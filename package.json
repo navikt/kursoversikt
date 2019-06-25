@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/fetch-mock": "^7.3.1",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.10",
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
+    "fetch-mock": "^7.3.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
@@ -16,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "yarn build && node src/server/server.js",
+    "mock": "set REACT_APP_MOCK=true && yarn start"
   },
   "eslintConfig": {
     "extends": "react-app"
