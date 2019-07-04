@@ -1,0 +1,25 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: kurskalender
+  namespace: default
+  labels:
+    team: teamtag
+spec:
+
+  image: navikt/
+  team: teamtag
+  port: 3000
+  ingresses:
+    - https://arbeidsgiver-q.nav.no/kurskalender
+  liveness:
+    path: /ditt-nav-arbeidsgiver/internal/isAlive
+    initialDelay: 20
+  readiness:
+    path: /ditt-nav-arbeidsgiver/internal/isReady
+    initialDelay: 20
+  vault:
+    enabled: true
+  env:
+    - name: NODE_EXTRA_CA_CERTS
+      value: /etc/ssl/ca-bundle.pem
