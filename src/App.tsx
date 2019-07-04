@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.less';
 import KursListe from "./kursliste/Kursliste";
+import {Sidetittel} from "nav-frontend-typografi";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Kursoversikt
-        </p>
+    <div className={"bakgrunnsside"}>
+      <header>
+            <Sidetittel className={"sentrert__tekst"}>Kurskalender</Sidetittel>
       </header>
       <KursListe></KursListe>
     </div>

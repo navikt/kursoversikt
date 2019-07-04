@@ -1,3 +1,4 @@
+
 export interface Kurs {
     RegistrationID: number;
     Title: string;
@@ -13,4 +14,5 @@ export interface Kurs {
     CatalogText?: any;
     Description: string;
     FrontPageDescription: string;
+
 }

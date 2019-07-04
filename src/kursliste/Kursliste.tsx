@@ -1,8 +1,11 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
 import {Kurs} from "../models/Kurs";
 import {hentKurs} from "../api/pindenaAPI";
+import KursPanel from "./KursPanel/KursPanel";
+import Filterboks from './Filter/Filter';
 const KursListe: FunctionComponent = () =>{
-const [kursArray,setKursArray]=useState(Array<Kurs>() );
+
+    const [kursArray,setKursArray]=useState(Array<Kurs>() );
     const hentOgSettKurs = async () => {
         setKursArray(await hentKurs());
     };
@@ -10,13 +13,14 @@ const [kursArray,setKursArray]=useState(Array<Kurs>() );
     useEffect(() => {
         hentOgSettKurs();
 
-},[]);
+    },[]);
+
 return(
 <div>
-    kursliste
-    {kursArray.map((value) => {
-    return value.Title;
+    {kursArray.map((kurs :Kurs) => {
+        return <KursPanel kurs={kurs}/>
     })}
+
 </div>
 
 );
