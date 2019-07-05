@@ -36,11 +36,4 @@ jobs:
           name: Bygger Docker image
           command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
       - nais/docker-deploy:
-            image: "$DOCKER_IMAGE_VERSIONED"
-      - nais/docker-deploy:
-            image: "$DOCKER_IMAGE_UNVERSIONED"
-
-workflow:
-  build-and-push-docker:
-    jobs:
-      - build
+            image: navikt/kursoversikt-6
