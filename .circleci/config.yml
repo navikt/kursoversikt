@@ -33,11 +33,8 @@ jobs:
             echo 'export DOCKER_IMAGE_VERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$BRANCH_PREFIX$RELEASE_VERSION"' >> $BASH_ENV
             echo 'export DOCKER_IMAGE_UNVERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
       - run:
-          name: Bygger Docker image
-          command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
-      - nais/docker-deploy:
-            image: navikt/kursoversikt-6
-workflow:
-  build-and-push-docker:
-    jobs:
-      - build
+          name: Pusher Docker image
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push "$DOCKER_IMAGE_VERSIONED"
+            docker push "$DOCKER_IMAGE_UNVERSIONED"
