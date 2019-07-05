@@ -37,3 +37,7 @@ jobs:
           command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
       - nais/docker-deploy:
             image: navikt/kursoversikt-6
+workflow:
+  build-and-push-docker:
+    jobs:
+      - build
