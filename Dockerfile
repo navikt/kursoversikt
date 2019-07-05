@@ -9,7 +9,6 @@ WORKDIR /app
 
 COPY build/ build/
 COPY src/server/ src/server/
-COPY start.sh ./
 COPY --from=builder /app/node_modules /app/node_modules
 
 
