@@ -8,10 +8,10 @@ server.disable('x-powered-by');
 
 
 // health checks
-server.get(BASE_PATH +'internal/isAlive', (req, res) =>
+server.get(BASE_PATH +'/internal/isAlive', (req, res) =>
     res.sendStatus(200)
 );
-server.get(BASE_PATH +'internal/internal/isReady', (req, res) =>
+server.get(BASE_PATH +'/internal/isReady', (req, res) =>
     res.sendStatus(200)
 );
 

@@ -6,20 +6,17 @@ metadata:
   labels:
     team: teamtag
 spec:
-
-  image: navikt/
+  image: navikt/kursoversikt:17
   team: teamtag
   port: 3000
   ingresses:
-    - https://arbeidsgiver-q.nav.no/kurskalender
+    - https://arbeidsgiver-q.nav.no/kursoversikt/
   liveness:
-    path: /ditt-nav-arbeidsgiver/internal/isAlive
+    path: /kursoversikt/internal/isAlive
     initialDelay: 20
   readiness:
-    path: /ditt-nav-arbeidsgiver/internal/isReady
+    path: /kursoversikt/internal/isReady
     initialDelay: 20
-  vault:
-    enabled: true
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
