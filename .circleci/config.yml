@@ -39,3 +39,8 @@ jobs:
             image: "$DOCKER_IMAGE_VERSIONED"
       - nais/docker-deploy:
             image: "$DOCKER_IMAGE_UNVERSIONED"
+
+workflow:
+  build-and-push-docker:
+    jobs:
+      - build
