@@ -1,5 +1,8 @@
 version: 1
+orbs:
+  nais: 'navikt/nais-deployment:XYZ'
 jobs:
+  context: NAIS deployment
   build:
     docker:
       - image: circleci/node:10
