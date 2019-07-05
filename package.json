@@ -2,6 +2,7 @@
   "name": "kursoversikt",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/kursoversikt",
   "dependencies": {
     "@craco/craco": "^5.2.3",
     "@types/fetch-mock": "^7.3.1",
@@ -11,6 +12,7 @@
     "@types/react-dom": "^16.8.4",
     "classnames": "^2.2.6",
     "craco-less": "^1.9.0",
+    "express": "^4.17.1",
     "fetch-mock": "^7.3.3",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron-style": "^0.3.4",

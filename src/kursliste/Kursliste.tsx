@@ -2,7 +2,6 @@ import React, {FunctionComponent, useEffect, useState} from "react";
 import {Kurs} from "../models/Kurs";
 import {hentKurs} from "../api/pindenaAPI";
 import KursPanel from "./KursPanel/KursPanel";
-import Filterboks from './Filter/Filter';
 const KursListe: FunctionComponent = () =>{
 
     const [kursArray,setKursArray]=useState(Array<Kurs>() );
