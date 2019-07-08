@@ -6,7 +6,7 @@ import {Sidetittel} from "nav-frontend-typografi";
 function App() {
   return (
     <div className={"bakgrunnsside"}>
-      <header>
+      <header className={"overskrift"}>
             <Sidetittel className={"sentrert__tekst"}>Kurskalender</Sidetittel>
       </header>
       <KursListe></KursListe>

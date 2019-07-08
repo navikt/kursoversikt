@@ -1,2 +1,4 @@
+export const kursapiUrl  =
+    "/kursoversikt/api/kurs";
 export const pindenaURL  =
-    "https://pindena.pameldingssystem.no/api/v1/activities";
+    "https://nav.pameldingssystem.no/api/v1.1/activities";

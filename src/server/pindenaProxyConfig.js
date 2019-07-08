@@ -1,0 +1,21 @@
+const proxy = require('http-proxy-middleware');
+
+const envProperties = {
+    API_USER: process.env.PINDENA_USER,
+    API_PASS: process.env.PINDENA_PASS
+};
+const pindenaProxyConfig = {
+    changeOrigin: true,
+    target: "https://nav.pameldingssystem.no/api/v1.1/activities",
+    pathRewrite: {
+        '/kursoversikt/api/kurs': '/api/v1.1/activities',
+    },
+    secure: true,
+    xfwd: true
+};
+
+if (envProperties.API_USER) {
+    pindenaProxyConfig.auth =envProperties.API_USER + ":" +  envProperties.API_PASS;
+}
+
+module.exports = proxy(pindenaProxyConfig);

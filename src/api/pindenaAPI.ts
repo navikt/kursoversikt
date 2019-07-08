@@ -1,8 +1,8 @@
 import {Kurs} from "../models/Kurs";
-import {pindenaURL} from "../utils/lenker";
+import {kursapiUrl} from "../utils/lenker";
 
 export async function hentKurs(): Promise<Kurs[]>{
-    let response =await fetch(pindenaURL);
+    let response =await fetch(kursapiUrl);
     if(response.ok){
 
         return response.json();

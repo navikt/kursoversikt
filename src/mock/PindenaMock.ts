@@ -1,8 +1,8 @@
 
-import {pindenaURL} from "../utils/lenker";
+import {kursapiUrl} from "../utils/lenker";
 import fetchMock from "fetch-mock";
 fetchMock
-    .get(pindenaURL,
+    .get(kursapiUrl,
         [
             {
                 "RegistrationID": 1879,

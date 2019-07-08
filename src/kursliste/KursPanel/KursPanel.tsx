@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, useEffect, useState} from "react";
 import {Panel} from "nav-frontend-paneler";
 import Lenke from "nav-frontend-lenker";
 import {Kurs} from "../../models/Kurs";
@@ -14,8 +14,19 @@ const parseDatetime = (date: string)=>{
 };
 
 const KursPanel: FunctionComponent<Props> = ({ kurs }) =>{
+    const [startTidspunkt,setStartTidspunkt] = useState(new Date());
+
+    useEffect(() =>{
+        setStartTidspunkt(parseDatetime(kurs.RegistrationFromDateTime));
+
+    },[kurs]);
+
     return <Panel className={"Kurspanel"}>
-        <Undertittel className={"Kurspanel__tidspunkt"}>{parseDatetime(kurs.RegistrationFromDateTime).getDate()}. {parseDatetime(kurs.RegistrationFromDateTime).toLocaleString('nb-no', { month: 'long' })}</Undertittel>
+        <div className={"Kurspanel__dato"}>
+            <Undertittel >{startTidspunkt.getDate()}. {startTidspunkt.toLocaleString('nb-no', { month: 'long' })}</Undertittel>
+            <Normaltekst>kl. {startTidspunkt.getHours()}</Normaltekst>
+            <div className={"Kurspanel__rektangel"} ></div>
+        </div>
         <div className={"Kurspanel__hovedInnhold"}>
         <Lenke className={"Panel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
         <Normaltekst>{kurs.DescriptionInternal}</Normaltekst>
