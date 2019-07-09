@@ -1,4 +1,10 @@
 
+export interface ConfigurableCustom {
+    Fylke: string;
+    "Type kurs": string;
+    Tema: string;
+}
+
 export interface Kurs {
     RegistrationID: number;
     Title: string;
@@ -9,10 +15,13 @@ export interface Kurs {
     RegistrationFromDateTime: string;
     RegistrationToDateTime: string;
     RegistrationDeadline: string;
-    RegistrationPlaceName: string;
+    RegistrationPlaceName?: any;
     DescriptionInternal: string;
     CatalogText?: any;
-    Description: string;
-    FrontPageDescription: string;
-
+    Description?: any;
+    FrontPageDescription?: any;
+    ActiveWeb: number;
+    ShowRegistrationForm: number;
+    ShowInActivityList: number;
+    configurable_custom: ConfigurableCustom;
 }

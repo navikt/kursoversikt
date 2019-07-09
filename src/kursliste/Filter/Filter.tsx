@@ -19,7 +19,7 @@ const Filter: FunctionComponent<Props> = ({
 
                     <Checkbox
                         label="label"
-                        checked={true}
+
                     />
 
             </Ekspanderbartpanel>

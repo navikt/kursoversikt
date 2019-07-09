@@ -24,8 +24,6 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) =>{
 
     const lagDatoTekst = () => {
         const starttid = startTidspunkt.toLocaleString('nb-no', {day:'numeric', month: 'long' });
-        console.log("startTidspunkt.toDateString()",startTidspunkt.toDateString());
-        console.log("sluttTidspunkt.toDateString()",sluttTidspunkt.toDateString());
         if(startTidspunkt.toDateString() === sluttTidspunkt.toDateString()){
             return starttid;
         }
@@ -44,7 +42,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) =>{
         </div>
         <div className={"Kurspanel__hovedInnhold"}>
             <Lenke className={"Kurspanel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
-            <Normaltekst>{kurs.DescriptionInternal}</Normaltekst>
+            <Normaltekst>{kurs.DescriptionInternal||""}</Normaltekst>
             <Normaltekst> <b>Sted:</b> {kurs.RegistrationPlaceName}</Normaltekst>
             <Normaltekst><b>Påmeldingsfrist: </b>{sluttTidspunkt.toLocaleString('nb-no', {day:'numeric', month: 'long' })}</Normaltekst>
 
