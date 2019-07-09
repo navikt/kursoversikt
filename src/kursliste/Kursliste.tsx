@@ -19,7 +19,7 @@ const KursListe: FunctionComponent = () =>{
         hentOgSettKurs();
 
     },[]);
-    let unikeKurs = new Set<string>();
+    let unikeKurs = new Array<string>();
 
     const getKursTyper = () => {
         const kursMedFylke = kursArray.filter(kurs=> {
@@ -29,7 +29,7 @@ const KursListe: FunctionComponent = () =>{
             return true;
         });
 
-        unikeKurs = new Set((kursMedFylke.map(kurs=>kurs.configurable_custom.Fylke)));
+        unikeKurs = (kursMedFylke.map(kurs=>kurs.configurable_custom.Fylke));
     };
     getKursTyper();
     console.log("kursArray", kursArray);
@@ -42,7 +42,7 @@ return(
         })}
     </span>
     <span className={"filterKolonne"}>
-        <Filter tittel={"Type kurs"} sporsmaal={"Kurs"}/>
+        <Filter tittel={"Fylker"} alternativer={unikeKurs}/>
     </span>
 </div>
 

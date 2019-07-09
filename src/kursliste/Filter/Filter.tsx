@@ -1,27 +1,25 @@
 import React, { FunctionComponent } from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Checkbox } from 'nav-frontend-skjema';
-import { Element } from 'nav-frontend-typografi';
 interface Props {
     tittel: string;
-    sporsmaal: string;
+    alternativer: string[];
 
 }
 
 const Filter: FunctionComponent<Props> = ({
                                               tittel,
-                                              sporsmaal
+                                              alternativer
                                           }) => {
     return (
         <div >
             <Ekspanderbartpanel tittel={tittel} apen>
-                <Element>{sporsmaal}</Element>
-
+                {alternativer.map(alternativ => (
                     <Checkbox
-                        label="label"
-
+                        label={alternativ}
+                        key={alternativ}
                     />
-
+                ))}
             </Ekspanderbartpanel>
         </div>
     );
