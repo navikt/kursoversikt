@@ -9,8 +9,6 @@ const KursListe: FunctionComponent = () =>{
 
     const [kursArray,setKursArray]=useState(Array<Kurs>() );
 
-
-
     useEffect(() => {
         const hentOgSettKurs = async () => {
             const resultat = await hentKurs();
@@ -19,21 +17,25 @@ const KursListe: FunctionComponent = () =>{
         hentOgSettKurs();
 
     },[]);
-    let unikeKurs = new Array<string>();
 
-    const getKursTyper = () => {
+    const getUniqueProps = (property:'Fylke' | 'Type kurs' | 'Tema') => {
         const kursMedFylke = kursArray.filter(kurs=> {
-            if (!kurs.configurable_custom || !kurs.configurable_custom.Fylke ) {
+            if (!kurs.configurable_custom || !kurs.configurable_custom[property]) {
                 return false;
             }
             return true;
         });
-
-        unikeKurs = (kursMedFylke.map(kurs=>kurs.configurable_custom.Fylke));
+        let unikeVerdierSet = new Set (kursMedFylke.map(kurs=>kurs.configurable_custom[property]));
+        return Array.from(unikeVerdierSet.values());
     };
-    getKursTyper();
+
+
+    let unikeFylker = getUniqueProps ("Fylke");
+    let unikeKursTyper = getUniqueProps("Type kurs");
+    let unikeTema = getUniqueProps("Tema");
+
     console.log("kursArray", kursArray);
-    console.log("uttafor unikekursTyper", unikeKurs );
+    console.log("uttafor unikekursTyper", unikeFylker );
 return(
 <div className={"hovedside"}>
     <span className={"kursKolonne"}>
@@ -42,7 +44,9 @@ return(
         })}
     </span>
     <span className={"filterKolonne"}>
-        <Filter tittel={"Fylker"} alternativer={unikeKurs}/>
+        <Filter tittel={"Fylker"} alternativer={unikeFylker}/>
+        <Filter tittel={"Type kurs"} alternativer={unikeKursTyper}/>
+        <Filter tittel={"Tema"} alternativer={unikeTema}/>
     </span>
 </div>
 

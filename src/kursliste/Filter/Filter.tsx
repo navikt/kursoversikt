@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Checkbox } from 'nav-frontend-skjema';
+import "./Filter.less"
 interface Props {
     tittel: string;
     alternativer: string[];
@@ -12,7 +13,7 @@ const Filter: FunctionComponent<Props> = ({
                                               alternativer
                                           }) => {
     return (
-        <div >
+        <div className={"filterboks"}>
             <Ekspanderbartpanel tittel={tittel} apen>
                 {alternativer.map(alternativ => (
                     <Checkbox
