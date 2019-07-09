@@ -15,21 +15,39 @@ const parseDatetime = (date: string)=>{
 
 const KursPanel: FunctionComponent<Props> = ({ kurs }) =>{
     const [startTidspunkt,setStartTidspunkt] = useState(new Date());
+    const [sluttTidspunkt,setSluttTidspunkt] = useState(new Date());
 
     useEffect(() =>{
         setStartTidspunkt(parseDatetime(kurs.RegistrationFromDateTime));
-
+        setSluttTidspunkt(parseDatetime(kurs.RegistrationToDateTime));
     },[kurs]);
+
+    const lagDatoTekst = () => {
+        const starttid = startTidspunkt.toLocaleString('nb-no', {day:'numeric', month: 'long' });
+        console.log("startTidspunkt.toDateString()",startTidspunkt.toDateString());
+        console.log("sluttTidspunkt.toDateString()",sluttTidspunkt.toDateString());
+        if(startTidspunkt.toDateString() === sluttTidspunkt.toDateString()){
+            return starttid;
+        }
+        const sluttid = sluttTidspunkt.toLocaleString('nb-no', {day:'numeric', month: 'long' });
+        return starttid + " - \n" + sluttid;
+    };
+
 
     return <Panel className={"Kurspanel"}>
         <div className={"Kurspanel__dato"}>
-            <Undertittel >{startTidspunkt.getDate()}. {startTidspunkt.toLocaleString('nb-no', { month: 'long' })}</Undertittel>
-            <Normaltekst>kl. {startTidspunkt.getHours()}</Normaltekst>
+                <pre>
+                    <Undertittel>{lagDatoTekst()}</Undertittel>
+                </pre>
+            <Normaltekst>kl. {startTidspunkt.toLocaleString('nb-no', {hour:'2-digit', minute: '2-digit' })}</Normaltekst>
             <div className={"Kurspanel__rektangel"} ></div>
         </div>
         <div className={"Kurspanel__hovedInnhold"}>
-        <Lenke className={"Panel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
-        <Normaltekst>{kurs.DescriptionInternal}</Normaltekst>
+            <Lenke className={"Kurspanel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
+            <Normaltekst>{kurs.DescriptionInternal}</Normaltekst>
+            <Normaltekst> <b>Sted:</b> {kurs.RegistrationPlaceName}</Normaltekst>
+            <Normaltekst><b>Påmeldingsfrist: </b>{sluttTidspunkt.toLocaleString('nb-no', {day:'numeric', month: 'long' })}</Normaltekst>
+
         </div>
     </Panel>
 

@@ -4,18 +4,18 @@ import { Checkbox } from 'nav-frontend-skjema';
 import { Element } from 'nav-frontend-typografi';
 interface Props {
     tittel: string;
-    spørsmål: string;
+    sporsmaal: string;
 
 }
 
 const Filter: FunctionComponent<Props> = ({
                                               tittel,
-                                              spørsmål
+                                              sporsmaal
                                           }) => {
     return (
         <div >
             <Ekspanderbartpanel tittel={tittel} apen>
-                <Element>{spørsmål}</Element>
+                <Element>{sporsmaal}</Element>
 
                     <Checkbox
                         label="label"
