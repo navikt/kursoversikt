@@ -7,7 +7,7 @@ fetchMock
             {
                 "RegistrationID": 16,
                 "Title": "Kurs i bestillingsordningen",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/kurs-i-bestillingsordningen",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/kurs-i-bestillingsordningen",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
@@ -15,7 +15,7 @@ fetchMock
                 "RegistrationToDateTime": "2020-04-01 00:00:00",
                 "RegistrationDeadline": "2021-04-03 00:00:00",
                 "RegistrationPlaceName": null,
-                "DescriptionInternal": null,
+                "DescriptionInternal": "Kurs i bestillingsordningen",
                 "CatalogText": null,
                 "Description": null,
                 "FrontPageDescription": null,
@@ -23,16 +23,15 @@ fetchMock
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
                 "configurable_custom": {
-                    "Fylker": "Oslo",
-                    "Målgruppe": null,
+                    "Fylke": "Møre og Romsdal",
                     "Type kurs": "Seminar",
-                    "Tema": null
+                    "Tema": "Hjelpemidler og tilrettelegging – hørsel"
                 }
             },
             {
                 "RegistrationID": 15,
                 "Title": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/grunnkurs-synsproblematikk-og-tekniske-hjelpemiddel",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/grunnkurs-synsproblematikk-og-tekniske-hjelpemiddel",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
@@ -42,12 +41,16 @@ fetchMock
                 "RegistrationPlaceName": null,
                 "DescriptionInternal": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel, med litt lengere beskrivelse. som kan gå over flere linjer",
                 "CatalogText": null,
-                "Description": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel, med litt lengere beskrivelse. som kan gå over flere linjer",
+                "Description": null,
                 "FrontPageDescription": null,
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Oslo",
+                    "Type kurs": "Kurs",
+                    "Tema": "Hjelpemidler og tilrettelegging – syn"
+                }
             },
             {
                 "RegistrationID": 12,
@@ -57,7 +60,7 @@ fetchMock
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
                 "RegistrationFromDateTime": "2019-04-01 00:00:00",
-                "RegistrationToDateTime": "2019-04-01 00:00:00",
+                "RegistrationToDateTime": "2020-04-01 00:00:00",
                 "RegistrationDeadline": "2022-04-01 00:00:00",
                 "RegistrationPlaceName": null,
                 "DescriptionInternal": null,
@@ -67,7 +70,11 @@ fetchMock
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Rogaland",
+                    "Type kurs": "Seminar",
+                    "Tema": "Inkluderende arbeidsliv (IA) – Ledelse"
+                }
             },
             {
                 "RegistrationID": 11,
@@ -107,7 +114,11 @@ fetchMock
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Trøndelag",
+                    "Type kurs": "Kurs",
+                    "Tema": null
+                }
             },
             {
                 "RegistrationID": 7,
@@ -116,7 +127,7 @@ fetchMock
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2020-04-04 10:00:00",
+                "RegistrationFromDateTime": "2019-04-04 10:00:00",
                 "RegistrationToDateTime": "2020-04-04 15:00:00",
                 "RegistrationDeadline": "2022-04-03 10:00:00",
                 "RegistrationPlaceName": "Oslo",
