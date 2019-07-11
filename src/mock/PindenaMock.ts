@@ -86,7 +86,7 @@ fetchMock
                 "RegistrationFromDateTime": "2019-04-01 00:00:00",
                 "RegistrationToDateTime": "2020-04-01 00:00:00",
                 "RegistrationDeadline": "2021-04-01 00:00:00",
-                "RegistrationPlaceName": null,
+                "RegistrationPlaceName": "Nav Oslo",
                 "DescriptionInternal": null,
                 "CatalogText": null,
                 "Description": null,
@@ -94,7 +94,11 @@ fetchMock
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Oslo",
+                    "Type kurs": "Seminar",
+                    "Tema": "Inkluderende arbeidsliv (IA) – Ledelse"
+                }
             },
             {
                 "RegistrationID": 8,
@@ -106,7 +110,7 @@ fetchMock
                 "RegistrationFromDateTime": "2019-05-08 08:00:00",
                 "RegistrationToDateTime": "2020-05-08 13:00:00",
                 "RegistrationDeadline": "2022-05-01 08:00:00",
-                "RegistrationPlaceName": "Trondheim",
+                "RegistrationPlaceName": "Trondheim, Trøndelag",
                 "DescriptionInternal": null,
                 "CatalogText": "",
                 "Description": "",
@@ -130,7 +134,7 @@ fetchMock
                 "RegistrationFromDateTime": "2019-04-04 10:00:00",
                 "RegistrationToDateTime": "2020-04-04 15:00:00",
                 "RegistrationDeadline": "2022-04-03 10:00:00",
-                "RegistrationPlaceName": "Oslo",
+                "RegistrationPlaceName": "Nav - Oslo",
                 "DescriptionInternal": null,
                 "CatalogText": "",
                 "Description": "",
@@ -138,7 +142,11 @@ fetchMock
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Oslo",
+                    "Type kurs": "Kurs",
+                    "Tema": "Kurs for pensjonister"
+                }
             },
             {
                 "RegistrationID": 6,
@@ -158,7 +166,11 @@ fetchMock
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Trøndelag",
+                    "Type kurs": "Kurs",
+                    "Tema": "Kurs for studenter"
+                }
             },
             {
                 "RegistrationID": 5,

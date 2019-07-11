@@ -4,49 +4,68 @@ import {hentKurs} from "../api/pindenaAPI";
 import KursPanel from "./KursPanel/KursPanel";
 import Filter from "./Filter/Filter";
 import "./Kursliste.less"
+import {filtrer, lagFilterKriterier} from "./filtrertingsMotor";
+
+export interface FilterState {
+    Fylke: string[];
+    Tema: string[];
+    "Type kurs": string[];
+}
+
+export type FilterGruppe = 'Fylke' | 'Type kurs' | 'Tema';
 
 const KursListe: FunctionComponent = () =>{
-
     const [kursArray,setKursArray]=useState(Array<Kurs>() );
+    const [filtrerteKursArray,setFiltrerteKursArray]=useState(Array<Kurs>() );
+    const [filterState,setFilterState]=useState<FilterState>({Fylke:[],Tema:[],"Type kurs":[]} );
 
     useEffect(() => {
         const hentOgSettKurs = async () => {
             const resultat = await hentKurs();
             setKursArray(resultat);
+            setFiltrerteKursArray(resultat);
         };
         hentOgSettKurs();
 
     },[]);
 
-    const getUniqueProps = (property:'Fylke' | 'Type kurs' | 'Tema') => {
-        const kursMedFylke = kursArray.filter(kurs=> {
-            if (!kurs.configurable_custom || !kurs.configurable_custom[property]) {
-                return false;
-            }
-            return true;
-        });
-        let unikeVerdierSet = new Set (kursMedFylke.map(kurs=>kurs.configurable_custom[property]));
-        return Array.from(unikeVerdierSet.values());
+    const unikeFylker = lagFilterKriterier (kursArray,"Fylke");
+    const unikeKursTyper = lagFilterKriterier(kursArray,"Type kurs");
+    const unikeTema = lagFilterKriterier(kursArray,"Tema");
+
+    const handleFilterToggle = (filterGruppe : FilterGruppe, filterKriterie :string)=>{
+        if(filterState[filterGruppe].includes(filterKriterie)){
+            fjernFilterKriterie(filterGruppe,filterKriterie);
+        }else{
+            leggTilFilterKriterie(filterGruppe,filterKriterie);
+        }
+        setFiltrerteKursArray(filtrer(filterState, kursArray))
     };
 
+    const leggTilFilterKriterie = (filterGruppe : FilterGruppe, kriterieSomSkalLeggesTil :string ) => {
+        const nyttFilter ={...filterState};
+        nyttFilter[filterGruppe].push(kriterieSomSkalLeggesTil);
+        setFilterState(nyttFilter);
+        console.log("addFilterattr", filterState);
+    };
+    const fjernFilterKriterie = (filterGruppe : FilterGruppe, krietrieSomSkalFjernes :string ) => {
+        const nyttFilter ={...filterState};
+        nyttFilter[filterGruppe] = nyttFilter[filterGruppe].filter(filter => filter !== krietrieSomSkalFjernes);
+        setFilterState(nyttFilter);
+        console.log("removeFilterattr", filterState);
+    };
 
-    let unikeFylker = getUniqueProps ("Fylke");
-    let unikeKursTyper = getUniqueProps("Type kurs");
-    let unikeTema = getUniqueProps("Tema");
-
-    console.log("kursArray", kursArray);
-    console.log("uttafor unikekursTyper", unikeFylker );
 return(
 <div className={"hovedside"}>
     <span className={"kursKolonne"}>
-        {kursArray.map((kurs : Kurs,) => {
+        {filtrerteKursArray.map((kurs : Kurs,) => {
             return <KursPanel key={kurs.RegistrationID} kurs={kurs} />
         })}
     </span>
     <span className={"filterKolonne"}>
-        <Filter tittel={"Fylker"} alternativer={unikeFylker}/>
-        <Filter tittel={"Type kurs"} alternativer={unikeKursTyper}/>
-        <Filter tittel={"Tema"} alternativer={unikeTema}/>
+        <Filter tittel={"Fylker"} alternativer={unikeFylker} filterGruppe={"Fylke"} toggleFilter={handleFilterToggle}/>
+        <Filter tittel={"Type kurs"} alternativer={unikeKursTyper} filterGruppe={"Type kurs"} toggleFilter={handleFilterToggle}/>
+        <Filter tittel={"Tema"} alternativer={unikeTema} filterGruppe={"Tema"} toggleFilter={handleFilterToggle} />
     </span>
 </div>
 

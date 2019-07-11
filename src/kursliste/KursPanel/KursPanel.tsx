@@ -3,8 +3,8 @@ import {Panel} from "nav-frontend-paneler";
 import Lenke from "nav-frontend-lenker";
 import {Kurs} from "../../models/Kurs";
 import { Normaltekst, Undertittel} from "nav-frontend-typografi";
-import "./KursPanel.less"
-
+import "./KursPanel.less";
+import plasseringsIkon from "../../Ikoner/location-pin-6.svg";
 interface Props {
     kurs: Kurs;
 }
@@ -43,7 +43,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) =>{
         <div className={"Kurspanel__hovedInnhold"}>
             <Lenke className={"Kurspanel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
             <Normaltekst>{kurs.DescriptionInternal||""}</Normaltekst>
-            <Normaltekst> <b>Sted:</b> {kurs.RegistrationPlaceName}</Normaltekst>
+            <img  src={plasseringsIkon} alt="plasseringsikon" /><Normaltekst> <b>Sted:</b> {kurs.RegistrationPlaceName}</Normaltekst>
             <Normaltekst><b>Påmeldingsfrist: </b>{sluttTidspunkt.toLocaleString('nb-no', {day:'numeric', month: 'long' })}</Normaltekst>
 
         </div>
