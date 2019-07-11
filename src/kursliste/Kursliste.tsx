@@ -14,10 +14,10 @@ export interface FilterState {
 
 export type FilterGruppe = 'Fylke' | 'Type kurs' | 'Tema';
 
-const KursListe: FunctionComponent = () =>{
-    const [kursArray,setKursArray]=useState(Array<Kurs>() );
-    const [filtrerteKursArray,setFiltrerteKursArray]=useState(Array<Kurs>() );
-    const [filterState,setFilterState]=useState<FilterState>({Fylke:[],Tema:[],"Type kurs":[]} );
+const KursListe: FunctionComponent = () => {
+    const [kursArray, setKursArray] = useState(Array<Kurs>());
+    const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
+    const [filterState, setFilterState] = useState<FilterState>({Fylke: [], Tema: [], "Type kurs": []});
 
     useEffect(() => {
         const hentOgSettKurs = async () => {
@@ -27,51 +27,51 @@ const KursListe: FunctionComponent = () =>{
         };
         hentOgSettKurs();
 
-    },[]);
+    }, []);
     useEffect(() => {
         setFiltrerteKursArray(filtrer(filterState, kursArray))
-    },[kursArray,filterState]);
+    }, [kursArray, filterState]);
 
-    const unikeFylker = lagFilterKriterier (kursArray,"Fylke");
-    const unikeKursTyper = lagFilterKriterier(kursArray,"Type kurs");
-    const unikeTema = lagFilterKriterier(kursArray,"Tema");
+    const unikeFylker = lagFilterKriterier(kursArray, "Fylke");
+    const unikeKursTyper = lagFilterKriterier(kursArray, "Type kurs");
+    const unikeTema = lagFilterKriterier(kursArray, "Tema");
 
-    const handleFilterToggle = (filterGruppe : FilterGruppe, filterKriterie :string)=>{
-        if(filterState[filterGruppe].includes(filterKriterie)){
-            fjernFilterKriterie(filterGruppe,filterKriterie);
-        }else{
-            leggTilFilterKriterie(filterGruppe,filterKriterie);
+    const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
+        if (filterState[filterGruppe].includes(filterKriterie)) {
+            fjernFilterKriterie(filterGruppe, filterKriterie);
+        } else {
+            leggTilFilterKriterie(filterGruppe, filterKriterie);
         }
 
     };
 
-    const leggTilFilterKriterie = (filterGruppe : FilterGruppe, kriterieSomSkalLeggesTil :string ) => {
-        const nyttFilter ={...filterState};
+    const leggTilFilterKriterie = (filterGruppe: FilterGruppe, kriterieSomSkalLeggesTil: string) => {
+        const nyttFilter = {...filterState};
         nyttFilter[filterGruppe].push(kriterieSomSkalLeggesTil);
         setFilterState(nyttFilter);
     };
-    const fjernFilterKriterie = (filterGruppe : FilterGruppe, krietrieSomSkalFjernes :string ) => {
-        const nyttFilter ={...filterState};
+    const fjernFilterKriterie = (filterGruppe: FilterGruppe, krietrieSomSkalFjernes: string) => {
+        const nyttFilter = {...filterState};
         nyttFilter[filterGruppe] = nyttFilter[filterGruppe].filter(filter => filter !== krietrieSomSkalFjernes);
         setFilterState(nyttFilter);
     };
 
-return(
-<div className={"hovedside"}>
-    <span className={"kursKolonne"}>
-        {filtrerteKursArray.map((kurs : Kurs,) => {
-            return <KursPanel key={kurs.RegistrationID} kurs={kurs} />
+    return (
+        <div className={"hovedside"}>
+            <span className={"filterKolonne"}>
+                <Filter tittel={"Fylker"} alternativer={unikeFylker} filterGruppe={"Fylke"} toggleFilter={handleFilterToggle}/>
+                <Filter tittel={"Type kurs"} alternativer={unikeKursTyper} filterGruppe={"Type kurs"}
+                toggleFilter={handleFilterToggle}/>
+                <Filter tittel={"Tema"} alternativer={unikeTema} filterGruppe={"Tema"} toggleFilter={handleFilterToggle}/>
+            </span>
+            <span className={"kursKolonne"}>
+        {filtrerteKursArray.map((kurs: Kurs,) => {
+            return <KursPanel key={kurs.RegistrationID} kurs={kurs}/>
         })}
-    </span>
-    <span className={"filterKolonne"}>
-        <Filter tittel={"Fylker"} alternativer={unikeFylker} filterGruppe={"Fylke"} toggleFilter={handleFilterToggle}/>
-        <Filter tittel={"Type kurs"} alternativer={unikeKursTyper} filterGruppe={"Type kurs"} toggleFilter={handleFilterToggle}/>
-        <Filter tittel={"Tema"} alternativer={unikeTema} filterGruppe={"Tema"} toggleFilter={handleFilterToggle} />
-    </span>
-</div>
+            </span>
+        </div>
 
-
-);
+    );
 
 };
 

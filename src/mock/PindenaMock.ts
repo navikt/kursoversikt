@@ -39,7 +39,7 @@ fetchMock
                 "RegistrationToDateTime": "2020-04-01 00:00:00",
                 "RegistrationDeadline": "2021-04-02 00:00:00",
                 "RegistrationPlaceName": null,
-                "DescriptionInternal": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel, med litt lengere beskrivelse. som kan gå over flere linjer",
+                "DescriptionInternal": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel, med litt lengere beskrivelse. som kan gå over flere linjer aaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaa a a  aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaa",
                 "CatalogText": null,
                 "Description": null,
                 "FrontPageDescription": null,

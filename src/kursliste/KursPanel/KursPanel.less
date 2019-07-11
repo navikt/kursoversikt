@@ -1,25 +1,48 @@
 
-
 .Kurspanel {
 
-  height: 20rem;
+  min-height: 20rem;
   display: flex;
-  width: 50rem;
-  margin: 0 0 1rem 7rem;
-  padding: 30px 66px 32px 30px;
-  &__rektangel{
+  //width: 50rem;
+  margin: 0 1rem 0 1rem;
+  border-bottom: solid 1px #c6c2bf;
+  flex-direction: column;
+
+  &__rektangel {
     width: 2rem;
     height: 0.5rem;
     background-color: #ccdee6;
   }
-  &__dato{
-    width:8rem;
+
+  &__dato {
     justify-content: flex-start;
   }
-  &__hovedInnhold{
 
-    width: 40rem;
-    margin-left: 2rem;
+  &__hovedInnhold {
+    padding-top: 1rem;
     justify-content: center;
+  }
+  &__ikon{
+    display: flex;
+    justify-content: flex-start;
+  }
+  &__sted{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+  }
+  &__stedsOgFristTekst{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+  }
+  &__paameldingsfrist{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+  }
+  &__beskrivelse{
+    margin-top: 1rem;
+
   }
 }
