@@ -28,6 +28,9 @@ const KursListe: FunctionComponent = () =>{
         hentOgSettKurs();
 
     },[]);
+    useEffect(() => {
+        setFiltrerteKursArray(filtrer(filterState, kursArray))
+    },[kursArray,filterState]);
 
     const unikeFylker = lagFilterKriterier (kursArray,"Fylke");
     const unikeKursTyper = lagFilterKriterier(kursArray,"Type kurs");
@@ -39,20 +42,18 @@ const KursListe: FunctionComponent = () =>{
         }else{
             leggTilFilterKriterie(filterGruppe,filterKriterie);
         }
-        setFiltrerteKursArray(filtrer(filterState, kursArray))
+
     };
 
     const leggTilFilterKriterie = (filterGruppe : FilterGruppe, kriterieSomSkalLeggesTil :string ) => {
         const nyttFilter ={...filterState};
         nyttFilter[filterGruppe].push(kriterieSomSkalLeggesTil);
         setFilterState(nyttFilter);
-        console.log("addFilterattr", filterState);
     };
     const fjernFilterKriterie = (filterGruppe : FilterGruppe, krietrieSomSkalFjernes :string ) => {
         const nyttFilter ={...filterState};
         nyttFilter[filterGruppe] = nyttFilter[filterGruppe].filter(filter => filter !== krietrieSomSkalFjernes);
         setFilterState(nyttFilter);
-        console.log("removeFilterattr", filterState);
     };
 
 return(
