@@ -1,9 +1,13 @@
 const proxy = require('http-proxy-middleware');
+const HttpsProxyAgent = require('https-proxy-agent');
 
 const envProperties = {
     API_USER: process.env.PINDENA_USER,
-    API_PASS: process.env.PINDENA_PASS
-}
+    API_PASS: process.env.PINDENA_PASS,
+    PROXY_SERVER: process.env.HTTPS_PROXY
+};
+
+
 const pindenaProxyConfig = {
     changeOrigin: true,
     target: 'https://nav.pameldingssystem.no',
@@ -12,7 +16,8 @@ const pindenaProxyConfig = {
     },
     secure: true,
     xfwd: true,
-    logLevel: 'debug'
+    logLevel: 'debug',
+    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER)
 };
 
 if (envProperties.API_USER) {

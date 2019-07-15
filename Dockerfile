@@ -1,7 +1,7 @@
 FROM node:alpine as builder
 
 WORKDIR /app
-RUN yarn add http-proxy-middleware
+RUN yarn add http-proxy-middleware https-proxy-agent
 
 FROM navikt/node-express:1.0.0
 WORKDIR /app

@@ -1,12 +1,12 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: kurskalender
+  name: kursoversikt
   namespace: default
   labels:
     team: teamtag
 spec:
-  image: navikt/kursoversikt:30
+  image: navikt/kursoversikt:32
   team: teamtag
   port: 3000
   ingresses:
@@ -17,6 +17,7 @@ spec:
   readiness:
     path: /kursoversikt/internal/isReady
     initialDelay: 20
+  webproxy: true
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem

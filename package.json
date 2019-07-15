@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "fetch-mock": "^7.3.3",
     "http-proxy-middleware": "^0.19.1",
+    "https-proxy-agent": "^2.2.2",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-chevron-style": "^0.3.4",
     "nav-frontend-core": "^4.0.9",
