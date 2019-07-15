@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamtag
 spec:
-  image: navikt/kursoversikt:32
+  image: navikt/kursoversikt:33
   team: teamtag
   port: 3000
   ingresses:
@@ -17,6 +17,8 @@ spec:
   readiness:
     path: /kursoversikt/internal/isReady
     initialDelay: 20
+  vault:
+    enabled: true
   webproxy: true
   env:
     - name: NODE_EXTRA_CA_CERTS
