@@ -15,7 +15,7 @@ server.get(BASE_PATH +'/internal/isAlive', (req, res) =>
 server.get(BASE_PATH +'/internal/isReady', (req, res) =>
     res.sendStatus(200)
 );
-server.use('/kursoversikt/api/kurs', pindenaProxyConfig);
+server.use(BASE_PATH+'/api/kurs', pindenaProxyConfig);
 
 server.use(BASE_PATH,express.static(buildPath));
 
