@@ -6,7 +6,7 @@ const envProperties = {
 };
 const pindenaProxyConfig = {
     changeOrigin: true,
-    target: "https://nav.pameldingssystem.no/api/v1.1/activities",
+    target: "https://nav.pameldingssystem.no",
     pathRewrite: {
         '/kursoversikt/api/kurs': '/api/v1.1/activities',
     },
