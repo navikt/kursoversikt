@@ -2,7 +2,10 @@ import {Kurs} from "../models/Kurs";
 import {kursapiUrl} from "../utils/lenker";
 
 const sammenlignKursPaDato= (a:Kurs,b:Kurs) =>{
-    return new  Date(a.RegistrationFromDateTime).getTime() - new Date(b.RegistrationFromDateTime).getTime();
+    const aTime= a.RegistrationFromDateTime.replace("","T");
+    const bTime= b.RegistrationFromDateTime.replace("","T");
+
+    return new  Date(aTime).getTime() - new Date(bTime).getTime();
 };
 
 export async function hentKurs(): Promise<Kurs[]>{

@@ -1,6 +1,6 @@
-
 import {kursapiUrl} from "../utils/lenker";
 import fetchMock from "fetch-mock";
+
 fetchMock
     .get(kursapiUrl,
         [
@@ -35,11 +35,11 @@ fetchMock
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-09-08 09:00:00",
-                "RegistrationToDateTime": "2020-09-11 00:00:00",
+                "RegistrationFromDateTime": "2019-09-04 00:00:00",
+                "RegistrationToDateTime": "2019-09-07 00:00:00",
                 "RegistrationDeadline": "2021-04-02 00:00:00",
-                "RegistrationPlaceName": "Økernveien 94",
-                "DescriptionInternal": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel, med litt lengere beskrivelse. som kan gå over flere linjer aaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaa a a  aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaa",
+                "RegistrationPlaceName": null,
+                "DescriptionInternal": "Grunnkurs - Synsproblematikk og tekniske hjelpemiddel, med litt lengere beskrivelse. som kan gå over flere linjer",
                 "CatalogText": null,
                 "Description": null,
                 "FrontPageDescription": null,
@@ -55,12 +55,12 @@ fetchMock
             {
                 "RegistrationID": 12,
                 "Title": "Snakk om det - samtalen som verktøy",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/snakk-om-det-samtalen-som-verktoy",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/snakk-om-det-samtalen-som-verktoy",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-04-01 00:00:00",
-                "RegistrationToDateTime": "2020-04-01 00:00:00",
+                "RegistrationFromDateTime": "2019-08-01 00:00:00",
+                "RegistrationToDateTime": "2019-08-01 00:00:00",
                 "RegistrationDeadline": "2022-04-01 00:00:00",
                 "RegistrationPlaceName": null,
                 "DescriptionInternal": null,
@@ -79,14 +79,14 @@ fetchMock
             {
                 "RegistrationID": 11,
                 "Title": "Psykiske helseproblemer - konsekvenser og gode grep på jobb",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/psykiske-helseproblemer-konsekvenser-og-gode-grep-pa-jobb",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/psykiske-helseproblemer-konsekvenser-og-gode-grep-pa-jobb",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-04-01 00:00:00",
-                "RegistrationToDateTime": "2020-04-01 00:00:00",
+                "RegistrationFromDateTime": "2019-08-14 00:00:00",
+                "RegistrationToDateTime": "2019-08-16 00:00:00",
                 "RegistrationDeadline": "2021-04-01 00:00:00",
-                "RegistrationPlaceName": "Nav Oslo",
+                "RegistrationPlaceName": null,
                 "DescriptionInternal": null,
                 "CatalogText": null,
                 "Description": null,
@@ -94,24 +94,20 @@ fetchMock
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": {
-                    "Fylke": "Oslo",
-                    "Type kurs": "Seminar",
-                    "Tema": "Inkluderende arbeidsliv (IA) – Ledelse"
-                }
+                "configurable_custom": null
             },
             {
                 "RegistrationID": 8,
                 "Title": "Kurs for studenter 02",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/kurs-for-studenter-2",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/kurs-for-studenter-2",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-05-08 08:00:00",
-                "RegistrationToDateTime": "2020-05-08 13:00:00",
+                "RegistrationFromDateTime": "2019-07-17 08:00:00",
+                "RegistrationToDateTime": "2019-07-19 13:00:00",
                 "RegistrationDeadline": "2022-05-01 08:00:00",
-                "RegistrationPlaceName": "Trondheim, Trøndelag",
-                "DescriptionInternal": null,
+                "RegistrationPlaceName": "Trondheim",
+                "DescriptionInternal": "Kurs for studenter 01 - Et kurs for studenter om jobbsøking\r\nI kurset vil vi gå igjennom:\r\n    - CV-skriving\r\n    - Søknadsskriving\r\n    - Hva som kan gjøre deg attraktiv som jobbsøker",
                 "CatalogText": "",
                 "Description": "",
                 "FrontPageDescription": "",
@@ -121,45 +117,21 @@ fetchMock
                 "configurable_custom": {
                     "Fylke": "Trøndelag",
                     "Type kurs": "Kurs",
-                    "Tema": null
-                }
-            },
-            {
-                "RegistrationID": 7,
-                "Title": "Kurs for pensjonister 02",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/kurs-for-pensjonister-2",
-                "RegistrationImageMediaStorageID": 0,
-                "FrontImageMediaStorageID": 0,
-                "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-04-04 10:00:00",
-                "RegistrationToDateTime": "2020-04-04 15:00:00",
-                "RegistrationDeadline": "2022-04-03 10:00:00",
-                "RegistrationPlaceName": "Nav - Oslo",
-                "DescriptionInternal": null,
-                "CatalogText": "",
-                "Description": "",
-                "FrontPageDescription": "",
-                "ActiveWeb": 1,
-                "ShowRegistrationForm": 1,
-                "ShowInActivityList": 1,
-                "configurable_custom": {
-                    "Fylke": "Oslo",
-                    "Type kurs": "Kurs",
-                    "Tema": "Kurs for pensjonister"
+                    "Tema": "Arbeidssøkeraktivitet"
                 }
             },
             {
                 "RegistrationID": 6,
                 "Title": "Kurs for studenter 01",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/kurs-for-studenter",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/kurs-for-studenter",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-03-28 00:00:00",
-                "RegistrationToDateTime": "2020-03-28 00:00:00",
+                "RegistrationFromDateTime": "2019-09-04 00:00:00",
+                "RegistrationToDateTime": "2019-09-06 00:00:00",
                 "RegistrationDeadline": "2022-03-05 00:00:00",
                 "RegistrationPlaceName": "Trondheim",
-                "DescriptionInternal": null,
+                "DescriptionInternal": "Kurs for studenter 01 - Et kurs for studenter om jobbsøking\r\nI kurset vil vi gå igjennom:\r\n    - CV-skriving\r\n    - Søknadsskriving\r\n    - Hva som kan gjøre deg attraktiv som jobbsøker",
                 "CatalogText": null,
                 "Description": null,
                 "FrontPageDescription": null,
@@ -167,20 +139,20 @@ fetchMock
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
                 "configurable_custom": {
-                    "Fylke": "Trøndelag",
+                    "Fylke": "Hordaland",
                     "Type kurs": "Kurs",
-                    "Tema": "Kurs for studenter"
+                    "Tema": "Arbeidssøkeraktivitet"
                 }
             },
             {
                 "RegistrationID": 5,
                 "Title": "Kurs for ansatte, sett opp side",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/kurs-for-ansatte-sett-opp-side",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/kurs-for-ansatte-sett-opp-side",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-03-28 00:00:00",
-                "RegistrationToDateTime": "2020-03-28 00:00:00",
+                "RegistrationFromDateTime": "2019-10-07 00:00:00",
+                "RegistrationToDateTime": "2019-10-11 00:00:00",
                 "RegistrationDeadline": "2021-02-27 00:00:00",
                 "RegistrationPlaceName": "Oslo",
                 "DescriptionInternal": null,
@@ -195,22 +167,26 @@ fetchMock
             {
                 "RegistrationID": 4,
                 "Title": "Kurs for pensjonister 01",
-                "RegistrationUrl": "https://navkurs.pameldingssystem.no/kurs-for-pensjonister-01",
+                "RegistrationUrl": "https://nav.pameldingssystem.no/kurs-for-pensjonister-01",
                 "RegistrationImageMediaStorageID": 0,
                 "FrontImageMediaStorageID": 0,
                 "CatalogListMediaStorageID": null,
-                "RegistrationFromDateTime": "2019-03-28 00:00:00",
-                "RegistrationToDateTime": "2020-03-28 00:00:00",
+                "RegistrationFromDateTime": "2019-09-26 00:00:00",
+                "RegistrationToDateTime": "2019-09-26 00:00:00",
                 "RegistrationDeadline": "2021-03-01 00:00:00",
                 "RegistrationPlaceName": "Bergen",
-                "DescriptionInternal": null,
+                "DescriptionInternal": "Kurs for pensjonister som ønsker å jobbe deltid. Hvordan kan du som pensjonist bidra med din erfaring og kompetanse",
                 "CatalogText": null,
                 "Description": "",
                 "FrontPageDescription": null,
                 "ActiveWeb": 1,
                 "ShowRegistrationForm": 1,
                 "ShowInActivityList": 1,
-                "configurable_custom": null
+                "configurable_custom": {
+                    "Fylke": "Finnmark",
+                    "Type kurs": "Kurs",
+                    "Tema": "Arbeidssøkeraktivitet"
+                }
             }
         ]
     )

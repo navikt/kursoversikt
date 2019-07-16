@@ -1,4 +1,4 @@
-
+@import '~nav-frontend-core/less/_variabler';
 .Kurspanel {
 
   min-height: 20rem;
@@ -17,35 +17,62 @@
 
   &__tidspunkt {
     justify-content: flex-start;
-
+    display: flex;
+    flex-direction: column;
   }
-
+  &__datopanel{
+    display: flex;
+    flex-direction: row;
+  }
 
   &__hovedInnhold {
     margin-top: 2rem;
     justify-content: center;
   }
-  &__ikon{
+
+  &__ikon {
     display: flex;
     justify-content: flex-start;
   }
-  &__sted{
+
+  &__sted {
     padding-top: 1.5rem;
     display: flex;
     flex-direction: row;
   }
-  &__stedsOgFristTekst{
+
+  &__stedsOgFristTekst {
     display: flex;
     flex-direction: column;
     margin-left: 1rem;
   }
-  &__paameldingsfrist{
+
+  &__paameldingsfrist {
     padding-top: 1rem;
     display: flex;
     flex-direction: row;
   }
-  &__beskrivelse{
+
+  &__beskrivelse {
     margin-top: 1rem;
 
   }
 }
+  @media (min-width: @screen-md-min) {
+    .Kurspanel {
+      flex-direction: row;
+      &__tidspunkt {
+        margin-top: 2rem;
+        min-width: 7rem;
+      }
+      &__datopanel{
+        flex-direction: column;
+      }
+      &__hovedInnhold {
+        margin-left: 2rem;
+        justify-content: center;
+      }
+    }
+
+  }
+

@@ -12,8 +12,8 @@ interface Props {
 }
 
 const parseDatetime = (date: string) => {
+    date.replace(" ", "T");
     return new Date(date);
-
 };
 
 const KursPanel: FunctionComponent<Props> = ({kurs}) => {
@@ -28,18 +28,20 @@ const KursPanel: FunctionComponent<Props> = ({kurs}) => {
     const lagDatoTekst = () => {
         const starttid = startTidspunkt.toLocaleString('nb-no', {day: 'numeric', month: 'long'});
         if (startTidspunkt.toDateString() === sluttTidspunkt.toDateString()) {
-            return starttid;
+            return <div className={"Kurspanel__datopanel"}><Element className={"Kurspanel__startdato"}>{starttid}</Element> </div>
         }
         const sluttid = sluttTidspunkt.toLocaleString('nb-no', {day: 'numeric', month: 'long'});
-        return starttid + " - " + sluttid;
+        return <div  className={"Kurspanel__datopanel"}>
+            <Element className={"Kurspanel__startdato"}>{starttid + " - "}</Element>
+            <Element className={"Kurspanel__sluttdato"}>{` ` +sluttid}</Element>
+        </div>;
+
     };
 
 
     return <Panel className={"Kurspanel"}>
         <div className={"Kurspanel__tidspunkt"}>
-                <pre>
-                    <Element>{lagDatoTekst()}</Element>
-                </pre>
+            {lagDatoTekst()}
             <Normaltekst>kl. {startTidspunkt.toLocaleString('nb-no', {
                 hour: '2-digit',
                 minute: '2-digit'
