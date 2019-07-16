@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from "react";
 import {Panel} from "nav-frontend-paneler";
 import Lenke from "nav-frontend-lenker";
 import {Kurs} from "../../models/Kurs";
-import {Normaltekst} from "nav-frontend-typografi";
+import {Normaltekst, Element} from "nav-frontend-typografi";
 import "./KursPanel.less";
 import plasseringsIkon from "../../Ikoner/location-pin-6.svg";
 import flaggIkon from "../../Ikoner/flag-3.svg";
@@ -38,7 +38,7 @@ const KursPanel: FunctionComponent<Props> = ({kurs}) => {
     return <Panel className={"Kurspanel"}>
         <div className={"Kurspanel__tidspunkt"}>
                 <pre>
-                    <Normaltekst className={"Kurspanel__dato"}>{lagDatoTekst()}</Normaltekst>
+                    <Element>{lagDatoTekst()}</Element>
                 </pre>
             <Normaltekst>kl. {startTidspunkt.toLocaleString('nb-no', {
                 hour: '2-digit',

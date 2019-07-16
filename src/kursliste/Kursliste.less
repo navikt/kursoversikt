@@ -15,14 +15,20 @@
 .filterKolonne{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   margin: 1rem 1rem 1rem 1rem;
 }
 
 @media (min-width: @screen-md-min) {
   .hovedside{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     width: 100%;
+  }
+  .filterKolonne{
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem 1rem 1rem;
+    min-width: 16rem;
   }
 }
