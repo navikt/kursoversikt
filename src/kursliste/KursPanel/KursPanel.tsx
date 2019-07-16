@@ -12,8 +12,7 @@ interface Props {
 }
 
 const parseDatetime = (date: string) => {
-    date.replace(" ", "T");
-    return new Date(date);
+    return new Date(date.replace(" ", "T"));
 };
 
 const KursPanel: FunctionComponent<Props> = ({kurs}) => {
