@@ -72,7 +72,7 @@ const KursPanel: FunctionComponent<Props> = ({kurs}) => {
             <div className={"Kurspanel__rektangel"}></div>
         </div>
         <div className={"Kurspanel__hovedInnhold"}>
-            <Lenke className={"Kurspanel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
+            <Lenke className={"Kurspanel__header"} href={"/"+kurs.RegistrationID}>{kurs.Title}</Lenke>
             <Normaltekst className={"Kurspanel__beskrivelse"}>{kurs.DescriptionInternal || ""}</Normaltekst>
             {genererSted()}
             {genererPaameldingsfrist()}
