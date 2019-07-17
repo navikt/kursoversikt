@@ -1,23 +1,30 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
-import {Kurs} from "../models/Kurs";
+import {Kurs, tomtKurs} from "../models/Kurs";
 import {hentKurs} from "../api/pindenaAPI";
+import {RouteComponentProps} from "react-router";
 
-const DetaljSide: FunctionComponent = () => {
-    const [kursArray, setKursArray] = useState(Array<Kurs>());
-
+const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
+    const [detteKurset, setDetteKurset] = useState<Kurs >(tomtKurs);
     useEffect(() => {
         const hentOgSettKurs = async () => {
             const resultat = await hentKurs();
-            setKursArray(resultat);
+            let kursIdFraUrl = props.location.pathname.split("/")[1];
+            setDetteKurset(resultat.filter(kurs =>{
+                if(kurs.RegistrationID === parseInt(kursIdFraUrl)){
+                    return true;
+                }
+                return false;
+            })[0]
+            )
 
         };
         hentOgSettKurs();
 
-    }, []);
+    }, [props.location.pathname]);
 
     return (
         <div>
-            heihei
+            {detteKurset.Title}
         </div>
     );
 
