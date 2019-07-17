@@ -39,6 +39,28 @@ const KursPanel: FunctionComponent<Props> = ({kurs}) => {
 
     };
 
+    const genererPaameldingsfrist = () => {
+        return <div className={"Kurspanel__paameldingsfrist"}>
+            <img className={"Kurspanel__ikon"} src={flaggIkon} alt="flaggikon"/>
+            <Normaltekst className={"Kurspanel__stedsOgFristTekst"}><b>Påmeldingsfrist: &nbsp;</b>{pameldingsfrist.toLocaleString('nb-no', {
+                day: 'numeric',
+                month: 'long'
+            })}, kl.{pameldingsfrist.toLocaleString('nb-no', {
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</Normaltekst>
+        </div>
+    };
+
+    const genererSted = () => {
+        return <div className={"Kurspanel__sted"}>
+            <img className={"Kurspanel__ikon"} src={plasseringsIkon} alt="plasseringsikon"/>
+            <Normaltekst className={"Kurspanel__stedsOgFristTekst"}>
+                <b>Sted:</b> {kurs.RegistrationPlaceName}
+            </Normaltekst>
+        </div>
+    };
+
 
     return <Panel className={"Kurspanel"}>
         <div className={"Kurspanel__tidspunkt"}>
@@ -52,22 +74,8 @@ const KursPanel: FunctionComponent<Props> = ({kurs}) => {
         <div className={"Kurspanel__hovedInnhold"}>
             <Lenke className={"Kurspanel__header"} href={kurs.RegistrationUrl}>{kurs.Title}</Lenke>
             <Normaltekst className={"Kurspanel__beskrivelse"}>{kurs.DescriptionInternal || ""}</Normaltekst>
-            <div className={"Kurspanel__sted"}>
-                <img className={"Kurspanel__ikon"} src={plasseringsIkon} alt="plasseringsikon"/>
-                <Normaltekst className={"Kurspanel__stedsOgFristTekst"}>
-                    <b>Sted:</b> {kurs.RegistrationPlaceName}
-                </Normaltekst>
-            </div>
-            <div className={"Kurspanel__paameldingsfrist"}>
-                <img className={"Kurspanel__ikon"} src={flaggIkon} alt="flaggikon"/>
-                <Normaltekst className={"Kurspanel__stedsOgFristTekst"}><b>Påmeldingsfrist: &nbsp;</b>{pameldingsfrist.toLocaleString('nb-no', {
-                day: 'numeric',
-                month: 'long'
-                })}, kl.{pameldingsfrist.toLocaleString('nb-no', {
-                hour: '2-digit',
-                minute: '2-digit'
-            })}</Normaltekst>
-            </div>
+            {genererSted()}
+            {genererPaameldingsfrist()}
         </div>
     </Panel>
 

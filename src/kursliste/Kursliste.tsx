@@ -5,6 +5,7 @@ import KursPanel from "./KursPanel/KursPanel";
 import Filter from "./Filter/Filter";
 import "./Kursliste.less"
 import {filtrer, lagFilterKriterier} from "./filtrertingsMotor";
+import {Sidetittel} from "nav-frontend-typografi";
 
 export interface FilterState {
     Fylke: string[];
@@ -57,7 +58,12 @@ const KursListe: FunctionComponent = () => {
     };
 
     return (
+<div>
+    <header className={"overskrift"}>
+        <Sidetittel className={"sentrert__tekst"}>Kurskalender</Sidetittel>
+    </header>
         <div className={"hovedside"}>
+
             <span className={"filterKolonne"}>
                 <Filter tittel={"Fylker"} alternativer={unikeFylker} filterGruppe={"Fylke"} toggleFilter={handleFilterToggle}/>
                 <Filter tittel={"Type kurs"} alternativer={unikeKursTyper} filterGruppe={"Type kurs"}
@@ -70,6 +76,7 @@ const KursListe: FunctionComponent = () => {
         })}
             </span>
         </div>
+</div>
 
     );
 
