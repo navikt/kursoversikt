@@ -23,6 +23,7 @@
   &__datopanel{
     display: flex;
     flex-direction: row;
+
   }
 
   &__hovedInnhold {
@@ -55,8 +56,14 @@
 
   &__beskrivelse {
     margin-top: 1rem;
-
   }
+  &__tidsTekst{
+    font-weight:600;
+  }
+}
+.Kurspanel__tidspunkt.Kurspanel__datopanel{
+  font-weight:600;
+
 }
   @media (min-width: @screen-md-min) {
     .Kurspanel {
@@ -67,6 +74,7 @@
       }
       &__datopanel{
         flex-direction: column;
+
       }
       &__hovedInnhold {
         margin-left: 2rem;
@@ -76,6 +84,7 @@
         flex-direction: row;
 
       }
+
     }
 
   }
