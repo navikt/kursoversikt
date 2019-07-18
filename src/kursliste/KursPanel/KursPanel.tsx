@@ -12,34 +12,37 @@ interface Props {
 }
 
 const parseDatetime = (date: string) => {
-    return new Date(date);
-
+    return new Date(date.replace(" ", "T"));
 };
 
 const KursPanel: FunctionComponent<Props> = ({kurs}) => {
     const [startTidspunkt, setStartTidspunkt] = useState(new Date());
     const [sluttTidspunkt, setSluttTidspunkt] = useState(new Date());
+    const [pameldingsfrist, setPameldingsfrist] = useState(new Date());
 
     useEffect(() => {
         setStartTidspunkt(parseDatetime(kurs.RegistrationFromDateTime));
         setSluttTidspunkt(parseDatetime(kurs.RegistrationToDateTime));
+        setPameldingsfrist(parseDatetime(kurs.RegistrationDeadline))
     }, [kurs]);
 
     const lagDatoTekst = () => {
         const starttid = startTidspunkt.toLocaleString('nb-no', {day: 'numeric', month: 'long'});
         if (startTidspunkt.toDateString() === sluttTidspunkt.toDateString()) {
-            return starttid;
+            return <div className={"Kurspanel__datopanel"}><Element className={"Kurspanel__startdato"}>{starttid}</Element> </div>
         }
         const sluttid = sluttTidspunkt.toLocaleString('nb-no', {day: 'numeric', month: 'long'});
-        return starttid + " - " + sluttid;
+        return <div  className={"Kurspanel__datopanel"}>
+            <Element className={"Kurspanel__startdato"}>{starttid + " -"}&nbsp;</Element>
+            <Element className={"Kurspanel__sluttdato"}>{sluttid}</Element>
+        </div>;
+
     };
 
 
     return <Panel className={"Kurspanel"}>
         <div className={"Kurspanel__tidspunkt"}>
-                <pre>
-                    <Element>{lagDatoTekst()}</Element>
-                </pre>
+            {lagDatoTekst()}
             <Normaltekst>kl. {startTidspunkt.toLocaleString('nb-no', {
                 hour: '2-digit',
                 minute: '2-digit'
@@ -57,9 +60,12 @@ const KursPanel: FunctionComponent<Props> = ({kurs}) => {
             </div>
             <div className={"Kurspanel__paameldingsfrist"}>
                 <img className={"Kurspanel__ikon"} src={flaggIkon} alt="flaggikon"/>
-            <Normaltekst className={"Kurspanel__stedsOgFristTekst"}><b>Påmeldingsfrist: </b>{sluttTidspunkt.toLocaleString('nb-no', {
+                <Normaltekst className={"Kurspanel__stedsOgFristTekst"}><b>Påmeldingsfrist: &nbsp;</b>{pameldingsfrist.toLocaleString('nb-no', {
                 day: 'numeric',
                 month: 'long'
+                })}, kl.{pameldingsfrist.toLocaleString('nb-no', {
+                hour: '2-digit',
+                minute: '2-digit'
             })}</Normaltekst>
             </div>
         </div>
