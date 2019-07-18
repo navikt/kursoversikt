@@ -61,7 +61,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
           <img
             className={"MetaInfoPanel__ikon"}
             src={kalenderIkon}
-            alt="plasseringsikon"
+            alt="kalenderIkon"
           />
           <Element className={"MetaInfoPanel__infoTekst"}>
             <b>Når:&nbsp;</b>
@@ -74,7 +74,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
           <img
             className={"MetaInfoPanel__ikon"}
             src={kursTypeIkon}
-            alt="plasseringsikon"
+            alt="kurstypeikon"
           />
           <Normaltekst className={"MetaInfoPanel__infoTekst"}>
             <b>Type kurs:&nbsp;</b>
