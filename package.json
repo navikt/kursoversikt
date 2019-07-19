@@ -18,6 +18,7 @@
     "http-proxy-middleware": "^0.19.1",
     "https-proxy-agent": "^2.2.2",
     "lodash.throttle": "^4.1.1",
+    "nav-frontend-chevron": "^1.0.9",
     "nav-frontend-chevron-style": "^0.3.4",
     "nav-frontend-core": "^4.0.9",
     "nav-frontend-ekspanderbartpanel": "^1.0.28",

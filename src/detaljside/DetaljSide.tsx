@@ -13,7 +13,7 @@ import "nav-frontend-knapper-style";
 import "./DetaljSide.less";
 import kalenderIkon from "../Ikoner/calendar-3.svg";
 import kursTypeIkon from "../Ikoner/person-2.svg";
-
+import { VenstreChevron } from "nav-frontend-chevron";
 import Lenke from "nav-frontend-lenker";
 import {
   lagPaameldingsfristkomponent,
@@ -33,10 +33,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
       let kursIdFraUrl = props.location.pathname.split("/")[1];
       await setDetteKurset(
         resultat.filter(kurs => {
-          if (kurs.RegistrationID === parseInt(kursIdFraUrl)) {
-            return true;
-          }
-          return false;
+          return kurs.RegistrationID === parseInt(kursIdFraUrl);
         })[0]
       );
     };
@@ -49,6 +46,9 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     setPameldingsfrist(parseDatetime(detteKurset.RegistrationDeadline));
   }, [detteKurset]);
 
+  const createMarkup = () => ({
+    __html: detteKurset.FrontPageDescription
+  });
   return (
     <div>
       <header className={"overskrift"}>
@@ -56,43 +56,56 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
           {detteKurset.Title}
         </Sidetittel>
       </header>
-      <Panel className={"MetaInfoPanel"}>
-        <div className={"MetaInfoPanel__egenskapTop"}>
-          <img
-            className={"MetaInfoPanel__ikon"}
-            src={kalenderIkon}
-            alt="kalenderIkon"
-          />
-          <Element className={"MetaInfoPanel__infoTekst"}>
-            <b>Når:&nbsp;</b>
-          </Element>
-          {lagDatoTekst(startTidspunkt, sluttTidspunkt, "MetaInfoPanel__dato")}
-        </div>
-        {lagPaameldingsfristkomponent(pameldingsfrist)}
-        {lagStedkomponent(detteKurset)}
-        <div className={"MetaInfoPanel__egenskapTop"}>
-          <img
-            className={"MetaInfoPanel__ikon"}
-            src={kursTypeIkon}
-            alt="kurstypeikon"
-          />
-          <Normaltekst className={"MetaInfoPanel__infoTekst"}>
-            <b>Type kurs:&nbsp;</b>
-            {detteKurset.configurable_custom["Type kurs"]}
-          </Normaltekst>
-        </div>
-      </Panel>
-      <Panel className={"BeskrivelsePanel"}>
-        <header className={"overskrift"}>
-          <Systemtittel>Om kurset</Systemtittel>
-        </header>
-        <Lenke
-          className={"active knapp knapp--hoved"}
-          href={detteKurset.RegistrationUrl}
-        >
-          Meld deg på
-        </Lenke>
-      </Panel>
+      <div className={"detaljVisning"}>
+        <Panel className={"MetaInfoPanel"}>
+          <div className={"MetaInfoPanel__egenskapTop"}>
+            <img
+              className={"MetaInfoPanel__ikon"}
+              src={kalenderIkon}
+              alt="kalenderIkon"
+            />
+            <Element className={"MetaInfoPanel__infoTekst"}>
+              <b>Når:&nbsp;</b>
+            </Element>
+            {lagDatoTekst(
+              startTidspunkt,
+              sluttTidspunkt,
+              "MetaInfoPanel__dato"
+            )}
+          </div>
+          {lagPaameldingsfristkomponent(pameldingsfrist)}
+          {lagStedkomponent(detteKurset)}
+          <div className={"MetaInfoPanel__egenskapTop"}>
+            <img
+              className={"MetaInfoPanel__ikon"}
+              src={kursTypeIkon}
+              alt="kurstypeikon"
+            />
+            <Normaltekst className={"MetaInfoPanel__infoTekst"}>
+              <b>Type kurs:&nbsp;</b>
+              {detteKurset.configurable_custom["Type kurs"]}
+            </Normaltekst>
+          </div>
+        </Panel>
+        <Panel className={"BeskrivelsePanel"}>
+          <header className={"overskrift"}>
+            <Systemtittel>Om kurset</Systemtittel>
+          </header>
+          <div dangerouslySetInnerHTML={createMarkup()} />
+          <Lenke
+            className={"active knapp knapp--hoved margintop2"}
+            href={detteKurset.RegistrationUrl}
+          >
+            Meld deg på
+          </Lenke>
+          <div className={"BeskrivelsePanel__tilbakelenke"}>
+            <Lenke href={"/kursoversikt"}>
+              <VenstreChevron type={"venstre"} />
+              Tilbake til kursoversikten
+            </Lenke>
+          </div>
+        </Panel>
+      </div>
     </div>
   );
 };

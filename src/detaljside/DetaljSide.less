@@ -1,3 +1,10 @@
+@import "~nav-frontend-core/less/_variabler";
+.detaljVisning {
+  margin-bottom: 2rem;
+}
+.margintop2 {
+  margin-top: 2rem;
+}
 .MetaInfoPanel {
   display: flex;
   flex-direction: column;
@@ -15,10 +22,15 @@
 }
 .BeskrivelsePanel {
   margin-top: 1rem;
+  &__tilbakelenke {
+    margin-top: 1rem;
+    margin-left: -0.3rem;
+  }
+  padding-bottom: 2.5rem;
 }
 
 .Kurspanel {
-  &____dato {
+  &__dato {
     font-weight: 400;
   }
   &__sted {
@@ -27,5 +39,19 @@
   &__stedsOgFristTekst {
     display: flex;
     flex-direction: row;
+  }
+}
+@media (min-width: @screen-md-min) {
+  .detaljVisning {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .MetaInfoPanel {
+    margin-left: 1rem;
+  }
+  .BeskrivelsePanel {
+    margin-top: 0;
+    min-width: 40rem;
   }
 }
