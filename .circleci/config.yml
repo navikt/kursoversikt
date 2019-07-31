@@ -74,18 +74,18 @@ workflows:
            branches:
              only:
                - master
-      - godkjenn-til-prod:
-          type: approval
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-      - deploy-til-prod:
-          requires:
-            - godkjenn-til-prod
-          filters:
-            branches:
-              only:
-                - master
+      # - godkjenn-til-prod:
+          # type: approval
+          # requires:
+            # - build
+          # filters:
+            # branches:
+              # only:
+                # - master
+      # - deploy-til-prod:
+          # requires:
+            # - godkjenn-til-prod
+          # filters:
+            # branches:
+              # only:
+                # - master
