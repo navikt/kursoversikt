@@ -34,7 +34,7 @@ jobs:
 
   deploy-til-dev:
     docker:
-      - image: 'navikt/deployment-cli:v0.1.7'
+      - image: 'navikt/deployment-cli:v0.2.0'
     steps:
       - deploy:
           cluster: 'dev-sbs'
@@ -42,7 +42,7 @@ jobs:
 
   deploy-til-prod:
     docker:
-      - image: 'navikt/deployment-cli:v0.1.7'
+      - image: 'navikt/deployment-cli:v0.2.0'
     steps:
       - deploy:
           cluster: 'prod-sbs'
@@ -60,7 +60,7 @@ commands:
       - checkout
       - run:
           name: Deploy til << parameters.cluster >>
-          command: deployment-cli deploy create --cluster=<< parameters.cluster >> --repository=navikt/kursoversikt --team=teamtag --resource=<< parameters.nais-yaml >> --version=$CIRCLE_SHA1 --ref=$CIRCLE_BRANCH
+          command: deployment-cli deploy create --cluster=<< parameters.cluster >> --repository=navikt/kursoversikt --team=teamtag --resource=<< parameters.nais-yaml >> --var version=$CIRCLE_SHA1 --ref=$CIRCLE_BRANCH
 
 workflows:
   version: 2.1
