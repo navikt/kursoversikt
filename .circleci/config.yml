@@ -23,19 +23,69 @@ jobs:
           command: yarn build
       - setup_remote_docker
       - run:
-          name: Setter miljøvariabler
-          command: |
-            echo 'export RELEASE_VERSION="$(git rev-list --count $CIRCLE_SHA1)"' >> $BASH_ENV
-            echo 'export BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"' >> $BASH_ENV
-            echo 'export BRANCH_PREFIX=`[ $BRANCH_NAME == "master" ] && echo "" || echo $BRANCH_NAME\_`' >> $BASH_ENV
-            echo 'export DOCKER_IMAGE_VERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$BRANCH_PREFIX$RELEASE_VERSION"' >> $BASH_ENV
-            echo 'export DOCKER_IMAGE_UNVERSIONED="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
-      - run:
           name: Bygger Docker image
-          command: docker build -t "$DOCKER_IMAGE_VERSIONED" -t "$DOCKER_IMAGE_UNVERSIONED" .
+          command: docker build -t "navikt/kursoversikt:$CIRCLE_SHA1" .
       - run:
           name: Pusher Docker image
           command: |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker push "$DOCKER_IMAGE_VERSIONED"
-            docker push "$DOCKER_IMAGE_UNVERSIONED"
+            echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
+            docker push "navikt/kursoversikt:$CIRCLE_SHA1"
+            echo "Docker image: $CIRCLE_SHA1"
+
+  deploy-til-dev:
+    docker:
+      - image: 'navikt/deployment-cli:v0.2.0'
+    steps:
+      - deploy:
+          cluster: 'dev-sbs'
+          nais-yaml: 'nais-preprod.yaml'
+
+  deploy-til-prod:
+    docker:
+      - image: 'navikt/deployment-cli:v0.2.0'
+    steps:
+      - deploy:
+          cluster: 'prod-sbs'
+          nais-yaml: 'nais-prod.yaml'
+
+commands:
+  deploy:
+    description: Deploy til et gitt miljø
+    parameters:
+      cluster:
+        type: string
+      nais-yaml:
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Deploy til << parameters.cluster >>
+          command: deployment-cli deploy create --cluster=<< parameters.cluster >> --repository=navikt/kursoversikt --team=teamtag --resource=<< parameters.nais-yaml >> --var version=$CIRCLE_SHA1 --ref=$CIRCLE_BRANCH
+
+workflows:
+  version: 2.1
+  bygg_og_deploy:
+    jobs:
+      - build
+      - deploy-til-dev:
+         requires:
+           - build
+         filters:
+           branches:
+             only:
+               - master
+      # - godkjenn-til-prod:
+          # type: approval
+          # requires:
+            # - build
+          # filters:
+            # branches:
+              # only:
+                # - master
+      # - deploy-til-prod:
+          # requires:
+            # - godkjenn-til-prod
+          # filters:
+            # branches:
+              # only:
+                # - master
