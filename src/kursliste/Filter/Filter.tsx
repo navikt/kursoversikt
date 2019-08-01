@@ -2,12 +2,13 @@ import React, { FunctionComponent } from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Checkbox } from 'nav-frontend-skjema';
 import './Filter.less';
+import { FilterGruppe } from '../Kursliste';
 
 interface Props {
     tittel: string;
     alternativer: string[];
-    filterGruppe: 'Fylke' | 'Tema' | 'Type kurs';
-    toggleFilter: (gruppe: 'Fylke' | 'Tema' | 'Type kurs', filterattr: string) => void;
+    filterGruppe: FilterGruppe;
+    toggleFilter: (gruppe: FilterGruppe, filterattr: string) => void;
 }
 
 const Filter: FunctionComponent<Props> = ({ tittel, alternativer, filterGruppe, toggleFilter }) => {

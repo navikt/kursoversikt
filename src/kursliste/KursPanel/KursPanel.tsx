@@ -15,17 +15,13 @@ interface Props {
 }
 
 const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
-    const startTidspunkt = kurs.RegistrationFromDateTime;
-    const sluttTidspunkt = kurs.RegistrationToDateTime;
-    const pameldingsfrist = kurs.RegistrationDeadline;
-
     return (
         <Panel className={'Kurspanel'}>
             <div className={'Kurspanel__tidspunkt'}>
-                {lagDatoTekst(startTidspunkt, sluttTidspunkt, 'Kurspanel__tidsTekst')}
+                {lagDatoTekst(kurs.starttidspunkt, kurs.sluttidspunkt, 'Kurspanel__tidsTekst')}
                 <Normaltekst>
                     kl.{' '}
-                    {startTidspunkt.toLocaleString('nb-no', {
+                    {kurs.starttidspunkt.toLocaleString('nb-no', {
                         hour: '2-digit',
                         minute: '2-digit',
                     })}
@@ -33,17 +29,14 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                 <div className={'Kurspanel__rektangel'}></div>
             </div>
             <div className={'Kurspanel__hovedInnhold'}>
-                <Lenke
-                    className={'Kurspanel__header'}
-                    href={'/kursoversikt/' + kurs.RegistrationID}
-                >
-                    {kurs.Title}
+                <Lenke className={'Kurspanel__header'} href={'/kursoversikt/' + kurs.id}>
+                    {kurs.tittel}
                 </Lenke>
                 <Normaltekst className={'Kurspanel__beskrivelse'}>
-                    {kurs.DescriptionInternal || ''}
+                    {kurs.internBeskrivelse || ''}
                 </Normaltekst>
                 {lagStedkomponent(kurs)}
-                {lagPaameldingsfristkomponent(pameldingsfrist)}
+                {lagPaameldingsfristkomponent(kurs.pameldingsfrist)}
             </div>
         </Panel>
     );
