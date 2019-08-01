@@ -1,26 +1,32 @@
-import {Kurs} from "../models/Kurs";
-import {FilterState, FilterGruppe} from "./Kursliste";
-
+import { Kurs } from '../models/Kurs';
+import { FilterState, FilterGruppe } from './Kursliste';
 
 export const filtrer = (filterState: FilterState, kursArray: Kurs[]): Kurs[] => {
-    console.log("filtrer");
+    console.log('filtrer');
     let filtrerteKurs = kursArray;
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, "Fylke", filtrerteKurs);
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, "Tema", filtrerteKurs);
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, "Type kurs", filtrerteKurs);
+    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'Fylke', filtrerteKurs);
+    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'Tema', filtrerteKurs);
+    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'Type kurs', filtrerteKurs);
     return filtrerteKurs;
 };
 
-const utforFiltreringPaaFiltergruppe = (filterState: FilterState, filterGruppe: FilterGruppe, kursSomSkalFiltreres: Array<Kurs>): Kurs[] => {
+const utforFiltreringPaaFiltergruppe = (
+    filterState: FilterState,
+    filterGruppe: FilterGruppe,
+    kursSomSkalFiltreres: Array<Kurs>
+): Kurs[] => {
     const filtrerteKurs = kursSomSkalFiltreres.filter(kurs => {
-            if (filterState[filterGruppe].length > 0) {
-                if (!kurs.configurable_custom || !kurs.configurable_custom[filterGruppe] || !filterState[filterGruppe].includes(kurs.configurable_custom[filterGruppe])) {
-                    return false;
-                }
+        if (filterState[filterGruppe].length > 0) {
+            if (
+                !kurs.configurable_custom ||
+                !kurs.configurable_custom[filterGruppe] ||
+                !filterState[filterGruppe].includes(kurs.configurable_custom[filterGruppe])
+            ) {
+                return false;
             }
-            return true;
         }
-    );
+        return true;
+    });
     return filtrerteKurs;
 };
 

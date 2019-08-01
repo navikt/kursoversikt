@@ -4,9 +4,8 @@ const HttpsProxyAgent = require('https-proxy-agent');
 const envProperties = {
     API_USER: process.env.PINDENA_USER,
     API_PASS: process.env.PINDENA_PASS,
-    PROXY_SERVER: process.env.HTTPS_PROXY
+    PROXY_SERVER: process.env.HTTPS_PROXY,
 };
-
 
 const pindenaProxyConfig = {
     changeOrigin: true,
@@ -17,11 +16,11 @@ const pindenaProxyConfig = {
     secure: true,
     xfwd: true,
     logLevel: 'debug',
-    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER)
+    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
 };
 
 if (envProperties.API_USER) {
-    pindenaProxyConfig.auth =envProperties.API_USER + ":" +  envProperties.API_PASS;
+    pindenaProxyConfig.auth = envProperties.API_USER + ':' + envProperties.API_PASS;
 }
 
 module.exports = proxy(pindenaProxyConfig);

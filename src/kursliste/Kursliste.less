@@ -1,37 +1,36 @@
-@import "~nav-frontend-core/less/_variabler";
-
+@import '~nav-frontend-core/less/_variabler';
 
 .hovedside {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .kursKolonne {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .filterKolonne {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 1rem 1rem 1rem;
 }
 
 @media (min-width: @screen-md-min) {
-  .hovedside {
-    display: flex;
-    flex-direction: row-reverse;
-    width: 100%;
-    height: 100%;
+    .hovedside {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        height: 100%;
+    }
 
-  }
-  .filterKolonne {
-    display: flex;
-    flex-direction: column;
-    margin: 0 1rem 1rem 1rem;
-    min-width: 16rem;
-  }
+    .filterKolonne {
+        display: flex;
+        flex-direction: column;
+        margin: 0 1rem 1rem 1rem;
+        min-width: 16rem;
+    }
 }

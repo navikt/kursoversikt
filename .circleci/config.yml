@@ -1,91 +1,91 @@
 version: 2.1
 jobs:
-  build:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - restore_cache:
-          name: Hent Yarn cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Installer avhengigheter
-          command: |
-            yarn install --frozen-lockfile
-      - save_cache:
-          name: Lagre Yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - run:
-          name: Bygg produksjonsversjon av React app
-          command: yarn build
-      - setup_remote_docker
-      - run:
-          name: Bygger Docker image
-          command: docker build -t "navikt/kursoversikt:$CIRCLE_SHA1" .
-      - run:
-          name: Pusher Docker image
-          command: |
-            echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
-            docker push "navikt/kursoversikt:$CIRCLE_SHA1"
-            echo "Docker image: $CIRCLE_SHA1"
+    build:
+        docker:
+            - image: circleci/node:10
+        steps:
+            - checkout
+            - restore_cache:
+                  name: Hent Yarn cache
+                  keys:
+                      - yarn-packages-{{ checksum "yarn.lock" }}
+            - run:
+                  name: Installer avhengigheter
+                  command: |
+                      yarn install --frozen-lockfile
+            - save_cache:
+                  name: Lagre Yarn cache
+                  key: yarn-packages-{{ checksum "yarn.lock" }}
+                  paths:
+                      - ~/.cache/yarn
+            - run:
+                  name: Bygg produksjonsversjon av React app
+                  command: yarn build
+            - setup_remote_docker
+            - run:
+                  name: Bygger Docker image
+                  command: docker build -t "navikt/kursoversikt:$CIRCLE_SHA1" .
+            - run:
+                  name: Pusher Docker image
+                  command: |
+                      echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
+                      docker push "navikt/kursoversikt:$CIRCLE_SHA1"
+                      echo "Docker image: $CIRCLE_SHA1"
 
-  deploy-til-dev:
-    docker:
-      - image: 'navikt/deployment-cli:v0.2.0'
-    steps:
-      - deploy:
-          cluster: 'dev-sbs'
-          nais-yaml: 'nais-preprod.yaml'
+    deploy-til-dev:
+        docker:
+            - image: 'navikt/deployment-cli:v0.2.0'
+        steps:
+            - deploy:
+                  cluster: 'dev-sbs'
+                  nais-yaml: 'nais-preprod.yaml'
 
-  deploy-til-prod:
-    docker:
-      - image: 'navikt/deployment-cli:v0.2.0'
-    steps:
-      - deploy:
-          cluster: 'prod-sbs'
-          nais-yaml: 'nais-prod.yaml'
+    deploy-til-prod:
+        docker:
+            - image: 'navikt/deployment-cli:v0.2.0'
+        steps:
+            - deploy:
+                  cluster: 'prod-sbs'
+                  nais-yaml: 'nais-prod.yaml'
 
 commands:
-  deploy:
-    description: Deploy til et gitt miljø
-    parameters:
-      cluster:
-        type: string
-      nais-yaml:
-        type: string
-    steps:
-      - checkout
-      - run:
-          name: Deploy til << parameters.cluster >>
-          command: deployment-cli deploy create --cluster=<< parameters.cluster >> --repository=navikt/kursoversikt --team=teamtag --resource=<< parameters.nais-yaml >> --var version=$CIRCLE_SHA1 --ref=$CIRCLE_BRANCH
+    deploy:
+        description: Deploy til et gitt miljø
+        parameters:
+            cluster:
+                type: string
+            nais-yaml:
+                type: string
+        steps:
+            - checkout
+            - run:
+                  name: Deploy til << parameters.cluster >>
+                  command: deployment-cli deploy create --cluster=<< parameters.cluster >> --repository=navikt/kursoversikt --team=teamtag --resource=<< parameters.nais-yaml >> --var version=$CIRCLE_SHA1 --ref=$CIRCLE_BRANCH
 
 workflows:
-  version: 2.1
-  bygg_og_deploy:
-    jobs:
-      - build
-      - deploy-til-dev:
-         requires:
-           - build
-         filters:
-           branches:
-             only:
-               - master
-      # - godkjenn-til-prod:
-          # type: approval
-          # requires:
+    version: 2.1
+    bygg_og_deploy:
+        jobs:
+            - build
+            - deploy-til-dev:
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only:
+                              - master
+            # - godkjenn-til-prod:
+            # type: approval
+            # requires:
             # - build
-          # filters:
+            # filters:
             # branches:
-              # only:
-                # - master
-      # - deploy-til-prod:
-          # requires:
+            # only:
+            # - master
+            # - deploy-til-prod:
+            # requires:
             # - godkjenn-til-prod
-          # filters:
+            # filters:
             # branches:
-              # only:
-                # - master
+            # only:
+            # - master

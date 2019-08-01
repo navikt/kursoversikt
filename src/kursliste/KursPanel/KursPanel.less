@@ -1,83 +1,86 @@
-@import "~nav-frontend-core/less/_variabler";
+@import '~nav-frontend-core/less/_variabler';
 .Kurspanel {
-  min-height: 20rem;
-  display: flex;
-  //width: 50rem;
-  margin: 0 1rem 0 1rem;
-  border-bottom: solid 1px #c6c2bf;
-  flex-direction: column;
-
-  &__rektangel {
-    width: 2rem;
-    height: 0.5rem;
-    background-color: #ccdee6;
-    margin-top: 1rem;
-  }
-
-  &__tidspunkt {
-    justify-content: flex-start;
+    min-height: 20rem;
     display: flex;
+    //width: 50rem;
+    margin: 0 1rem 0 1rem;
+    border-bottom: solid 1px #c6c2bf;
     flex-direction: column;
-  }
-  &__datopanel {
-    display: flex;
-    flex-direction: row;
-  }
 
-  &__hovedInnhold {
-    margin-top: 2rem;
-    justify-content: center;
-  }
+    &__rektangel {
+        width: 2rem;
+        height: 0.5rem;
+        background-color: #ccdee6;
+        margin-top: 1rem;
+    }
 
-  &__ikon {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  &__sted {
-    padding-top: 1.5rem;
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__stedsOgFristTekst {
-    display: flex;
-    flex-direction: column;
-    margin-left: 1rem;
-  }
-
-  &__paameldingsfrist {
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__beskrivelse {
-    margin-top: 1rem;
-  }
-  &__tidsTekst {
-    font-weight: 600;
-  }
-}
-.Kurspanel__tidspunkt.Kurspanel__datopanel {
-  font-weight: 600;
-}
-@media (min-width: @screen-md-min) {
-  .Kurspanel {
-    flex-direction: row;
     &__tidspunkt {
-      margin-top: 2rem;
-      min-width: 7rem;
+        justify-content: flex-start;
+        display: flex;
+        flex-direction: column;
     }
     &__datopanel {
-      flex-direction: column;
+        display: flex;
+        flex-direction: row;
     }
+
     &__hovedInnhold {
-      margin-left: 2rem;
-      justify-content: center;
+        margin-top: 2rem;
+        justify-content: center;
     }
+
+    &__ikon {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__sted {
+        padding-top: 1.5rem;
+        display: flex;
+        flex-direction: row;
+    }
+
     &__stedsOgFristTekst {
-      flex-direction: row;
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
     }
-  }
+
+    &__paameldingsfrist {
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__beskrivelse {
+        margin-top: 1rem;
+    }
+
+    &__tidsTekst {
+        font-weight: 600;
+    }
+}
+
+.Kurspanel__tidspunkt.Kurspanel__datopanel {
+    font-weight: 600;
+}
+
+@media (min-width: @screen-md-min) {
+    .Kurspanel {
+        flex-direction: row;
+        &__tidspunkt {
+            margin-top: 2rem;
+            min-width: 7rem;
+        }
+        &__datopanel {
+            flex-direction: column;
+        }
+        &__hovedInnhold {
+            margin-left: 2rem;
+            justify-content: center;
+        }
+        &__stedsOgFristTekst {
+            flex-direction: row;
+        }
+    }
 }

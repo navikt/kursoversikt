@@ -1,26 +1,18 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import {Checkbox} from 'nav-frontend-skjema';
-import "./Filter.less"
+import { Checkbox } from 'nav-frontend-skjema';
+import './Filter.less';
 
 interface Props {
     tittel: string;
     alternativer: string[];
-    filterGruppe: "Fylke" | "Tema" | "Type kurs";
-    toggleFilter: (gruppe: "Fylke" | "Tema" | "Type kurs", filterattr: string) => void;
-
+    filterGruppe: 'Fylke' | 'Tema' | 'Type kurs';
+    toggleFilter: (gruppe: 'Fylke' | 'Tema' | 'Type kurs', filterattr: string) => void;
 }
 
-const Filter: FunctionComponent<Props> = ({
-                                              tittel,
-                                              alternativer,
-                                              filterGruppe,
-                                              toggleFilter,
-                                          }) => {
-
-
+const Filter: FunctionComponent<Props> = ({ tittel, alternativer, filterGruppe, toggleFilter }) => {
     return (
-        <div className={"filterboks"}>
+        <div className={'filterboks'}>
             <Ekspanderbartpanel tittel={tittel} apen>
                 {alternativer.map(alternativ => (
                     <Checkbox
