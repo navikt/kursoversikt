@@ -96,7 +96,11 @@ fetchMock
             ActiveWeb: 1,
             ShowRegistrationForm: 1,
             ShowInActivityList: 1,
-            configurable_custom: null,
+            configurable_custom: {
+                Fylke: 'Finnmark',
+                'Type kurs': 'Kurs',
+                Tema: 'Arbeidssøkeraktivitet',
+            },
         },
         {
             RegistrationID: 8,
@@ -167,7 +171,11 @@ fetchMock
             ActiveWeb: 1,
             ShowRegistrationForm: 1,
             ShowInActivityList: 1,
-            configurable_custom: null,
+            configurable_custom: {
+                Fylke: 'Finnmark',
+                'Type kurs': 'Kurs',
+                Tema: 'Arbeidssøkeraktivitet',
+            },
         },
         {
             RegistrationID: 4,

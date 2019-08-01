@@ -4,10 +4,6 @@ import flaggIkon from '../Ikoner/flag-3.svg';
 import plasseringsIkon from '../Ikoner/location-pin-6.svg';
 import { Kurs } from '../models/Kurs';
 
-export const parseDatetime = (date: string) => {
-    return new Date(date.replace(' ', 'T'));
-};
-
 const dagOgManedPaLesbartFormat = (dato: Date): string => {
     return dato.toLocaleString('nb-no', { day: 'numeric', month: 'long' });
 };

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import Lenke from 'nav-frontend-lenker';
 import { Kurs } from '../../models/Kurs';
@@ -8,7 +8,6 @@ import {
     lagPaameldingsfristkomponent,
     lagStedkomponent,
     lagDatoTekst,
-    parseDatetime,
 } from '../../utils/kursMetaInfoKomponenter';
 
 interface Props {
@@ -16,15 +15,9 @@ interface Props {
 }
 
 const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
-    const [startTidspunkt, setStartTidspunkt] = useState(new Date());
-    const [sluttTidspunkt, setSluttTidspunkt] = useState(new Date());
-    const [pameldingsfrist, setPameldingsfrist] = useState(new Date());
-
-    useEffect(() => {
-        setStartTidspunkt(parseDatetime(kurs.RegistrationFromDateTime));
-        setSluttTidspunkt(parseDatetime(kurs.RegistrationToDateTime));
-        setPameldingsfrist(parseDatetime(kurs.RegistrationDeadline));
-    }, [kurs]);
+    const startTidspunkt = kurs.RegistrationFromDateTime;
+    const sluttTidspunkt = kurs.RegistrationToDateTime;
+    const pameldingsfrist = kurs.RegistrationDeadline;
 
     return (
         <Panel className={'Kurspanel'}>

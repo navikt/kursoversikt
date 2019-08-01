@@ -14,7 +14,6 @@ import {
     lagPaameldingsfristkomponent,
     lagStedkomponent,
     lagDatoTekst,
-    parseDatetime,
 } from '../utils/kursMetaInfoKomponenter';
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
@@ -37,9 +36,9 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     }, [props.location.pathname]);
 
     useEffect(() => {
-        setStartTidspunkt(parseDatetime(detteKurset.RegistrationFromDateTime));
-        setSluttTidspunkt(parseDatetime(detteKurset.RegistrationToDateTime));
-        setPameldingsfrist(parseDatetime(detteKurset.RegistrationDeadline));
+        setStartTidspunkt(detteKurset.RegistrationFromDateTime);
+        setSluttTidspunkt(detteKurset.RegistrationToDateTime);
+        setPameldingsfrist(detteKurset.RegistrationDeadline);
     }, [detteKurset]);
 
     const createMarkup = () => ({
@@ -74,6 +73,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         />
                         <Normaltekst className={'MetaInfoPanel__infoTekst'}>
                             <b>Type kurs:&nbsp;</b>
+                            {/* TODO: Kan configurable_custom være null? */}
                             {detteKurset.configurable_custom['Type kurs']}
                         </Normaltekst>
                     </div>

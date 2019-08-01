@@ -11,9 +11,9 @@ export interface Kurs {
     RegistrationImageMediaStorageID: number;
     FrontImageMediaStorageID: number;
     CatalogListMediaStorageID?: any;
-    RegistrationFromDateTime: string;
-    RegistrationToDateTime: string;
-    RegistrationDeadline: string;
+    RegistrationFromDateTime: Date;
+    RegistrationToDateTime: Date;
+    RegistrationDeadline: Date;
     RegistrationPlaceName?: any;
     DescriptionInternal: string;
     CatalogText?: any;
@@ -38,9 +38,9 @@ export const tomtKurs: Kurs = {
     RegistrationImageMediaStorageID: 0,
     FrontImageMediaStorageID: 0,
     CatalogListMediaStorageID: '',
-    RegistrationFromDateTime: '',
-    RegistrationToDateTime: '',
-    RegistrationDeadline: '',
+    RegistrationFromDateTime: new Date(),
+    RegistrationToDateTime: new Date(),
+    RegistrationDeadline: new Date(),
     RegistrationPlaceName: '',
     DescriptionInternal: '',
     CatalogText: '',
