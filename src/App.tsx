@@ -1,16 +1,27 @@
 import React from 'react';
 import './App.less';
 import KursListe from "./kursliste/Kursliste";
-import {Sidetittel} from "nav-frontend-typografi";
-
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import DetaljSide from "./detaljside/DetaljSide";
+const basename = "/kursoversikt";
 function App() {
   return (
-    <div className={"bakgrunnsside"}>
-      <header className={"overskrift"}>
-            <Sidetittel className={"sentrert__tekst"}>Kurskalender</Sidetittel>
-      </header>
-      <KursListe></KursListe>
-    </div>
+      <div className={"bakgrunnsside"}>
+      <BrowserRouter basename={basename}>
+      <Switch>
+          <Route
+              path="/:orgnummer"
+              exact={true}
+              component={DetaljSide}
+          />
+          <Route
+              path="/"
+              exact={true}
+              component={KursListe}
+          />
+      </Switch>
+       </BrowserRouter>
+      </div>
   );
 }
 

@@ -1,0 +1,57 @@
+@import "~nav-frontend-core/less/_variabler";
+.detaljVisning {
+  margin-bottom: 2rem;
+}
+.margintop2 {
+  margin-top: 2rem;
+}
+.MetaInfoPanel {
+  display: flex;
+  flex-direction: column;
+  &__egenskapTop {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+  }
+  &__infoTekst {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+    font-weight: 400;
+  }
+}
+.BeskrivelsePanel {
+  margin-top: 1rem;
+  &__tilbakelenke {
+    margin-top: 1rem;
+    margin-left: -0.3rem;
+  }
+  padding-bottom: 2.5rem;
+}
+
+.Kurspanel {
+  &__dato {
+    font-weight: 400;
+  }
+  &__sted {
+    padding-top: 1rem;
+  }
+  &__stedsOgFristTekst {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media (min-width: @screen-md-min) {
+  .detaljVisning {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .MetaInfoPanel {
+    margin-left: 1rem;
+  }
+  .BeskrivelsePanel {
+    margin-top: 0;
+    min-width: 40rem;
+  }
+}

@@ -1,6 +1,5 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 .Kurspanel {
-
   min-height: 20rem;
   display: flex;
   //width: 50rem;
@@ -20,7 +19,7 @@
     display: flex;
     flex-direction: column;
   }
-  &__datopanel{
+  &__datopanel {
     display: flex;
     flex-direction: row;
   }
@@ -55,28 +54,30 @@
 
   &__beskrivelse {
     margin-top: 1rem;
-
+  }
+  &__tidsTekst {
+    font-weight: 600;
   }
 }
-  @media (min-width: @screen-md-min) {
-    .Kurspanel {
-      flex-direction: row;
-      &__tidspunkt {
-        margin-top: 2rem;
-        min-width: 7rem;
-      }
-      &__datopanel{
-        flex-direction: column;
-      }
-      &__hovedInnhold {
-        margin-left: 2rem;
-        justify-content: center;
-      }
-      &__stedsOgFristTekst{
-        flex-direction: row;
-
-      }
+.Kurspanel__tidspunkt.Kurspanel__datopanel {
+  font-weight: 600;
+}
+@media (min-width: @screen-md-min) {
+  .Kurspanel {
+    flex-direction: row;
+    &__tidspunkt {
+      margin-top: 2rem;
+      min-width: 7rem;
     }
-
+    &__datopanel {
+      flex-direction: column;
+    }
+    &__hovedInnhold {
+      margin-left: 2rem;
+      justify-content: center;
+    }
+    &__stedsOgFristTekst {
+      flex-direction: row;
+    }
   }
-
+}

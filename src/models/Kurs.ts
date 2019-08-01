@@ -25,3 +25,30 @@ export interface Kurs {
     ShowInActivityList: number;
     configurable_custom: ConfigurableCustom;
 }
+
+export const tomConfigurableCustom: ConfigurableCustom =  {
+    Fylke: "",
+    "Type kurs": "",
+    Tema: ""
+}
+
+export const tomtKurs: Kurs = {
+    RegistrationID: 0,
+Title: "",
+RegistrationUrl: "",
+RegistrationImageMediaStorageID: 0,
+FrontImageMediaStorageID: 0,
+CatalogListMediaStorageID: "",
+RegistrationFromDateTime: "",
+RegistrationToDateTime: "",
+RegistrationDeadline: "",
+RegistrationPlaceName: "",
+DescriptionInternal: "",
+CatalogText: "",
+Description: "",
+FrontPageDescription: "",
+ActiveWeb: 0,
+ShowRegistrationForm: 0,
+ShowInActivityList: 0,
+configurable_custom: tomConfigurableCustom,
+};
