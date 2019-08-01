@@ -18,9 +18,6 @@ import {
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     const [detteKurset, setDetteKurset] = useState<Kurs>(tomtKurs);
-    const [startTidspunkt, setStartTidspunkt] = useState(new Date());
-    const [sluttTidspunkt, setSluttTidspunkt] = useState(new Date());
-    const [pameldingsfrist, setPameldingsfrist] = useState(new Date());
 
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
@@ -34,12 +31,6 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
         };
         hentOgSettDetteKurset();
     }, [props.location.pathname]);
-
-    useEffect(() => {
-        setStartTidspunkt(detteKurset.starttidspunkt);
-        setSluttTidspunkt(detteKurset.sluttidspunkt);
-        setPameldingsfrist(detteKurset.pameldingsfrist);
-    }, [detteKurset]);
 
     const createMarkup = () => ({
         __html: detteKurset.forsideBeskrivelse,
@@ -61,9 +52,13 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         <Element className={'MetaInfoPanel__infoTekst'}>
                             <b>Når:&nbsp;</b>
                         </Element>
-                        {lagDatoTekst(startTidspunkt, sluttTidspunkt, 'MetaInfoPanel__dato')}
+                        {lagDatoTekst(
+                            detteKurset.starttidspunkt,
+                            detteKurset.sluttidspunkt,
+                            'MetaInfoPanel__dato'
+                        )}
                     </div>
-                    {lagPaameldingsfristkomponent(pameldingsfrist)}
+                    {lagPaameldingsfristkomponent(detteKurset.pameldingsfrist)}
                     {lagStedkomponent(detteKurset)}
                     <div className={'MetaInfoPanel__egenskapTop'}>
                         <img
