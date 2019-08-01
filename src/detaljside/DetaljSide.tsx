@@ -28,7 +28,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
             let kursIdFraUrl = props.location.pathname.split('/')[1];
             await setDetteKurset(
                 resultat.filter(kurs => {
-                    return kurs.RegistrationID === parseInt(kursIdFraUrl);
+                    return kurs.id === parseInt(kursIdFraUrl);
                 })[0]
             );
         };
@@ -36,19 +36,19 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     }, [props.location.pathname]);
 
     useEffect(() => {
-        setStartTidspunkt(detteKurset.RegistrationFromDateTime);
-        setSluttTidspunkt(detteKurset.RegistrationToDateTime);
-        setPameldingsfrist(detteKurset.RegistrationDeadline);
+        setStartTidspunkt(detteKurset.starttidspunkt);
+        setSluttTidspunkt(detteKurset.sluttidspunkt);
+        setPameldingsfrist(detteKurset.pameldingsfrist);
     }, [detteKurset]);
 
     const createMarkup = () => ({
-        __html: detteKurset.FrontPageDescription,
+        __html: detteKurset.forsideBeskrivelse,
     });
 
     return (
         <div>
             <header className={'overskrift'}>
-                <Sidetittel className={'sentrert__tekst'}>{detteKurset.Title}</Sidetittel>
+                <Sidetittel className={'sentrert__tekst'}>{detteKurset.tittel}</Sidetittel>
             </header>
             <div className={'detaljVisning'}>
                 <Panel className={'MetaInfoPanel'}>
@@ -74,7 +74,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         <Normaltekst className={'MetaInfoPanel__infoTekst'}>
                             <b>Type kurs:&nbsp;</b>
                             {/* TODO: Kan configurable_custom være null? */}
-                            {detteKurset.configurable_custom['Type kurs']}
+                            {detteKurset.type}
                         </Normaltekst>
                     </div>
                 </Panel>
@@ -85,7 +85,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                     <div dangerouslySetInnerHTML={createMarkup()} />
                     <Lenke
                         className={'active knapp knapp--hoved margintop2'}
-                        href={detteKurset.RegistrationUrl}
+                        href={detteKurset.registreringsUrl}
                     >
                         Meld deg på
                     </Lenke>

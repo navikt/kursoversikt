@@ -1,19 +1,45 @@
-export interface ConfigurableCustom {
-    Fylke: string;
-    'Type kurs': string;
-    Tema: string;
+export interface Kurs {
+    id: number;
+    tittel: string;
+    registreringsUrl: string;
+    starttidspunkt: Date;
+    sluttidspunkt: Date;
+    pameldingsfrist: Date;
+    sted?: any;
+    beskrivelse?: any;
+    internBeskrivelse: string;
+    forsideBeskrivelse?: any;
+    fylke: string;
+    type: string;
+    tema: string;
 }
 
-export interface Kurs {
+export const tomtKurs: Kurs = {
+    id: 0,
+    tittel: '',
+    registreringsUrl: '',
+    starttidspunkt: new Date(),
+    sluttidspunkt: new Date(),
+    pameldingsfrist: new Date(),
+    sted: '',
+    beskrivelse: '',
+    internBeskrivelse: '',
+    forsideBeskrivelse: '',
+    fylke: '',
+    type: '',
+    tema: '',
+};
+
+export interface PindenaKurs {
     RegistrationID: number;
     Title: string;
     RegistrationUrl: string;
     RegistrationImageMediaStorageID: number;
     FrontImageMediaStorageID: number;
     CatalogListMediaStorageID?: any;
-    RegistrationFromDateTime: Date;
-    RegistrationToDateTime: Date;
-    RegistrationDeadline: Date;
+    RegistrationFromDateTime: string;
+    RegistrationToDateTime: string;
+    RegistrationDeadline: string;
     RegistrationPlaceName?: any;
     DescriptionInternal: string;
     CatalogText?: any;
@@ -22,32 +48,9 @@ export interface Kurs {
     ActiveWeb: number;
     ShowRegistrationForm: number;
     ShowInActivityList: number;
-    configurable_custom: ConfigurableCustom;
+    configurable_custom: {
+        Fylke: string;
+        'Type kurs': string;
+        Tema: string;
+    };
 }
-
-export const tomConfigurableCustom: ConfigurableCustom = {
-    Fylke: '',
-    'Type kurs': '',
-    Tema: '',
-};
-
-export const tomtKurs: Kurs = {
-    RegistrationID: 0,
-    Title: '',
-    RegistrationUrl: '',
-    RegistrationImageMediaStorageID: 0,
-    FrontImageMediaStorageID: 0,
-    CatalogListMediaStorageID: '',
-    RegistrationFromDateTime: new Date(),
-    RegistrationToDateTime: new Date(),
-    RegistrationDeadline: new Date(),
-    RegistrationPlaceName: '',
-    DescriptionInternal: '',
-    CatalogText: '',
-    Description: '',
-    FrontPageDescription: '',
-    ActiveWeb: 0,
-    ShowRegistrationForm: 0,
-    ShowInActivityList: 0,
-    configurable_custom: tomConfigurableCustom,
-};

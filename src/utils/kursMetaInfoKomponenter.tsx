@@ -50,7 +50,7 @@ export const lagStedkomponent = (kurs: Kurs) => {
         <div className={'Kurspanel__sted'}>
             <img className={'Kurspanel__ikon'} src={plasseringsIkon} alt="plasseringsikon" />
             <Normaltekst className={'Kurspanel__stedsOgFristTekst'}>
-                <b>Sted:&nbsp;</b> {kurs.RegistrationPlaceName}
+                <b>Sted:&nbsp;</b> {kurs.sted}
             </Normaltekst>
         </div>
     );
