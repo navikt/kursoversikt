@@ -11,9 +11,9 @@ import { VenstreChevron } from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
-import StedInfo from '../komponenter/StedInfo/StedInfo';
-import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/PameldingsfristInfo';
 import VarighetInfo from '../komponenter/VarighetInfo/VarighetInfo';
+import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/PameldingsfristInfo';
+import StedInfo from '../komponenter/StedInfo/StedInfo';
 
 const cls = bemHelper('detaljside');
 const metainfoCls = bemHelper(cls.element('metainfoPanel'));
@@ -58,10 +58,12 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         <VarighetInfo
                             startTid={detteKurset.starttidspunkt}
                             sluttTid={detteKurset.sluttidspunkt}
-                            className={cls.element('dato')}
                         />
                     </div>
-                    <PameldingsfristInfo pameldingsfrist={detteKurset.pameldingsfrist} />
+                    <PameldingsfristInfo
+                        pameldingsfrist={detteKurset.pameldingsfrist}
+                        className={metainfoCls.element('pamelding')}
+                    />
                     <StedInfo sted={detteKurset.sted} />
                     <div className={metainfoCls.element('egenskapTop')}>
                         <img
