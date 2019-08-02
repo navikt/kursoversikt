@@ -1,18 +1,22 @@
 @import '~nav-frontend-core/less/_variabler';
 
 .kursPanel {
-    min-height: 20rem;
     display: flex;
-    //width: 50rem;
-    margin: 0 1rem 0 1rem;
+    padding: 1.25rem 1rem;
+    margin: 0 1rem 0.5rem 1rem;
     border-bottom: solid 1px #c6c2bf;
     flex-direction: column;
 
+    &__header {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
     &__rektangel {
-        width: 2rem;
-        height: 0.5rem;
+        width: 1.25rem;
+        height: 0.25rem;
         background-color: #ccdee6;
-        margin-top: 1rem;
+        margin: 1rem 0;
     }
 
     &__tidspunkt {
@@ -30,48 +34,47 @@
     }
 
     &__hovedInnhold {
-        margin-top: 2rem;
         justify-content: center;
     }
 
     &__ikon {
+        height: 20px;
+        width: 20px;
         display: flex;
         justify-content: flex-start;
+        margin-right: 1rem;
     }
 
     &__sted {
-        padding-top: 1.5rem;
         display: flex;
         flex-direction: row;
+        margin-bottom: 1rem;
     }
 
     &__stedsOgFristTekst {
         display: flex;
         flex-direction: column;
-        margin-left: 1rem;
     }
 
     &__paameldingsfrist {
-        padding-top: 1rem;
         display: flex;
         flex-direction: row;
+        margin-bottom: 1rem;
     }
 
     &__beskrivelse {
-        margin-top: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     &__tidsTekst {
         font-weight: 600;
     }
-}
 
-@media (min-width: @screen-md-min) {
-    .kursPanel {
+    @media (min-width: @screen-md-min) {
+        padding: 2rem;
         flex-direction: row;
 
         &__tidspunkt {
-            margin-top: 2rem;
             min-width: 7rem;
         }
 
@@ -80,7 +83,7 @@
         }
 
         &__hovedInnhold {
-            margin-left: 2rem;
+            margin: 0 4rem 0 2rem;
             justify-content: center;
         }
 
