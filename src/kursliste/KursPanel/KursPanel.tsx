@@ -5,9 +5,9 @@ import { Kurs } from '../../models/Kurs';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
 import bemHelper from '../../utils/bemHelper';
-import { lagDatoTekst } from './kursMetaInfoKomponenter';
 import StedInfo from '../../komponenter/StedInfo/StedInfo';
 import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/PameldingsfristInfo';
+import VarighetInfo from '../../komponenter/VarighetInfo/VarighetInfo';
 
 interface Props {
     kurs: Kurs;
@@ -19,7 +19,11 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
     return (
         <Panel className={cls.block}>
             <div className={cls.element('tidspunkt')}>
-                {lagDatoTekst(kurs.starttidspunkt, kurs.sluttidspunkt, cls.element('tidsTekst'))}
+                <VarighetInfo
+                    startTid={kurs.starttidspunkt}
+                    sluttTid={kurs.sluttidspunkt}
+                    className={cls.element('tidsTekst')}
+                />
                 <Normaltekst>
                     kl.{' '}
                     {kurs.starttidspunkt.toLocaleString('nb-no', {

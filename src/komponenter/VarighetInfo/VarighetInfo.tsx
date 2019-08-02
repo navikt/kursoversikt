@@ -1,12 +1,17 @@
-import { Normaltekst } from 'nav-frontend-typografi';
-import React from 'react';
-import bemHelper from '../../utils/bemHelper';
-import './KursPanel.less';
+import React, { FunctionComponent } from 'react';
 import { dagOgManedPaLesbartFormat } from '../../utils/datoUtils';
+import { Normaltekst } from 'nav-frontend-typografi';
+import bemHelper from '../../utils/bemHelper';
 
-const cls = bemHelper('kursPanel');
+const cls = bemHelper('varighetInfo');
 
-export const lagDatoTekst = (startTid: Date, sluttTid: Date, className: string) => {
+interface Props {
+    startTid: Date;
+    sluttTid: Date;
+    className: string;
+}
+
+const VarighetInfo: FunctionComponent<Props> = ({ startTid, sluttTid, className }) => {
     if (startTid.toDateString() === sluttTid.toDateString()) {
         return (
             <div className={cls.element('datopanel')}>
@@ -26,3 +31,5 @@ export const lagDatoTekst = (startTid: Date, sluttTid: Date, className: string) 
         </div>
     );
 };
+
+export default VarighetInfo;
