@@ -2,8 +2,8 @@
 
 .kursPanel {
     display: flex;
-    padding: 1.25rem 1rem;
-    margin: 0 1rem 0.5rem 1rem;
+    padding: 1.25rem 1rem 1.75rem;
+    margin: 0 1rem 0.5rem;
     border-bottom: solid 1px #c6c2bf;
     flex-direction: column;
 
@@ -23,10 +23,6 @@
         justify-content: flex-start;
         display: flex;
         flex-direction: column;
-
-        &.varighetInfo__datopanel {
-            font-weight: 600;
-        }
     }
 
     &__hovedInnhold {
@@ -42,7 +38,7 @@
     }
 
     @media (min-width: @screen-md-min) {
-        padding: 2rem;
+        padding: 2rem 2rem 2.5rem;
         flex-direction: row;
 
         &__tidspunkt {
@@ -50,7 +46,9 @@
         }
 
         &__hovedInnhold {
-            margin: 0 4rem 0 2rem;
+            margin-top: 0;
+            margin-left: 1.5rem;
+            margin-bottom: 0;
             justify-content: center;
         }
     }

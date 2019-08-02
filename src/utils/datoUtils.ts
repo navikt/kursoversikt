@@ -9,5 +9,15 @@ export const sammenlignKursPaDato = (a: Kurs, b: Kurs) => {
 };
 
 export const dagOgManedPaLesbartFormat = (dato: Date): string => {
-    return dato.toLocaleString('nb-no', { day: 'numeric', month: 'long' });
+    return dato.toLocaleString('nb-no', { day: 'numeric', month: 'short' });
+};
+
+export const formaterVarighet = (startTid: Date, sluttTid: Date): string => {
+    if (startTid.toDateString() === sluttTid.toDateString()) {
+        return dagOgManedPaLesbartFormat(sluttTid);
+    } else if (startTid.getMonth() === sluttTid.getMonth()) {
+        return startTid.getDate() + '. - ' + dagOgManedPaLesbartFormat(sluttTid);
+    } else {
+        return dagOgManedPaLesbartFormat(startTid) + ' - ' + dagOgManedPaLesbartFormat(sluttTid);
+    }
 };
