@@ -13,19 +13,28 @@ export async function hentKurs(): Promise<Kurs[]> {
 }
 
 const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
-    return alleKurs.map((kurs: PindenaKurs) => ({
-        id: kurs.RegistrationID,
-        tittel: kurs.Title,
-        registreringsUrl: kurs.RegistrationUrl,
-        starttidspunkt: tilDato(kurs.RegistrationFromDateTime),
-        sluttidspunkt: tilDato(kurs.RegistrationToDateTime),
-        pameldingsfrist: tilDato(kurs.RegistrationDeadline),
-        sted: kurs.RegistrationPlaceName,
-        beskrivelse: kurs.Description,
-        internBeskrivelse: kurs.DescriptionInternal,
-        forsideBeskrivelse: kurs.FrontPageDescription,
-        fylke: kurs.configurable_custom.Fylke,
-        type: kurs.configurable_custom['Type kurs'],
-        tema: kurs.configurable_custom.Tema,
-    }));
+    return alleKurs.map((kurs: PindenaKurs) => {
+        let fylke, type, tema;
+        if (kurs.configurable_custom) {
+            fylke = kurs.configurable_custom.Fylke;
+            type = kurs.configurable_custom['Type kurs'];
+            tema = kurs.configurable_custom.Tema;
+        }
+
+        return {
+            id: kurs.RegistrationID,
+            tittel: kurs.Title,
+            registreringsUrl: kurs.RegistrationUrl,
+            starttidspunkt: tilDato(kurs.RegistrationFromDateTime),
+            sluttidspunkt: tilDato(kurs.RegistrationToDateTime),
+            pameldingsfrist: tilDato(kurs.RegistrationDeadline),
+            sted: kurs.RegistrationPlaceName,
+            beskrivelse: kurs.Description,
+            internBeskrivelse: kurs.DescriptionInternal,
+            forsideBeskrivelse: kurs.FrontPageDescription,
+            fylke: fylke,
+            type: type,
+            tema: tema,
+        };
+    });
 };

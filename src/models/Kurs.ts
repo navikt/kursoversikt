@@ -9,9 +9,9 @@ export interface Kurs {
     beskrivelse?: any;
     internBeskrivelse: string;
     forsideBeskrivelse?: any;
-    fylke: string;
-    type: string;
-    tema: string;
+    fylke?: string;
+    type?: string;
+    tema?: string;
 }
 
 export const tomtKurs: Kurs = {

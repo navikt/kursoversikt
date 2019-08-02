@@ -15,7 +15,7 @@ function App() {
         <div className={cls.block}>
             <BrowserRouter basename={basename}>
                 <Switch>
-                    <Route path="/:orgnummer" exact={true} component={DetaljSide} />
+                    <Route path="/:id" exact={true} component={DetaljSide} />
                     <Route path="/" exact={true} component={KursListe} />
                 </Switch>
             </BrowserRouter>
