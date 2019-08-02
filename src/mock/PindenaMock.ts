@@ -92,11 +92,7 @@ fetchMock
             ActiveWeb: 1,
             ShowRegistrationForm: 1,
             ShowInActivityList: 1,
-            configurable_custom: {
-                Fylke: 'Finnmark',
-                'Type kurs': 'Kurs',
-                Tema: 'Arbeidssøkeraktivitet',
-            },
+            configurable_custom: null,
         },
         {
             RegistrationID: 8,
@@ -134,7 +130,7 @@ fetchMock
             RegistrationFromDateTime: '2019-09-04 00:00:00',
             RegistrationToDateTime: '2019-09-06 00:00:00',
             RegistrationDeadline: '2022-03-05 00:00:00',
-            RegistrationPlaceName: 'Trondheim',
+            RegistrationPlaceName: 'Bergen',
             DescriptionInternal:
                 'Kurs for studenter 01 - Et kurs for studenter om jobbsøking\r\nI kurset vil vi gå igjennom:\r\n    - CV-skriving\r\n    - Søknadsskriving\r\n    - Hva som kan gjøre deg attraktiv som jobbsøker',
             CatalogText: null,
@@ -167,11 +163,7 @@ fetchMock
             ActiveWeb: 1,
             ShowRegistrationForm: 1,
             ShowInActivityList: 1,
-            configurable_custom: {
-                Fylke: 'Finnmark',
-                'Type kurs': 'Kurs',
-                Tema: 'Arbeidssøkeraktivitet',
-            },
+            configurable_custom: null,
         },
         {
             RegistrationID: 4,
@@ -183,7 +175,7 @@ fetchMock
             RegistrationFromDateTime: '2019-09-26 00:00:00',
             RegistrationToDateTime: '2019-09-26 00:00:00',
             RegistrationDeadline: '2021-03-01 00:00:00',
-            RegistrationPlaceName: 'Bergen',
+            RegistrationPlaceName: 'Stavanger',
             DescriptionInternal:
                 'Kurs for pensjonister som ønsker å jobbe deltid. Hvordan kan du som pensjonist bidra med din erfaring og kompetanse',
             CatalogText: null,
@@ -193,7 +185,7 @@ fetchMock
             ShowRegistrationForm: 1,
             ShowInActivityList: 1,
             configurable_custom: {
-                Fylke: 'Finnmark',
+                Fylke: 'Rogaland',
                 'Type kurs': 'Kurs',
                 Tema: 'Arbeidssøkeraktivitet',
             },
