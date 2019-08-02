@@ -1,8 +1,6 @@
 import { Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
 import flaggIkon from '../../ikoner/flag-3.svg';
-import plasseringsIkon from '../../ikoner/location-pin-6.svg';
-import { Kurs } from '../../models/Kurs';
 import bemHelper from '../../utils/bemHelper';
 import './KursPanel.less';
 
@@ -44,17 +42,6 @@ export const lagPaameldingsfristkomponent = (pameldingsfrist: Date) => {
                     hour: '2-digit',
                     minute: '2-digit',
                 })}
-            </Normaltekst>
-        </div>
-    );
-};
-
-export const lagStedkomponent = (kurs: Kurs) => {
-    return (
-        <div className={cls.element('sted')}>
-            <img className={cls.element('ikon')} src={plasseringsIkon} alt="plasseringsikon" />
-            <Normaltekst className={cls.element('stedsOgFristTekst')}>
-                <b>Sted:&nbsp;</b> {kurs.sted}
             </Normaltekst>
         </div>
     );

@@ -11,11 +11,11 @@ import { VenstreChevron } from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
 import {
     lagPaameldingsfristkomponent,
-    lagStedkomponent,
     lagDatoTekst,
 } from '../kursliste/KursPanel/kursMetaInfoKomponenter';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
+import StedInfo from '../komponenter/StedInfo/StedInfo';
 
 const cls = bemHelper('detaljside');
 const metainfoCls = bemHelper(cls.element('metainfoPanel'));
@@ -64,7 +64,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         )}
                     </div>
                     {lagPaameldingsfristkomponent(detteKurset.pameldingsfrist)}
-                    {lagStedkomponent(detteKurset)}
+                    <StedInfo sted={detteKurset.sted} />
                     <div className={metainfoCls.element('egenskapTop')}>
                         <img
                             className={metainfoCls.element('ikon')}

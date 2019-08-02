@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+.stedInfo {
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+
+    &__ikon {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__stedsOgFristTekst {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+    }
+
+    @media (min-width: @screen-md-min) {
+        &__stedsOgFristTekst {
+            flex-direction: row;
+        }
+    }
+}
