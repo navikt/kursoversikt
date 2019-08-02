@@ -6,6 +6,7 @@ import { VenstreChevron } from 'nav-frontend-chevron';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
 import bemHelper from '../../utils/bemHelper';
+import { Link } from 'react-router-dom';
 
 const cls = bemHelper('omKurset');
 
@@ -28,10 +29,10 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 Meld deg på
             </Lenke>
             <div className={cls.element('tilbakelenke')}>
-                <Lenke href={'/kursoversikt'}>
+                <Link to={'/'} className={'lenke'}>
                     <VenstreChevron type={'venstre'} />
                     Tilbake til kursoversikten
-                </Lenke>
+                </Link>
             </div>
         </Panel>
     );
