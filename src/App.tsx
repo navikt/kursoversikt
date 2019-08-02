@@ -4,12 +4,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import DetaljSide from './detaljside/DetaljSide';
 import KursListe from './kursliste/Kursliste';
 import './App.less';
+import bemHelper from './utils/bemHelper';
+
+const cls = bemHelper('app');
 
 const basename = '/kursoversikt';
 
 function App() {
     return (
-        <div className={'bakgrunnsside'}>
+        <div className={cls.block}>
             <BrowserRouter basename={basename}>
                 <Switch>
                     <Route path="/:orgnummer" exact={true} component={DetaljSide} />

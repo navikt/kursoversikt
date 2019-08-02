@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Kurs } from '../models/Kurs';
 import { hentKurs } from '../api/pindenaAPI';
-import KursPanel from './KursPanel/KursPanel';
+import KursPanel from './Filter/KursPanel/KursPanel';
 import Filter from './Filter/Filter';
 import './Kursliste.less';
 import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
 import { Sidetittel } from 'nav-frontend-typografi';
+import bemHelper from '../utils/bemHelper';
 
 export interface FilterState {
     fylke: string[];
@@ -14,6 +15,8 @@ export interface FilterState {
 }
 
 export type FilterGruppe = 'fylke' | 'type' | 'tema';
+
+const cls = bemHelper('kursliste');
 
 const KursListe: FunctionComponent = () => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
@@ -65,12 +68,12 @@ const KursListe: FunctionComponent = () => {
     };
 
     return (
-        <div>
-            <header className={'overskrift'}>
-                <Sidetittel className={'sentrert__tekst'}>Kurskalender</Sidetittel>
+        <div className={cls.block}>
+            <header className="overskrift">
+                <Sidetittel className="sentrertTekst">Kurskalender</Sidetittel>
             </header>
-            <div className={'hovedside'}>
-                <span className={'filterKolonne'}>
+            <div className={cls.element('hovedside')}>
+                <span className={cls.element('filterKolonne')}>
                     <Filter
                         tittel={'Fylker'}
                         alternativer={unikeFylker}
@@ -90,7 +93,7 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                     />
                 </span>
-                <span className={'kursKolonne'}>
+                <span className={cls.element('kursKolonne')}>
                     {filtrerteKursArray.map((kurs: Kurs) => {
                         return <KursPanel key={kurs.id} kurs={kurs} />;
                     })}
