@@ -2,21 +2,16 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Kurs, tomtKurs } from '../models/Kurs';
 import { hentKurs } from '../api/pindenaAPI';
 import { RouteComponentProps } from 'react-router';
-import { Element, Normaltekst, Sidetittel, Systemtittel } from 'nav-frontend-typografi';
+import { Sidetittel, Systemtittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
 import 'nav-frontend-knapper-style';
-import kalenderIkon from '../ikoner/calendar-3.svg';
-import kursTypeIkon from '../ikoner/person-2.svg';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
-import VarighetInfo from '../komponenter/VarighetInfo/VarighetInfo';
-import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/PameldingsfristInfo';
-import StedInfo from '../komponenter/StedInfo/StedInfo';
+import Metainfo from './Metainfo/Metainfo';
 
 const cls = bemHelper('detaljside');
-const metainfoCls = bemHelper(cls.element('metainfoPanel'));
 const beskrivelseCls = bemHelper(cls.element('beskrivelsePanel'));
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
@@ -45,38 +40,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                 <Sidetittel className="sentrertTekst">{detteKurset.tittel}</Sidetittel>
             </header>
             <main className={cls.element('innhold')}>
-                <Panel className={metainfoCls.block}>
-                    <div className={metainfoCls.element('egenskapTop')}>
-                        <img
-                            className={metainfoCls.element('ikon')}
-                            src={kalenderIkon}
-                            alt="kalenderIkon"
-                        />
-                        <Element className={metainfoCls.element('infoTekst')}>
-                            <b>Når:&nbsp;</b>
-                        </Element>
-                        <VarighetInfo
-                            startTid={detteKurset.starttidspunkt}
-                            sluttTid={detteKurset.sluttidspunkt}
-                        />
-                    </div>
-                    <PameldingsfristInfo
-                        pameldingsfrist={detteKurset.pameldingsfrist}
-                        className={metainfoCls.element('pamelding')}
-                    />
-                    <StedInfo sted={detteKurset.sted} />
-                    <div className={metainfoCls.element('egenskapTop')}>
-                        <img
-                            className={metainfoCls.element('ikon')}
-                            src={kursTypeIkon}
-                            alt="kurstypeikon"
-                        />
-                        <Normaltekst className={metainfoCls.element('infoTekst')}>
-                            <b>Type kurs:&nbsp;</b>
-                            {detteKurset.type}
-                        </Normaltekst>
-                    </div>
-                </Panel>
+                <Metainfo kurs={detteKurset} />
                 <Panel className={beskrivelseCls.block}>
                     <header className={'overskrift'}>
                         <Systemtittel>Om kurset</Systemtittel>
