@@ -14,7 +14,7 @@ const StedInfo: FunctionComponent<Props> = ({ sted }) => {
     return (
         <div className={cls.block}>
             <img className={cls.element('ikon')} src={plasseringsIkon} alt="plasseringsikon" />
-            <Normaltekst className={cls.element('stedsOgFristTekst')}>
+            <Normaltekst className={cls.element('label')}>
                 <b>Sted:&nbsp;</b> {sted}
             </Normaltekst>
         </div>
