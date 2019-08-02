@@ -1,11 +1,14 @@
 @import '../../styles/variables';
 
 .stedInfo {
-    padding-top: 1.5rem;
     display: flex;
     flex-direction: row;
+    margin-bottom: 1rem;
 
     &__ikon {
+        height: 20px;
+        width: 20px;
+        margin-right: 1rem;
         display: flex;
         justify-content: flex-start;
     }
@@ -13,7 +16,6 @@
     &__stedsOgFristTekst {
         display: flex;
         flex-direction: column;
-        margin-left: 1rem;
     }
 
     @media (min-width: @screen-md-min) {
