@@ -1,24 +1,27 @@
 import React, { FunctionComponent } from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import Lenke from 'nav-frontend-lenker';
-import { Kurs } from '../../models/Kurs';
+import { Kurs } from '../../../models/Kurs';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
+import bemHelper from '../../../utils/bemHelper';
 import {
-    lagPaameldingsfristkomponent,
-    lagStedkomponent,
     lagDatoTekst,
-} from '../../utils/kursMetaInfoKomponenter';
+    lagStedkomponent,
+    lagPaameldingsfristkomponent,
+} from './kursMetaInfoKomponenter';
 
 interface Props {
     kurs: Kurs;
 }
 
+const cls = bemHelper('kursPanel');
+
 const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
     return (
-        <Panel className={'Kurspanel'}>
-            <div className={'Kurspanel__tidspunkt'}>
-                {lagDatoTekst(kurs.starttidspunkt, kurs.sluttidspunkt, 'Kurspanel__tidsTekst')}
+        <Panel className={cls.block}>
+            <div className={cls.element('tidspunkt')}>
+                {lagDatoTekst(kurs.starttidspunkt, kurs.sluttidspunkt, cls.element('tidsTekst'))}
                 <Normaltekst>
                     kl.{' '}
                     {kurs.starttidspunkt.toLocaleString('nb-no', {
@@ -26,13 +29,13 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                         minute: '2-digit',
                     })}
                 </Normaltekst>
-                <div className={'Kurspanel__rektangel'}></div>
+                <div className={cls.element('rektangel')}></div>
             </div>
-            <div className={'Kurspanel__hovedInnhold'}>
-                <Lenke className={'Kurspanel__header'} href={'/kursoversikt/' + kurs.id}>
+            <div className={cls.element('hovedInnhold')}>
+                <Lenke className={cls.element('header')} href={'/kursoversikt/' + kurs.id}>
                     {kurs.tittel}
                 </Lenke>
-                <Normaltekst className={'Kurspanel__beskrivelse'}>
+                <Normaltekst className={cls.element('beskrivelse')}>
                     {kurs.internBeskrivelse || ''}
                 </Normaltekst>
                 {lagStedkomponent(kurs)}

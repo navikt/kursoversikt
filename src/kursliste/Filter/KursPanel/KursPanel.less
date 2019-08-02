@@ -1,5 +1,6 @@
 @import '~nav-frontend-core/less/_variabler';
-.Kurspanel {
+
+.kursPanel {
     min-height: 20rem;
     display: flex;
     //width: 50rem;
@@ -18,6 +19,10 @@
         justify-content: flex-start;
         display: flex;
         flex-direction: column;
+
+        &.kursPanel__datopanel {
+            font-weight: 600;
+        }
     }
     &__datopanel {
         display: flex;
@@ -61,24 +66,24 @@
     }
 }
 
-.Kurspanel__tidspunkt.Kurspanel__datopanel {
-    font-weight: 600;
-}
-
 @media (min-width: @screen-md-min) {
-    .Kurspanel {
+    .kursPanel {
         flex-direction: row;
+
         &__tidspunkt {
             margin-top: 2rem;
             min-width: 7rem;
         }
+
         &__datopanel {
             flex-direction: column;
         }
+
         &__hovedInnhold {
             margin-left: 2rem;
             justify-content: center;
         }
+
         &__stedsOgFristTekst {
             flex-direction: row;
         }

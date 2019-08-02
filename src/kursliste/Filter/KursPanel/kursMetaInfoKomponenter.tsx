@@ -1,8 +1,12 @@
 import { Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
-import flaggIkon from '../Ikoner/flag-3.svg';
-import plasseringsIkon from '../Ikoner/location-pin-6.svg';
-import { Kurs } from '../models/Kurs';
+import flaggIkon from '../../../ikoner/flag-3.svg';
+import plasseringsIkon from '../../../ikoner/location-pin-6.svg';
+import { Kurs } from '../../../models/Kurs';
+import bemHelper from '../../../utils/bemHelper';
+import './KursPanel.less';
+
+const cls = bemHelper('kursPanel');
 
 const dagOgManedPaLesbartFormat = (dato: Date): string => {
     return dato.toLocaleString('nb-no', { day: 'numeric', month: 'long' });
@@ -11,7 +15,7 @@ const dagOgManedPaLesbartFormat = (dato: Date): string => {
 export const lagDatoTekst = (startTid: Date, sluttTid: Date, className: string) => {
     if (startTid.toDateString() === sluttTid.toDateString()) {
         return (
-            <div className={'Kurspanel__datopanel'}>
+            <div className={cls.element('datopanel')}>
                 <Normaltekst className={className}>
                     {dagOgManedPaLesbartFormat(sluttTid)}
                 </Normaltekst>{' '}
@@ -20,7 +24,7 @@ export const lagDatoTekst = (startTid: Date, sluttTid: Date, className: string) 
     }
 
     return (
-        <div className={'Kurspanel__datopanel'}>
+        <div className={cls.element('datopanel')}>
             <Normaltekst className={className}>
                 {dagOgManedPaLesbartFormat(startTid) + ' -'}&nbsp;
             </Normaltekst>
@@ -31,9 +35,9 @@ export const lagDatoTekst = (startTid: Date, sluttTid: Date, className: string) 
 
 export const lagPaameldingsfristkomponent = (pameldingsfrist: Date) => {
     return (
-        <div className={'Kurspanel__paameldingsfrist'}>
-            <img className={'Kurspanel__ikon'} src={flaggIkon} alt="flaggikon" />
-            <Normaltekst className={'Kurspanel__stedsOgFristTekst'}>
+        <div className={cls.element('paameldingsfrist')}>
+            <img className={cls.element('ikon')} src={flaggIkon} alt="flaggikon" />
+            <Normaltekst className={cls.element('stedsOgFristTekst')}>
                 <b>Påmeldingsfrist:&nbsp;</b>
                 {dagOgManedPaLesbartFormat(pameldingsfrist)}, kl.
                 {pameldingsfrist.toLocaleString('nb-no', {
@@ -47,9 +51,9 @@ export const lagPaameldingsfristkomponent = (pameldingsfrist: Date) => {
 
 export const lagStedkomponent = (kurs: Kurs) => {
     return (
-        <div className={'Kurspanel__sted'}>
-            <img className={'Kurspanel__ikon'} src={plasseringsIkon} alt="plasseringsikon" />
-            <Normaltekst className={'Kurspanel__stedsOgFristTekst'}>
+        <div className={cls.element('sted')}>
+            <img className={cls.element('ikon')} src={plasseringsIkon} alt="plasseringsikon" />
+            <Normaltekst className={cls.element('stedsOgFristTekst')}>
                 <b>Sted:&nbsp;</b> {kurs.sted}
             </Normaltekst>
         </div>
