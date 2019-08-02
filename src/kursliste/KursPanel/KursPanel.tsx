@@ -5,8 +5,9 @@ import { Kurs } from '../../models/Kurs';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
 import bemHelper from '../../utils/bemHelper';
-import { lagDatoTekst, lagPaameldingsfristkomponent } from './kursMetaInfoKomponenter';
+import { lagDatoTekst } from './kursMetaInfoKomponenter';
 import StedInfo from '../../komponenter/StedInfo/StedInfo';
+import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/PameldingsfristInfo';
 
 interface Props {
     kurs: Kurs;
@@ -36,7 +37,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                     {kurs.internBeskrivelse || ''}
                 </Normaltekst>
                 <StedInfo sted={kurs.sted} />
-                {lagPaameldingsfristkomponent(kurs.pameldingsfrist)}
+                <PameldingsfristInfo pameldingsfrist={kurs.pameldingsfrist} />
             </div>
         </Panel>
     );

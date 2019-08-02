@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.pameldingsfristInfo {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+
+    &__ikon {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__stedsOgFristTekst {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+    }
+    @media (min-width: @screen-md-min) {
+        &__stedsOgFristTekst {
+            flex-direction: row;
+        }
+    }
+}

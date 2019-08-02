@@ -9,13 +9,11 @@ import kalenderIkon from '../ikoner/calendar-3.svg';
 import kursTypeIkon from '../ikoner/person-2.svg';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
-import {
-    lagPaameldingsfristkomponent,
-    lagDatoTekst,
-} from '../kursliste/KursPanel/kursMetaInfoKomponenter';
+import { lagDatoTekst } from '../kursliste/KursPanel/kursMetaInfoKomponenter';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
 import StedInfo from '../komponenter/StedInfo/StedInfo';
+import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/PameldingsfristInfo';
 
 const cls = bemHelper('detaljside');
 const metainfoCls = bemHelper(cls.element('metainfoPanel'));
@@ -63,7 +61,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                             metainfoCls.element('dato')
                         )}
                     </div>
-                    {lagPaameldingsfristkomponent(detteKurset.pameldingsfrist)}
+                    <PameldingsfristInfo pameldingsfrist={detteKurset.pameldingsfrist} />
                     <StedInfo sted={detteKurset.sted} />
                     <div className={metainfoCls.element('egenskapTop')}>
                         <img
