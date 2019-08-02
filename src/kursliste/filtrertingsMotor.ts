@@ -14,23 +14,18 @@ const utforFiltreringPaaFiltergruppe = (
     filterGruppe: FilterGruppe,
     kursSomSkalFiltreres: Array<Kurs>
 ): Kurs[] => {
-    return kursSomSkalFiltreres.filter(kurs => {
-        if (filterState[filterGruppe].length > 0) {
-            if (!kurs[filterGruppe] || !filterState[filterGruppe].includes(kurs[filterGruppe])) {
-                return false;
-            }
-        }
-        return true;
-    });
+    const ingenFilterValgt = filterState[filterGruppe].length === 0;
+    if (ingenFilterValgt) {
+        return kursSomSkalFiltreres;
+    }
+
+    return kursSomSkalFiltreres.filter(
+        kurs => kurs[filterGruppe] && filterState[filterGruppe].includes(kurs[filterGruppe]!)
+    );
 };
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
-    const kursMedFylke = kursArray.filter(kurs => {
-        if (!kurs[filterGruppe]) {
-            return false;
-        }
-        return true;
-    });
-    let unikeVerdierSet = new Set(kursMedFylke.map(kurs => kurs[filterGruppe]));
+    const kursMedFilterGruppe = kursArray.filter(kurs => kurs[filterGruppe]);
+    let unikeVerdierSet = new Set(kursMedFilterGruppe.map(kurs => kurs[filterGruppe]!));
     return [...unikeVerdierSet.values()];
 };

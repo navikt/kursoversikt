@@ -21,11 +21,7 @@ fetchMock
             ActiveWeb: 1,
             ShowRegistrationForm: 1,
             ShowInActivityList: 1,
-            configurable_custom: {
-                Fylke: 'Møre og Romsdal',
-                'Type kurs': 'Seminar',
-                Tema: 'Hjelpemidler og tilrettelegging – hørsel',
-            },
+            configurable_custom: null,
         },
         {
             RegistrationID: 15,
