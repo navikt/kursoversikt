@@ -1,0 +1,26 @@
+@import '../../styles/variables';
+
+.pameldingsfristInfo {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+
+    &__ikon {
+        height: 20px;
+        width: 20px;
+        margin-right: 1rem;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (min-width: @screen-md-min) {
+        &__label {
+            flex-direction: row;
+        }
+    }
+}

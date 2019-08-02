@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import Lenke from 'nav-frontend-lenker';
-import { Kurs } from '../../../models/Kurs';
+import { Kurs } from '../../models/Kurs';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
-import bemHelper from '../../../utils/bemHelper';
-import {
-    lagDatoTekst,
-    lagStedkomponent,
-    lagPaameldingsfristkomponent,
-} from './kursMetaInfoKomponenter';
+import bemHelper from '../../utils/bemHelper';
+import StedInfo from '../../komponenter/StedInfo/StedInfo';
+import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/PameldingsfristInfo';
+import VarighetInfo from '../../komponenter/VarighetInfo/VarighetInfo';
 
 interface Props {
     kurs: Kurs;
@@ -21,7 +19,11 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
     return (
         <Panel className={cls.block}>
             <div className={cls.element('tidspunkt')}>
-                {lagDatoTekst(kurs.starttidspunkt, kurs.sluttidspunkt, cls.element('tidsTekst'))}
+                <VarighetInfo
+                    startTid={kurs.starttidspunkt}
+                    sluttTid={kurs.sluttidspunkt}
+                    className={cls.element('tidsTekst')}
+                />
                 <Normaltekst>
                     kl.{' '}
                     {kurs.starttidspunkt.toLocaleString('nb-no', {
@@ -29,7 +31,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                         minute: '2-digit',
                     })}
                 </Normaltekst>
-                <div className={cls.element('rektangel')}></div>
+                <div className={cls.element('rektangel')} />
             </div>
             <div className={cls.element('hovedInnhold')}>
                 <Lenke className={cls.element('header')} href={'/kursoversikt/' + kurs.id}>
@@ -38,8 +40,8 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                 <Normaltekst className={cls.element('beskrivelse')}>
                     {kurs.internBeskrivelse || ''}
                 </Normaltekst>
-                {lagStedkomponent(kurs)}
-                {lagPaameldingsfristkomponent(kurs.pameldingsfrist)}
+                <StedInfo sted={kurs.sted} />
+                <PameldingsfristInfo pameldingsfrist={kurs.pameldingsfrist} />
             </div>
         </Panel>
     );

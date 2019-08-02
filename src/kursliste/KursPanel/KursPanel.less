@@ -1,4 +1,4 @@
-@import '~nav-frontend-core/less/_variabler';
+@import '../../styles/variables.less';
 
 .kursPanel {
     display: flex;
@@ -24,42 +24,13 @@
         display: flex;
         flex-direction: column;
 
-        &.kursPanel__datopanel {
+        &.varighetInfo__datopanel {
             font-weight: 600;
         }
-    }
-    &__datopanel {
-        display: flex;
-        flex-direction: row;
     }
 
     &__hovedInnhold {
         justify-content: center;
-    }
-
-    &__ikon {
-        height: 20px;
-        width: 20px;
-        display: flex;
-        justify-content: flex-start;
-        margin-right: 1rem;
-    }
-
-    &__sted {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 1rem;
-    }
-
-    &__stedsOgFristTekst {
-        display: flex;
-        flex-direction: column;
-    }
-
-    &__paameldingsfrist {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 1rem;
     }
 
     &__beskrivelse {
@@ -78,17 +49,9 @@
             min-width: 7rem;
         }
 
-        &__datopanel {
-            flex-direction: column;
-        }
-
         &__hovedInnhold {
             margin: 0 4rem 0 2rem;
             justify-content: center;
-        }
-
-        &__stedsOgFristTekst {
-            flex-direction: row;
         }
     }
 }

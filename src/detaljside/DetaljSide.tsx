@@ -9,13 +9,11 @@ import kalenderIkon from '../ikoner/calendar-3.svg';
 import kursTypeIkon from '../ikoner/person-2.svg';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
-import {
-    lagPaameldingsfristkomponent,
-    lagStedkomponent,
-    lagDatoTekst,
-} from '../kursliste/Filter/KursPanel/kursMetaInfoKomponenter';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
+import StedInfo from '../komponenter/StedInfo/StedInfo';
+import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/PameldingsfristInfo';
+import VarighetInfo from '../komponenter/VarighetInfo/VarighetInfo';
 
 const cls = bemHelper('detaljside');
 const metainfoCls = bemHelper(cls.element('metainfoPanel'));
@@ -57,14 +55,14 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         <Element className={metainfoCls.element('infoTekst')}>
                             <b>Når:&nbsp;</b>
                         </Element>
-                        {lagDatoTekst(
-                            detteKurset.starttidspunkt,
-                            detteKurset.sluttidspunkt,
-                            metainfoCls.element('dato')
-                        )}
+                        <VarighetInfo
+                            startTid={detteKurset.starttidspunkt}
+                            sluttTid={detteKurset.sluttidspunkt}
+                            className={cls.element('dato')}
+                        />
                     </div>
-                    {lagPaameldingsfristkomponent(detteKurset.pameldingsfrist)}
-                    {lagStedkomponent(detteKurset)}
+                    <PameldingsfristInfo pameldingsfrist={detteKurset.pameldingsfrist} />
+                    <StedInfo sted={detteKurset.sted} />
                     <div className={metainfoCls.element('egenskapTop')}>
                         <img
                             className={metainfoCls.element('ikon')}
@@ -73,7 +71,6 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         />
                         <Normaltekst className={metainfoCls.element('infoTekst')}>
                             <b>Type kurs:&nbsp;</b>
-                            {/* TODO: Kan configurable_custom være null? */}
                             {detteKurset.type}
                         </Normaltekst>
                     </div>

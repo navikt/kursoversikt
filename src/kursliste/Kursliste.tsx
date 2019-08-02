@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Kurs } from '../models/Kurs';
 import { hentKurs } from '../api/pindenaAPI';
-import KursPanel from './Filter/KursPanel/KursPanel';
+import KursPanel from './KursPanel/KursPanel';
 import Filter from './Filter/Filter';
 import './Kursliste.less';
 import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
