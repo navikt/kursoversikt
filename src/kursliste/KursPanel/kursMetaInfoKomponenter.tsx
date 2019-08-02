@@ -1,9 +1,9 @@
 import { Normaltekst } from 'nav-frontend-typografi';
 import React from 'react';
-import flaggIkon from '../../../ikoner/flag-3.svg';
-import plasseringsIkon from '../../../ikoner/location-pin-6.svg';
-import { Kurs } from '../../../models/Kurs';
-import bemHelper from '../../../utils/bemHelper';
+import flaggIkon from '../../ikoner/flag-3.svg';
+import plasseringsIkon from '../../ikoner/location-pin-6.svg';
+import { Kurs } from '../../models/Kurs';
+import bemHelper from '../../utils/bemHelper';
 import './KursPanel.less';
 
 const cls = bemHelper('kursPanel');

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import Lenke from 'nav-frontend-lenker';
-import { Kurs } from '../../../models/Kurs';
+import { Kurs } from '../../models/Kurs';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
-import bemHelper from '../../../utils/bemHelper';
+import bemHelper from '../../utils/bemHelper';
 import {
     lagDatoTekst,
     lagStedkomponent,
@@ -29,7 +29,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                         minute: '2-digit',
                     })}
                 </Normaltekst>
-                <div className={cls.element('rektangel')}></div>
+                <div className={cls.element('rektangel')} />
             </div>
             <div className={cls.element('hovedInnhold')}>
                 <Lenke className={cls.element('header')} href={'/kursoversikt/' + kurs.id}>

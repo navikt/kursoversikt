@@ -13,7 +13,7 @@ import {
     lagPaameldingsfristkomponent,
     lagStedkomponent,
     lagDatoTekst,
-} from '../kursliste/Filter/KursPanel/kursMetaInfoKomponenter';
+} from '../kursliste/KursPanel/kursMetaInfoKomponenter';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
 
