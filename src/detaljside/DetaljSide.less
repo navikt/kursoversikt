@@ -5,65 +5,10 @@
         margin-bottom: 2rem;
     }
 
-    .knapp--hoved {
-        margin-top: 2rem;
-        text-decoration: none;
-
-        &:visited:not(:hover):not(:focus) {
-            color: @navBla;
-        }
-    }
-
-    &__metainfoPanel {
-        display: flex;
-        flex-direction: column;
-
-        &__egenskapTop {
-            display: flex;
-            flex-direction: row;
-            margin-bottom: 1rem;
-        }
-
-        &__infoTekst {
-            display: flex;
-            flex-direction: row;
-            margin-left: 1rem;
-            font-weight: 400;
-        }
-
-        &__pamelding {
-            margin-bottom: 1rem;
-        }
-
-        &__ikon {
-            height: 20px;
-            width: 20px;
-        }
-    }
-
-    &__beskrivelsePanel {
-        margin-top: 1rem;
-        padding-bottom: 2.5rem;
-
-        &__tilbakelenke {
-            margin-top: 1rem;
-            margin-left: -0.3rem;
-        }
-    }
-
     @media (min-width: @screen-md-min) {
         &__innhold {
             display: flex;
             flex-direction: row-reverse;
-        }
-
-        &__metainfoPanel {
-            margin-left: 1rem;
-        }
-
-        &__beskrivelsePanel {
-            margin-top: 0;
-            min-width: 40rem;
         }
     }
 }
