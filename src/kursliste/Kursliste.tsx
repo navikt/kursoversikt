@@ -7,6 +7,7 @@ import './Kursliste.less';
 import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
 import { Sidetittel } from 'nav-frontend-typografi';
 import bemHelper from '../utils/bemHelper';
+import IngenKurs from './IngenKurs/IngenKurs';
 
 export interface FilterState {
     fylke: string[];
@@ -94,9 +95,13 @@ const KursListe: FunctionComponent = () => {
                     />
                 </span>
                 <span className={cls.element('kursKolonne')}>
-                    {filtrerteKursArray.map((kurs: Kurs) => {
-                        return <KursPanel key={kurs.id} kurs={kurs} />;
-                    })}
+                    {filtrerteKursArray.length > 0 ? (
+                        filtrerteKursArray.map((kurs: Kurs) => (
+                            <KursPanel key={kurs.id} kurs={kurs} />
+                        ))
+                    ) : (
+                        <IngenKurs />
+                    )}
                 </span>
             </div>
         </div>
