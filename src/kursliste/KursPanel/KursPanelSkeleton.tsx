@@ -7,6 +7,8 @@ import './KursPanel.less';
 
 const cls = bemHelper('kursPanel');
 
+export const lagPlaceholderlisteForKurs = () => [1, 2, 3].map(n => <KursPanelSkeleton key={n} />);
+
 const KursPanelSkeleton: FunctionComponent = () => {
     return (
         <Panel className={cls.block} aria-disabled={true}>

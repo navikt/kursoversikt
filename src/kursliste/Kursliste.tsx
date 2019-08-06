@@ -1,14 +1,15 @@
 import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
-import { Kurs } from '../models/Kurs';
-import { hentKurs } from '../api/pindenaAPI';
-import KursPanel from './KursPanel/KursPanel';
-import Filter from './Filter/Filter';
-import './Kursliste.less';
-import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
 import { Sidetittel } from 'nav-frontend-typografi';
+
+import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
+import { hentKurs } from '../api/pindenaAPI';
+import { Kurs } from '../models/Kurs';
+import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
 import bemHelper from '../utils/bemHelper';
-import KursPanelSkeleton from './KursPanel/KursPanelSkeleton';
+import Filter from './Filter/Filter';
 import IngenKurs from './IngenKurs/IngenKurs';
+import KursPanel from './KursPanel/KursPanel';
+import './Kursliste.less';
 
 export interface FilterState {
     fylke: string[];
@@ -72,11 +73,11 @@ const KursListe: FunctionComponent = () => {
         setFilterState(nyttFilter);
     };
 
-    let toRender: ReactNode = <IngenKurs />;
+    let kursliste: ReactNode = <IngenKurs />;
     if (lasterInnKurs) {
-        toRender = [...Array(3)].map((_, i) => <KursPanelSkeleton key={i} />);
+        kursliste = lagPlaceholderlisteForKurs();
     } else if (filtrerteKursArray.length > 0) {
-        toRender = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
+        kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
     }
 
     return (
@@ -105,7 +106,7 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                     />
                 </span>
-                <span className={cls.element('kursKolonne')}>{toRender}</span>
+                <span className={cls.element('kursKolonne')}>{kursliste}</span>
             </div>
         </div>
     );
