@@ -1,6 +1,7 @@
 @import '../styles/variables.less';
 
 .detaljside {
+
     &__innhold {
         margin-bottom: 2rem;
     }
@@ -13,8 +14,13 @@
             color: @navBla;
         }
     }
+    &__metainfoKolonne{
+        margin: 1rem 1rem 1rem 1rem;
+    }
+    &__beskrivelseKolonne{
 
-    &__metainfoPanel {
+    }
+    &__metainfoKolonne {
         display: flex;
         flex-direction: column;
 
@@ -41,13 +47,16 @@
         }
     }
 
-    &__beskrivelsePanel {
+    &__beskrivelseKolonne {
         margin-top: 1rem;
         padding-bottom: 2.5rem;
 
         &__tilbakelenke {
             margin-top: 1rem;
             margin-left: -0.3rem;
+        }
+        &__beskrivelsePanel {
+            margin: 0 1rem 0.5rem;
         }
     }
 
@@ -56,14 +65,19 @@
             display: flex;
             flex-direction: row-reverse;
         }
-
+        &__metainfoKolonne{
+            margin: 0 1rem 1rem 1rem;
+            min-width: 16rem;
+        }
         &__metainfoPanel {
-            margin-left: 1rem;
+            margin: 0 1rem 1rem 1rem;
+            width: 18rem;
+
+        }
+        &__beskrivelseKolonne{
+            margin-top: 0;
+            width: 48.5rem;
         }
 
-        &__beskrivelsePanel {
-            margin-top: 0;
-            min-width: 40rem;
-        }
     }
 }

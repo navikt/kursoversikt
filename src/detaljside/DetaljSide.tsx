@@ -16,8 +16,8 @@ import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/Pameldingsfr
 import StedInfo from '../komponenter/StedInfo/StedInfo';
 
 const cls = bemHelper('detaljside');
-const metainfoCls = bemHelper(cls.element('metainfoPanel'));
-const beskrivelseCls = bemHelper(cls.element('beskrivelsePanel'));
+const metainfoCls = bemHelper(cls.element('metainfoKolonne'));
+const beskrivelseCls = bemHelper(cls.element('beskrivelseKolonne'));
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     const [detteKurset, setDetteKurset] = useState<Kurs>(tomtKurs);
@@ -45,7 +45,8 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                 <Sidetittel className="sentrertTekst">{detteKurset.tittel}</Sidetittel>
             </header>
             <main className={cls.element('innhold')}>
-                <Panel className={metainfoCls.block}>
+                 <span className={metainfoCls.block}>
+                <Panel className={metainfoCls.element('metainfoPanel')}>
                     <div className={metainfoCls.element('egenskapTop')}>
                         <img
                             className={metainfoCls.element('ikon')}
@@ -77,7 +78,9 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         </Normaltekst>
                     </div>
                 </Panel>
-                <Panel className={beskrivelseCls.block}>
+                 </span>
+                <span className={beskrivelseCls.block}>
+                <Panel className={beskrivelseCls.element('beskrivelsePanel')}>
                     <header className={'overskrift'}>
                         <Systemtittel>Om kurset</Systemtittel>
                     </header>
@@ -95,6 +98,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         </Lenke>
                     </div>
                 </Panel>
+                </span>
             </main>
         </div>
     );
