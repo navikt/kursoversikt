@@ -9,7 +9,7 @@ const cls = bemHelper('kursPanel');
 
 const KursPanelSkeleton: FunctionComponent = () => {
     return (
-        <Panel className={cls.block}>
+        <Panel className={cls.block} aria-disabled={true}>
             <div className={cls.element('tidspunkt')}>
                 <Skeleton width={70} />
                 <Skeleton width={55} />

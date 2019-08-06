@@ -25,7 +25,11 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
             <header className={cls.element('overskrift')}>
                 <Systemtittel>Om kurset</Systemtittel>
             </header>
-            {kurs ? <div dangerouslySetInnerHTML={beskrivelse} /> : <Skeleton count={3} />}
+            {kurs ? (
+                <div dangerouslySetInnerHTML={beskrivelse} />
+            ) : (
+                <Skeleton count={3} aria-disabled={true} />
+            )}
             {kurs && (
                 <Lenke className="active knapp knapp--hoved" href={kurs.registreringsUrl}>
                     Meld deg på

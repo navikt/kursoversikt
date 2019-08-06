@@ -9,7 +9,7 @@ const FiltervalgSkeleton = () => {
     const treValg = [...Array(3)];
 
     return (
-        <div className={cls.block}>
+        <div className={cls.block} aria-disabled={true}>
             {treValg.map((_, i) => {
                 const tekstbredde = 50 + Math.random() * 100;
 
