@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
 import { Kurs } from '../models/Kurs';
 import { hentKurs } from '../api/pindenaAPI';
 import KursPanel from './KursPanel/KursPanel';
@@ -7,6 +7,7 @@ import './Kursliste.less';
 import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
 import { Sidetittel } from 'nav-frontend-typografi';
 import bemHelper from '../utils/bemHelper';
+import KursPanelSkeleton from './KursPanel/KursPanelSkeleton';
 import IngenKurs from './IngenKurs/IngenKurs';
 
 export interface FilterState {
@@ -22,6 +23,7 @@ const cls = bemHelper('kursliste');
 const KursListe: FunctionComponent = () => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
+    const [lasterInnKurs, setLasterInnKurs] = useState<boolean>(true);
     const [filterState, setFilterState] = useState<FilterState>({
         fylke: [],
         tema: [],
@@ -33,7 +35,9 @@ const KursListe: FunctionComponent = () => {
             const resultat = await hentKurs();
             setKursArray(resultat);
             setFiltrerteKursArray(resultat);
+            setLasterInnKurs(false);
         };
+
         hentOgSettKurs();
     }, []);
     useEffect(() => {
@@ -68,6 +72,13 @@ const KursListe: FunctionComponent = () => {
         setFilterState(nyttFilter);
     };
 
+    let toRender: ReactNode = <IngenKurs />;
+    if (lasterInnKurs) {
+        toRender = [...Array(3)].map((_, i) => <KursPanelSkeleton key={i} />);
+    } else if (filtrerteKursArray.length > 0) {
+        toRender = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
+    }
+
     return (
         <div className={cls.block}>
             <header className="overskrift">
@@ -94,15 +105,7 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                     />
                 </span>
-                <span className={cls.element('kursKolonne')}>
-                    {filtrerteKursArray.length > 0 ? (
-                        filtrerteKursArray.map((kurs: Kurs) => (
-                            <KursPanel key={kurs.id} kurs={kurs} />
-                        ))
-                    ) : (
-                        <IngenKurs />
-                    )}
-                </span>
+                <span className={cls.element('kursKolonne')}>{toRender}</span>
             </div>
         </div>
     );
