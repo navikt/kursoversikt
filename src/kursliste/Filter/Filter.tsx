@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Checkbox } from 'nav-frontend-skjema';
-import './Filter.less';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+
 import { FilterGruppe } from '../Kursliste';
 import bemHelper from '../../utils/bemHelper';
-import Skeleton from 'react-loading-skeleton';
+import FiltervalgSkeleton from './FiltervalgSkeleton';
+import './Filter.less';
 
 interface Props {
     tittel: string;
@@ -28,16 +29,7 @@ const Filter: FunctionComponent<Props> = ({ tittel, alternativer, filterGruppe, 
                         />
                     ))
                 ) : (
-                    <div className={cls.element('skeleton')}>
-                        {[...Array(3)].map((x, i) => (
-                            <div key={i} className={cls.element('skeletonItem')}>
-                                <div className={cls.element('skeletonCheckbox')}>
-                                    <Skeleton height={30} width={30} />
-                                </div>
-                                <Skeleton width={50 + Math.random() * 100} />
-                            </div>
-                        ))}
-                    </div>
+                    <FiltervalgSkeleton />
                 )}
             </Ekspanderbartpanel>
         </div>
