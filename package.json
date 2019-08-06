@@ -46,7 +46,8 @@
         "serve": "node src/server/server.js",
         "server": "yarn build && node src/server/server.js",
         "mock": "REACT_APP_MOCK=true yarn start",
-        "format": "prettier --write 'src/**/*.{ts,js,less,tsx}'"
+        "format": "prettier --write 'src/**/*.{ts,js,less,tsx}'",
+        "heroku-postbuild": "REACT_APP_MOCK=true yarn build"
     },
     "eslintConfig": {
         "extends": "react-app"
