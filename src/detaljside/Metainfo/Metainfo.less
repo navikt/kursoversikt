@@ -26,6 +26,21 @@
         width: 20px;
     }
 
+    &__skeleton {
+        &__rad {
+            display: flex;
+            align-items: center;
+
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+
+            span:first-child {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
     @media (min-width: @screen-md-min) {
         margin-left: 1rem;
     }
