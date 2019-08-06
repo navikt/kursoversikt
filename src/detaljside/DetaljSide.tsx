@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Kurs, tomtKurs } from '../models/Kurs';
+import { Kurs } from '../models/Kurs';
 import { hentKurs } from '../api/pindenaAPI';
 import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
@@ -8,11 +8,13 @@ import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
 import Metainfo from './Metainfo/Metainfo';
 import OmKurset from './OmKurset/OmKurset';
+import Skeleton from 'react-loading-skeleton';
+import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 
 const cls = bemHelper('detaljside');
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
-    const [kurs, setKurs] = useState<Kurs>(tomtKurs);
+    const [kurs, setKurs] = useState<Kurs | undefined>(undefined);
 
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
@@ -29,11 +31,13 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
 
     return (
         <div className={cls.block}>
-            <header className="overskrift">
-                <Sidetittel className="sentrertTekst">{kurs.tittel}</Sidetittel>
+            <header className={cls.element('overskrift')}>
+                <Sidetittel className={cls.element('kurstittel')}>
+                    {kurs ? kurs.tittel : <Skeleton width={200} />}
+                </Sidetittel>
             </header>
             <main className={cls.element('innhold')}>
-                <Metainfo kurs={kurs} />
+                {kurs ? <Metainfo kurs={kurs} /> : <MetainfoSkeleton />}
                 <OmKurset kurs={kurs} />
             </main>
         </div>

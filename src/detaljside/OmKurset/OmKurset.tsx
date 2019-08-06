@@ -7,15 +7,16 @@ import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
 import bemHelper from '../../utils/bemHelper';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 const cls = bemHelper('omKurset');
 
 interface Props {
-    kurs: Kurs;
+    kurs?: Kurs;
 }
 
 const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
-    const beskrivelse = {
+    const beskrivelse = kurs && {
         __html: kurs.forsideBeskrivelse,
     };
 
@@ -24,10 +25,12 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
             <header className={cls.element('overskrift')}>
                 <Systemtittel>Om kurset</Systemtittel>
             </header>
-            <div dangerouslySetInnerHTML={beskrivelse} />
-            <Lenke className="active knapp knapp--hoved" href={kurs.registreringsUrl}>
-                Meld deg på
-            </Lenke>
+            {kurs ? <div dangerouslySetInnerHTML={beskrivelse} /> : <Skeleton count={3} />}
+            {kurs && (
+                <Lenke className="active knapp knapp--hoved" href={kurs.registreringsUrl}>
+                    Meld deg på
+                </Lenke>
+            )}
             <div className={cls.element('tilbakelenke')}>
                 <Link to={'/'} className={'lenke'}>
                     <VenstreChevron type={'venstre'} />
