@@ -1,5 +1,6 @@
-import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
+import FlipMove from 'react-flip-move';
 
 import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
 import { hentKurs } from '../api/pindenaAPI';
@@ -20,6 +21,27 @@ export interface FilterState {
 export type FilterGruppe = 'fylke' | 'type' | 'tema';
 
 const cls = bemHelper('kursliste');
+
+const fadeInAnimation = {
+    from: {
+        transform: 'scale(0.9)',
+        opacity: '0',
+    },
+    to: {
+        transform: 'none',
+        opacity: '1',
+    },
+};
+
+const fadeOutAnimation = {
+    from: {
+        opacity: '1',
+    },
+    to: {
+        transform: 'scale(0.9)',
+        opacity: '0',
+    },
+};
 
 const KursListe: FunctionComponent = () => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
@@ -73,13 +95,6 @@ const KursListe: FunctionComponent = () => {
         setFilterState(nyttFilter);
     };
 
-    let kursliste: ReactNode = <IngenKurs />;
-    if (lasterInnKurs) {
-        kursliste = lagPlaceholderlisteForKurs();
-    } else if (filtrerteKursArray.length > 0) {
-        kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
-    }
-
     return (
         <div className={cls.block}>
             <header className="overskrift">
@@ -106,7 +121,24 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                     />
                 </span>
-                <span className={cls.element('kursKolonne')}>{kursliste}</span>
+                <span className={cls.element('kursKolonne')}>
+                    {lasterInnKurs ? (
+                        lagPlaceholderlisteForKurs()
+                    ) : (
+                        <FlipMove
+                            enterAnimation={fadeInAnimation}
+                            leaveAnimation={fadeOutAnimation}
+                            className={cls.element('kursKolonne__inner')}
+                        >
+                            {filtrerteKursArray.map((kurs: Kurs) => (
+                                <div key={kurs.id}>
+                                    <KursPanel kurs={kurs} />
+                                </div>
+                            ))}
+                        </FlipMove>
+                    )}
+                    <IngenKurs vis={filtrerteKursArray.length === 0 && !lasterInnKurs} />
+                </span>
             </div>
         </div>
     );

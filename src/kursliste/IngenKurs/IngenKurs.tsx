@@ -7,9 +7,18 @@ import './IngenKurs.less';
 
 const cls = bemHelper('ingenKurs');
 
-const IngenKurs: FunctionComponent = () => {
+interface Props {
+    vis: boolean;
+}
+
+const IngenKurs: FunctionComponent<Props> = ({ vis }) => {
     return (
-        <div className={cls.block}>
+        <div
+            aria-disabled={!vis}
+            className={cls.classNames(cls.block, {
+                [cls.modifier('vis')]: vis,
+            })}
+        >
             <img src={fjell} alt="fjell" className={cls.element('illustrasjon')} />
             <Systemtittel>Fant ingen kurs</Systemtittel>
             <p>Prøv igjen med andre kriterier</p>

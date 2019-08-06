@@ -7,7 +7,13 @@ import './KursPanel.less';
 
 const cls = bemHelper('kursPanel');
 
-export const lagPlaceholderlisteForKurs = () => [1, 2, 3].map(n => <KursPanelSkeleton key={n} />);
+export const lagPlaceholderlisteForKurs = () => (
+    <div className={cls.element('skeleton')}>
+        {[1, 2, 3].map(n => (
+            <KursPanelSkeleton key={n} />
+        ))}
+    </div>
+);
 
 const KursPanelSkeleton: FunctionComponent = () => {
     return (
