@@ -1,0 +1,32 @@
+@import '../../styles/variables.less';
+
+.omKurset {
+
+    &__panel {
+        margin-top: 1rem;
+        padding-bottom: 2.5rem;
+    }
+
+        .knapp--hoved {
+            margin-top: 2rem;
+            text-decoration: none;
+
+            &:visited:not(:hover):not(:focus) {
+                color: @navBla;
+            }
+        }
+
+        &__tilbakelenke {
+            margin-top: 1rem;
+            margin-left: -0.3rem;
+        }
+
+        @media (min-width: @screen-md-min) {
+            width: 48.5rem;
+
+            &__panel {
+                margin: 0 1rem 0.5rem;
+            }
+        }
+
+}

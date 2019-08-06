@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import Lenke from 'nav-frontend-lenker';
 import { Kurs } from '../../models/Kurs';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
@@ -8,6 +7,8 @@ import bemHelper from '../../utils/bemHelper';
 import StedInfo from '../../komponenter/StedInfo/StedInfo';
 import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/PameldingsfristInfo';
 import VarighetInfo from '../../komponenter/VarighetInfo/VarighetInfo';
+import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 
 interface Props {
     kurs: Kurs;
@@ -34,9 +35,9 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                 <div className={cls.element('rektangel')} />
             </div>
             <div className={cls.element('hovedInnhold')}>
-                <Lenke className={cls.element('header')} href={'/kursoversikt/' + kurs.id}>
+                <Link to={`/${kurs.id}`} className={classnames(cls.element('header'), 'lenke')}>
                     {kurs.tittel}
-                </Lenke>
+                </Link>
                 <Normaltekst className={cls.element('beskrivelse')}>
                     {kurs.internBeskrivelse || ''}
                 </Normaltekst>

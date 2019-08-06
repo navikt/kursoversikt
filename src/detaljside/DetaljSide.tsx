@@ -2,31 +2,23 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Kurs, tomtKurs } from '../models/Kurs';
 import { hentKurs } from '../api/pindenaAPI';
 import { RouteComponentProps } from 'react-router';
-import { Element, Normaltekst, Sidetittel, Systemtittel } from 'nav-frontend-typografi';
-import { Panel } from 'nav-frontend-paneler';
+import { Sidetittel } from 'nav-frontend-typografi';
 import 'nav-frontend-knapper-style';
-import kalenderIkon from '../ikoner/calendar-3.svg';
-import kursTypeIkon from '../ikoner/person-2.svg';
-import { VenstreChevron } from 'nav-frontend-chevron';
-import Lenke from 'nav-frontend-lenker';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
-import VarighetInfo from '../komponenter/VarighetInfo/VarighetInfo';
-import PameldingsfristInfo from '../komponenter/PameldingsfristInfo/PameldingsfristInfo';
-import StedInfo from '../komponenter/StedInfo/StedInfo';
+import Metainfo from './Metainfo/Metainfo';
+import OmKurset from './OmKurset/OmKurset';
 
 const cls = bemHelper('detaljside');
-const metainfoCls = bemHelper(cls.element('metainfoKolonne'));
-const beskrivelseCls = bemHelper(cls.element('beskrivelseKolonne'));
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
-    const [detteKurset, setDetteKurset] = useState<Kurs>(tomtKurs);
+    const [kurs, setKurs] = useState<Kurs>(tomtKurs);
 
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
             const resultat = await hentKurs();
             let kursIdFraUrl = props.location.pathname.split('/')[1];
-            await setDetteKurset(
+            await setKurs(
                 resultat.filter(kurs => {
                     return kurs.id === parseInt(kursIdFraUrl);
                 })[0]
@@ -35,70 +27,14 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
         hentOgSettDetteKurset();
     }, [props.location.pathname]);
 
-    const createMarkup = () => ({
-        __html: detteKurset.forsideBeskrivelse,
-    });
-
     return (
         <div className={cls.block}>
             <header className="overskrift">
-                <Sidetittel className="sentrertTekst">{detteKurset.tittel}</Sidetittel>
+                <Sidetittel className="sentrertTekst">{kurs.tittel}</Sidetittel>
             </header>
             <main className={cls.element('innhold')}>
-                 <span className={metainfoCls.block}>
-                <Panel className={metainfoCls.element('metainfoPanel')}>
-                    <div className={metainfoCls.element('egenskapTop')}>
-                        <img
-                            className={metainfoCls.element('ikon')}
-                            src={kalenderIkon}
-                            alt="kalenderIkon"
-                        />
-                        <Element className={metainfoCls.element('infoTekst')}>
-                            <b>Når:&nbsp;</b>
-                        </Element>
-                        <VarighetInfo
-                            startTid={detteKurset.starttidspunkt}
-                            sluttTid={detteKurset.sluttidspunkt}
-                        />
-                    </div>
-                    <PameldingsfristInfo
-                        pameldingsfrist={detteKurset.pameldingsfrist}
-                        className={metainfoCls.element('pamelding')}
-                    />
-                    <StedInfo sted={detteKurset.sted} />
-                    <div className={metainfoCls.element('egenskapTop')}>
-                        <img
-                            className={metainfoCls.element('ikon')}
-                            src={kursTypeIkon}
-                            alt="kurstypeikon"
-                        />
-                        <Normaltekst className={metainfoCls.element('infoTekst')}>
-                            <b>Type kurs:&nbsp;</b>
-                            {detteKurset.type}
-                        </Normaltekst>
-                    </div>
-                </Panel>
-                 </span>
-                <span className={beskrivelseCls.block}>
-                <Panel className={beskrivelseCls.element('beskrivelsePanel')}>
-                    <header className={'overskrift'}>
-                        <Systemtittel>Om kurset</Systemtittel>
-                    </header>
-                    <div dangerouslySetInnerHTML={createMarkup()} />
-                    <Lenke
-                        className="active knapp knapp--hoved"
-                        href={detteKurset.registreringsUrl}
-                    >
-                        Meld deg på
-                    </Lenke>
-                    <div className={beskrivelseCls.element('tilbakelenke')}>
-                        <Lenke href={'/kursoversikt'}>
-                            <VenstreChevron type={'venstre'} />
-                            Tilbake til kursoversikten
-                        </Lenke>
-                    </div>
-                </Panel>
-                </span>
+                <Metainfo kurs={kurs} />
+                <OmKurset kurs={kurs} />
             </main>
         </div>
     );
