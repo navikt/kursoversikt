@@ -55,6 +55,7 @@ const KursListe: FunctionComponent = () => {
         } else {
             leggTilFilterKriterie(filterGruppe, filterKriterie);
         }
+        console.log(filterState);
     };
 
     const leggTilFilterKriterie = (
@@ -71,6 +72,10 @@ const KursListe: FunctionComponent = () => {
             filter => filter !== krietrieSomSkalFjernes
         );
         setFilterState(nyttFilter);
+    };
+
+    const finnCheckedStatus = (filterGruppe:FilterGruppe, filterAlternativ:string)=>{
+        return filterState[filterGruppe].includes(filterAlternativ)
     };
 
     let kursliste: ReactNode = <IngenKurs />;
@@ -92,18 +97,21 @@ const KursListe: FunctionComponent = () => {
                         alternativer={unikeFylker}
                         filterGruppe={'fylke'}
                         toggleFilter={handleFilterToggle}
+                        bestemCheckedhet={finnCheckedStatus}
                     />
                     <Filter
                         tittel={'Type kurs'}
                         alternativer={unikeKursTyper}
                         filterGruppe={'type'}
                         toggleFilter={handleFilterToggle}
+                        bestemCheckedhet={finnCheckedStatus}
                     />
                     <Filter
                         tittel={'Tema'}
                         alternativer={unikeTema}
                         filterGruppe={'tema'}
                         toggleFilter={handleFilterToggle}
+                        bestemCheckedhet={finnCheckedStatus}
                     />
                 </span>
                 <span className={cls.element('kursKolonne')}>{kursliste}</span>
