@@ -10,8 +10,6 @@ const port = PORT || 3000;
 const server = express();
 
 const startServer = () => {
-    let pindenaProxyConfig;
-
     // Sikkerhet
     server.disable('x-powered-by');
 
@@ -21,7 +19,7 @@ const startServer = () => {
 
     // Ikke bruk proxy hvis du vil mocke API-et.
     if (!REACT_APP_MOCK) {
-        pindenaProxyConfig = require('./pindenaProxyConfig');
+        const pindenaProxyConfig = require('./pindenaProxyConfig');
         server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
     }
 
