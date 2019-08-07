@@ -1,29 +1,36 @@
 const path = require('path');
 const express = require('express');
+
+const { PORT, REACT_APP_MOCK } = process.env;
+
 const BASE_PATH = '/kursoversikt';
-const server = express();
 const buildPath = path.join(__dirname, '../../build');
+const port = PORT || 3000;
 
-// Ikke bruk proxy hvis du vil mocke API-et.
-let pindenaProxyConfig;
-if (!process.env.REACT_APP_MOCK) {
-    pindenaProxyConfig = require('./pindenaProxyConfig');
-}
+const server = express();
 
-// security
-server.disable('x-powered-by');
+const startServer = () => {
+    // Sikkerhet
+    server.disable('x-powered-by');
 
-// health checks
-server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
-server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
+    // Helsesjekker for NAIS
+    server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
+    server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
 
-if (pindenaProxyConfig) {
-    server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
-}
+    // Ikke bruk proxy hvis du vil mocke API-et.
+    if (!REACT_APP_MOCK) {
+        const pindenaProxyConfig = require('./pindenaProxyConfig');
+        server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
+    }
 
-server.use(BASE_PATH, express.static(buildPath));
+    server.use(BASE_PATH, express.static(buildPath));
+    server.use(BASE_PATH, (_, res) => {
+        res.sendFile(path.resolve(buildPath, 'index.html'));
+    });
 
-const port = process.env.PORT || 3000;
-server.listen(port, () => {
-    console.log('Server listening on port', port);
-});
+    server.listen(port, () => {
+        console.log('Server listening on port', port);
+    });
+};
+
+startServer();
