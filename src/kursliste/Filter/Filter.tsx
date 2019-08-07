@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Checkbox } from 'nav-frontend-skjema';
-import './Filter.less';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+
 import { FilterGruppe } from '../Kursliste';
 import bemHelper from '../../utils/bemHelper';
+import FiltervalgSkeleton from './FiltervalgSkeleton';
+import './Filter.less';
 
 interface Props {
     tittel: string;
@@ -18,13 +20,17 @@ const Filter: FunctionComponent<Props> = ({ tittel, alternativer, filterGruppe, 
     return (
         <div className={cls.block}>
             <Ekspanderbartpanel tittel={tittel} apen>
-                {alternativer.map(alternativ => (
-                    <Checkbox
-                        label={alternativ}
-                        key={alternativ}
-                        onChange={() => toggleFilter(filterGruppe, alternativ)}
-                    />
-                ))}
+                {alternativer.length > 0 ? (
+                    alternativer.map(alternativ => (
+                        <Checkbox
+                            label={alternativ}
+                            key={alternativ}
+                            onChange={() => toggleFilter(filterGruppe, alternativ)}
+                        />
+                    ))
+                ) : (
+                    <FiltervalgSkeleton />
+                )}
             </Ekspanderbartpanel>
         </div>
     );

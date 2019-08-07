@@ -28,9 +28,23 @@
             width: 20px;
         }
 
-        @media (min-width: @screen-md-min) {
-            width: 18rem;
-            margin: 0 1rem 1rem 1rem;
-        }
+    &__skeleton {
+        &__rad {
+            display: flex;
+            align-items: center;
 
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+
+            span:first-child {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    @media (min-width: @screen-md-min) {
+      width: 18rem;
+      margin: 0 1rem 1rem 1rem;
+    }
 }

@@ -26,6 +26,7 @@
     }
 
     &__hovedInnhold {
+        width: 100%;
         justify-content: center;
     }
 
@@ -35,6 +36,17 @@
 
     &__tidsTekst {
         font-weight: 600;
+    }
+
+    &__skeleton {
+        &__ikonOgTekst {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        &__ikon {
+            margin-right: 1rem;
+        }
     }
 
     @media (min-width: @screen-md-min) {
