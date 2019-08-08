@@ -20,6 +20,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse,
     };
 
+
     return (
         <span className={cls.block} >
         <Panel className={cls.element('panel')}>
