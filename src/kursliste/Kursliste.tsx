@@ -93,6 +93,13 @@ const KursListe: FunctionComponent = () => {
             <div className={cls.element('hovedside')}>
                 <span className={cls.element('filterKolonne')}>
                     <Filter
+                        tittel={'Tema'}
+                        alternativer={unikeTema}
+                        filterGruppe={'tema'}
+                        toggleFilter={handleFilterToggle}
+                        bestemCheckedhet={finnCheckedStatus}
+                    />
+                    <Filter
                         tittel={'Fylker'}
                         alternativer={unikeFylker}
                         filterGruppe={'fylke'}
@@ -106,13 +113,7 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                         bestemCheckedhet={finnCheckedStatus}
                     />
-                    <Filter
-                        tittel={'Tema'}
-                        alternativer={unikeTema}
-                        filterGruppe={'tema'}
-                        toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
-                    />
+
                 </span>
                 <span className={cls.element('kursKolonne')}>{kursliste}</span>
             </div>
