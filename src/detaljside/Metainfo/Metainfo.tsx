@@ -18,7 +18,8 @@ interface Props {
 
 const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
     return (
-        <Panel className={cls.block}>
+        <span className={cls.block}>
+        <Panel className={cls.element('panel')}>
             <div className={cls.element('egenskapTop')}>
                 <img className={cls.element('ikon')} src={kalenderIkon} alt="kalenderIkon" />
                 <Element className={cls.element('infoTekst')}>
@@ -39,6 +40,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                 </Normaltekst>
             </div>
         </Panel>
+        </span>
     );
 };
 

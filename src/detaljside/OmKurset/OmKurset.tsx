@@ -20,8 +20,10 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse,
     };
 
+
     return (
-        <Panel className={cls.block}>
+        <span className={cls.block} >
+        <Panel className={cls.element('panel')}>
             <header className={cls.element('overskrift')}>
                 <Systemtittel>Om kurset</Systemtittel>
             </header>
@@ -42,6 +44,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 </Link>
             </div>
         </Panel>
+        </span>
     );
 };
 
