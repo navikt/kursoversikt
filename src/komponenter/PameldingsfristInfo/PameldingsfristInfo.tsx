@@ -19,7 +19,7 @@ const PameldingsfristInfo: FunctionComponent<Props> = ({ pameldingsfrist, classN
             <img className={cls.element('ikon')} src={flaggIkon} alt="flaggikon" />
             <Normaltekst className={cls.element('label')}>
                 <b>Påmeldingsfrist:&nbsp;</b>
-                {dagOgManedPaLesbartFormat(pameldingsfrist)}, kl.
+                {dagOgManedPaLesbartFormat(pameldingsfrist)} kl.
                 {pameldingsfrist.toLocaleString('nb-no', {
                     hour: '2-digit',
                     minute: '2-digit',
