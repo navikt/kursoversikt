@@ -74,8 +74,8 @@ const KursListe: FunctionComponent = () => {
         setFilterState(nyttFilter);
     };
 
-    const finnCheckedStatus = (filterGruppe:FilterGruppe, filterAlternativ:string)=>{
-        return filterState[filterGruppe].includes(filterAlternativ)
+    const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
+        return filterState[filterGruppe].includes(filterAlternativ);
     };
 
     let kursliste: ReactNode = <IngenKurs />;
@@ -113,7 +113,6 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                         bestemCheckedhet={finnCheckedStatus}
                     />
-
                 </span>
                 <span className={cls.element('kursKolonne')}>{kursliste}</span>
             </div>
