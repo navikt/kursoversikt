@@ -11,15 +11,20 @@ interface Props {
     startTid: Date;
     sluttTid: Date;
     className?: string;
-    kurs?: Kurs;
+    kursForaLageKlokkeslett?: Kurs;
 }
 
-const VarighetInfo: FunctionComponent<Props> = ({ startTid, sluttTid, className, kurs }) => {
+const VarighetInfo: FunctionComponent<Props> = ({
+    startTid,
+    sluttTid,
+    className,
+    kursForaLageKlokkeslett,
+}) => {
     const varighet = formaterVarighet(startTid, sluttTid);
     return (
         <div className={cls.block}>
             <Normaltekst className={className}>
-                {varighet} {kurs && lagTidspunkt(kurs)}
+                {varighet} {kursForaLageKlokkeslett && lagTidspunkt(kursForaLageKlokkeslett)}
             </Normaltekst>
         </div>
     );

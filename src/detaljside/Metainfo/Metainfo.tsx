@@ -28,7 +28,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                     <VarighetInfo
                         startTid={kurs.starttidspunkt}
                         sluttTid={kurs.sluttidspunkt}
-                        kurs={kurs}
+                        kursForaLageKlokkeslett={kurs}
                     />
                 </div>
                 <PameldingsfristInfo
