@@ -10,6 +10,7 @@ import Filter from './Filter/Filter';
 import IngenKurs from './IngenKurs/IngenKurs';
 import KursPanel from './KursPanel/KursPanel';
 import './Kursliste.less';
+import Soketreff from './Soketreff/Soketreff';
 
 export interface FilterState {
     fylke: string[];
@@ -74,8 +75,8 @@ const KursListe: FunctionComponent = () => {
         setFilterState(nyttFilter);
     };
 
-    const finnCheckedStatus = (filterGruppe:FilterGruppe, filterAlternativ:string)=>{
-        return filterState[filterGruppe].includes(filterAlternativ)
+    const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
+        return filterState[filterGruppe].includes(filterAlternativ);
     };
 
     let kursliste: ReactNode = <IngenKurs />;
@@ -90,6 +91,7 @@ const KursListe: FunctionComponent = () => {
             <header className="overskrift">
                 <Sidetittel className="sentrertTekst">Kurskalender</Sidetittel>
             </header>
+
             <div className={cls.element('hovedside')}>
                 <span className={cls.element('filterKolonne')}>
                     <Filter
@@ -113,9 +115,14 @@ const KursListe: FunctionComponent = () => {
                         toggleFilter={handleFilterToggle}
                         bestemCheckedhet={finnCheckedStatus}
                     />
-
                 </span>
-                <span className={cls.element('kursKolonne')}>{kursliste}</span>
+                <span className={cls.element('kursKolonne')}>
+                    <Soketreff
+                        antallTreff={filtrerteKursArray.length}
+                        totaltAntallKurs={kursArray.length}
+                    />
+                    {kursliste}
+                </span>
             </div>
         </div>
     );
