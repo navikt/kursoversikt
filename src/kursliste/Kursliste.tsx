@@ -11,6 +11,7 @@ import IngenKurs from './IngenKurs/IngenKurs';
 import KursPanel from './KursPanel/KursPanel';
 import './Kursliste.less';
 import Soketreff from './Soketreff/Soketreff';
+import Sokeboks from "./Sokeboks/Sokeboks";
 
 export interface FilterState {
     fylke: string[];
@@ -31,6 +32,8 @@ const KursListe: FunctionComponent = () => {
         tema: [],
         type: [],
     });
+    const [sokeState,setsokeState] = useState<string>("");
+
 
     useEffect(() => {
         const hentOgSettKurs = async () => {
@@ -43,8 +46,15 @@ const KursListe: FunctionComponent = () => {
         hentOgSettKurs();
     }, []);
     useEffect(() => {
-        setFiltrerteKursArray(filtrer(filterState, kursArray));
-    }, [kursArray, filterState]);
+        setFiltrerteKursArray(filtrer(filterState,sokeState, kursArray));
+    }, [kursArray,sokeState, filterState]);
+
+    useEffect(() => {
+        console.log(sokeState);
+
+    }, [sokeState]);
+
+
 
     const unikeFylker = lagFilterKriterier(kursArray, 'fylke');
     const unikeKursTyper = lagFilterKriterier(kursArray, 'type');
@@ -74,6 +84,10 @@ const KursListe: FunctionComponent = () => {
         );
         setFilterState(nyttFilter);
     };
+    const fritekstSok = (sokeTekst:string)=>{
+        setsokeState(sokeTekst);
+
+    };
 
     const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
         return filterState[filterGruppe].includes(filterAlternativ);
@@ -94,6 +108,7 @@ const KursListe: FunctionComponent = () => {
 
             <div className={cls.element('hovedside')}>
                 <span className={cls.element('filterKolonne')}>
+                    <Sokeboks sokeFunksjon={fritekstSok} />
                     <Filter
                         tittel={'Tema'}
                         alternativer={unikeTema}
