@@ -12,25 +12,33 @@ interface Props {
     alternativer: string[];
     filterGruppe: FilterGruppe;
     toggleFilter: (gruppe: FilterGruppe, filterattr: string) => void;
-    bestemCheckedhet: (filtergruppe:FilterGruppe,filterattr:string) => boolean;
-
+    bestemCheckedhet: (filtergruppe: FilterGruppe, filterattr: string) => boolean;
 }
 
 const cls = bemHelper('filterboks');
 
-const Filter: FunctionComponent<Props> = ({ tittel, alternativer, filterGruppe, toggleFilter, bestemCheckedhet }) => {
+const Filter: FunctionComponent<Props> = ({
+    tittel,
+    alternativer,
+    filterGruppe,
+    toggleFilter,
+    bestemCheckedhet,
+}) => {
     return (
         <div className={cls.block}>
             <Ekspanderbartpanel tittel={tittel} apen>
                 {alternativer.length > 0 ? (
-                    alternativer.map(alternativ => (
-                        <Checkbox
-                            label={alternativ}
-                            key={alternativ}
-                            onChange={() => toggleFilter(filterGruppe, alternativ)}
-                            checked={bestemCheckedhet(filterGruppe,alternativ)}
-                        />
-                    ))
+                    alternativer.map(
+                        alternativ =>
+                            alternativ !== 'Landsdekkende' && (
+                                <Checkbox
+                                    label={alternativ}
+                                    key={alternativ}
+                                    onChange={() => toggleFilter(filterGruppe, alternativ)}
+                                    checked={bestemCheckedhet(filterGruppe, alternativ)}
+                                />
+                            )
+                    )
                 ) : (
                     <FiltervalgSkeleton />
                 )}
