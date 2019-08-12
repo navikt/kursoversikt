@@ -19,27 +19,31 @@ interface Props {
 const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
     return (
         <span className={cls.block}>
-        <Panel className={cls.element('panel')}>
-            <div className={cls.element('egenskapTop')}>
-                <img className={cls.element('ikon')} src={kalenderIkon} alt="kalenderIkon" />
-                <Element className={cls.element('infoTekst')}>
-                    <b>Når:&nbsp;</b>
-                </Element>
-                <VarighetInfo startTid={kurs.starttidspunkt} sluttTid={kurs.sluttidspunkt} />
-            </div>
-            <PameldingsfristInfo
-                pameldingsfrist={kurs.pameldingsfrist}
-                className={cls.element('pamelding')}
-            />
-            <StedInfo sted={kurs.sted} />
-            <div className={cls.element('egenskapTop')}>
-                <img className={cls.element('ikon')} src={kursTypeIkon} alt="kurstypeikon" />
-                <Normaltekst className={cls.element('infoTekst')}>
-                    <b>Type kurs:&nbsp;</b>
-                    {kurs.type}
-                </Normaltekst>
-            </div>
-        </Panel>
+            <Panel className={cls.element('panel')}>
+                <div className={cls.element('egenskapTop')}>
+                    <img className={cls.element('ikon')} src={kalenderIkon} alt="kalenderIkon" />
+                    <Element className={cls.element('infoTekst')}>
+                        <b>Når:&nbsp;</b>
+                    </Element>
+                    <VarighetInfo
+                        startTid={kurs.starttidspunkt}
+                        sluttTid={kurs.sluttidspunkt}
+                        kursForaLageKlokkeslett={kurs}
+                    />
+                </div>
+                <PameldingsfristInfo
+                    pameldingsfrist={kurs.pameldingsfrist}
+                    className={cls.element('pamelding')}
+                />
+                <StedInfo sted={kurs.sted} />
+                <div className={cls.element('egenskapTop')}>
+                    <img className={cls.element('ikon')} src={kursTypeIkon} alt="kurstypeikon" />
+                    <Normaltekst className={cls.element('infoTekst')}>
+                        <b>Type kurs:&nbsp;</b>
+                        {kurs.type}
+                    </Normaltekst>
+                </div>
+            </Panel>
         </span>
     );
 };
