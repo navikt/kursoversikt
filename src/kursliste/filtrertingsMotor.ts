@@ -18,9 +18,11 @@ const utforFiltreringPaaFiltergruppe = (
     if (ingenFilterValgt) {
         return kursSomSkalFiltreres;
     }
-
     return kursSomSkalFiltreres.filter(
-        kurs => kurs[filterGruppe] && filterState[filterGruppe].includes(kurs[filterGruppe]!)
+        kurs =>
+            kurs[filterGruppe] &&
+            (kurs.fylke === 'Landsdekkende' ||
+                filterState[filterGruppe].includes(kurs[filterGruppe]!))
     );
 };
 
