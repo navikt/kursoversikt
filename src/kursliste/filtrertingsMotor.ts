@@ -35,7 +35,8 @@ const utforSokIFiltrertListe = (
         return kursSomSkalFiltreres.filter(
             kurs =>
                 (kurs.tittel && kurs.tittel.toLowerCase().includes(sokeordState)) ||
-                (kurs.internBeskrivelse && kurs.internBeskrivelse.toLowerCase().includes(sokeordState))
+                (kurs.internBeskrivelse &&
+                    kurs.internBeskrivelse.toLowerCase().includes(sokeordState))
         );
     }
     return kursSomSkalFiltreres;
