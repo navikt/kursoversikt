@@ -12,6 +12,22 @@ export const dagOgManedPaLesbartFormat = (dato: Date): string => {
     return dato.toLocaleString('nb-no', { day: 'numeric', month: 'short' });
 };
 
+export const formaterTimeOgMinutt = (tidspunkt: Date) => {
+    return tidspunkt.toLocaleString('nb-no', {
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
+
+export const lagTidspunkt = (kurs: Kurs) => {
+    const start = formaterTimeOgMinutt(kurs.starttidspunkt);
+    const slutt = formaterTimeOgMinutt(kurs.sluttidspunkt);
+    if (start !== slutt) {
+        return ' kl. ' + start + ' - ' + slutt;
+    }
+    return ' kl. ' + start;
+};
+
 export const formaterVarighet = (startTid: Date, sluttTid: Date): string => {
     if (startTid.toDateString() === sluttTid.toDateString()) {
         return dagOgManedPaLesbartFormat(sluttTid);

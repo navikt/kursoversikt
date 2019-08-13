@@ -9,6 +9,7 @@ import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/Pamelding
 import VarighetInfo from '../../komponenter/VarighetInfo/VarighetInfo';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import { lagTidspunkt } from '../../utils/datoUtils';
 
 interface Props {
     kurs: Kurs;
@@ -25,13 +26,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                     sluttTid={kurs.sluttidspunkt}
                     className={cls.element('tidsTekst')}
                 />
-                <Normaltekst>
-                    kl.{' '}
-                    {kurs.starttidspunkt.toLocaleString('nb-no', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                    })}
-                </Normaltekst>
+                <Normaltekst>{lagTidspunkt(kurs)}</Normaltekst>
                 <div className={cls.element('rektangel')} />
             </div>
             <div className={cls.element('hovedInnhold')}>

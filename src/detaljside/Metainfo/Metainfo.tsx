@@ -25,7 +25,11 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                     <Element className={cls.element('infoTekst')}>
                         <b>Når:&nbsp;</b>
                     </Element>
-                    <VarighetInfo startTid={kurs.starttidspunkt} sluttTid={kurs.sluttidspunkt} />
+                    <VarighetInfo
+                        startTid={kurs.starttidspunkt}
+                        sluttTid={kurs.sluttidspunkt}
+                        kursForaLageKlokkeslett={kurs}
+                    />
                 </div>
                 <PameldingsfristInfo
                     pameldingsfrist={kurs.pameldingsfrist}
