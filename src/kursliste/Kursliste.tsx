@@ -12,6 +12,7 @@ import KursPanel from './KursPanel/KursPanel';
 import './Kursliste.less';
 import Soketreff from './Soketreff/Soketreff';
 import Sokeboks from './Sokeboks/Sokeboks';
+import {RouteComponentProps} from "react-router";
 
 export interface FilterState {
     fylke: string[];
@@ -20,10 +21,10 @@ export interface FilterState {
 }
 
 export type FilterGruppe = 'fylke' | 'type' | 'tema';
-
+export const filterGruppeValues: FilterGruppe[]= ['fylke', 'type', 'tema'];
 const cls = bemHelper('kursliste');
 
-const KursListe: FunctionComponent = () => {
+const KursListe: FunctionComponent<RouteComponentProps> = props => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
     const [lasterInnKurs, setLasterInnKurs] = useState<boolean>(true);
@@ -45,12 +46,10 @@ const KursListe: FunctionComponent = () => {
         hentOgSettKurs();
     }, []);
     useEffect(() => {
-        setFiltrerteKursArray(filtrer(filterState, sokeState, kursArray));
+        brukFilterFraUrl();
+        setFiltrerteKursArray(filtrer(filterState, sokeState, kursArray, props));
     }, [kursArray, sokeState, filterState]);
 
-    useEffect(() => {
-        console.log(sokeState);
-    }, [sokeState]);
 
     const unikeFylker = lagFilterKriterier(kursArray, 'fylke');
     const unikeKursTyper = lagFilterKriterier(kursArray, 'type');
@@ -87,6 +86,23 @@ const KursListe: FunctionComponent = () => {
     const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
         return filterState[filterGruppe].includes(filterAlternativ);
     };
+    const brukFilterFraUrl = () => {
+        const urlParams = props.location.search;
+        const filterFraUrl = hentFilterFraUrl(urlParams);
+
+        /*console.log("filterFraUrl",filterFraUrl.keys().next());
+        console.log("filterFraUrl.getAll()",filterFraUrl.values().next());
+        console.log("filterFraUrl.getAll()",filterFraUrl.getAll("Tema"));
+        console.log("props.location.search",props.location.search);*/
+    };
+
+    const hentFilterFraUrl = (urlParams: string) => {
+
+        const query = new URLSearchParams(urlParams);
+        return query;
+    };
+
+
 
     let kursliste: ReactNode = <IngenKurs />;
     if (lasterInnKurs) {

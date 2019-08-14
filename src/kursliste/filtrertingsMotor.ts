@@ -1,11 +1,18 @@
 import { Kurs } from '../models/Kurs';
-import { FilterGruppe, FilterState } from './Kursliste';
+import { FilterGruppe, filterGruppeValues, FilterState } from './Kursliste';
+import { RouteComponentProps } from 'react-router';
 
-export const filtrer = (filterState: FilterState, sokeOrd: string, kursArray: Kurs[]): Kurs[] => {
+export const filtrer = (
+    filterState: FilterState,
+    sokeOrd: string,
+    kursArray: Kurs[],
+    props: RouteComponentProps
+): Kurs[] => {
     let filtrerteKurs = kursArray;
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'fylke', filtrerteKurs);
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'tema', filtrerteKurs);
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'type', filtrerteKurs);
+    settFilerIURL(filterState, sokeOrd, props);
+    filterGruppeValues.map(filtergruppe => {
+       return filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, filtergruppe, filtrerteKurs);
+    });
     filtrerteKurs = utforSokIFiltrertListe(sokeOrd, filtrerteKurs);
     return filtrerteKurs;
 };
@@ -40,6 +47,21 @@ const utforSokIFiltrertListe = (
         );
     }
     return kursSomSkalFiltreres;
+};
+const settFilerIURL = (filterState: FilterState, sokeOrd: string, props: RouteComponentProps) => {
+    console.log('Object.entries(filterState)', Object.entries(filterState));
+    let filter = Object.entries(filterState)
+        .map(([kriterie, allekriterier]) =>
+            allekriterier.map((etbehov: string) => `${kriterie}=${etbehov}`).join('&')
+        )
+        .filter(liste => liste.length !== 0)
+        .join('&');
+    if (sokeOrd!) {
+        console.log('søkeord');
+        filter = filter + '&sokeOrd=' + sokeOrd;
+    }
+
+    props.history.replace('?' + filter);
 };
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
