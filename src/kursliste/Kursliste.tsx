@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
+import React, {FunctionComponent, useEffect, useState, ReactNode} from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 
-import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
+import {byggtFilterTilURL, filtrer, hentFilterFraUrl, lagFilterKriterier} from './filtrertingsMotor';
 import { hentKurs } from '../api/pindenaAPI';
 import { Kurs } from '../models/Kurs';
 import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
@@ -14,7 +14,7 @@ import Soketreff from './Soketreff/Soketreff';
 import Sokeboks from './Sokeboks/Sokeboks';
 import {RouteComponentProps} from "react-router";
 
-export interface FilterState {
+export type FilterState = {
     fylke: string[];
     tema: string[];
     type: string[];
@@ -28,27 +28,28 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
     const [lasterInnKurs, setLasterInnKurs] = useState<boolean>(true);
-    const [filterState, setFilterState] = useState<FilterState>({
-        fylke: [],
-        tema: [],
-        type: [],
-    });
+    const [filterState, setFilterState] = useState<FilterState>(hentFilterFraUrl(props.location.search));
     const [sokeState, setsokeState] = useState<string>('');
 
-    useEffect(() => {
-        const hentOgSettKurs = async () => {
-            const resultat = await hentKurs();
-            setKursArray(resultat);
-            setFiltrerteKursArray(resultat);
-            setLasterInnKurs(false);
-        };
+    const hentOgSettKurs = () => {
+         hentKurs().then(resultat => {
+             setKursArray(resultat);
+             setFiltrerteKursArray(resultat);
+             setLasterInnKurs(false);
+             setFiltrerteKursArray(filtrer(filterState, sokeState, resultat));
+         });
+    };
 
-        hentOgSettKurs();
-    }, []);
-    useEffect(() => {
-        brukFilterFraUrl();
-        setFiltrerteKursArray(filtrer(filterState, sokeState, kursArray, props));
-    }, [kursArray, sokeState, filterState]);
+    useEffect(
+        hentOgSettKurs,
+        []);
+
+    const oppdaterFilter = ()=>{
+        setFiltrerteKursArray(filtrer(filterState, sokeState, kursArray));
+        props.history.replace(byggtFilterTilURL (filterState, sokeState));
+    };
+
+    useEffect(oppdaterFilter, [sokeState, filterState]);
 
 
     const unikeFylker = lagFilterKriterier(kursArray, 'fylke');
@@ -86,23 +87,6 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
         return filterState[filterGruppe].includes(filterAlternativ);
     };
-    const brukFilterFraUrl = () => {
-        const urlParams = props.location.search;
-        const filterFraUrl = hentFilterFraUrl(urlParams);
-
-        /*console.log("filterFraUrl",filterFraUrl.keys().next());
-        console.log("filterFraUrl.getAll()",filterFraUrl.values().next());
-        console.log("filterFraUrl.getAll()",filterFraUrl.getAll("Tema"));
-        console.log("props.location.search",props.location.search);*/
-    };
-
-    const hentFilterFraUrl = (urlParams: string) => {
-
-        const query = new URLSearchParams(urlParams);
-        return query;
-    };
-
-
 
     let kursliste: ReactNode = <IngenKurs />;
     if (lasterInnKurs) {

@@ -1,17 +1,18 @@
 import { Kurs } from '../models/Kurs';
 import { FilterGruppe, filterGruppeValues, FilterState } from './Kursliste';
-import { RouteComponentProps } from 'react-router';
 
 export const filtrer = (
     filterState: FilterState,
     sokeOrd: string,
     kursArray: Kurs[],
-    props: RouteComponentProps
 ): Kurs[] => {
     let filtrerteKurs = kursArray;
-    settFilerIURL(filterState, sokeOrd, props);
     filterGruppeValues.map(filtergruppe => {
-       return filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, filtergruppe, filtrerteKurs);
+        return (filtrerteKurs = utforFiltreringPaaFiltergruppe(
+            filterState,
+            filtergruppe,
+            filtrerteKurs
+        ));
     });
     filtrerteKurs = utforSokIFiltrertListe(sokeOrd, filtrerteKurs);
     return filtrerteKurs;
@@ -48,11 +49,11 @@ const utforSokIFiltrertListe = (
     }
     return kursSomSkalFiltreres;
 };
-const settFilerIURL = (filterState: FilterState, sokeOrd: string, props: RouteComponentProps) => {
+export const byggtFilterTilURL = (filterState: FilterState, sokeOrd: string, ) => {
     console.log('Object.entries(filterState)', Object.entries(filterState));
     let filter = Object.entries(filterState)
         .map(([kriterie, allekriterier]) =>
-            allekriterier.map((etbehov: string) => `${kriterie}=${etbehov}`).join('&')
+            allekriterier.map((ettKriterie: string) => `${kriterie}=${ettKriterie}`).join('&')
         )
         .filter(liste => liste.length !== 0)
         .join('&');
@@ -60,12 +61,22 @@ const settFilerIURL = (filterState: FilterState, sokeOrd: string, props: RouteCo
         console.log('søkeord');
         filter = filter + '&sokeOrd=' + sokeOrd;
     }
-
-    props.history.replace('?' + filter);
+    return ('?' + filter);
 };
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
     const kursMedFilterGruppe = kursArray.filter(kurs => kurs[filterGruppe]);
     let unikeVerdierSet = new Set(kursMedFilterGruppe.map(kurs => kurs[filterGruppe]!));
     return [...unikeVerdierSet.values()];
+};
+
+export const  hentFilterFraUrl = (urlParams: string) => {
+    const query = new URLSearchParams(urlParams);
+    return filterGruppeValues.reduce(
+        (filter: FilterState, filtergruppe) => ({
+            ...filter,
+            [filtergruppe]: query.getAll(filtergruppe),
+        }),
+        {} as FilterState
+    );
 };
