@@ -1,11 +1,7 @@
 import { Kurs } from '../models/Kurs';
 import { FilterGruppe, filterGruppeValues, FilterState } from './Kursliste';
 
-export const filtrer = (
-    filterState: FilterState,
-    sokeOrd: string,
-    kursArray: Kurs[],
-): Kurs[] => {
+export const filtrer = (filterState: FilterState, sokeOrd: string, kursArray: Kurs[]): Kurs[] => {
     let filtrerteKurs = kursArray;
     filterGruppeValues.map(filtergruppe => {
         return (filtrerteKurs = utforFiltreringPaaFiltergruppe(
@@ -49,8 +45,8 @@ const utforSokIFiltrertListe = (
     }
     return kursSomSkalFiltreres;
 };
-export const byggtFilterTilURL = (filterState: FilterState, sokeOrd: string, ) => {
-    console.log('Object.entries(filterState)', Object.entries(filterState));
+
+export const byggFilterTilURL = (filterState: FilterState, sokeOrd: string) => {
     let filter = Object.entries(filterState)
         .map(([kriterie, allekriterier]) =>
             allekriterier.map((ettKriterie: string) => `${kriterie}=${ettKriterie}`).join('&')
@@ -58,10 +54,16 @@ export const byggtFilterTilURL = (filterState: FilterState, sokeOrd: string, ) =
         .filter(liste => liste.length !== 0)
         .join('&');
     if (sokeOrd!) {
-        console.log('søkeord');
-        filter = filter + '&sokeOrd=' + sokeOrd;
+        filter = leggTilSokeord(filter,sokeOrd);
     }
-    return ('?' + filter);
+    return '?' + filter;
+};
+
+const leggTilSokeord = (filtertekst:string, sokeOrd:string) =>{
+    if(!filtertekst){
+        return 'sokeord=' + sokeOrd;
+    }
+    return filtertekst + '&sokeOrd=' + sokeOrd;
 };
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
@@ -70,7 +72,7 @@ export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe
     return [...unikeVerdierSet.values()];
 };
 
-export const  hentFilterFraUrl = (urlParams: string) => {
+export const hentFilterFraUrl = (urlParams: string) => {
     const query = new URLSearchParams(urlParams);
     return filterGruppeValues.reduce(
         (filter: FilterState, filtergruppe) => ({
