@@ -97,10 +97,6 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
         return filterState[filterGruppe].includes(filterAlternativ);
     };
 
-    const unikeFylker = lagFilterKriterier(kursArray, 'fylke');
-    const unikeKursTyper = lagFilterKriterier(kursArray, 'type');
-    const unikeTema = lagFilterKriterier(kursArray, 'tema');
-
     return (
         <div className={cls.block}>
             <header className="overskrift">
@@ -112,21 +108,21 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                     <Sokeboks sokeFunksjon={fritekstSok} verdi={sokeState} />
                     <Filter
                         tittel={'Tema'}
-                        alternativer={unikeTema}
+                        alternativer={lagFilterKriterier(kursArray, 'tema')}
                         filterGruppe={'tema'}
                         toggleFilter={handleFilterToggle}
                         bestemCheckedhet={finnCheckedStatus}
                     />
                     <Filter
                         tittel={'Fylker'}
-                        alternativer={unikeFylker}
+                        alternativer={lagFilterKriterier(kursArray, 'fylke')}
                         filterGruppe={'fylke'}
                         toggleFilter={handleFilterToggle}
                         bestemCheckedhet={finnCheckedStatus}
                     />
                     <Filter
                         tittel={'Type kurs'}
-                        alternativer={unikeKursTyper}
+                        alternativer={lagFilterKriterier(kursArray, 'type')}
                         filterGruppe={'type'}
                         toggleFilter={handleFilterToggle}
                         bestemCheckedhet={finnCheckedStatus}
