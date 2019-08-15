@@ -28,11 +28,12 @@ const renderApp = decoratorFragments =>
 const startServer = html => {
     // Sikkerhet
     server.disable('x-powered-by');
-
     // Helsesjekker for NAIS
-    setInternalEndpoints();
-
-    server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
+    server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
+    server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
+    if (REACT_APP_MOCK) {
+        server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
+    }
 
     server.use(BASE_PATH, express.static(buildPath, { index: false }));
     server.get(`${BASE_PATH}/*`, (req, res) => {
@@ -43,32 +44,12 @@ const startServer = html => {
     });
 };
 
-const startMockServer = () => {
-    setInternalEndpoints();
-
-    server.use(BASE_PATH, express.static(buildPath));
-    server.use(BASE_PATH, (_, res) => {
-        res.sendFile(path.resolve(buildPath, 'index.html'));
+getDecorator()
+    .then(renderApp, error => {
+        console.error('Kunne ikke hente dekoratør ', error);
+        process.exit(1);
+    })
+    .then(startServer, error => {
+        console.error('Kunne ikke rendre app ', error);
+        process.exit(1);
     });
-
-    server.listen(port, () => {
-        console.log('Server listening on port', port);
-    });
-};
-const setInternalEndpoints = () => {
-    server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
-    server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
-};
-if (process.env.REACT_APP_MOCK) {
-    startMockServer();
-} else {
-    getDecorator()
-        .then(renderApp, error => {
-            console.error('Kunne ikke hente dekoratør ', error);
-            process.exit(1);
-        })
-        .then(startServer, error => {
-            console.error('Kunne ikke rendre app ', error);
-            process.exit(1);
-        });
-}
