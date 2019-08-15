@@ -31,7 +31,7 @@ const startServer = html => {
     // Helsesjekker for NAIS
     server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
-    if (REACT_APP_MOCK) {
+    if (!REACT_APP_MOCK) {
         server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
     }
 
