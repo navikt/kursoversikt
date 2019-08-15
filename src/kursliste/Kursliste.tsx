@@ -5,6 +5,7 @@ import {
     byggFilterTilURL,
     filtrer,
     hentFilterFraUrl,
+    hentSokFraUrl,
     lagFilterKriterier,
 } from './filtrertingsMotor';
 import { hentKurs } from '../api/pindenaAPI';
@@ -33,10 +34,10 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
     const [lasterInnKurs, setLasterInnKurs] = useState<boolean>(true);
+    const [sokeState, setsokeState] = useState<string>(hentSokFraUrl(props.location.search));
     const [filterState, setFilterState] = useState<FilterState>(
         hentFilterFraUrl(props.location.search)
     );
-    const [sokeState, setsokeState] = useState<string>('');
 
     const hentOgSettKurs = () => {
         hentKurs().then(resultat => {
@@ -62,7 +63,6 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
         } else {
             leggTilFilterKriterie(filterGruppe, filterKriterie);
         }
-        console.log(filterState);
     };
 
     const leggTilFilterKriterie = (
@@ -110,7 +110,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
 
             <div className={cls.element('hovedside')}>
                 <span className={cls.element('filterKolonne')}>
-                    <Sokeboks sokeFunksjon={fritekstSok} />
+                    <Sokeboks sokeFunksjon={fritekstSok} verdi={sokeState} />
                     <Filter
                         tittel={'Tema'}
                         alternativer={unikeTema}

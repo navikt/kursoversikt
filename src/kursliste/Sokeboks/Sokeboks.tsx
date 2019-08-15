@@ -8,9 +8,10 @@ const cls = bemHelper('Sokeboks');
 
 interface Props {
     sokeFunksjon: (sokeOrd: string) => void;
+    verdi: string;
 }
 
-const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon }) => {
+const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon, verdi }) => {
     return (
         <div className={'filterboks'}>
             <Panel className={cls.block}>
@@ -21,6 +22,7 @@ const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon }) => {
                             sokeFunksjon(event.target.value);
                         }}
                         placeholder={'Søk etter kurs'}
+                        value={verdi}
                     />
                 </span>
             </Panel>

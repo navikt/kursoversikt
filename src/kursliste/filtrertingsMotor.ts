@@ -1,6 +1,8 @@
 import { Kurs } from '../models/Kurs';
 import { FilterGruppe, filterGruppeValues, FilterState } from './Kursliste';
 
+const sokeOrdKey = 'sokeord';
+
 export const filtrer = (filterState: FilterState, sokeOrd: string, kursArray: Kurs[]): Kurs[] => {
     let filtrerteKurs = kursArray;
     filterGruppeValues.map(filtergruppe => {
@@ -54,16 +56,16 @@ export const byggFilterTilURL = (filterState: FilterState, sokeOrd: string) => {
         .filter(liste => liste.length !== 0)
         .join('&');
     if (sokeOrd!) {
-        filter = leggTilSokeord(filter,sokeOrd);
+        filter = leggTilSokeord(filter, sokeOrd);
     }
     return '?' + filter;
 };
 
-const leggTilSokeord = (filtertekst:string, sokeOrd:string) =>{
-    if(!filtertekst){
-        return 'sokeord=' + sokeOrd;
+const leggTilSokeord = (filtertekst: string, sokeOrd: string) => {
+    if (!filtertekst) {
+        return sokeOrdKey + '=' + sokeOrd;
     }
-    return filtertekst + '&sokeOrd=' + sokeOrd;
+    return filtertekst + '&' + sokeOrdKey + '=' + sokeOrd;
 };
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
@@ -81,4 +83,9 @@ export const hentFilterFraUrl = (urlParams: string) => {
         }),
         {} as FilterState
     );
+};
+
+export const hentSokFraUrl = (urlParams: string): string => {
+    const query = new URLSearchParams(urlParams);
+    return query.get(sokeOrdKey) || '';
 };
