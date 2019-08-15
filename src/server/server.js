@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const mustacheExpress = require('mustache-express');
 const getDecorator = require('./decorator');
+const Promise = require('promise');
 const { PORT, REACT_APP_MOCK } = process.env;
 
 const BASE_PATH = '/kursoversikt';
