@@ -1,11 +1,12 @@
 import { Kurs } from '../models/Kurs';
-import { FilterGruppe, filterGruppeValues, FilterState } from './Kursliste';
+import { FilterGruppe, FilterState } from './Kursliste';
 
 const sokeOrdKey = 'sokeord';
+const filterGruppeKeys: FilterGruppe[] = ['fylke', 'type', 'tema'];
 
 export const filtrer = (filterState: FilterState, sokeOrd: string, kursArray: Kurs[]): Kurs[] => {
     let filtrerteKurs = kursArray;
-    filterGruppeValues.map(filtergruppe => {
+    filterGruppeKeys.map(filtergruppe => {
         return (filtrerteKurs = utforFiltreringPaaFiltergruppe(
             filterState,
             filtergruppe,
@@ -76,7 +77,7 @@ export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe
 
 export const hentFilterFraUrl = (urlParams: string) => {
     const query = new URLSearchParams(urlParams);
-    return filterGruppeValues.reduce(
+    return filterGruppeKeys.reduce(
         (filter: FilterState, filtergruppe) => ({
             ...filter,
             [filtergruppe]: query.getAll(filtergruppe),

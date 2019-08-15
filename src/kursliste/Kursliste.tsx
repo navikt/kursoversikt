@@ -27,7 +27,6 @@ export type FilterState = {
 };
 
 export type FilterGruppe = 'fylke' | 'type' | 'tema';
-export const filterGruppeValues: FilterGruppe[] = ['fylke', 'type', 'tema'];
 const cls = bemHelper('kursliste');
 
 const KursListe: FunctionComponent<RouteComponentProps> = props => {
