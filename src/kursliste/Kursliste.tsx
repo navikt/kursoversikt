@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 
-import { filtrer, lagFilterKriterier } from './filtrertingsMotor';
+import { filtrerKurs, lagFilterKriterier } from './filtrertingsMotor';
 import { hentKurs } from '../api/pindenaAPI';
 import { Kurs } from '../models/Kurs';
 import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
@@ -11,80 +11,60 @@ import IngenKurs from './IngenKurs/IngenKurs';
 import KursPanel from './KursPanel/KursPanel';
 import './Kursliste.less';
 import Soketreff from './Soketreff/Soketreff';
+import Sokeboks from './Sokeboks/Sokeboks';
+import { RouteComponentProps } from 'react-router';
+import { lagNyttFilter } from './checkboksKontroller';
+import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 
-export interface FilterState {
+export type FilterState = {
     fylke: string[];
     tema: string[];
     type: string[];
-}
+};
 
 export type FilterGruppe = 'fylke' | 'type' | 'tema';
-
 const cls = bemHelper('kursliste');
 
-const KursListe: FunctionComponent = () => {
+const KursListe: FunctionComponent<RouteComponentProps> = props => {
     const [kursArray, setKursArray] = useState(Array<Kurs>());
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
     const [lasterInnKurs, setLasterInnKurs] = useState<boolean>(true);
-    const [filterState, setFilterState] = useState<FilterState>({
-        fylke: [],
-        tema: [],
-        type: [],
-    });
+    const [sokeState, setsokeState] = useState<string>(hentSokFraUrl(props.location.search));
+    const [filterState, setFilterState] = useState<FilterState>(
+        hentFilterFraUrl(props.location.search)
+    );
 
-    useEffect(() => {
-        const hentOgSettKurs = async () => {
-            const resultat = await hentKurs();
+    const hentOgSettKurs = () => {
+        hentKurs().then(resultat => {
             setKursArray(resultat);
             setFiltrerteKursArray(resultat);
             setLasterInnKurs(false);
-        };
+            setFiltrerteKursArray(filtrerKurs(filterState, sokeState, resultat));
+        });
+    };
+    const brukFilterPaKurslisteOgOppdaterUrl = () => {
+        setFiltrerteKursArray(filtrerKurs(filterState, sokeState, kursArray));
+        props.history.replace(byggFilterTilURL(filterState, sokeState));
+    };
 
-        hentOgSettKurs();
-    }, []);
-    useEffect(() => {
-        setFiltrerteKursArray(filtrer(filterState, kursArray));
-    }, [kursArray, filterState]);
-
-    const unikeFylker = lagFilterKriterier(kursArray, 'fylke');
-    const unikeKursTyper = lagFilterKriterier(kursArray, 'type');
-    const unikeTema = lagFilterKriterier(kursArray, 'tema');
+    useEffect(hentOgSettKurs, []);
+    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState]);
 
     const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
-        if (filterState[filterGruppe].includes(filterKriterie)) {
-            fjernFilterKriterie(filterGruppe, filterKriterie);
-        } else {
-            leggTilFilterKriterie(filterGruppe, filterKriterie);
-        }
-        console.log(filterState);
-    };
-
-    const leggTilFilterKriterie = (
-        filterGruppe: FilterGruppe,
-        kriterieSomSkalLeggesTil: string
-    ) => {
-        const nyttFilter = { ...filterState };
-        nyttFilter[filterGruppe].push(kriterieSomSkalLeggesTil);
-        setFilterState(nyttFilter);
-    };
-    const fjernFilterKriterie = (filterGruppe: FilterGruppe, krietrieSomSkalFjernes: string) => {
-        const nyttFilter = { ...filterState };
-        nyttFilter[filterGruppe] = nyttFilter[filterGruppe].filter(
-            filter => filter !== krietrieSomSkalFjernes
-        );
-        setFilterState(nyttFilter);
-    };
-
-    const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
-        return filterState[filterGruppe].includes(filterAlternativ);
+        setFilterState(lagNyttFilter(filterGruppe, filterKriterie, filterState));
     };
 
     let kursliste: ReactNode = <IngenKurs />;
+
     if (lasterInnKurs) {
         kursliste = lagPlaceholderlisteForKurs();
     } else if (filtrerteKursArray.length > 0) {
         kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
     }
+
+    const sjekkOmAlternativErChecked = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
+        return filterState[filterGruppe].includes(filterAlternativ);
+    };
 
     return (
         <div className={cls.block}>
@@ -94,26 +74,27 @@ const KursListe: FunctionComponent = () => {
 
             <div className={cls.element('hovedside')}>
                 <span className={cls.element('filterKolonne')}>
+                    <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState} />
                     <Filter
                         tittel={'Tema'}
-                        alternativer={unikeTema}
+                        alternativer={lagFilterKriterier(kursArray, 'tema')}
                         filterGruppe={'tema'}
                         toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
+                        checked={sjekkOmAlternativErChecked}
                     />
                     <Filter
                         tittel={'Fylker'}
-                        alternativer={unikeFylker}
+                        alternativer={lagFilterKriterier(kursArray, 'fylke')}
                         filterGruppe={'fylke'}
                         toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
+                        checked={sjekkOmAlternativErChecked}
                     />
                     <Filter
                         tittel={'Type kurs'}
-                        alternativer={unikeKursTyper}
+                        alternativer={lagFilterKriterier(kursArray, 'type')}
                         filterGruppe={'type'}
                         toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
+                        checked={sjekkOmAlternativErChecked}
                     />
                 </span>
                 <span className={cls.element('kursKolonne')}>

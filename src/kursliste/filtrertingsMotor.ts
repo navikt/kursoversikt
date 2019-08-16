@@ -1,18 +1,29 @@
 import { Kurs } from '../models/Kurs';
 import { FilterGruppe, FilterState } from './Kursliste';
 
-export const filtrer = (filterState: FilterState, kursArray: Kurs[]): Kurs[] => {
+export const filterGruppeKeys: FilterGruppe[] = ['fylke', 'type', 'tema'];
+
+export const filtrerKurs = (
+    filterState: FilterState,
+    sokeOrd: string,
+    kursArray: Kurs[]
+): Kurs[] => {
     let filtrerteKurs = kursArray;
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'fylke', filtrerteKurs);
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'tema', filtrerteKurs);
-    filtrerteKurs = utforFiltreringPaaFiltergruppe(filterState, 'type', filtrerteKurs);
+    filterGruppeKeys.map(filtergruppe => {
+        return (filtrerteKurs = utforFiltreringPaaFiltergruppe(
+            filterState,
+            filtergruppe,
+            filtrerteKurs
+        ));
+    });
+    filtrerteKurs = utforSokIListe(sokeOrd, filtrerteKurs);
     return filtrerteKurs;
 };
 
 const utforFiltreringPaaFiltergruppe = (
     filterState: FilterState,
     filterGruppe: FilterGruppe,
-    kursSomSkalFiltreres: Array<Kurs>
+    kursSomSkalFiltreres: Kurs[]
 ): Kurs[] => {
     const ingenFilterValgt = filterState[filterGruppe].length === 0;
     if (ingenFilterValgt) {
@@ -24,6 +35,18 @@ const utforFiltreringPaaFiltergruppe = (
             (kurs.fylke === 'Landsdekkende' ||
                 filterState[filterGruppe].includes(kurs[filterGruppe]!))
     );
+};
+
+const utforSokIListe = (sokeordState: string, kursSomSkalFiltreres: Kurs[]): Kurs[] => {
+    if (sokeordState !== '') {
+        return kursSomSkalFiltreres.filter(
+            kurs =>
+                (kurs.tittel && kurs.tittel.toLowerCase().includes(sokeordState.toLowerCase())) ||
+                (kurs.internBeskrivelse &&
+                    kurs.internBeskrivelse.toLowerCase().includes(sokeordState.toLowerCase()))
+        );
+    }
+    return kursSomSkalFiltreres;
 };
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
