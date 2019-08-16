@@ -1,13 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 
-import {
-    byggFilterTilURL,
-    filtrer,
-    hentFilterFraUrl,
-    hentSokFraUrl,
-    lagFilterKriterier,
-} from './filtrertingsMotor';
+import { filtrerKurs, lagFilterKriterier } from './filtrertingsMotor';
 import { hentKurs } from '../api/pindenaAPI';
 import { Kurs } from '../models/Kurs';
 import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
@@ -19,6 +13,8 @@ import './Kursliste.less';
 import Soketreff from './Soketreff/Soketreff';
 import Sokeboks from './Sokeboks/Sokeboks';
 import { RouteComponentProps } from 'react-router';
+import { lagNyttFilter } from './checkboksKontroller';
+import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 
 export type FilterState = {
     fylke: string[];
@@ -43,42 +39,19 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
             setKursArray(resultat);
             setFiltrerteKursArray(resultat);
             setLasterInnKurs(false);
-            setFiltrerteKursArray(filtrer(filterState, sokeState, resultat));
+            setFiltrerteKursArray(filtrerKurs(filterState, sokeState, resultat));
         });
     };
-
-    const oppdaterFilter = () => {
-        setFiltrerteKursArray(filtrer(filterState, sokeState, kursArray));
+    const brukFilterPaKurslisteOgOppdaterUrl = () => {
+        setFiltrerteKursArray(filtrerKurs(filterState, sokeState, kursArray));
         props.history.replace(byggFilterTilURL(filterState, sokeState));
     };
 
     useEffect(hentOgSettKurs, []);
-
-    useEffect(oppdaterFilter, [sokeState, filterState]);
+    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState]);
 
     const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
-        if (filterState[filterGruppe].includes(filterKriterie)) {
-            fjernFilterKriterie(filterGruppe, filterKriterie);
-        } else {
-            leggTilFilterKriterie(filterGruppe, filterKriterie);
-        }
-    };
-
-    const leggTilFilterKriterie = (
-        filterGruppe: FilterGruppe,
-        kriterieSomSkalLeggesTil: string
-    ) => {
-        const nyttFilter = { ...filterState };
-        nyttFilter[filterGruppe].push(kriterieSomSkalLeggesTil);
-        setFilterState(nyttFilter);
-    };
-
-    const fjernFilterKriterie = (filterGruppe: FilterGruppe, krietrieSomSkalFjernes: string) => {
-        const nyttFilter = { ...filterState };
-        nyttFilter[filterGruppe] = nyttFilter[filterGruppe].filter(
-            filter => filter !== krietrieSomSkalFjernes
-        );
-        setFilterState(nyttFilter);
+        setFilterState(lagNyttFilter(filterGruppe, filterKriterie, filterState));
     };
 
     let kursliste: ReactNode = <IngenKurs />;
@@ -89,11 +62,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
         kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
     }
 
-    const fritekstSok = (sokeTekst: string) => {
-        setsokeState(sokeTekst);
-    };
-
-    const finnCheckedStatus = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
+    const sjekkOmAlternativErChecked = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
         return filterState[filterGruppe].includes(filterAlternativ);
     };
 
@@ -105,27 +74,27 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
 
             <div className={cls.element('hovedside')}>
                 <span className={cls.element('filterKolonne')}>
-                    <Sokeboks sokeFunksjon={fritekstSok} verdi={sokeState} />
+                    <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState} />
                     <Filter
                         tittel={'Tema'}
                         alternativer={lagFilterKriterier(kursArray, 'tema')}
                         filterGruppe={'tema'}
                         toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
+                        checked={sjekkOmAlternativErChecked}
                     />
                     <Filter
                         tittel={'Fylker'}
                         alternativer={lagFilterKriterier(kursArray, 'fylke')}
                         filterGruppe={'fylke'}
                         toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
+                        checked={sjekkOmAlternativErChecked}
                     />
                     <Filter
                         tittel={'Type kurs'}
                         alternativer={lagFilterKriterier(kursArray, 'type')}
                         filterGruppe={'type'}
                         toggleFilter={handleFilterToggle}
-                        bestemCheckedhet={finnCheckedStatus}
+                        checked={sjekkOmAlternativErChecked}
                     />
                 </span>
                 <span className={cls.element('kursKolonne')}>

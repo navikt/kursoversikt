@@ -1,10 +1,13 @@
 import { Kurs } from '../models/Kurs';
 import { FilterGruppe, FilterState } from './Kursliste';
 
-const sokeOrdKey = 'sokeord';
-const filterGruppeKeys: FilterGruppe[] = ['fylke', 'type', 'tema'];
+export const filterGruppeKeys: FilterGruppe[] = ['fylke', 'type', 'tema'];
 
-export const filtrer = (filterState: FilterState, sokeOrd: string, kursArray: Kurs[]): Kurs[] => {
+export const filtrerKurs = (
+    filterState: FilterState,
+    sokeOrd: string,
+    kursArray: Kurs[]
+): Kurs[] => {
     let filtrerteKurs = kursArray;
     filterGruppeKeys.map(filtergruppe => {
         return (filtrerteKurs = utforFiltreringPaaFiltergruppe(
@@ -13,14 +16,14 @@ export const filtrer = (filterState: FilterState, sokeOrd: string, kursArray: Ku
             filtrerteKurs
         ));
     });
-    filtrerteKurs = utforSokIFiltrertListe(sokeOrd, filtrerteKurs);
+    filtrerteKurs = utforSokIListe(sokeOrd, filtrerteKurs);
     return filtrerteKurs;
 };
 
 const utforFiltreringPaaFiltergruppe = (
     filterState: FilterState,
     filterGruppe: FilterGruppe,
-    kursSomSkalFiltreres: Array<Kurs>
+    kursSomSkalFiltreres: Kurs[]
 ): Kurs[] => {
     const ingenFilterValgt = filterState[filterGruppe].length === 0;
     if (ingenFilterValgt) {
@@ -34,10 +37,7 @@ const utforFiltreringPaaFiltergruppe = (
     );
 };
 
-const utforSokIFiltrertListe = (
-    sokeordState: string,
-    kursSomSkalFiltreres: Array<Kurs>
-): Kurs[] => {
+const utforSokIListe = (sokeordState: string, kursSomSkalFiltreres: Kurs[]): Kurs[] => {
     if (sokeordState !== '') {
         return kursSomSkalFiltreres.filter(
             kurs =>
@@ -49,44 +49,8 @@ const utforSokIFiltrertListe = (
     return kursSomSkalFiltreres;
 };
 
-export const byggFilterTilURL = (filterState: FilterState, sokeOrd: string) => {
-    let filter = Object.entries(filterState)
-        .map(([kriterie, allekriterier]) =>
-            allekriterier.map((ettKriterie: string) => `${kriterie}=${ettKriterie}`).join('&')
-        )
-        .filter(liste => liste.length !== 0)
-        .join('&');
-    if (sokeOrd!) {
-        filter = leggTilSokeord(filter, sokeOrd);
-    }
-    return '?' + filter;
-};
-
-const leggTilSokeord = (filtertekst: string, sokeOrd: string) => {
-    if (!filtertekst) {
-        return sokeOrdKey + '=' + sokeOrd;
-    }
-    return filtertekst + '&' + sokeOrdKey + '=' + sokeOrd;
-};
-
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
     const kursMedFilterGruppe = kursArray.filter(kurs => kurs[filterGruppe]);
     let unikeVerdierSet = new Set(kursMedFilterGruppe.map(kurs => kurs[filterGruppe]!));
     return [...unikeVerdierSet.values()];
-};
-
-export const hentFilterFraUrl = (urlParams: string) => {
-    const query = new URLSearchParams(urlParams);
-    return filterGruppeKeys.reduce(
-        (filter: FilterState, filtergruppe) => ({
-            ...filter,
-            [filtergruppe]: query.getAll(filtergruppe),
-        }),
-        {} as FilterState
-    );
-};
-
-export const hentSokFraUrl = (urlParams: string): string => {
-    const query = new URLSearchParams(urlParams);
-    return query.get(sokeOrdKey) || '';
 };
