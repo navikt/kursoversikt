@@ -41,9 +41,9 @@ const utforSokIListe = (sokeordState: string, kursSomSkalFiltreres: Kurs[]): Kur
     if (sokeordState !== '') {
         return kursSomSkalFiltreres.filter(
             kurs =>
-                (kurs.tittel && kurs.tittel.toLowerCase().includes(sokeordState)) ||
+                (kurs.tittel && kurs.tittel.toLowerCase().includes(sokeordState.toLowerCase())) ||
                 (kurs.internBeskrivelse &&
-                    kurs.internBeskrivelse.toLowerCase().includes(sokeordState))
+                    kurs.internBeskrivelse.toLowerCase().includes(sokeordState.toLowerCase()))
         );
     }
     return kursSomSkalFiltreres;
