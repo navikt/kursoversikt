@@ -39,7 +39,6 @@ const KursListe: FunctionComponent = () => {
             setFiltrerteKursArray(resultat);
             setLasterInnKurs(false);
         };
-
         hentOgSettKurs();
     }, []);
     useEffect(() => {

@@ -12,6 +12,7 @@
         "http-proxy-middleware": "^0.19.1",
         "https-proxy-agent": "^2.2.2",
         "lodash.throttle": "^4.1.1",
+        "mustache-express": "^1.2.8",
         "nav-frontend-chevron": "^1.0.9",
         "nav-frontend-chevron-style": "^0.3.4",
         "nav-frontend-core": "^4.0.9",
@@ -45,7 +46,7 @@
         "eject": "react-scripts eject",
         "serve": "node src/server/server.js",
         "server": "yarn build && node src/server/server.js",
-        "mock": "REACT_APP_MOCK=true yarn start",
+        "mock": "set REACT_APP_MOCK=true && yarn start",
         "format": "prettier --write 'src/**/*.{ts,js,less,tsx}'",
         "heroku-postbuild": "REACT_APP_MOCK=true yarn build"
     },
