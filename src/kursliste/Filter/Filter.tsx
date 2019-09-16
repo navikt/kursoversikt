@@ -12,7 +12,7 @@ interface Props {
     alternativer: string[];
     filterGruppe: FilterGruppe;
     toggleFilter: (gruppe: FilterGruppe, filterattr: string) => void;
-    bestemCheckedhet: (filtergruppe: FilterGruppe, filterattr: string) => boolean;
+    checked: (filtergruppe: FilterGruppe, filterattr: string) => boolean;
 }
 
 const cls = bemHelper('filterboks');
@@ -22,7 +22,7 @@ const Filter: FunctionComponent<Props> = ({
     alternativer,
     filterGruppe,
     toggleFilter,
-    bestemCheckedhet,
+    checked,
 }) => {
     return (
         <div className={cls.block}>
@@ -35,7 +35,7 @@ const Filter: FunctionComponent<Props> = ({
                                     label={alternativ}
                                     key={alternativ}
                                     onChange={() => toggleFilter(filterGruppe, alternativ)}
-                                    checked={bestemCheckedhet(filterGruppe, alternativ)}
+                                    checked={checked(filterGruppe, alternativ)}
                                 />
                             )
                     )
