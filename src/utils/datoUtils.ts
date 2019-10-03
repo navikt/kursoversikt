@@ -1,7 +1,12 @@
 import { Kurs } from '../models/Kurs';
 
 export const tilDato = (dato: string): Date => {
-    return new Date(dato.replace(' ', 'T'));
+    const [dateAsString, timeAsString] = dato.split(' ');
+    const [year, month, day] = dateAsString.split('-').map(i => parseInt(i));
+    const [hours, minutes] = timeAsString.split(':').map(i => parseInt(i));
+
+    const monthIndex = month - 1;
+    return new Date(year, monthIndex, day, hours, minutes);
 };
 
 export const sammenlignKursPaDato = (a: Kurs, b: Kurs) => {
