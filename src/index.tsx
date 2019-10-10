@@ -1,5 +1,4 @@
 import 'core-js';
-import 'core-js/es/object';
 import 'unorm/lib/unorm';
 
 
