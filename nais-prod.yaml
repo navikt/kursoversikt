@@ -6,7 +6,7 @@ metadata:
     labels:
         team: teamtag
 spec:
-    image: navikt/kursoversikt:4fefe920396cfae0378ec8372deea58c5fc5baaa83f5d7f7b39f5a037ad6e4dd
+    image: navikt/kursoversikt:4fea50a8934f4ff0a62be486403ddbf452409d9b
     team: teamtag
     port: 3000
     ingresses:
