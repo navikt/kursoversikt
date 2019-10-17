@@ -13,7 +13,7 @@ export async function hentKurs(): Promise<Kurs[]> {
 }
 
 const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
-    return alleKurs.map((kurs: PindenaKurs) => {
+    return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: PindenaKurs) => {
         let fylke, type, tema;
         if (kurs.configurable_custom) {
             fylke = kurs.configurable_custom.Fylke;
