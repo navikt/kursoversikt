@@ -4,10 +4,10 @@ metadata:
     name: kursoversikt
     namespace: default
     labels:
-        team: teamtag
+        team: {{team}}
 spec:
-    image: navikt/kursoversikt:4fea50a8934f4ff0a62be486403ddbf452409d9b
-    team: teamtag
+    image: {{version}}
+    team: {{team}}
     port: 3000
     ingresses:
         - https://arbeidsgiver.nav.no/kursoversikt/
