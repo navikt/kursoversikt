@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  nais: navikt/nais-deployment@dev:master
+
 jobs:
     build:
         docker:
@@ -21,71 +24,84 @@ jobs:
             - run:
                   name: Bygg produksjonsversjon av React app
                   command: yarn build
-            - setup_remote_docker
-            - run:
-                  name: Bygger Docker image
-                  command: docker build -t "navikt/kursoversikt:$CIRCLE_SHA1" .
-            - run:
-                  name: Pusher Docker image
-                  command: |
-                      echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
-                      docker push "navikt/kursoversikt:$CIRCLE_SHA1"
-                      echo "Docker image: $CIRCLE_SHA1"
+            - nais/docker:
+                image: navikt/kursoversikt
 
     deploy-til-dev:
-        docker:
-            - image: 'navikt/deployment-cli:v0.2.0'
-        steps:
-            - deploy:
-                  cluster: 'dev-sbs'
-                  nais-yaml: 'nais-preprod.yaml'
+      docker:
+        - image: navikt/deployment-cli:0.4.2
+      steps:
+        - checkout
+        - run:
+            name: Unpack Private Key
+            command: echo $GITHUB_PRIVATE_KEY | base64 -d > .circleci/github.key.pem
+        - nais/deploy-with-gh-app:
+            repo: navikt/kursoversikt
+            image: navikt/kursoversikt
+            github-app-id: 43789
+            nais-template: nais-preprod.yaml
+            environment: dev-sbs
+            team: teamtag
 
     deploy-til-prod:
-        docker:
-            - image: 'navikt/deployment-cli:v0.2.0'
-        steps:
-            - deploy:
-                  cluster: 'prod-sbs'
-                  nais-yaml: 'nais-prod.yaml'
-
-commands:
-    deploy:
-        description: Deploy til et gitt miljø
-        parameters:
-            cluster:
-                type: string
-            nais-yaml:
-                type: string
-        steps:
-            - checkout
-            - run:
-                  name: Deploy til << parameters.cluster >>
-                  command: deployment-cli deploy create --cluster=<< parameters.cluster >> --repository=navikt/kursoversikt --team=teamtag --resource=<< parameters.nais-yaml >> --var version=$CIRCLE_SHA1 --ref=$CIRCLE_BRANCH
+      docker:
+        - image: navikt/deployment-cli:0.4.2
+      steps:
+        - checkout
+        - run:
+            name: Unpack Private Key
+            command: echo $GITHUB_PRIVATE_KEY | base64 -d > .circleci/github.key.pem
+        - nais/deploy-with-gh-app:
+            repo: navikt/kursoversikt
+            image: navikt/kursoversikt
+            github-app-id: 43789
+            nais-template: nais-prod.yaml
+            environment: prod-sbs
+            team: teamtag
 
 workflows:
     version: 2.1
     bygg_og_deploy:
         jobs:
-            - build
+            - build:
+                  context: NAIS deployment
             - deploy-til-dev:
+                  context: tag-ci
                   requires:
                       - build
                   filters:
                       branches:
                           only:
                               - master
-            # - godkjenn-til-prod:
-            # type: approval
-            # requires:
-            # - build
-            # filters:
-            # branches:
-            # only:
-            # - master
-            # - deploy-til-prod:
-            # requires:
-            # - godkjenn-til-prod
-            # filters:
-            # branches:
-            # only:
-            # - master
+            - godkjenn-til-dev:
+                type: approval
+                requires:
+                  - build
+                filters:
+                  branches:
+                    ignore:
+                      - master
+            - deploy-til-dev:
+                context: tag-ci
+                requires:
+                  - godkjenn-til-dev
+                filters:
+                  branches:
+                    ignore:
+                      - master
+            - godkjenn-til-prod:
+                type: approval
+                requires:
+                  - build
+                filters:
+                  branches:
+                    only:
+                    - master
+            - deploy-til-prod:
+                context: tag-ci
+                requires:
+                  - godkjenn-til-prod
+                filters:
+                  branches:
+                    only:
+                      - master
