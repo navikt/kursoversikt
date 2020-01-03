@@ -73,19 +73,35 @@ workflows:
                       branches:
                           only:
                               - master
-            # - godkjenn-til-prod:
-            # type: approval
-            # requires:
-            # - build
-            # filters:
-            # branches:
-            # only:
-            # - master
-            # - deploy-til-prod:
-            # context: tag-ci
-            # requires:
-            # - godkjenn-til-prod
-            # filters:
-            # branches:
-            # only:
-            # - master
+            - godkjenn-til-dev:
+                type: approval
+                requires:
+                  - build
+                filters:
+                  branches:
+                    ignore:
+                      - master
+            - deploy-til-dev:
+                context: tag-ci
+                requires:
+                  - godkjenn-branch-til-dev
+                filters:
+                  branches:
+                    ignore:
+                      - master
+            - godkjenn-til-prod:
+                type: approval
+                requires:
+                  - build
+                filters:
+                  branches:
+                    only:
+                    - master
+            - deploy-til-prod:
+                context: tag-ci
+                requires:
+                  - godkjenn-til-prod
+                filters:
+                  branches:
+                    only:
+                      - master
