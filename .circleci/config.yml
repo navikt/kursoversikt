@@ -84,7 +84,7 @@ workflows:
             - deploy-til-dev:
                 context: tag-ci
                 requires:
-                  - godkjenn-branch-til-dev
+                  - godkjenn-til-dev
                 filters:
                   branches:
                     ignore:
