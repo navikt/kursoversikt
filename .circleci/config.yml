@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  nais: navikt/nais-deployment@dev:master
+  nais: navikt/nais-deployment@3.2.1
 
 jobs:
     build:
@@ -41,7 +41,7 @@ jobs:
             github-app-id: 43789
             nais-template: nais-preprod.yaml
             environment: dev-sbs
-            team: teamtag
+            team: arbeidsgiver
 
     deploy-til-prod:
       docker:
@@ -57,7 +57,7 @@ jobs:
             github-app-id: 43789
             nais-template: nais-prod.yaml
             environment: prod-sbs
-            team: teamtag
+            team: arbeidsgiver
 
 workflows:
     version: 2.1
