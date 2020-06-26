@@ -1,7 +1,7 @@
 FROM node:alpine as builder
 
 WORKDIR /app
-RUN yarn add http-proxy-middleware@0.21.0 https-proxy-agent mustache-express jsdom promise
+RUN yarn add http-proxy-middleware@0.21.0 https-proxy-agent mustache-express jsdom promise axios
 
 FROM navikt/node-express:12.2.0-alpine
 WORKDIR /app
