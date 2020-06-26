@@ -28,4 +28,4 @@ const sfProxy = {
 };
 
 
-module.exports = proxy(pindenaProxyConfig);
+module.exports = proxy(sfProxy);
