@@ -2,7 +2,10 @@
 const proxy = require('http-proxy-middleware');
 const HttpsProxyAgent = require('https-proxy-agent');
 
+const envProperties = {
 
+    PROXY_SERVER: process.env.HTTPS_PROXY,
+};
 const sfProxy = {
     changeOrigin: true,
     target: 'https://test.salesforce.com',

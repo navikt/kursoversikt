@@ -15,7 +15,7 @@ const sfAuthbaseUrl= "https://test.salesforce.com/services/oauth2/token";
 
 const sfauthParams = {
     'grant_type':'password',
-    'client_id': process.env.HTTPS_PROXY,
+    'client_id': process.env.SF_CLIENTID,
     'client_secret': process.env.SF_CLIENTSECRET,
     'username': process.env.SF_USER,
     'password': process.env.SF_PASS,
