@@ -7,20 +7,10 @@ const getDecorator = require('./decorator');
 const Promise = require('promise');
 const { PORT, REACT_APP_MOCK } = process.env;
 const sfProxy = require('./sfProxy');
+const sfAuthProxy = require('./sfauthProxy');
 const BASE_PATH = '/kursoversikt';
 const buildPath = path.join(__dirname, '../../build');
 const port = PORT || 3000;
-
-const sfAuthbaseUrl= "https://test.salesforce.com/services/oauth2/token";
-
-const sfauthParams = {
-    'grant_type':'password',
-    'client_id': process.env.SF_CLIENTID,
-    'client_secret': process.env.SF_CLIENTSECRET,
-    'username': process.env.SF_USER,
-    'password': process.env.SF_PASS,
-};
-
 
 server.engine('html', mustacheExpress());
 server.set('view engine', 'mustache');
@@ -45,6 +35,7 @@ const startServer = html => {
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
     if (!REACT_APP_MOCK) {
         server.use(BASE_PATH + '/api/kurs', sfProxy);
+        server.use(BASE_PATH + '/kursoversikt/kursauth', sfAuthProxy);
     }
 
     server.use(BASE_PATH, express.static(buildPath, { index: false }));

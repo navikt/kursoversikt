@@ -8,7 +8,7 @@ const envProperties = {
     PROXY_SERVER: process.env.HTTPS_PROXY,
 };
 
-const sfAuthbaseUrl= "https://test.salesforce.com/services/oauth2/token";
+const sfAuthbaseUrl= "https://arbeidsgiver-q.nav.no/kursoversikt/kursauth";
 
 const sfauthParams = {
     'grant_type':'password',
