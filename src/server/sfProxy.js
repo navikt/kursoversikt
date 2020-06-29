@@ -21,9 +21,9 @@ let token ="";
 
 const sfProxy = {
     changeOrigin: true,
-    target: 'https://test.salesforce.com',
+    target: 'https://navdialog--preprod.my.salesforce.com',
     pathRewrite: {
-        '^/kursoversikt/api/kurs': '/services/oauth2/token',
+        '^/kursoversikt/api/kurs': '/services/apexrest/Course',
     },
     secure: true,
     xfwd: true,
@@ -47,6 +47,7 @@ const sfProxy = {
 
         });
         if (token) {
+            console.error('no token');
             proxyReq.setHeader('Authorization', `bearer ${token.access_token}`)
         }
     },
