@@ -28,13 +28,13 @@ const sfProxy = {
     xfwd: true,
     logLevel: 'debug',
     agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
-    onProxyReq: function onProxyReq(proxyReq, req, res) {
+    onProxyReq: async function onProxyReq(proxyReq, req, res) {
         // add custom header to request
         console.log("add custom header to request");
-        const resToken = axios.post(sfAuthbaseUrl, null, { params : sfauthParams});
-        req.authtoken.token = resToken.access_token;
+        const resToken = await axios.post(sfAuthbaseUrl, null, { params : sfauthParams});
+        //req.authtoken.token = resToken.access_token;
         console.log("resToken", resToken);
-        console.log("req.authtoken.token", req.authtoken.token);
+        console.log("req.authtoken.token", resToken.access_token);
         let token = resToken.access_token;
         if (token) {
             proxyReq.setHeader('Authorization', `bearer ${token.access_token}`)
