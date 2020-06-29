@@ -33,6 +33,7 @@ const sfProxy = {
         // add custom header to request
 
         console.log("add custom header to request");
+        console.log("sfauthParams", sfauthParams);
 
            axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
                 console.log("resToken", response);
@@ -41,6 +42,7 @@ const sfProxy = {
         ).catch(e =>{
             console.error('Failure!');
             console.error(e.message);
+               console.error('error',e);
             console.error(e.response.status);
 
         });
