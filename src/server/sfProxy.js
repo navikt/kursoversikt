@@ -37,7 +37,7 @@ const sfProxy = {
            axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
                 console.log("resToken", response);
                 console.log("req.authtoken.token", response.access_token);
-        token = response.access_token;}
+        token = response.data.access_token;}
         ).catch(e =>{
             console.error('Failure!');
             console.error(e.message);
