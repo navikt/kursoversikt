@@ -17,6 +17,7 @@ const sfauthParams = {
     'username': process.env.SF_USER,
     'password': process.env.SF_PASS,
 };
+let token ="";
 
 const sfProxy = {
     changeOrigin: true,
@@ -32,18 +33,17 @@ const sfProxy = {
         // add custom header to request
 
         console.log("add custom header to request");
-        try {
-            const resToken = axios.post(sfAuthbaseUrl, null, {params: sfauthParams});
-            //req.authtoken.token = resToken.access_token;
-            console.log("resToken", resToken);
-            console.log("req.authtoken.token", resToken.access_token);
-            let token = resToken.access_token;
-        }        catch (e) {
+
+           axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
+                console.log("resToken", response);
+                console.log("req.authtoken.token", response.access_token);
+        token = response.access_token;}
+        ).catch(e =>{
             console.error('Failure!');
             console.error(e.message);
             console.error(e.response.status);
 
-        }
+        });
         if (token) {
             proxyReq.setHeader('Authorization', `bearer ${token.access_token}`)
         }
