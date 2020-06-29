@@ -35,7 +35,7 @@ const startServer = html => {
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
     if (!REACT_APP_MOCK) {
         server.use(BASE_PATH + '/api/kurs', sfProxy);
-        server.use(BASE_PATH + '/kursoversikt/kursauth', sfAuthProxy);
+        server.use(BASE_PATH + '/kursoversikt/api/kursauth', sfAuthProxy);
     }
 
     server.use(BASE_PATH, express.static(buildPath, { index: false }));

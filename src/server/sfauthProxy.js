@@ -12,7 +12,7 @@ const sfAuthProxy = {
     changeOrigin: true,
     target: 'https://test.salesforce.com',
     pathRewrite: {
-        '^/kursoversikt/kursauth': '/services/oauth2/token',
+        '^/kursoversikt/api/kursauth': '/services/oauth2/token',
     },
     secure: true,
     xfwd: true,

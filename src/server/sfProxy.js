@@ -8,7 +8,7 @@ const envProperties = {
     PROXY_SERVER: process.env.HTTPS_PROXY,
 };
 
-const sfAuthbaseUrl= "https://arbeidsgiver-q.nav.no/kursoversikt/kursauth";
+const sfAuthbaseUrl= "https://arbeidsgiver-q.nav.no/kursoversikt/api/kursauth";
 
 const sfauthParams = {
     'grant_type':'password',
