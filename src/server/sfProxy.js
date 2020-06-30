@@ -37,8 +37,8 @@ const sfProxy = {
                 console.log("responsen", response);
                 console.log("response.data", response.data);
                 console.log("response.data.access_token", response.data.access_token);
-                token = response.data.access_token;
-               proxyReq.setHeader('Authorization', `bearer ${token}`)
+               token = response.data.access_token;
+               proxyReq.setHeader('Authorization', `bearer ${token}`);
                proxyReq.socket.resume();
            }
         ).catch(e =>{
@@ -46,6 +46,7 @@ const sfProxy = {
             console.error(e.message);
             console.error('error',e);
             console.error(e.response.status);
+            res.sendStatus(500);
 
         });
 
