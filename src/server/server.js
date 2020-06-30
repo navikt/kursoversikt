@@ -54,7 +54,8 @@ const startServer = html => {
                     console.log("response.data.access_token", response.data.access_token);
                     token = response.data.access_token;
                     //req.req.session.token = token;
-                    req.headers["Authorization"] = `bearer ${token}`;
+                    req.headers["Authorization"] = `Bearer ${token}`;
+
                     //req.setHeader('Authorization', `bearer ${token}`);
 
                 next();
