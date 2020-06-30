@@ -28,6 +28,12 @@ const sfProxy = {
     xfwd: true,
     logLevel: 'debug',
     agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
+    onProxyReq: function onProxyReq(proxyReq, req, res) {
+        // add custom header to request
+        console.log("add custom header to request");
+        console.log("proxyReq", proxyReq);
+
+    }
 
 };
 
