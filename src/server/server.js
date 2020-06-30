@@ -56,6 +56,8 @@ const startServer = html => {
                     req._token = token;
                     req.headers["Authorization"] = `bearer ${token}`;
                     //req.setHeader('Authorization', `bearer ${token}`);
+
+                next();
                 }
             ).catch(e =>{
                 console.error('Failure!');
@@ -63,9 +65,9 @@ const startServer = html => {
                 console.error('error',e);
                 console.error(e.response.status);
                 res.sendStatus(500);
-
+                next();
             });
-            next();
+
 
         });
         server.use(BASE_PATH + '/api/kurs', sfProxy);
