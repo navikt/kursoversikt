@@ -31,10 +31,7 @@ const sfProxy = {
     onProxyReq: function onProxyReq(proxyReq, req, res) {
         // add custom header to request
         console.log("req", req);
-        proxyReq.setHeader('Authorization', req._token);
-        console.log("responsen", proxyReq);
-        console.log("req", req);
-
+        console.log("proxyReq", proxyReq);
     }
 
 };
