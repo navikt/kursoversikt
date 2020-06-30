@@ -47,7 +47,7 @@ const startServer = html => {
     server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
     if (!REACT_APP_MOCK) {
-        server.use('/api/kurs', async (req, res, next) => {
+        server.use(BASE_PATH + '/api/kurs', async (req, res, next) => {
             axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
                     console.log("responsen", response);
                     console.log("response.data", response.data);
