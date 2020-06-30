@@ -49,8 +49,8 @@ const startServer = html => {
     if (!REACT_APP_MOCK) {
         server.use(BASE_PATH + '/api/kurs', async (req, res, next) => {
             axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
-                    console.log("responsen", response);
-                    console.log("response.data", response.data);
+                   // console.log("responsen", response);
+                    //console.log("response.data", response.data);
                     console.log("response.data.access_token", response.data.access_token);
                     token = response.data.access_token;
                     req._token = token;
