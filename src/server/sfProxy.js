@@ -28,29 +28,6 @@ const sfProxy = {
     xfwd: true,
     logLevel: 'debug',
     agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
-    onProxyReq: function onProxyReq(proxyReq, req, res) {
-        // add custom header to request
-        proxyReq.socket.pause();
-        console.log("add custom header to request");
-        console.log("sfauthParams", sfauthParams);
-           axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
-                console.log("responsen", response);
-                console.log("response.data", response.data);
-                console.log("response.data.access_token", response.data.access_token);
-               token = response.data.access_token;
-               proxyReq.setHeader('Authorization', `bearer ${token}`);
-               proxyReq.socket.resume();
-           }
-        ).catch(e =>{
-            console.error('Failure!');
-            console.error(e.message);
-            console.error('error',e);
-            console.error(e.response.status);
-            res.sendStatus(500);
-
-        });
-
-    }
 
 };
 

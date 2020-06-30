@@ -16,6 +16,19 @@ server.engine('html', mustacheExpress());
 server.set('view engine', 'mustache');
 server.set('views', buildPath);
 
+let token ="";
+
+
+const sfAuthbaseUrl= "https://arbeidsgiver-q.nav.no/kursoversikt/api/kursauth";
+
+const sfauthParams = {
+    'grant_type':'password',
+    'client_id': process.env.SF_CLIENTID,
+    'client_secret': process.env.SF_CLIENTSECRET,
+    'username': process.env.SF_USER,
+    'password': process.env.SF_PASS,
+};
+
 const renderApp = decoratorFragments =>
     new Promise((resolve, reject) => {
         server.render('index.html', decoratorFragments, (err, html) => {
@@ -34,6 +47,25 @@ const startServer = html => {
     server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
     if (!REACT_APP_MOCK) {
+        server.use('/api/kurs', async (req, res, next) => {
+            axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
+                    console.log("responsen", response);
+                    console.log("response.data", response.data);
+                    console.log("response.data.access_token", response.data.access_token);
+                    token = response.data.access_token;
+                    req.setHeader('Authorization', `bearer ${token}`);
+                }
+            ).catch(e =>{
+                console.error('Failure!');
+                console.error(e.message);
+                console.error('error',e);
+                console.error(e.response.status);
+                res.sendStatus(500);
+
+            });
+            next();
+
+        });
         server.use(BASE_PATH + '/api/kurs', sfProxy);
         server.use(BASE_PATH + '/api/kursauth', sfAuthProxy);
     }
