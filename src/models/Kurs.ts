@@ -33,11 +33,7 @@ export const tomtKurs: Kurs = {
 export interface PindenaKurs {
     RegistrationID: string;
     Title: string;
-    RegistrationUrl: string;
-    RegistrationImageMediaStorageID: number;
-    FrontImageMediaStorageID: number;
-    CatalogListMediaStorageID?: any;
-    RegistrationFromDateTime: string;
+    RegistrationUrl: string;    RegistrationFromDateTime: string;
     RegistrationToDateTime: string;
     RegistrationDeadline: string;
     RegistrationPlaceName?: any;
@@ -45,8 +41,6 @@ export interface PindenaKurs {
     CatalogText?: any;
     Description?: any;
     FrontPageDescription?: any;
-    ActiveWeb: number;
-    ShowRegistrationForm: number;
     ShowInActivityList: number;
     configurable_custom: {
         Fylke: string;
