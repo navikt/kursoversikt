@@ -34,7 +34,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                     {kurs.tittel}
                 </Link>
                 <Normaltekst className={cls.element('beskrivelse')}>
-                    {kurs.internBeskrivelse || ''}
+                    {kurs.beskrivelse || ''}
                 </Normaltekst>
                 <StedInfo sted={kurs.sted} />
                 <PameldingsfristInfo pameldingsfrist={kurs.pameldingsfrist} />

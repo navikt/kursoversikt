@@ -6,8 +6,7 @@ export interface Kurs {
     sluttidspunkt: Date;
     pameldingsfrist: Date;
     sted?: any;
-    beskrivelse?: any;
-    internBeskrivelse: string;
+    beskrivelse: string;
     forsideBeskrivelse?: any;
     fylke?: string;
     type?: string;
@@ -23,7 +22,6 @@ export const tomtKurs: Kurs = {
     pameldingsfrist: new Date(),
     sted: '',
     beskrivelse: '',
-    internBeskrivelse: '',
     forsideBeskrivelse: '',
     fylke: '',
     type: '',
@@ -37,7 +35,6 @@ export interface PindenaKurs {
     RegistrationToDateTime: string;
     RegistrationDeadline: string;
     RegistrationPlaceName?: any;
-    DescriptionInternal: string;
     CatalogText?: any;
     Description?: any;
     FrontPageDescription?: any;

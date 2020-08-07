@@ -30,7 +30,6 @@ const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
             pameldingsfrist: tilDato(kurs.RegistrationDeadline),
             sted: kurs.RegistrationPlaceName,
             beskrivelse: kurs.Description,
-            internBeskrivelse: kurs.DescriptionInternal,
             forsideBeskrivelse: kurs.FrontPageDescription,
             fylke: fylke,
             type: type,
