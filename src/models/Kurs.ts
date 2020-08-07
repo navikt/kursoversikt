@@ -1,5 +1,5 @@
 export interface Kurs {
-    id: number;
+    id: string;
     tittel: string;
     registreringsUrl: string;
     starttidspunkt: Date;
@@ -15,7 +15,7 @@ export interface Kurs {
 }
 
 export const tomtKurs: Kurs = {
-    id: 0,
+    id: '',
     tittel: '',
     registreringsUrl: '',
     starttidspunkt: new Date(),
@@ -31,7 +31,7 @@ export const tomtKurs: Kurs = {
 };
 
 export interface PindenaKurs {
-    RegistrationID: number;
+    RegistrationID: string;
     Title: string;
     RegistrationUrl: string;
     RegistrationImageMediaStorageID: number;
@@ -50,7 +50,7 @@ export interface PindenaKurs {
     ShowInActivityList: number;
     configurable_custom: {
         Fylke: string;
-        'Type kurs': string;
+        Type: string;
         Tema: string;
     };
 }

@@ -17,7 +17,7 @@ const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
         let fylke, type, tema;
         if (kurs.configurable_custom) {
             fylke = kurs.configurable_custom.Fylke;
-            type = kurs.configurable_custom['Type kurs'];
+            type = kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
         }
 

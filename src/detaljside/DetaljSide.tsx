@@ -18,11 +18,18 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
 
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
+            console.log("hentOgSettDetteKurset");
             const resultat = await hentKurs();
+            console.log("hentOgSettDetteKurset resultat", resultat);
             let kursIdFraUrl = props.location.pathname.split('/')[1];
+            console.log("hentOgSettDetteKurset kursIdFraUrl", kursIdFraUrl);
+            const result = await resultat.filter(kurs => {
+                return kurs.id === kursIdFraUrl;
+            })[0];
+            console.log("hentOgSettDetteKurset result", result);
             await setKurs(
                 resultat.filter(kurs => {
-                    return kurs.id === parseInt(kursIdFraUrl);
+                    return kurs.id === kursIdFraUrl;
                 })[0]
             );
         };
