@@ -76,7 +76,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Installer avhengigheter (yarn install)
-        run:  yarn install --production --ignore-scripts --no-optional
+        run:  yarn install --production --frozen-lockfile
 
       - name: Bygg (yarn build)
         run: yarn build
