@@ -23,3 +23,7 @@ spec:
       value: /etc/ssl/ca-bundle.pem
   envFrom:
     - secret: pindena-auth
+  accessPolicy:
+    outbound:
+      external:
+        - host: https://nav.pameldingssystem.no

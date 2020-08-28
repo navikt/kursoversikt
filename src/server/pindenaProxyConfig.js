@@ -16,7 +16,6 @@ const pindenaProxyConfig = {
     secure: true,
     xfwd: true,
     logLevel: 'debug',
-    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
 };
 
 if (envProperties.API_USER) {
