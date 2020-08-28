@@ -2,7 +2,7 @@ apiVersion: 'nais.io/v1alpha1'
 kind: 'Application'
 metadata:
   name: kursoversikt
-  namespace: default
+  namespace: arbeidsgiver
   labels:
     team: arbeidsgiver
 spec:
@@ -17,9 +17,9 @@ spec:
   readiness:
     path: /kursoversikt/internal/isReady
     initialDelay: 20
-  vault:
-    enabled: true
   webproxy: true
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
+  envFrom:
+    - secret: pindena-auth
