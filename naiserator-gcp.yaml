@@ -26,4 +26,4 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: https://nav.pameldingssystem.no
+        - host: nav.pameldingssystem.no
