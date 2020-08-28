@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if test -d /var/run/secrets;
+if test -d /var/run/secrets/;
 then
     for FILE in /var/run/secrets/
     do
