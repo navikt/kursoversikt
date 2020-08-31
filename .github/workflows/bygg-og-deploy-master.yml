@@ -119,6 +119,6 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-sbs
-          RESOURCE: naiserator.yaml
+          RESOURCE: naiserator-gcp.yaml
           PRINT_PAYLOAD: true
           VARS: nais/prod-sbs.json
