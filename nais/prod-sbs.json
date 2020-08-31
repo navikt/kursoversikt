@@ -1,4 +1,4 @@
 {
-  "ingress": "https://arbeidsgiver.nav.no/kursoversikttest/",
+  "ingress": "https://arbeidsgiver.nav.no/kursoversikt/",
   "decorator-external-url": "https://appres.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true"
 }
