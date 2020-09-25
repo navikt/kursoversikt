@@ -1,0 +1,78 @@
+name: Bygg branch og lag deployment-issue
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+
+env:
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}
+
+jobs:
+  bygg:
+    name: Bygg branch og lag deployment-issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut kode
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Installer avhengigheter (yarn install)
+        run:  yarn install --frozen-lockfile
+
+      - name: Bygg (yarn build)
+        run: yarn build
+
+      - name: Sjekk om branch er oppdatert mot master
+        id: sjekk-mot-master
+        run: |
+          git fetch origin master
+          echo ::set-output name=oppdatert::$(git merge-base --is-ancestor origin/master $GITHUB_SHA && echo ja || echo nei)
+
+      - name: Sett variable
+        id: variable
+        run: |
+          echo ::set-output name=branch::"$(echo ${GITHUB_REF#refs/heads/})"
+
+      - name: Bygg, tag og push Docker-image
+        run: |
+          docker build --tag $IMAGE_BASE:$GITHUB_SHA .
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u $GITHUB_REPOSITORY --password-stdin
+          docker push $IMAGE_BASE
+
+      - name: Lukk gamle deployment-issues
+        uses: actions/github-script@0.5.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['deploy', '${{ steps.variable.outputs.branch }}']
+            }).then(response => {
+              response.data.forEach(issue => {
+                github.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+              });
+            });
+
+      - name: Ny deployment-issue
+        uses: actions/github-script@0.5.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Bygg av ${{ steps.variable.outputs.branch }}',
+              body: 'Kommenter med \n\n>/deploy ${{ steps.variable.outputs.branch }}\n\n for å deploye til dev-gcp.\n\nCommit: ${{ github.sha }}',
+              labels: ['deploy', '${{ steps.variable.outputs.branch }}'],
+              assignees: ['${{ github.actor }}']
+            })
