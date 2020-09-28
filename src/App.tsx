@@ -8,7 +8,7 @@ import bemHelper from './utils/bemHelper';
 
 const cls = bemHelper('app');
 
-const basename = '/kursoversikt';
+const basename = '/arbeidsgiver/kursoversikt';
 
 function App() {
     return (

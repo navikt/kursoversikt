@@ -6,7 +6,7 @@ const getDecorator = require('./decorator');
 const Promise = require('promise');
 const { PORT, REACT_APP_MOCK } = process.env;
 const pindenaProxyConfig = require('./pindenaProxyConfig');
-const BASE_PATH = '/kursoversikt';
+const BASE_PATH = '/arbeidsgiver/kursoversikt';
 const buildPath = path.join(__dirname, '../../build');
 const port = PORT || 3000;
 
