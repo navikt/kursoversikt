@@ -12,10 +12,10 @@ spec:
   ingresses:
     - '{{{ingress}}}'
   liveness:
-    path: /kursoversikt/internal/isAlive
+    path: arbeidsgiver/kursoversikt/internal/isAlive
     initialDelay: 20
   readiness:
-    path: /kursoversikt/internal/isReady
+    path: arbeidsgiver/kursoversikt/internal/isReady
     initialDelay: 20
   webproxy: true
   env:
