@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
+import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
-
 import { filtrerKurs, lagFilterKriterier } from './filtrertingsMotor';
 import { hentKurs } from '../api/pindenaAPI';
 import { Kurs } from '../models/Kurs';
@@ -9,12 +9,12 @@ import bemHelper from '../utils/bemHelper';
 import Filter from './Filter/Filter';
 import IngenKurs from './IngenKurs/IngenKurs';
 import KursPanel from './KursPanel/KursPanel';
-import './Kursliste.less';
 import Soketreff from './Soketreff/Soketreff';
 import Sokeboks from './Sokeboks/Sokeboks';
-import { RouteComponentProps } from 'react-router';
 import { lagNyttFilter } from './checkboksKontroller';
 import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
+import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
+import './Kursliste.less';
 
 export type FilterState = {
     fylke: string[];
@@ -68,45 +68,48 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     };
 
     return (
-        <div className={cls.block}>
-            <header className="overskrift">
-                <Sidetittel className="sentrertTekst">Kurskalender</Sidetittel>
-            </header>
+        <>
+            <Brodsmulesti brodsmuler={[]} />
+            <div className={cls.block}>
+                <header className="overskrift">
+                    <Sidetittel className="sentrertTekst">Kurskalender</Sidetittel>
+                </header>
 
-            <div className={cls.element('hovedside')}>
-                <span className={cls.element('filterKolonne')}>
-                    <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState} />
-                    <Filter
-                        tittel={'Tema'}
-                        alternativer={lagFilterKriterier(kursArray, 'tema')}
-                        filterGruppe={'tema'}
-                        toggleFilter={handleFilterToggle}
-                        checked={sjekkOmAlternativErChecked}
-                    />
-                    <Filter
-                        tittel={'Fylker'}
-                        alternativer={lagFilterKriterier(kursArray, 'fylke')}
-                        filterGruppe={'fylke'}
-                        toggleFilter={handleFilterToggle}
-                        checked={sjekkOmAlternativErChecked}
-                    />
-                    <Filter
-                        tittel={'Type kurs'}
-                        alternativer={lagFilterKriterier(kursArray, 'type')}
-                        filterGruppe={'type'}
-                        toggleFilter={handleFilterToggle}
-                        checked={sjekkOmAlternativErChecked}
-                    />
-                </span>
-                <span className={cls.element('kursKolonne')}>
-                    <Soketreff
-                        antallTreff={filtrerteKursArray.length}
-                        totaltAntallKurs={kursArray.length}
-                    />
-                    {kursliste}
-                </span>
+                <div className={cls.element('hovedside')}>
+                    <span className={cls.element('filterKolonne')}>
+                        <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState} />
+                        <Filter
+                            tittel={'Tema'}
+                            alternativer={lagFilterKriterier(kursArray, 'tema')}
+                            filterGruppe={'tema'}
+                            toggleFilter={handleFilterToggle}
+                            checked={sjekkOmAlternativErChecked}
+                        />
+                        <Filter
+                            tittel={'Fylker'}
+                            alternativer={lagFilterKriterier(kursArray, 'fylke')}
+                            filterGruppe={'fylke'}
+                            toggleFilter={handleFilterToggle}
+                            checked={sjekkOmAlternativErChecked}
+                        />
+                        <Filter
+                            tittel={'Type kurs'}
+                            alternativer={lagFilterKriterier(kursArray, 'type')}
+                            filterGruppe={'type'}
+                            toggleFilter={handleFilterToggle}
+                            checked={sjekkOmAlternativErChecked}
+                        />
+                    </span>
+                    <span className={cls.element('kursKolonne')}>
+                        <Soketreff
+                            antallTreff={filtrerteKursArray.length}
+                            totaltAntallKurs={kursArray.length}
+                        />
+                        {kursliste}
+                    </span>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
