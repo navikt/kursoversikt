@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { Input } from 'nav-frontend-skjema';
 import bemHelper from '../../utils/bemHelper';
 import {Undertittel} from "nav-frontend-typografi";
