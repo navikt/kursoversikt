@@ -2,7 +2,7 @@
     "name": "kursoversikt",
     "version": "0.1.0",
     "private": true,
-    "homepage": "/arbeidsgiver/kursoversikt",
+    "homepage": "/kursoversikt",
     "dependencies": {
         "@craco/craco": "^5.2.3",
         "@types/classnames": "^2.2.9",
