@@ -1,4 +1,3 @@
 {
-  "ingress": "https://arbeidsgiver-q.nav.no/kursoversikt/",
-  "decorator-external-url": "https://appres-q1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true"
+  "ingress": "https://arbeidsgiver-q.nav.no/kursoversikt/"
 }

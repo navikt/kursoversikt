@@ -21,7 +21,7 @@ jobs:
               issue_number: ${{ github.event.client_payload.github.payload.issue.number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Deploy satt i gang: https://github.com/navikt/oversikt-over-bedrift-og-ansatte/actions/runs/${{ github.run_id }}'
+              body: 'Deploy satt i gang: https://github.com/navikt/kursoversikt/actions/runs/${{ github.run_id }}'
             })
 
       - name: Sjekk ut kode
@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Sett miljøvariabel COMMIT
-        run: echo "::set-env name=COMMIT::$(git rev-parse HEAD)"
+        run: echo "COMMIT=$(git rev-parse HEAD)">>$GITHUB_ENV
 
       - name: Sjekk om COMMIT er oppdatert mot master
         run: |
@@ -39,15 +39,15 @@ jobs:
           git merge-base --is-ancestor origin/master $COMMIT
 
       - name: Sett miljøvariabel IMAGE
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$COMMIT"
+        run: echo "IMAGE=$IMAGE_BASE:$COMMIT">>$GITHUB_ENV
 
-      - name: Deploy til dev-gcp
+      - name: Deploy til dev-sbs
         uses: nais/deploy/actions/deploy@v1
         env:
           TEAM: arbeidsgiver
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: naiserator-gcp.yaml
+          CLUSTER: dev-sbs
+          RESOURCE: naiserator.yaml
           PRINT_PAYLOAD: true
           VARS: nais/dev-sbs.json
           REF: ${{ env.COMMIT }}
@@ -75,14 +75,14 @@ jobs:
             github.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['deploy', 'dev-gcp']
+              labels: ['deploy', 'dev-sbs']
             }).then(response => {
               response.data.forEach(issue => {
                 github.issues.removeLabel({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,
-                  name: 'dev-gcp'
+                  name: 'dev-sbs'
                 });
               });
             });
@@ -98,5 +98,5 @@ jobs:
               owner: context.issue.owner,
               repo: context.issue.repo,
               issue_number: ${{ github.event.client_payload.github.payload.issue.number }},
-              labels: ['dev-gcp']
+              labels: ['dev-sbs']
             });

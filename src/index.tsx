@@ -1,7 +1,5 @@
 import 'core-js';
 import 'unorm/lib/unorm';
-
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.less';

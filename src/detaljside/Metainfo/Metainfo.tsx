@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import VarighetInfo from '../../komponenter/VarighetInfo/VarighetInfo';
 import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/PameldingsfristInfo';
 import StedInfo from '../../komponenter/StedInfo/StedInfo';

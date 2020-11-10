@@ -10,6 +10,7 @@ import Metainfo from './Metainfo/Metainfo';
 import OmKurset from './OmKurset/OmKurset';
 import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
+import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
 
 const cls = bemHelper('detaljside');
 
@@ -37,17 +38,20 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     }, [props.location.pathname]);
 
     return (
-        <div className={cls.block}>
-            <header className={cls.element('overskrift')}>
-                <Sidetittel className={cls.element('kurstittel')}>
-                    {kurs ? kurs.tittel : <Skeleton width={200} />}
-                </Sidetittel>
-            </header>
-            <main className={cls.element('innhold')}>
-                {kurs ? <Metainfo kurs={kurs} /> : <MetainfoSkeleton />}
-                <OmKurset kurs={kurs} />
-            </main>
-        </div>
+        <>
+            <Brodsmulesti brodsmuler={[{url: '/', title: 'Om kurset', handleInApp: true}]} />
+            <div className={cls.block}>
+                <header className={cls.element('overskrift')}>
+                    <Sidetittel className={cls.element('kurstittel')}>
+                        {kurs ? kurs.tittel : <Skeleton width={200} />}
+                    </Sidetittel>
+                </header>
+                <main className={cls.element('innhold')}>
+                    {kurs ? <Metainfo kurs={kurs} /> : <MetainfoSkeleton />}
+                    <OmKurset kurs={kurs} />
+                </main>
+            </div>
+        </>
     );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import Skeleton from 'react-loading-skeleton';
 import './Metainfo.less';
 import bemHelper from '../../utils/bemHelper';
