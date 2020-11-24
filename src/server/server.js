@@ -8,6 +8,7 @@ const Promise = require('promise');
 const { PORT, REACT_APP_MOCK } = process.env;
 const sfProxy = require('./sfProxy');
 const sfAuthProxy = require('./sfauthProxy');
+const pindenaProxyConfig = require('./pindenaProxyConfig');
 const BASE_PATH = '/kursoversikt';
 const buildPath = path.join(__dirname, '../../build');
 const port = PORT || 3000;
@@ -47,7 +48,8 @@ const startServer = html => {
     server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
     if (!REACT_APP_MOCK) {
-        server.use(BASE_PATH + '/api/kurs', async (req, res, next) => {
+        server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
+        server.use(BASE_PATH + '/api/sfkurs', async (req, res, next) => {
             axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
                    // console.log("responsen", response);
                     //console.log("response.data", response.data);
@@ -55,9 +57,6 @@ const startServer = html => {
                     token = response.data.access_token;
                     //req.req.session.token = token;
                     req.headers["Authorization"] = `Bearer ${token}`;
-
-                    //req.setHeader('Authorization', `bearer ${token}`);
-
                 next();
                 }
             ).catch(e =>{
@@ -71,7 +70,7 @@ const startServer = html => {
 
 
         });
-        server.use(BASE_PATH + '/api/kurs', sfProxy);
+        server.use(BASE_PATH + '/api/sfkurs', sfProxy);
         server.use(BASE_PATH + '/api/kursauth', sfAuthProxy);
     }
 
