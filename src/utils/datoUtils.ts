@@ -1,7 +1,7 @@
 import { Kurs } from '../models/Kurs';
 
 export const tilDato = (dato: string): Date => {
-    const [dateAsString, timeAsString] = dato.split('T');
+    const [dateAsString, timeAsString] = dato.includes('T') ? dato.split('T') : dato.split(' ')
     const [year, month, day] = dateAsString.split('-').map(i => parseInt(i));
     const [hours, minutes] = timeAsString.split(':').map(i => parseInt(i));
 
