@@ -1,4 +1,4 @@
-const kursliste = [
+const sfkursliste = [
     {
         "Title": "sfkurs1",
         "ShowInActivityList": 1,
@@ -33,42 +33,6 @@ const kursliste = [
             "Type": "Kurs",
             "Tema": "Arbeidssøkeraktivitet",
             "Fylke": "Rogaland"
-        }
-    },
-    {
-        "Title": "K0006",
-        "ShowInActivityList": 1,
-        "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/kurs/s/?id=a160E0000029OfP",
-        "RegistrationToDateTime": null,
-        "RegistrationPlaceName": null,
-        "RegistrationID": "a160E0000029OfPQAU",
-        "RegistrationFromDateTime": null,
-        "RegistrationDeadline": null,
-        "FrontPageDescription": null,
-        "DescriptionInternal": null,
-        "Description": null,
-        "configurable_custom": {
-            "Type": null,
-            "Tema": null,
-            "Fylke": null
-        }
-    },
-    {
-        "Title": "K00005",
-        "ShowInActivityList": 1,
-        "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/kurs/s/?id=a160E0000029OfK",
-        "RegistrationToDateTime": null,
-        "RegistrationPlaceName": null,
-        "RegistrationID": "a160E0000029OfKQAU",
-        "RegistrationFromDateTime": null,
-        "RegistrationDeadline": null,
-        "FrontPageDescription": null,
-        "DescriptionInternal": null,
-        "Description": null,
-        "configurable_custom": {
-            "Type": null,
-            "Tema": null,
-            "Fylke": null
         }
     },
     {
@@ -108,3 +72,5 @@ const kursliste = [
         }
     }
 ]
+
+export default sfkursliste;

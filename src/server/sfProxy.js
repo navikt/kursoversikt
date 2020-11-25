@@ -22,7 +22,7 @@ const sfProxy = {
     changeOrigin: true,
     target: 'https://navdialog--preprod.my.salesforce.com',
     pathRewrite: {
-        '^/kursoversikt/api/kurs': '/services/apexrest/Course',
+        '^/kursoversikt/api/sfkurs': '/services/apexrest/Course',
     },
     secure: true,
     xfwd: true,

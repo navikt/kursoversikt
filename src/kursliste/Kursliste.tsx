@@ -38,14 +38,18 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
 
     const hentOgSettKurs = () => {
         hentKurs(kursapiUrl).then(async pindenaresultat => {
-            const sfresultat = await hentKurs(sfkursapiUrl)
-            console.log("hentOgSettDetteKurset pindenaresultat", pindenaresultat);
-            console.log("hentOgSettDetteKurset sfresultat", sfresultat);
-            const resultat = pindenaresultat.concat(sfresultat)
-            setKursArray(resultat);
-            setFiltrerteKursArray(resultat);
-            setLasterInnKurs(false);
-            setFiltrerteKursArray(filtrerKurs(filterState, sokeState, resultat));
+            hentKurs(sfkursapiUrl).then( sfresultat =>{
+                console.log("hentOgSettDetteKurset pindenaresultat", pindenaresultat);
+                console.log("hentOgSettDetteKurset sfresultat", sfresultat);
+                const resultat = pindenaresultat.concat(sfresultat)
+                console.log("hentOgSettDetteKurset resultat", resultat);
+                setKursArray(resultat);
+                setFiltrerteKursArray(resultat);
+                setLasterInnKurs(false);
+                setFiltrerteKursArray(filtrerKurs(filterState, sokeState, resultat));
+            })
+
+
         });
     };
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
