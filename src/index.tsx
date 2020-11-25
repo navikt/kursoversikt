@@ -13,6 +13,7 @@ if (process.env.REACT_APP_MOCK) {
     console.log('========================================');
 
     require('./mock/PindenaMock');
+    require('./mock/SfMock')
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
