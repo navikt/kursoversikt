@@ -15,6 +15,7 @@ import { lagNyttFilter } from './checkboksKontroller';
 import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
+import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
 
 export type FilterState = {
     fylke: string[];
@@ -36,7 +37,11 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     );
 
     const hentOgSettKurs = () => {
-        hentKurs().then(resultat => {
+        hentKurs(kursapiUrl).then(async pindenaresultat => {
+            const sfresultat = await hentKurs(sfkursapiUrl)
+            console.log("hentOgSettDetteKurset pindenaresultat", pindenaresultat);
+            console.log("hentOgSettDetteKurset sfresultat", sfresultat);
+            const resultat = pindenaresultat.concat(sfresultat)
             setKursArray(resultat);
             setFiltrerteKursArray(resultat);
             setLasterInnKurs(false);
