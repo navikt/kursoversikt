@@ -1,9 +1,8 @@
 import { Kurs, PindenaKurs } from '../models/Kurs';
-import { kursapiUrl } from '../utils/lenker';
 import { sammenlignKursPaDato, tilDato } from '../utils/datoUtils';
 
-export async function hentKurs(): Promise<Kurs[]> {
-    let response = await fetch(kursapiUrl);
+export async function hentKurs(url:string): Promise<Kurs[]> {
+    let response = await fetch(url);
     if (response.ok) {
         const kurs = await response.json();
         return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato);
@@ -11,6 +10,7 @@ export async function hentKurs(): Promise<Kurs[]> {
         return [];
     }
 }
+
 
 const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
     return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: PindenaKurs) => {
