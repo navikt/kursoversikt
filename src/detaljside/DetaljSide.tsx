@@ -24,10 +24,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
             console.log("hentOgSettDetteKurset");
             hentKurs(kursapiUrl).then(async pindenaresultat => {
                 hentKurs(sfkursapiUrl).then(sfresultat => {
-                    console.log("hentOgSettDetteKurset pindenaresultat", pindenaresultat);
-                    console.log("hentOgSettDetteKurset sfresultat", sfresultat);
                     const resultat = pindenaresultat.concat(sfresultat)
-                    console.log("hentOgSettDetteKurset resultat", resultat);
                     let kursIdFraUrl = props.location.pathname.split('/')[1];
                     setKurs(
                         resultat.filter(kurs => {
@@ -35,18 +32,6 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         })[0]
                     );
                 })
-                /*console.log("hentOgSettDetteKurset resultat", resultat);
-                let kursIdFraUrl = props.location.pathname.split('/')[1];
-                console.log("hentOgSettDetteKurset kursIdFraUrl", kursIdFraUrl);
-                const result = await resultat.filter(kurs => {
-                    return kurs.id === kursIdFraUrl;
-                })[0];
-                console.log("hentOgSettDetteKurset result", result);
-                await setKurs(
-                    resultat.filter(kurs => {
-                        return kurs.id === kursIdFraUrl;
-                    })[0]
-                );*/
             })
         };
         hentOgSettDetteKurset();
