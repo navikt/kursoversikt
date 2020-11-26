@@ -21,9 +21,10 @@ const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
             type = kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
         }
+        let id:string = (typeof kurs.RegistrationID === 'number') ? kurs.RegistrationID.toString() : kurs.RegistrationID
 
-        return {
-            id: kurs.RegistrationID,
+         return {
+            id: id,
             tittel: kurs.Title,
             registreringsUrl: kurs.RegistrationUrl,
             starttidspunkt: tilDato(kurs.RegistrationFromDateTime),

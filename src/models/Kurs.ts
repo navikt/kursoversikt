@@ -29,7 +29,7 @@ export const tomtKurs: Kurs = {
 };
 
 export interface PindenaKurs {
-    RegistrationID: string;
+    RegistrationID: string|number;
     Title: string;
     RegistrationUrl: string;    RegistrationFromDateTime: string;
     RegistrationToDateTime: string;

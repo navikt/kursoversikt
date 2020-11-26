@@ -13,6 +13,7 @@ import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
 import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
 
+
 const cls = bemHelper('detaljside');
 
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
@@ -21,23 +22,32 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
             console.log("hentOgSettDetteKurset");
-            const pindenaresultat = await hentKurs(kursapiUrl);
-            const sfresultat = await hentKurs(sfkursapiUrl)
-            console.log("hentOgSettDetteKurset pindenaresultat", pindenaresultat);
-            console.log("hentOgSettDetteKurset sfresultat", sfresultat);
-            const resultat = pindenaresultat.concat(sfresultat)
-            console.log("hentOgSettDetteKurset resultat", resultat);
-            let kursIdFraUrl = props.location.pathname.split('/')[1];
-            console.log("hentOgSettDetteKurset kursIdFraUrl", kursIdFraUrl);
-            const result = await resultat.filter(kurs => {
-                return kurs.id === kursIdFraUrl;
-            })[0];
-            console.log("hentOgSettDetteKurset result", result);
-            await setKurs(
-                resultat.filter(kurs => {
+            hentKurs(kursapiUrl).then(async pindenaresultat => {
+                hentKurs(sfkursapiUrl).then(sfresultat => {
+                    console.log("hentOgSettDetteKurset pindenaresultat", pindenaresultat);
+                    console.log("hentOgSettDetteKurset sfresultat", sfresultat);
+                    const resultat = pindenaresultat.concat(sfresultat)
+                    console.log("hentOgSettDetteKurset resultat", resultat);
+                    let kursIdFraUrl = props.location.pathname.split('/')[1];
+                    setKurs(
+                        resultat.filter(kurs => {
+                            return kurs.id === kursIdFraUrl;
+                        })[0]
+                    );
+                })
+                /*console.log("hentOgSettDetteKurset resultat", resultat);
+                let kursIdFraUrl = props.location.pathname.split('/')[1];
+                console.log("hentOgSettDetteKurset kursIdFraUrl", kursIdFraUrl);
+                const result = await resultat.filter(kurs => {
                     return kurs.id === kursIdFraUrl;
-                })[0]
-            );
+                })[0];
+                console.log("hentOgSettDetteKurset result", result);
+                await setKurs(
+                    resultat.filter(kurs => {
+                        return kurs.id === kursIdFraUrl;
+                    })[0]
+                );*/
+            })
         };
         hentOgSettDetteKurset();
     }, [props.location.pathname]);
