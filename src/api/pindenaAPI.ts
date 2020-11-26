@@ -1,4 +1,4 @@
-import { Kurs, PindenaKurs } from '../models/Kurs';
+import { Kurs, KursFraKildeSystem } from '../models/Kurs';
 import { sammenlignKursPaDato, tilDato } from '../utils/datoUtils';
 
 export async function hentKurs(url:string): Promise<Kurs[]> {
@@ -13,8 +13,8 @@ export async function hentKurs(url:string): Promise<Kurs[]> {
 }
 
 
-const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
-    return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: PindenaKurs) => {
+const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
+    return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: KursFraKildeSystem) => {
         let fylke, type, tema;
         if (kurs.configurable_custom) {
             fylke = kurs.configurable_custom.Fylke;

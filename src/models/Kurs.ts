@@ -28,7 +28,7 @@ export const tomtKurs: Kurs = {
     tema: '',
 };
 
-export interface PindenaKurs {
+export interface KursFraKildeSystem {
     RegistrationID: string|number;
     Title: string;
     RegistrationUrl: string;
@@ -38,7 +38,7 @@ export interface PindenaKurs {
     RegistrationPlaceName?: any;
     CatalogText?: any;
     Description?: any;
-   DescriptionInternal?:string;
+    DescriptionInternal?:string;
     FrontPageDescription?: any;
     ShowInActivityList: number;
     configurable_custom: {
