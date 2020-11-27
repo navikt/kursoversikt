@@ -1,36 +1,37 @@
-import { Kurs, PindenaKurs } from '../models/Kurs';
-import { kursapiUrl } from '../utils/lenker';
+import { Kurs, KursFraKildeSystem } from '../models/Kurs';
 import { sammenlignKursPaDato, tilDato } from '../utils/datoUtils';
 
-export async function hentKurs(): Promise<Kurs[]> {
-    let response = await fetch(kursapiUrl);
+export async function hentKurs(url:string): Promise<Kurs[]> {
+    let response = await fetch(url);
     if (response.ok) {
         const kurs = await response.json();
+        console.log("hentKurs kurs", kurs);
         return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato);
     } else {
         return [];
     }
 }
 
-const oversettTilKursObjekt = (alleKurs: PindenaKurs[]): Kurs[] => {
-    return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: PindenaKurs) => {
+
+const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
+    return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: KursFraKildeSystem) => {
         let fylke, type, tema;
         if (kurs.configurable_custom) {
             fylke = kurs.configurable_custom.Fylke;
-            type = kurs.configurable_custom['Type kurs'];
+            type = kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
         }
+        let id:string = (typeof kurs.RegistrationID === 'number') ? kurs.RegistrationID.toString() : kurs.RegistrationID
 
-        return {
-            id: kurs.RegistrationID,
+         return {
+            id: id,
             tittel: kurs.Title,
             registreringsUrl: kurs.RegistrationUrl,
             starttidspunkt: tilDato(kurs.RegistrationFromDateTime),
             sluttidspunkt: tilDato(kurs.RegistrationToDateTime),
             pameldingsfrist: tilDato(kurs.RegistrationDeadline),
             sted: kurs.RegistrationPlaceName,
-            beskrivelse: kurs.Description,
-            internBeskrivelse: kurs.DescriptionInternal,
+            beskrivelse: kurs.DescriptionInternal ? kurs.DescriptionInternal : kurs.Description,
             forsideBeskrivelse: kurs.FrontPageDescription,
             fylke: fylke,
             type: type,

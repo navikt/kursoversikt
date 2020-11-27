@@ -1,13 +1,12 @@
 export interface Kurs {
-    id: number;
+    id: string;
     tittel: string;
     registreringsUrl: string;
     starttidspunkt: Date;
     sluttidspunkt: Date;
     pameldingsfrist: Date;
     sted?: any;
-    beskrivelse?: any;
-    internBeskrivelse: string;
+    beskrivelse: string;
     forsideBeskrivelse?: any;
     fylke?: string;
     type?: string;
@@ -15,7 +14,7 @@ export interface Kurs {
 }
 
 export const tomtKurs: Kurs = {
-    id: 0,
+    id: '',
     tittel: '',
     registreringsUrl: '',
     starttidspunkt: new Date(),
@@ -23,34 +22,28 @@ export const tomtKurs: Kurs = {
     pameldingsfrist: new Date(),
     sted: '',
     beskrivelse: '',
-    internBeskrivelse: '',
     forsideBeskrivelse: '',
     fylke: '',
     type: '',
     tema: '',
 };
 
-export interface PindenaKurs {
-    RegistrationID: number;
+export interface KursFraKildeSystem {
+    RegistrationID: string|number;
     Title: string;
     RegistrationUrl: string;
-    RegistrationImageMediaStorageID: number;
-    FrontImageMediaStorageID: number;
-    CatalogListMediaStorageID?: any;
     RegistrationFromDateTime: string;
     RegistrationToDateTime: string;
     RegistrationDeadline: string;
     RegistrationPlaceName?: any;
-    DescriptionInternal: string;
     CatalogText?: any;
     Description?: any;
+    DescriptionInternal?:string;
     FrontPageDescription?: any;
-    ActiveWeb: number;
-    ShowRegistrationForm: number;
     ShowInActivityList: number;
     configurable_custom: {
         Fylke: string;
-        'Type kurs': string;
+        Type: string;
         Tema: string;
     };
 }
