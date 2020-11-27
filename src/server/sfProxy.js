@@ -5,6 +5,7 @@ const axios = require('axios');
 
 const envProperties = {
     PROXY_SERVER: process.env.HTTPS_PROXY,
+    SF_TARGET: process.env.SF_TARGET
 };
 
 const sfAuthbaseUrl= "https://arbeidsgiver-q.nav.no/kursoversikt/api/kursauth";
@@ -16,11 +17,12 @@ const sfauthParams = {
     'username': process.env.SF_USER,
     'password': process.env.SF_PASS,
 };
+
 let token ="";
 
 const sfProxy = {
     changeOrigin: true,
-    target: 'https://navdialog--preprod.my.salesforce.com',
+    target: envProperties.SF_TARGET,
     pathRewrite: {
         '^/kursoversikt/api/sfkurs': '/services/apexrest/Course',
     },

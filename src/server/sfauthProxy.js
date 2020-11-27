@@ -4,7 +4,7 @@ const HttpsProxyAgent = require('https-proxy-agent');
 
 
 const envProperties = {
-
+    SF_AUTH_TARGET: process.env.SF_AUTH_TARGET || 'https://salesforce.com',
     PROXY_SERVER: process.env.HTTPS_PROXY,
 };
 
