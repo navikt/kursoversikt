@@ -18,7 +18,7 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
         let fylke, type, tema;
         if (kurs.configurable_custom) {
             fylke = kurs.configurable_custom.Fylke;
-            type = kurs.configurable_custom.Type;
+            type = (kurs.configurable_custom['Type kurs'] !== undefined) ? kurs.configurable_custom['Type kurs'] : kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
         }
         let id:string = (typeof kurs.RegistrationID === 'number') ? kurs.RegistrationID.toString() : kurs.RegistrationID

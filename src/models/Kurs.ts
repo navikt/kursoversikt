@@ -43,7 +43,10 @@ export interface KursFraKildeSystem {
     ShowInActivityList: number;
     configurable_custom: {
         Fylke: string;
-        Type: string;
+        Type?: string;
         Tema: string;
-    };
+        'Type kurs'?: string;
+
+    }
+
 }
