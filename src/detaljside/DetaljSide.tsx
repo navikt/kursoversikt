@@ -11,7 +11,7 @@ import OmKurset from './OmKurset/OmKurset';
 import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
-import {kursapiUrl} from "../utils/lenker";
+import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
 
 
 const cls = bemHelper('detaljside');
@@ -23,15 +23,15 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
         const hentOgSettDetteKurset = async () => {
             console.log("hentOgSettDetteKurset");
             hentKurs(kursapiUrl).then(async pindenaresultat => {
-                //hentKurs(sfkursapiUrl).then(sfresultat => {
-                    const resultat = pindenaresultat//.concat(sfresultat)
+                hentKurs(sfkursapiUrl).then(sfresultat => {
+                    const resultat = pindenaresultat.concat(sfresultat)
                     let kursIdFraUrl = props.location.pathname.split('/')[1];
                     setKurs(
                         resultat.filter(kurs => {
                             return kurs.id === kursIdFraUrl;
                         })[0]
                     );
-                //})
+                })
             })
         };
         hentOgSettDetteKurset();

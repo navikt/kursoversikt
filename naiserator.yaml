@@ -27,5 +27,5 @@ spec:
       value: '{{{sfauthtarget}}}'
     - name: SF_TARGET
       value: '{{{sfurl}}}'
-    - name: AF_AUTH_BASE_URL
+    - name: SF_AUTH_BASE_URL
       value: '{{{sfauthbaseurl}}}'
