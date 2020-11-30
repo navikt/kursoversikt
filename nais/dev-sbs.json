@@ -1,6 +1,5 @@
 {
   "ingress": "https://arbeidsgiver-q.nav.no/kursoversikt/",
   "sfauthtarget": "https://test.salesforce.com",
-  "sfurl":"https://navdialog--preprod.my.salesforce.com",
-
+  "sfurl":"https://navdialog--preprod.my.salesforce.com"
 }
