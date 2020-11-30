@@ -20,7 +20,7 @@ server.set('views', buildPath);
 let token ="";
 
 
-const sfAuthbaseUrl= process.env.AF_AUTH_BASE_URL||"https://arbeidsgiver.nav.no/kursoversikt/api/kursauth";
+const sfAuthbaseUrl= process.env.SF_AUTH_BASE_URL||"https://arbeidsgiver.nav.no/kursoversikt/api/kursauth";
 
 const sfauthParams = {
     'grant_type':'password',
