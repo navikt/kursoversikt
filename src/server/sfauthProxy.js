@@ -10,7 +10,7 @@ const envProperties = {
 
 const sfAuthProxy = {
     changeOrigin: true,
-    target: 'https://test.salesforce.com',
+    target: envProperties.SF_AUTH_TARGET,
     pathRewrite: {
         '^/kursoversikt/api/kursauth': '/services/oauth2/token',
     },
