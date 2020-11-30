@@ -16,7 +16,6 @@ const sfAuthProxy = {
     },
     secure: true,
     xfwd: true,
-    logLevel: 'info',
     agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
 };
 
