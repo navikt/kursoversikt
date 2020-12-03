@@ -104,7 +104,7 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: naiserator-gcp.yaml
           PRINT_PAYLOAD: true
-          VARS: nais/dev-sbs.json
+          VARS: nais/dev-gcp.json
 
   deploy-prod-sbs:
     name: Deploy til prod-sbs
