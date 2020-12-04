@@ -24,6 +24,10 @@ spec:
   envFrom:
     - secret: pindena-pass
     - secret: pindena-user
+    - secret: sfuser
+    - secret: sfclientid
+    - secret: sfpass
+    - secret: sfsecuritytoken
   accessPolicy:
     outbound:
       external:
