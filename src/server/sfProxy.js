@@ -1,6 +1,5 @@
 
 const proxy = require('http-proxy-middleware');
-const HttpsProxyAgent = require('https-proxy-agent');
 const axios = require('axios');
 
 const envProperties = {
@@ -29,7 +28,6 @@ const sfProxy = {
     secure: true,
     xfwd: true,
     logLevel: 'debug',
-    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
     onProxyReq: function onProxyReq(proxyReq, req, res) {
         // add custom header to request
         console.log("req", req);

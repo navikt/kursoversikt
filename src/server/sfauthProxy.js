@@ -1,6 +1,5 @@
 
 const proxy = require('http-proxy-middleware');
-const HttpsProxyAgent = require('https-proxy-agent');
 
 
 const envProperties = {
@@ -16,7 +15,6 @@ const sfAuthProxy = {
     },
     secure: true,
     xfwd: true,
-    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
 };
 
 
