@@ -38,3 +38,4 @@ spec:
     outbound:
       external:
         - host: nav.pameldingssystem.no
+        - host: www.nav.no

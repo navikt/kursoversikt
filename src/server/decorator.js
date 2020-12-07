@@ -9,7 +9,7 @@ if (process.env.NAIS_CLUSTER_NAME === 'prod-sbs') {
         'https://www.nav.no/dekoratoren/';
 } else {
     url =
-        'https://www-q1.nav.no/dekoratoren/';
+        'https://www.nav.no/dekoratoren/';
 }
 
 const requestDecorator = callback => request(url, callback);
