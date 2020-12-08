@@ -35,6 +35,8 @@ spec:
     - secret: sfsecuritytoken
   accessPolicy:
     outbound:
+      rules:
+        - application: kursoversikt
       external:
         - host: nav.pameldingssystem.no
         - host: www.nav.no

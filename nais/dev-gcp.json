@@ -2,5 +2,5 @@
   "ingress": "https://kursoversikt.dev.nav.no/kursoversikt",
   "sfauthtarget": "https://test.salesforce.com",
   "sfurl":"https://navdialog--preprod.my.salesforce.com",
-  "sfauthbaseurl": "https://kursoversikt.dev.nav.no/kursoversikt/api/kursauth"
+  "sfauthbaseurl": "http://kursoversikt/kursoversikt/api/kursauth"
 }
