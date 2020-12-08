@@ -17,7 +17,6 @@ spec:
   readiness:
     path: arbeidsgiver/kursoversikt/internal/isReady
     initialDelay: 20
-  webproxy: true
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem

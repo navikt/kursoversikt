@@ -1,5 +1,5 @@
 {
-  "ingress": "https://dev.nav.no/arbeidsgiver/kursoversikt/",
+  "ingress": "https://arbeidsgiver.dev.nav.no/arbeidsgiver/kursoversikt/",
   "sfauthtarget": "https://test.salesforce.com",
   "sfurl":"https://navdialog--preprod.my.salesforce.com",
   "sfauthbaseurl": "https://arbeidsgiver-q.nav.no/kursoversikt/api/kursauth"
