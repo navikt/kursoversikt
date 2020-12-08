@@ -51,10 +51,9 @@ const startServer = html => {
         server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
         server.use(BASE_PATH + '/api/sfkurs', async (req, res, next) => {
             axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
-                    console.log("response.data.access_token", response.data.access_token);
                     token = response.data.access_token;
                     req.headers["Authorization"] = `Bearer ${token}`;
-                next();
+                    next();
                 }
             ).catch(e =>{
                 console.error('Failure!');
