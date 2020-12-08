@@ -12,10 +12,10 @@ spec:
   ingresses:
     - '{{{ingress}}}'
   liveness:
-    path: arbeidsgiver/kursoversikt/internal/isAlive
+    path: /kursoversikt/internal/isAlive
     initialDelay: 20
   readiness:
-    path: arbeidsgiver/kursoversikt/internal/isReady
+    path: /kursoversikt/internal/isReady
     initialDelay: 20
   env:
     - name: NODE_EXTRA_CA_CERTS
