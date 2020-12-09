@@ -15,12 +15,11 @@ const sfProxy = {
     logLevel: 'debug',
     onProxyReq: function onProxyReq(proxyReq, req, res) {
         // add custom header to request
-        console.log("req", req);
-        console.log("proxyReq", proxyReq);
+        //console.log("req", req);
+        console.log("sf proxy proxyReq target: ", proxyReq.target);
+        //console.log("proxyReq: ", proxyReq.);
        // proxyReq.setHeader('Authorization', req._token);
     }
-
 };
-
 
 module.exports = proxy(sfProxy);

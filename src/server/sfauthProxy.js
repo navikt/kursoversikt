@@ -13,6 +13,10 @@ const sfAuthProxy = {
     },
     secure: true,
     xfwd: true,
+    onProxyReq: function onProxyReq(proxyReq, req, res) {
+        console.log("sf auth proxy proxyReq target: ", proxyReq.target);
+
+    }
 };
 
 
