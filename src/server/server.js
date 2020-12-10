@@ -65,7 +65,6 @@ const startServer = html => {
             });
         });
         server.use(BASE_PATH + '/api/sfkurs', sfProxy);
-        server.use(BASE_PATH + '/api/kursauth', sfAuthProxy);
     }
 
     server.use(BASE_PATH, express.static(buildPath, { index: false }));
