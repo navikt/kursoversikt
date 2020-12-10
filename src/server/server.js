@@ -7,7 +7,6 @@ const getDecorator = require('./decorator');
 const Promise = require('promise');
 const { PORT, REACT_APP_MOCK } = process.env;
 const sfProxy = require('./sfProxy');
-const sfAuthProxy = require('./sfauthProxy');
 const pindenaProxyConfig = require('./pindenaProxyConfig');
 const BASE_PATH = '/kursoversikt';
 const buildPath = path.join(__dirname, '../../build');
@@ -20,7 +19,7 @@ server.set('views', buildPath);
 let token ="";
 
 
-const sfAuthbaseUrl= process.env.SF_AUTH_BASE_URL||"https://arbeidsgiver.nav.no/kursoversikt/api/kursauth";
+const sfAuthUrl= process.env.SF_AUTH_BASE_URL||"https://arbeidsgiver.nav.no/kursoversikt/api/kursauth";
 
 const sfauthParams = {
     'grant_type':'password',
@@ -50,7 +49,7 @@ const startServer = html => {
     if (!REACT_APP_MOCK) {
         server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
         server.use(BASE_PATH + '/api/sfkurs', async (req, res, next) => {
-            axios.post(sfAuthbaseUrl, null, {params: sfauthParams}).then(response => {
+            axios.post(sfAuthUrl, null, {params: sfauthParams}).then(response => {
                     token = response.data.access_token;
                     req.headers["Authorization"] = `Bearer ${token}`;
                     next();

@@ -27,8 +27,8 @@ spec:
       value: '{{{sfauthtarget}}}'
     - name: SF_TARGET
       value: '{{{sfurl}}}'
-    - name: SF_AUTH_BASE_URL
-      value: '{{{sfauthbaseurl}}}'
+    - name: SF_AUTH_URL
+      value: '{{{sfauthurl}}}'
   envFrom:
     - secret: pindena-pass
     - secret: pindena-user
@@ -43,8 +43,5 @@ spec:
       external:
         - host: nav.pameldingssystem.no
         - host: www.nav.no
-        - host: test.salesforce.com
-        - host: navdialog--preprod.my.salesforce.com
-      inbound:
-        rules:
-          - application: kursoversikt
+        - host: '{{{sfauthhost}}}'
+        - host: '{{{sfhost}}}'

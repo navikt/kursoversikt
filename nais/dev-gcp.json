@@ -2,5 +2,7 @@
   "ingress": "https://kursoversikt.dev.nav.no/kursoversikt",
   "sfauthtarget": "https://test.salesforce.com",
   "sfurl":"https://navdialog--preprod.my.salesforce.com",
-  "sfauthbaseurl": "https://test.salesforce.com/services/oauth2/token"
+  "sfhost": "navdialog--preprod.my.salesforce.com",
+  "sfauthbaseurl": "https://test.salesforce.com/services/oauth2/token",
+  "sfauthhost": "test.salesforce.com"
 }
