@@ -23,8 +23,6 @@ spec:
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
-    - name: SF_AUTH_TARGET
-      value: '{{{sfauthtarget}}}'
     - name: SF_TARGET
       value: '{{{sfurl}}}'
     - name: SF_AUTH_URL

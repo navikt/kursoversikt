@@ -19,7 +19,7 @@ server.set('views', buildPath);
 let token ="";
 
 
-const sfAuthUrl= process.env.SF_AUTH_BASE_URL||"https://arbeidsgiver.nav.no/kursoversikt/api/kursauth";
+const sfAuthUrl= process.env.SF_AUTH_URL||"https://login.salesforce.com/services/oauth2/token";
 
 const sfauthParams = {
     'grant_type':'password',
