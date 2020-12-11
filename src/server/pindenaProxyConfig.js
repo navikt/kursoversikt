@@ -1,5 +1,4 @@
 const proxy = require('http-proxy-middleware');
-const HttpsProxyAgent = require('https-proxy-agent');
 
 const envProperties = {
     API_USER: process.env.PINDENA_USER,
@@ -16,7 +15,6 @@ const pindenaProxyConfig = {
     secure: true,
     xfwd: true,
     logLevel: 'debug',
-    agent: new HttpsProxyAgent(envProperties.PROXY_SERVER),
 };
 
 if (envProperties.API_USER) {

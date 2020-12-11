@@ -9,22 +9,37 @@ spec:
   image: {{image}}
   team: arbeidsgiver
   port: 3000
+  replicas:
+    min: 1
+    max: 1
   ingresses:
     - '{{{ingress}}}'
   liveness:
-    path: arbeidsgiver/kursoversikt/internal/isAlive
+    path: /kursoversikt/internal/isAlive
     initialDelay: 20
   readiness:
-    path: arbeidsgiver/kursoversikt/internal/isReady
+    path: /kursoversikt/internal/isReady
     initialDelay: 20
-  webproxy: true
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
+    - name: SF_TARGET
+      value: '{{{sfurl}}}'
+    - name: SF_AUTH_URL
+      value: '{{{sfauthurl}}}'
   envFrom:
     - secret: pindena-pass
     - secret: pindena-user
+    - secret: sfuser
+    - secret: sfclientid
+    - secret: sfpass
+    - secret: sfsecuritytoken
   accessPolicy:
     outbound:
+      rules:
+        - application: kursoversikt
       external:
         - host: nav.pameldingssystem.no
+        - host: www.nav.no
+        - host: '{{{sfauthhost}}}'
+        - host: '{{{sfhost}}}'
