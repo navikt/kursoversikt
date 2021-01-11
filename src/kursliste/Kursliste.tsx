@@ -16,6 +16,7 @@ import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponente
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
 import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
+import {sammenlignKursPaDato} from "../utils/datoUtils";
 
 export type FilterState = {
     fylke: string[];
@@ -41,6 +42,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
             try{
            hentKurs(sfkursapiUrl).then( sfresultat => {
                 const resultat = pindenaresultat.concat(sfresultat)
+               resultat.sort(sammenlignKursPaDato);
                 setKursArray(resultat);
                 setFiltrerteKursArray(resultat);
                 setLasterInnKurs(false);
