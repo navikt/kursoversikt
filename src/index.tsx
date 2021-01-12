@@ -12,7 +12,6 @@ if (process.env.REACT_APP_MOCK) {
     console.log('===DETTE SKAL DU IKKE SE I PRODUKSJON===');
     console.log('========================================');
 
-    require('./mock/PindenaMock');
     require('./mock/SfMock')
 }
 

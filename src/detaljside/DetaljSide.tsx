@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Kurs } from '../models/Kurs';
-import { hentKurs } from '../api/pindenaAPI';
+import { hentKurs } from '../api/kursAPI';
 import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import 'nav-frontend-knapper-style';

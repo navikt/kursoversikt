@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import { filtrerKurs, lagFilterKriterier } from './filtrertingsMotor';
-import { hentKurs } from '../api/pindenaAPI';
+import { hentKurs } from '../api/kursAPI';
 import { Kurs } from '../models/Kurs';
 import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
 import bemHelper from '../utils/bemHelper';
