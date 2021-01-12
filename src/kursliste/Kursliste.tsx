@@ -15,8 +15,7 @@ import { lagNyttFilter } from './checkboksKontroller';
 import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
-import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
-import {sammenlignKursPaDato} from "../utils/datoUtils";
+import {sfkursapiUrl} from "../utils/lenker";
 
 export type FilterState = {
     fylke: string[];
@@ -38,24 +37,13 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     );
 
     const hentOgSettKurs = () => {
-        hentKurs(kursapiUrl).then(async pindenaresultat => {
-            try{
            hentKurs(sfkursapiUrl).then( sfresultat => {
-                const resultat = pindenaresultat.concat(sfresultat)
-               resultat.sort(sammenlignKursPaDato);
+                const resultat = sfresultat
                 setKursArray(resultat);
                 setFiltrerteKursArray(resultat);
                 setLasterInnKurs(false);
                 setFiltrerteKursArray(filtrerKurs(filterState, sokeState, resultat));
-            })}
-            catch (e){
-                setKursArray(pindenaresultat);
-                setFiltrerteKursArray(pindenaresultat);
-                setLasterInnKurs(false);
-                setFiltrerteKursArray(filtrerKurs(filterState, sokeState, pindenaresultat));
-            }
-        });
-    };
+    })}
 
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
         setFiltrerteKursArray(filtrerKurs(filterState, sokeState, kursArray));
