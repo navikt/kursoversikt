@@ -11,7 +11,7 @@ import OmKurset from './OmKurset/OmKurset';
 import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
-import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
+import {sfkursapiUrl} from "../utils/lenker";
 
 
 const cls = bemHelper('detaljside');
