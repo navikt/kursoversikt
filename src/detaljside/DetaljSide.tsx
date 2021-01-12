@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Kurs } from '../models/Kurs';
-import { hentKurs } from '../api/pindenaAPI';
+import { hentKurs } from '../api/kursAPI';
 import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
 import 'nav-frontend-knapper-style';
@@ -11,7 +11,7 @@ import OmKurset from './OmKurset/OmKurset';
 import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
-import {kursapiUrl, sfkursapiUrl} from "../utils/lenker";
+import {sfkursapiUrl} from "../utils/lenker";
 
 
 const cls = bemHelper('detaljside');
@@ -21,10 +21,8 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
 
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
-            console.log("hentOgSettDetteKurset");
-            hentKurs(kursapiUrl).then(async pindenaresultat => {
                 hentKurs(sfkursapiUrl).then(sfresultat => {
-                    const resultat = pindenaresultat.concat(sfresultat)
+                    const resultat = sfresultat
                     let kursIdFraUrl = props.location.pathname.split('/')[1];
                     setKurs(
                         resultat.filter(kurs => {
@@ -32,7 +30,6 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         })[0]
                     );
                 })
-            })
         };
         hentOgSettDetteKurset();
     }, [props.location.pathname]);

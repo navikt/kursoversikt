@@ -7,7 +7,6 @@ const getDecorator = require('./decorator');
 const Promise = require('promise');
 const { PORT, REACT_APP_MOCK } = process.env;
 const sfProxy = require('./sfProxy');
-const pindenaProxyConfig = require('./pindenaProxyConfig');
 const BASE_PATH = '/kursoversikt';
 const buildPath = path.join(__dirname, '../../build');
 const port = PORT || 3000;
@@ -47,7 +46,6 @@ const startServer = html => {
     server.get(BASE_PATH + '/internal/isAlive', (req, res) => res.sendStatus(200));
     server.get(BASE_PATH + '/internal/isReady', (req, res) => res.sendStatus(200));
     if (!REACT_APP_MOCK) {
-        server.use(BASE_PATH + '/api/kurs', pindenaProxyConfig);
         server.use(BASE_PATH + '/api/sfkurs', async (req, res, next) => {
             axios.post(sfAuthUrl, null, {params: sfauthParams}).then(response => {
                     token = response.data.access_token;
