@@ -52,5 +52,6 @@ const utforSokIListe = (sokeordState: string, kursSomSkalFiltreres: Kurs[]): Kur
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe): string[] => {
     const kursMedFilterGruppe = kursArray.filter(kurs => kurs[filterGruppe]);
     let unikeVerdierSet = new Set(kursMedFilterGruppe.map(kurs => kurs[filterGruppe]!));
-    return [...unikeVerdierSet.values()];
+    let sorterteVerdier = Array.from(unikeVerdierSet.values()).sort()
+    return sorterteVerdier;
 };
