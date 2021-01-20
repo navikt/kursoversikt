@@ -77,7 +77,7 @@ const sfkursliste = [
         "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/kurs/s/?id=a160E000002268J",
         "RegistrationToDateTime": "2020-07-11T18:00:00.000Z",
         "RegistrationPlaceName": null,
-        "RegistrationID": "a160E000002268JQAQ",
+        "RegistrationID": "a160E000002269JQAQ",
         "RegistrationFromDateTime": "2020-07-11T10:00:00.000Z",
         "RegistrationDeadline": "2020-07-10T10:00:00.000Z",
         "FrontPageDescription": null,
