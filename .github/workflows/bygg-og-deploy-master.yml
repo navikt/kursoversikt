@@ -7,7 +7,6 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}
   IMAGE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
 
 jobs:
@@ -83,9 +82,9 @@ jobs:
 
       - name: Bygg, tag og push Docker-image
         run: |
-          docker build --tag $IMAGE --tag $IMAGE_BASE:latest .
+          docker build --tag $IMAGE .
           echo $GITHUB_TOKEN | docker login docker.pkg.github.com -u $GITHUB_REPOSITORY --password-stdin
-          docker push $IMAGE_BASE
+          docker push $IMAGE
 
   deploy-dev-gcp:
     name: Deploy til dev-gcp
