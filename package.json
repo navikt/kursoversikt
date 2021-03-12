@@ -57,15 +57,14 @@
     },
     "scripts": {
         "start": "craco start",
+        "start:mock": "REACT_APP_MOCK=true yarn start",
+        "start:mock:win": "set REACT_APP_MOCK=true && yarn start",
         "build": "craco build",
         "test": "craco test",
-        "eject": "react-scripts eject",
-        "serve": "node src/server/server.js",
-        "server": "yarn build && node src/server/server.js",
-        "winmock": "set REACT_APP_MOCK=true && yarn start",
-        "mock": "REACT_APP_MOCK=true yarn start",
+        "lint": "eslint --ext ts,tsx .",
         "format": "prettier --write 'src/**/*.{ts,js,less,tsx}'",
-        "heroku-postbuild": "REACT_APP_MOCK=true yarn build"
+        "docker:build": "docker build -t kursoversikt .",
+        "docker:start": "docker run -p 3000:3000 kursoversikt"
     },
     "eslintConfig": {
         "extends": "react-app"

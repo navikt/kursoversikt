@@ -1,16 +1,13 @@
-FROM node:alpine as builder
-
-WORKDIR /app
-RUN yarn add http-proxy-middleware@0.21.0 https-proxy-agent mustache-express jsdom promise axios
-
 FROM navikt/node-express:12.2.0-alpine
-WORKDIR /app
+
+WORKDIR /usr/src/app
 
 COPY build/ build/
-COPY src/server/ src/server/
-COPY start.sh ./
-COPY --from=builder /app/node_modules /app/node_modules
+
+WORKDIR /usr/src/app/server
+COPY server/ .
+
+RUN npm ci
 
 EXPOSE 3000
 ENTRYPOINT ["/bin/sh", "start.sh"]
-

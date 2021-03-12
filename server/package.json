@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.6",
+    "jsdom": "^16.4.0",
+    "mustache-express": "^1.3.0",
+    "node-fetch": "^2.6.1",
+    "prom-client": "^12.0.0",
+    "prometheus-api-metrics": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node --experimental-modules server.js"
+  }
+}
