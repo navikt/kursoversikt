@@ -1,6 +1,0 @@
-{
-  "ingress": "https://arbeidsgiver.nav.no/kursoversikt/",
-  "sfauthtarget": "https://login.salesforce.com",
-  "sfurl":"https://navdialog.my.salesforce.com",
-  "sfauthbaseurl": "https://arbeidsgiver.nav.no/kursoversikt/api/kursauth"
-}
