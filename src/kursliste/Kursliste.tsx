@@ -40,9 +40,8 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
            hentKurs(sfkursapiUrl).then( sfresultat => {
                 const resultat = sfresultat
                 setKursArray(resultat);
-                setFiltrerteKursArray(resultat);
                 setLasterInnKurs(false);
-                setFiltrerteKursArray(filtrerKurs(filterState, sokeState, resultat));
+
     })}
 
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
@@ -51,7 +50,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     };
 
     useEffect(hentOgSettKurs, []);
-    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState]);
+    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState, kursArray, props.history]);
 
     const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
         setFilterState(lagNyttFilter(filterGruppe, filterKriterie, filterState));
