@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
-import { filtrerKurs, lagFilterKriterier } from './filtrertingsMotor';
+import {filtrerKurs, lagFilterKriterier, lagFylkeKriterier} from './filtrertingsMotor';
 import { hentKurs } from '../api/kursAPI';
 import { Kurs } from '../models/Kurs';
 import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
@@ -24,7 +24,7 @@ export type FilterState = {
 };
 
 export type FilterGruppe = 'fylke' | 'type' | 'tema';
-
+export type FilterGruppeUtenFylke = 'type' | 'tema';
 const cls = bemHelper('kursliste');
 
 const KursListe: FunctionComponent<RouteComponentProps> = props => {
@@ -88,7 +88,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                         />
                         <Filter
                             tittel={'Fylker'}
-                            alternativer={lagFilterKriterier(kursArray, 'fylke')}
+                            alternativer={lagFylkeKriterier(kursArray)}
                             filterGruppe={'fylke'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
