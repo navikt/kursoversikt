@@ -8,7 +8,7 @@ export interface Kurs {
     sted?: any;
     beskrivelse: string;
     forsideBeskrivelse?: any;
-    fylke?: string;
+    fylke?: string[];
     type?: string;
     tema?: string;
 }
@@ -23,7 +23,7 @@ export const tomtKurs: Kurs = {
     sted: '',
     beskrivelse: '',
     forsideBeskrivelse: '',
-    fylke: '',
+    fylke: [],
     type: '',
     tema: '',
 };

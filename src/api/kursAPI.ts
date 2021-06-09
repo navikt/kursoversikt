@@ -5,7 +5,7 @@ export async function hentKurs(url:string): Promise<Kurs[]> {
     let response = await fetch(url);
     if (response.ok) {
         const kurs = await response.json();
-        return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato);
+        return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato)
     } else {
         return [];
     }
@@ -16,7 +16,7 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
     return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: KursFraKildeSystem) => {
         let fylke, type, tema;
         if (kurs.configurable_custom) {
-            fylke = kurs.configurable_custom.Fylke;
+            fylke = (kurs.configurable_custom['Fylke'] ? kurs.configurable_custom['Fylke'].split(';') :[] );
             type = (kurs.configurable_custom['Type kurs'] !== undefined) ? kurs.configurable_custom['Type kurs'] : kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
         }
