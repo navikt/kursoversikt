@@ -70,7 +70,6 @@ export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppe
 };
 
 export const lagFylkeFilterKriterier = (kursArray: Kurs[] ): string[] => {
-    console.log("lagfylkekriterier", kursArray)
     const fylkeflatmap = kursArray.flatMap(kurs => kurs.fylke!)
     let unikeVerdierSet = new Set(fylkeflatmap);
     return  Array.from(unikeVerdierSet.values()).sort()
