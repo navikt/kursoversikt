@@ -65,12 +65,12 @@ const utforSokIListe = (sokeordState: string, kursSomSkalFiltreres: Kurs[]): Kur
 
 export const lagFilterKriterier = (kursArray: Kurs[], filterGruppe: FilterGruppeUtenFylke): string[] => {
     const kursMedFilterGruppe = kursArray.filter(kurs => kurs[filterGruppe]);
-    const unikeVerdierSet = new Set(kursMedFilterGruppe.map(kurs => kurs[filterGruppe]!));
-    return Array.from(unikeVerdierSet.values()).sort()
+    let unikeVerdierSet = new Set(kursMedFilterGruppe.map(kurs => kurs[filterGruppe]!));
+     return Array.from(unikeVerdierSet.values()).sort()
 };
 
 export const lagFylkeFilterKriterier = (kursArray: Kurs[] ): string[] => {
     const fylkeflatmap = kursArray.flatMap(kurs => kurs.fylke!)
-    const unikeVerdier = new Set(fylkeflatmap);
-    return Array.from(unikeVerdier.values()).sort()
+    let unikeVerdierSet = new Set(fylkeflatmap);
+    return  Array.from(unikeVerdierSet.values()).sort()
 };
