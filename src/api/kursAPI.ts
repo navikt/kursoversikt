@@ -5,7 +5,8 @@ export async function hentKurs(url:string): Promise<Kurs[]> {
     let response = await fetch(url);
     if (response.ok) {
         const kurs = await response.json();
-        return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato);
+        console.log("oversatte kurs", oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato))
+        return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato)
     } else {
         return [];
     }
