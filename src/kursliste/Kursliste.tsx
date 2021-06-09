@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Sidetittel } from 'nav-frontend-typografi';
-import {filtrerKurs, lagFilterKriterier, lagFylkeKriterier} from './filtrertingsMotor';
+import {filtrerKurs, lagFilterKriterier, lagFylkeFilterKriterier} from './filtrertingsMotor';
 import { hentKurs } from '../api/kursAPI';
 import { Kurs } from '../models/Kurs';
 import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
@@ -65,6 +65,9 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     }
 
     const sjekkOmAlternativErChecked = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
+        console.log("filterGruppe: ", filterGruppe)
+        console.log("filterAlternativ: ", filterAlternativ)
+        console.log("filterState: ", filterState)
         return filterState[filterGruppe].includes(filterAlternativ);
     };
 
@@ -88,7 +91,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                         />
                         <Filter
                             tittel={'Fylker'}
-                            alternativer={lagFylkeKriterier(kursArray)}
+                            alternativer={lagFylkeFilterKriterier(kursArray)}
                             filterGruppe={'fylke'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
