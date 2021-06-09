@@ -65,9 +65,6 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     }
 
     const sjekkOmAlternativErChecked = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
-        console.log("filterGruppe: ", filterGruppe)
-        console.log("filterAlternativ: ", filterAlternativ)
-        console.log("filterState: ", filterState)
         return filterState[filterGruppe].includes(filterAlternativ);
     };
 
