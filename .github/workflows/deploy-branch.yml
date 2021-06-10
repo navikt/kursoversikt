@@ -33,11 +33,6 @@ jobs:
       - name: Sett miljøvariabel COMMIT
         run: echo "COMMIT=$(git rev-parse HEAD)">>$GITHUB_ENV
 
-      - name: Sjekk om COMMIT er oppdatert mot master
-        run: |
-          git fetch origin master
-          git merge-base --is-ancestor origin/master $COMMIT
-
       - name: Sett miljøvariabel IMAGE
         run: echo "IMAGE=$IMAGE_BASE:$COMMIT">>$GITHUB_ENV
 
