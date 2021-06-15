@@ -12,6 +12,7 @@ import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
 import {sfkursapiUrl} from "../utils/lenker";
+import {logAmplitudeEvent} from "../utils/amplitude";
 
 
 const cls = bemHelper('detaljside');
@@ -19,16 +20,22 @@ const cls = bemHelper('detaljside');
 const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     const [kurs, setKurs] = useState<Kurs | undefined>(undefined);
 
+    const loggDetaljvisning = (kursTittel: string) => {
+        logAmplitudeEvent('sidevisning', {
+            kurstittel: kursTittel
+        });
+    };
+
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
                 hentKurs(sfkursapiUrl).then(sfresultat => {
                     const resultat = sfresultat
                     let kursIdFraUrl = props.location.pathname.split('/')[1];
-                    setKurs(
-                        resultat.filter(kurs => {
-                            return kurs.id === kursIdFraUrl;
-                        })[0]
-                    );
+                    let kursFraSalesforce =  resultat.filter(kurs => {
+                        return kurs.id === kursIdFraUrl;
+                    })[0]
+                    setKurs(kursFraSalesforce);
+                    loggDetaljvisning(kursFraSalesforce.tittel)
                 })
         };
         hentOgSettDetteKurset();

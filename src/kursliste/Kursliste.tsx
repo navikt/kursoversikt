@@ -16,6 +16,7 @@ import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponente
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
 import {sfkursapiUrl} from "../utils/lenker";
+import {logAmplitudeEvent} from "../utils/amplitude";
 
 export type FilterState = {
     fylke: string[];
@@ -36,12 +37,16 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
         hentFilterFraUrl(props.location.search)
     );
 
+    const loggOversiktsvisning = () => {
+        logAmplitudeEvent('sidevisning', {});
+    };
+
     const hentOgSettKurs = () => {
            hentKurs(sfkursapiUrl).then( sfresultat => {
                 const resultat = sfresultat
                 setKursArray(resultat);
                 setLasterInnKurs(false);
-
+                loggOversiktsvisning()
     })}
 
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
