@@ -14,11 +14,12 @@ export async function hentKurs(url:string): Promise<Kurs[]> {
 
 const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
     return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: KursFraKildeSystem) => {
-        let fylke, type, tema;
+        let fylke, type, tema, underkategori;
         if (kurs.configurable_custom) {
             fylke = (kurs.configurable_custom['Fylke'] ? kurs.configurable_custom['Fylke'].split(';') :[] );
             type = (kurs.configurable_custom['Type kurs'] !== undefined) ? kurs.configurable_custom['Type kurs'] : kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
+            underkategori = (kurs.configurable_custom['Underkategori'] ? kurs.configurable_custom['Underkategori'].split(';') :[] );
         }
         let id:string = (typeof kurs.RegistrationID === 'number') ? kurs.RegistrationID.toString() : kurs.RegistrationID
 
@@ -35,6 +36,7 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
             fylke: fylke,
             type: type,
             tema: tema,
+            underkategori: underkategori
         };
     });
 };

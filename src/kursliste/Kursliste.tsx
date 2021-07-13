@@ -1,18 +1,23 @@
-import React, { FunctionComponent, useEffect, useState, ReactNode } from 'react';
-import { RouteComponentProps } from 'react-router';
-import { Sidetittel } from 'nav-frontend-typografi';
-import {filtrerKurs, lagFilterKriterier, lagFylkeFilterKriterier} from './filtrertingsMotor';
-import { hentKurs } from '../api/kursAPI';
-import { Kurs } from '../models/Kurs';
-import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
+import React, {FunctionComponent, useEffect, useState, ReactNode} from 'react';
+import {RouteComponentProps} from 'react-router';
+import {Sidetittel} from 'nav-frontend-typografi';
+import {
+    filtrerKurs,
+    lagFilterKriterier,
+    lagFylkeFilterKriterier,
+    lagUnderkategoriFilterKriterier
+} from './filtrertingsMotor';
+import {hentKurs} from '../api/kursAPI';
+import {Kurs} from '../models/Kurs';
+import {lagPlaceholderlisteForKurs} from './KursPanel/KursPanelSkeleton';
 import bemHelper from '../utils/bemHelper';
 import Filter from './Filter/Filter';
 import IngenKurs from './IngenKurs/IngenKurs';
 import KursPanel from './KursPanel/KursPanel';
 import Soketreff from './Soketreff/Soketreff';
 import Sokeboks from './Sokeboks/Sokeboks';
-import { lagNyttFilter } from './checkboksKontroller';
-import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
+import {lagNyttFilter} from './checkboksKontroller';
+import {byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl} from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
 import {sfkursapiUrl} from "../utils/lenker";
@@ -22,9 +27,10 @@ export type FilterState = {
     fylke: string[];
     tema: string[];
     type: string[];
+    underkategori: string[];
 };
 
-export type FilterGruppe = 'fylke' | 'type' | 'tema';
+export type FilterGruppe = 'fylke' | 'type' | 'tema' | 'underkategori';
 export type FilterGruppeUtenFylke = 'type' | 'tema';
 const cls = bemHelper('kursliste');
 
@@ -42,12 +48,13 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     };
 
     const hentOgSettKurs = () => {
-           hentKurs(sfkursapiUrl).then( sfresultat => {
-                const resultat = sfresultat
-                setKursArray(resultat);
-                setLasterInnKurs(false);
-                loggOversiktsvisning()
-    })}
+        hentKurs(sfkursapiUrl).then(sfresultat => {
+            const resultat = sfresultat
+            setKursArray(resultat);
+            setLasterInnKurs(false);
+            loggOversiktsvisning()
+        })
+    }
 
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
         setFiltrerteKursArray(filtrerKurs(filterState, sokeState, kursArray));
@@ -61,21 +68,25 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
         setFilterState(lagNyttFilter(filterGruppe, filterKriterie, filterState));
     };
 
-    let kursliste: ReactNode = <IngenKurs />;
+    let kursliste: ReactNode = <IngenKurs/>;
 
     if (lasterInnKurs) {
         kursliste = lagPlaceholderlisteForKurs();
     } else if (filtrerteKursArray.length > 0) {
-        kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs} />);
+        kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs}/>);
     }
 
     const sjekkOmAlternativErChecked = (filterGruppe: FilterGruppe, filterAlternativ: string) => {
+        console.log("filterGruppe ", filterGruppe)
+        console.log("filterState ", filterState)
+        console.log("filterState[filterGruppe] ", filterState[filterGruppe])
+        console.log("filterAlternativ ", filterAlternativ)
         return filterState[filterGruppe].includes(filterAlternativ);
     };
 
     return (
         <>
-            <Brodsmulesti brodsmuler={[]} />
+            <Brodsmulesti brodsmuler={[]}/>
             <div className={cls.block}>
                 <header className="overskrift">
                     <Sidetittel className="sentrertTekst">Kurskalender</Sidetittel>
@@ -83,13 +94,14 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
 
                 <div className={cls.element('hovedside')}>
                     <span className={cls.element('filterKolonne')}>
-                        <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState} />
+                        <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState}/>
                         <Filter
                             tittel={'Tema'}
                             alternativer={lagFilterKriterier(kursArray, 'tema')}
                             filterGruppe={'tema'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
+                            underkategorier={lagUnderkategoriFilterKriterier(kursArray)}
                         />
                         <Filter
                             tittel={'Fylker'}
@@ -97,6 +109,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                             filterGruppe={'fylke'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
+                            underkategorier={[]}
                         />
                         <Filter
                             tittel={'Type kurs'}
@@ -104,6 +117,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                             filterGruppe={'type'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
+                            underkategorier={[]}
                         />
                     </span>
                     <span className={cls.element('kursKolonne')}>

@@ -22,7 +22,7 @@ const sfkursliste = [{
     "FrontPageDescription": "<p>Hola</p>",
     "Description": "sdfgsdfg",
     "configurable_custom": {
-        "Underkategori": "Kognisjon",
+        "Underkategori": "Kognisjon;",
         "Type": "Webinar",
         "Tema": "Hjelpemidler og tilrettelegging",
         "Fylke": null
@@ -111,13 +111,13 @@ const sfkursliste = [{
     "configurable_custom": {"Underkategori": null, "Type": null, "Tema": null, "Fylke": null}
 }, {
     "Title": "Nettverks samling Barnehage",
-    "ShowInActivityList": 0,
+    "ShowInActivityList": 1,
     "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/s/pamelding?id=a160E000002WpHTQA0",
-    "RegistrationToDateTime": "2021-06-01T10:45:00.000Z",
+    "RegistrationToDateTime": "2021-10-10T10:45:00.000Z",
     "RegistrationPlaceName": "Artig Barnehage",
     "RegistrationID": "a160E000002WpHTQA0",
     "RegistrationFromDateTime": "2021-06-01T08:15:00.000Z",
-    "RegistrationDeadline": "2021-05-31T20:45:00.000Z",
+    "RegistrationDeadline": "2021-10-10T20:45:00.000Z",
     "FrontPageDescription": null,
     "Description": "Deling av informasjon og erfaringsutvekslingss",
     "configurable_custom": {
@@ -336,7 +336,7 @@ const sfkursliste = [{
     "configurable_custom": {"Underkategori": null, "Type": "Kurs", "Tema": "Arbeidssøkeraktivitet", "Fylke": null}
 }, {
     "Title": "Sykkelutprøving Kirkenes",
-    "ShowInActivityList": 0,
+    "ShowInActivityList": 1,
     "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/s/pamelding?id=a160E000001s4aeQAA",
     "RegistrationToDateTime": "2020-09-29T12:59:59.000Z",
     "RegistrationPlaceName": "Barentshallen",
@@ -346,14 +346,14 @@ const sfkursliste = [{
     "FrontPageDescription": "<p><strong>Påmelding er ikke nødvendig!</strong></p>\\r\\n<p><strong>Målgruppe:</strong><strong><br></strong>Alle interesserte og våre samarbeidspartnere. <br>NAV kan låne ut sykler til de under 26 år som har behov for spesialsykler, etter søknad. De som er over 26 år må betale en egenandel (10% av verdien på sykkelen, maks kr 4000,-)</p>\\r\\n<p><strong>Utprøving:</strong><br>Vi stiller med terapeuter og forhandlere som kan bistå med utprøving og tilpassing. <br>De som skal hjelpe til å søke om sykkel bør delta ved utprøvingen.<br>Er det noen som har spesielle behov vil vi vite om det i forkant, og <em>så snart som mulig</em>, slik at forhandler har mulighet for å ta med utstyr til tilpassing.</p>\\r\\n<p><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">Forhandlere som deltar er: </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://bardum.no/produktkategori/sykler-og-motor/\" target=\"_blank\">Bardum</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"http://www.caretec.no/produktkategori/aktivitetsutstyr/sykler-utstyr/\" target=\"_blank\">Caretec</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://hjelpemiddelspesialisten.no/produkter/sykler\" target=\"_blank\">Hjelpemiddelspesialisten</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://www.krabat.no/\" target=\"_blank\">Krabat</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://medema.no/produkter/sykler/\" target=\"_blank\">Medema</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"http://skeno.no/produkter/sykkel/\" target=\"_blank\">Skeno</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\"> og </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://www.sunrisemedical.no/\" target=\"_blank\">Sunrise Medical</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">.</span></p>\\r\\n<p><strong>Husk kartleggingen i forkant</strong><strong>:</strong><br>- gi informasjon om regelverk og egenandel<br>- diskuter hvor sykkelen skal brukes<br>- kan personen ivareta sin egen og andres sikkerhet? <br>- trengs det spesiell sykkelstørrelse og tilleggsutstyr?<br>- kan sykkelen oppbevares forsvarlig, også innendørs om vinteren?</p>\\r\\n<p><strong>Reiseutgifter:</strong><br>NAV kan dekke utgifter for at bruker skal komme seg til utprøvingsstedene.<br><em><strong>Det forutsetter at vår kontaktperson i kommunen er kontaktet, har kartlagt behovet og har gjort avtale med NAV Hjelpemiddelsentral</strong></em><em>. Bare de som har gjort dette på forhånd vil kunne få drosjerekvisisjon</em><em>. </em>Vi regner med at dere samler flere personer i samme transport!</p>\\r\\n<p><strong>Smittevern:</strong><br>Alle regler for smittevern vil bli ivaretatt. Kommer det mange som vil prøve sykler samtidig, kan noen måtte vente.</p>\\r\\n<p>Ta kontakt med NAV Hjelpemiddelsentral for mer informasjon på <strong>telefon 40 70 28 20</strong></p>",
     "Description": null,
     "configurable_custom": {
-        "Underkategori": null,
+        "Underkategori": "Hørsel",
         "Type": "Konferanse",
         "Tema": "Hjelpemidler og tilrettelegging",
         "Fylke": null
     }
 }, {
     "Title": "Hørsel: Digitalt kurs \"Hør etter!\"",
-    "ShowInActivityList": 0,
+    "ShowInActivityList": 1,
     "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/s/pamelding?id=a160E000001s4afQAA",
     "RegistrationToDateTime": "2020-11-19T15:29:59.000Z",
     "RegistrationPlaceName": "Digitalt kurs ved NAV Hjelpemiddelsentral Nordland",
@@ -363,7 +363,7 @@ const sfkursliste = [{
     "FrontPageDescription": "<h2><b>NAV Hjelpemiddelsentral Nordland inviterer til digitalt kurs</b></h2><h1><b>HØR ETTER!</b></h1><p><br></p><h3><b>Hvordan skape godt kommunikasjonsmiljø?</b></h3><h3><b>Hørselsvansker og tilrettelegging</b></h3><p><b>Onsdag 14. oktober klokken 11:30-15:30</b></p><p><b>Link til oppkobling: </b><a href=\"https://teams.microsoft.com/l/meetup-join/19%3ameeting_Zjk3Y2EzODMtYzcxZS00MDFiLTk5ZmQtMTZkNjczNTdlNmQ5%40thread.v2/0?context=%7b%22Tid%22%3a%2262366534-1ec3-4962-8869-9b5535279d0b%22%2c%22Oid%22%3a%22311edc57-e9e1-492f-b910-8ccce219ceb7%22%7d\" target=\"_blank\">Bli med i Microsoft Teams-møte</a></p><p><br></p><p>Vi tilbyr kurs til lærere, barnehagelærere, pedagoger og andre som jobber med barn og ungdom med hørselsvansker i barnehage, skole og utdanning.</p><p><br></p><h3>Kurset vil omhandle følgende temaer</h3><ul><li>Hva er et godt lydmiljø og hvorfor er det viktig for alle?</li><li>Råd og veiledning rundt tilrettelegging</li><li>Hørselstekniske hjelpemidler; Hva og hvorfor?</li><li>Overganger mellom barnehage og skole, mellom skoler samt overgang mellom skole og arbeidsliv</li><li>Saksgang og søknadsprosedyre</li><li>Innlegg fra Statped</li><li>Innlegg fra Hørselsentral</li></ul><h4>Kursledere<b>: </b>Audiopedagog Inger Lise Neef og seniorrådgiver Line Bjørnerud</h4><p><b>Praktisk informasjon:</b></p><p>Det blir informasjon rundt den praktiske gjennomføringen ved oppstart av kurset.</p><p><br></p><p>For mer informasjon, ta kontakt med <a href=\"mailto:Inger.lise.neef@nav.no\" target=\"_blank\">Inger.lise.neef@nav.no</a> eller <a href=\"mailto:line.bjornerud@nav.no\" target=\"_blank\">line.bjornerud@nav.no</a></p><p><br></p><p>Velkommen til digitalt kurs!</p>",
     "Description": null,
     "configurable_custom": {
-        "Underkategori": null,
+        "Underkategori": "Syn",
         "Type": "Webinar",
         "Tema": "Hjelpemidler og tilrettelegging",
         "Fylke": null
