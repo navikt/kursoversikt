@@ -29,10 +29,6 @@ spec:
       value: '{{{sfauthurl}}}'
   envFrom:
     - secret: kursoversikt-secrets
-    - secret: sfuser
-    - secret: sfclientid
-    - secret: sfpass
-    - secret: sfsecuritytoken
   accessPolicy:
     outbound:
       rules:
