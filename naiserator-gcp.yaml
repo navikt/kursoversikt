@@ -2,12 +2,12 @@ apiVersion: 'nais.io/v1alpha1'
 kind: 'Application'
 metadata:
   name: kursoversikt
-  namespace: arbeidsgiver
+  namespace: fager
   labels:
-    team: arbeidsgiver
+    team: fager
 spec:
   image: {{image}}
-  team: arbeidsgiver
+  team: fager
   port: 3000
   ingresses:
     - '{{{ingress}}}'
@@ -28,8 +28,7 @@ spec:
     - name: SF_AUTH_URL
       value: '{{{sfauthurl}}}'
   envFrom:
-    - secret: pindena-pass
-    - secret: pindena-user
+    - secret: kursoversikt-secrets
     - secret: sfuser
     - secret: sfclientid
     - secret: sfpass
