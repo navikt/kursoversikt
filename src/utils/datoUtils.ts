@@ -33,7 +33,7 @@ export const dagOgManedPaLesbartFormat = (dato: Date): string => {
     //return dato.toLocaleString('nb-no', { day: 'numeric', month: 'short' });
     const dag = dato.getDate();
     const måned = månedsnavn[dato.getMonth()];
-    return `${dag}. ${måned}.`;
+    return `${dag}. ${måned}`;
 };
 
 export const formaterTimeOgMinutt = (tidspunkt: Date) => {
