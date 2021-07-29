@@ -13,8 +13,27 @@ export const sammenlignKursPaDato = (a: Kurs, b: Kurs) => {
     return a.starttidspunkt.getTime() - b.starttidspunkt.getTime();
 };
 
+const månedsnavn = [
+    "januar",
+    "februar",
+    "mars",
+    "april",
+    "mai",
+    "juni",
+    "juli",
+    "august",
+    "september",
+    "oktober",
+    "november",
+    "desember"
+];
+
 export const dagOgManedPaLesbartFormat = (dato: Date): string => {
-    return dato.toLocaleString('nb-no', { day: 'numeric', month: 'short' });
+    // Denne fungerer ikke for alle. Så hardkoder hva vi trenger.
+    //return dato.toLocaleString('nb-no', { day: 'numeric', month: 'short' });
+    const dag = dato.getDate();
+    const måned = månedsnavn[dato.getMonth()];
+    return `${dag}. ${måned}`;
 };
 
 export const formaterTimeOgMinutt = (tidspunkt: Date) => {
