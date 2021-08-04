@@ -118,6 +118,7 @@ app.use([
     target: SF_TARGET,
     pathRewrite: {
         '^/kursoversikt/api/sfkurs': '/services/apexrest/Course',
+        '^/kursoversikt/api/kurs': '/services/apexrest/Course',
     },
     secure: true,
     xfwd: true,
