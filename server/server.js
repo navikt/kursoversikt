@@ -78,10 +78,7 @@ app.use(
 /**
  * obs: dette apiet benyttes også av andre (e.g. team-ia)
  */
-app.use([
-    '/kursoversikt/api/sfkurs', // deprecated, vil bli fjernet
-    '/kursoversikt/api/kurs'
-], async (req, res, next) => {
+app.use('/kursoversikt/api/kurs', async (req, res, next) => {
     try {
         const response = await fetch(SF_AUTH_URL, {
             method: 'post',
@@ -105,10 +102,7 @@ app.use([
         res.sendStatus(500);
     }
 });
-app.use([
-    '/kursoversikt/api/sfkurs', // deprecated, vil bli fjernet
-    '/kursoversikt/api/kurs'
-], createProxyMiddleware({
+app.use('/kursoversikt/api/kurs', createProxyMiddleware({
     logLevel: PROXY_LOG_LEVEL,
     logProvider: _ => log,
     onError: (err, req, res) => {
@@ -117,7 +111,6 @@ app.use([
     changeOrigin: true,
     target: SF_TARGET,
     pathRewrite: {
-        '^/kursoversikt/api/sfkurs': '/services/apexrest/Course',
         '^/kursoversikt/api/kurs': '/services/apexrest/Course',
     },
     secure: true,
