@@ -20,7 +20,7 @@ import {lagNyttFilter} from './checkboksKontroller';
 import {byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl} from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
-import {sfkursapiUrl} from "../utils/lenker";
+import {kursapiUrl} from "../utils/lenker";
 import {logAmplitudeEvent} from "../utils/amplitude";
 
 export type FilterState = {
@@ -48,7 +48,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     };
 
     const hentOgSettKurs = () => {
-        hentKurs(sfkursapiUrl).then(sfresultat => {
+        hentKurs(kursapiUrl).then(sfresultat => {
             const resultat = sfresultat
             setKursArray(resultat);
             setLasterInnKurs(false);

@@ -17,7 +17,7 @@ const {
     PORT = 3000,
     NAIS_APP_IMAGE = '?',
     NAIS_CLUSTER_NAME = 'local',
-    DECORATOR_EXTERNAL_URL = defaultDecoratorUrl,    
+    DECORATOR_EXTERNAL_URL = defaultDecoratorUrl,
     DECORATOR_UPDATE_MS = 30 * 60 * 1000,
     PROXY_LOG_LEVEL = 'info',
     SF_TARGET = 'http://localhost:8080',
@@ -75,7 +75,13 @@ app.use(
         metricsPath: '/kursoversikt/internal/metrics',
     })
 );
-app.use('/kursoversikt/api/sfkurs', async (req, res, next) => {
+/**
+ * obs: dette apiet benyttes også av andre (e.g. team-ia)
+ */
+app.use([
+    '/kursoversikt/api/sfkurs', // deprecated, vil bli fjernet
+    '/kursoversikt/api/kurs'
+], async (req, res, next) => {
     try {
         const response = await fetch(SF_AUTH_URL, {
             method: 'post',
@@ -87,7 +93,7 @@ app.use('/kursoversikt/api/sfkurs', async (req, res, next) => {
                 'password': SF_PASS,
             }),
         });
-        const { access_token: token } = await response.json();
+        const {access_token: token} = await response.json();
         req.headers["Authorization"] = `Bearer ${token}`;
         next();
     } catch (e) {
@@ -99,7 +105,10 @@ app.use('/kursoversikt/api/sfkurs', async (req, res, next) => {
         res.sendStatus(500);
     }
 });
-app.use('/kursoversikt/api/sfkurs', createProxyMiddleware({
+app.use([
+    '/kursoversikt/api/sfkurs', // deprecated, vil bli fjernet
+    '/kursoversikt/api/kurs'
+], createProxyMiddleware({
     logLevel: PROXY_LOG_LEVEL,
     logProvider: _ => log,
     onError: (err, req, res) => {

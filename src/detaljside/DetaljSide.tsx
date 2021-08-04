@@ -11,7 +11,7 @@ import OmKurset from './OmKurset/OmKurset';
 import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
-import {sfkursapiUrl} from "../utils/lenker";
+import {kursapiUrl} from "../utils/lenker";
 import {logAmplitudeEvent} from "../utils/amplitude";
 
 
@@ -28,7 +28,7 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
 
     useEffect(() => {
         const hentOgSettDetteKurset = async () => {
-                hentKurs(sfkursapiUrl).then(sfresultat => {
+                hentKurs(kursapiUrl).then(sfresultat => {
                     const resultat = sfresultat
                     let kursIdFraUrl = props.location.pathname.split('/')[1];
                     let kursFraSalesforce =  resultat.filter(kurs => {
