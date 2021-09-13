@@ -28,8 +28,6 @@ const Filter: FunctionComponent<Props> = ({
                                               checked,
                                               underkategorier,
                                           }) => {
-    console.log('Filter underkategorier; ', underkategorier)
-    console.log('Filter filterGruppe; ', filterGruppe)
     return (
         <div className={cls.block}>
             <Ekspanderbartpanel tittel={tittel} apen>

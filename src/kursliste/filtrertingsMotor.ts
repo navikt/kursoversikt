@@ -90,6 +90,5 @@ export const lagFylkeFilterKriterier = (kursArray: Kurs[]): string[] => {
 export const lagUnderkategoriFilterKriterier = (kursArray: Kurs[]): string[] => {
     const underkategoriflatmap = kursArray.flatMap(kurs => kurs.underkategori!)
     let unikeVerdierSet = new Set(underkategoriflatmap);
-    console.log('lagUnderkategoriFilterKriterier unikeVerdierSet', unikeVerdierSet)
     return Array.from(unikeVerdierSet.values()).sort()
 };
