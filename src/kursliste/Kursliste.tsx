@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState, ReactNode} from 'react';
+import React, {FunctionComponent, useEffect, useState, ReactNode, useContext} from 'react';
 import {RouteComponentProps} from 'react-router';
 import {Sidetittel} from 'nav-frontend-typografi';
 import {
@@ -7,7 +7,6 @@ import {
     lagFylkeFilterKriterier,
     lagUnderkategoriFilterKriterier
 } from './filtrertingsMotor';
-import {hentKurs} from '../api/kursAPI';
 import {Kurs} from '../models/Kurs';
 import {lagPlaceholderlisteForKurs} from './KursPanel/KursPanelSkeleton';
 import bemHelper from '../utils/bemHelper';
@@ -20,8 +19,8 @@ import {lagNyttFilter} from './checkboksKontroller';
 import {byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl} from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
-import {kursapiUrl} from "../utils/lenker";
 import {logAmplitudeEvent} from "../utils/amplitude";
+import {KursListeContext} from "../utils/KursProvider";
 
 export type FilterState = {
     fylke: string[];
@@ -35,9 +34,9 @@ export type FilterGruppeUtenFylke = 'type' | 'tema';
 const cls = bemHelper('kursliste');
 
 const KursListe: FunctionComponent<RouteComponentProps> = props => {
-    const [kursArray, setKursArray] = useState(Array<Kurs>());
+
+    const {aktiveKurs,kursLaster} = useContext(KursListeContext)
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
-    const [lasterInnKurs, setLasterInnKurs] = useState<boolean>(true);
     const [sokeState, setsokeState] = useState<string>(hentSokFraUrl(props.location.search));
     const [filterState, setFilterState] = useState<FilterState>(
         hentFilterFraUrl(props.location.search)
@@ -48,21 +47,17 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
     };
 
     const hentOgSettKurs = () => {
-        hentKurs(kursapiUrl).then(sfresultat => {
-            const resultat = sfresultat
-            setKursArray(resultat);
-            setLasterInnKurs(false);
             loggOversiktsvisning()
-        })
-    }
+        }
+
 
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
-        setFiltrerteKursArray(filtrerKurs(filterState, sokeState, kursArray));
+        setFiltrerteKursArray(filtrerKurs(filterState, sokeState, aktiveKurs));
         props.history.replace(byggFilterTilURL(filterState, sokeState));
     };
 
     useEffect(hentOgSettKurs, []);
-    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState, kursArray, props.history]);
+    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState, aktiveKurs, props.history]);
 
     const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
         setFilterState(lagNyttFilter(filterGruppe, filterKriterie, filterState));
@@ -70,7 +65,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
 
     let kursliste: ReactNode = <IngenKurs/>;
 
-    if (lasterInnKurs) {
+    if (kursLaster) {
         kursliste = lagPlaceholderlisteForKurs();
     } else if (filtrerteKursArray.length > 0) {
         kursliste = filtrerteKursArray.map((kurs: Kurs) => <KursPanel key={kurs.id} kurs={kurs}/>);
@@ -93,15 +88,15 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                         <Sokeboks sokeFunksjon={setsokeState} verdi={sokeState}/>
                         <Filter
                             tittel={'Tema'}
-                            alternativer={lagFilterKriterier(kursArray, 'tema')}
+                            alternativer={lagFilterKriterier(aktiveKurs, 'tema')}
                             filterGruppe={'tema'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
-                            underkategorier={lagUnderkategoriFilterKriterier(kursArray)}
+                            underkategorier={lagUnderkategoriFilterKriterier(aktiveKurs)}
                         />
                         <Filter
                             tittel={'Fylker'}
-                            alternativer={lagFylkeFilterKriterier(kursArray)}
+                            alternativer={lagFylkeFilterKriterier(aktiveKurs)}
                             filterGruppe={'fylke'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
@@ -109,7 +104,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                         />
                         <Filter
                             tittel={'Type kurs'}
-                            alternativer={lagFilterKriterier(kursArray, 'type')}
+                            alternativer={lagFilterKriterier(aktiveKurs, 'type')}
                             filterGruppe={'type'}
                             toggleFilter={handleFilterToggle}
                             checked={sjekkOmAlternativErChecked}
@@ -119,7 +114,7 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
                     <span className={cls.element('kursKolonne')}>
                         <Soketreff
                             antallTreff={filtrerteKursArray.length}
-                            totaltAntallKurs={kursArray.length}
+                            totaltAntallKurs={aktiveKurs.length}
                         />
                         {kursliste}
                     </span>

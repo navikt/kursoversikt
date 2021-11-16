@@ -12,6 +12,7 @@ export interface Kurs {
     type?: string;
     tema?: string;
     underkategori?: string[];
+    aktivt:number
 }
 
 export const tomtKurs: Kurs = {
@@ -27,7 +28,8 @@ export const tomtKurs: Kurs = {
     fylke: [],
     type: '',
     tema: '',
-    underkategori: []
+    underkategori: [],
+    aktivt:0
 };
 
 export interface KursFraKildeSystem {
