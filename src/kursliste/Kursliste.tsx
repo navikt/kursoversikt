@@ -42,21 +42,14 @@ const KursListe: FunctionComponent<RouteComponentProps> = props => {
         hentFilterFraUrl(props.location.search)
     );
 
-    const loggOversiktsvisning = () => {
-        logAmplitudeEvent('sidevisning', {});
-    };
-
-    const hentOgSettKurs = () => {
-            loggOversiktsvisning()
-        }
-
+    useEffect(()=>{ logAmplitudeEvent('sidevisning', {})}
+,[])
 
     const brukFilterPaKurslisteOgOppdaterUrl = () => {
         setFiltrerteKursArray(filtrerKurs(filterState, sokeState, aktiveKurs));
         props.history.replace(byggFilterTilURL(filterState, sokeState));
     };
 
-    useEffect(hentOgSettKurs, []);
     useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState, aktiveKurs, props.history]);
 
     const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
