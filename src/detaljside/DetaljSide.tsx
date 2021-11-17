@@ -28,14 +28,18 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
 
     useEffect(() => {
         let kursIdFraUrl = props.location.pathname.split('/')[1];
-        let kursFraSalesforce = alleKurs.find(kurs =>
-          kurs.id === kursIdFraUrl
+        setKurs(
+            alleKurs.find(k =>
+            k.id === kursIdFraUrl
         )
-        setKurs(kursFraSalesforce);
-        if(kursFraSalesforce !== undefined){
-            loggDetaljvisning(kursFraSalesforce.tittel)
-        }
+        );
     }, [props.location.pathname, alleKurs]);
+
+    useEffect(()=>{
+        if(kurs !== undefined){
+            loggDetaljvisning(kurs.tittel)
+        }
+    },[kurs])
 
     return (
         <>
