@@ -16,8 +16,8 @@ export const KursProvider = (props: any) => {
     useEffect(() => {
             hentAlleKurs().then(alleKurs => {
                     setkursKontext({
-                            aktiveKurs: alleKurs,
-                            alleKurs: alleKurs.filter(kurs =>
+                        alleKurs: alleKurs,
+                        aktiveKurs: alleKurs.filter(kurs =>
                                 kurs.aktivt === 1
                             ),
                             kursLaster: false

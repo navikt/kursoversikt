@@ -31,6 +31,8 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
         let kursFraSalesforce = alleKurs.find(kurs =>
           kurs.id === kursIdFraUrl
         )
+        console.log('fant kurs: ',kursFraSalesforce)
+        console.log('fant kurs: ',alleKurs)
         setKurs(kursFraSalesforce);
         if(kursFraSalesforce !== undefined){
             loggDetaljvisning(kursFraSalesforce.tittel)
