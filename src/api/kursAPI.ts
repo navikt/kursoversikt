@@ -1,8 +1,10 @@
 import { Kurs, KursFraKildeSystem } from '../models/Kurs';
 import { sammenlignKursPaDato, tilDato } from '../utils/datoUtils';
+import {kursapiUrl} from "../utils/lenker";
 
-export async function hentKurs(url:string): Promise<Kurs[]> {
-    let response = await fetch(url);
+
+export async function hentAlleKurs(): Promise<Kurs[]> {
+    let response = await fetch(kursapiUrl);
     if (response.ok) {
         const kurs = await response.json();
         return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato)
@@ -13,7 +15,7 @@ export async function hentKurs(url:string): Promise<Kurs[]> {
 
 
 const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
-    return alleKurs.filter(kurs=>{return kurs.ShowInActivityList===1}).map((kurs: KursFraKildeSystem) => {
+    return alleKurs.map((kurs: KursFraKildeSystem) => {
         let fylke, type, tema, underkategori;
         if (kurs.configurable_custom) {
             fylke = (kurs.configurable_custom['Fylke'] ? kurs.configurable_custom['Fylke'].split(';') :[] );
@@ -36,7 +38,8 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
             fylke: fylke,
             type: type,
             tema: tema,
-            underkategori: underkategori
+            underkategori: underkategori,
+             aktivt:kurs.ShowInActivityList
         };
     });
 };
