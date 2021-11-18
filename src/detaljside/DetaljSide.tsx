@@ -12,6 +12,7 @@ import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
 import {logAmplitudeEvent} from "../utils/amplitude";
 import {KursListeContext} from "../utils/KursProvider";
+import {AlertStripeAdvarsel} from "nav-frontend-alertstriper";
 
 
 const cls = bemHelper('detaljside');
@@ -50,6 +51,15 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
                         {kurs ? kurs.tittel : <Skeleton width={200}/>}
                     </Sidetittel>
                 </header>
+
+                {
+                    kurs?.aktivt===0 &&
+                    <div className={cls.element('varselbanner')}>
+                    <AlertStripeAdvarsel>
+                        Dette kurset er ikke aktivt. Det vil sannsynligvis ikke være mulig å melde seg som deltaker
+                    </AlertStripeAdvarsel>
+                    </div>
+                }
                 <main className={cls.element('innhold')}>
                     {kurs ? <Metainfo kurs={kurs}/> : <MetainfoSkeleton/>}
                     <OmKurset kurs={kurs}/>
