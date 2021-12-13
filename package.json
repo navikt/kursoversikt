@@ -23,7 +23,7 @@
         "craco-less": "^1.9.0",
         "express": "^4.17.1",
         "fetch-mock": "^7.3.3",
-        "http-proxy-middleware": "^0.19.1",
+        "http-proxy-middleware": "^0.21.0",
         "https-proxy-agent": "^2.2.2",
         "lodash.throttle": "^4.1.1",
         "mustache-express": "^1.2.8",
