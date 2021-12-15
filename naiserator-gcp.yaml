@@ -9,9 +9,7 @@ spec:
   image: {{image}}
   port: 3000
   ingresses:
-  {{#each ingresses as |url|}}
-    - {{url}}
-  {{/each}}
+    - {{{ingress}}}
   liveness:
     path: /kursoversikt/internal/isAlive
     initialDelay: 20

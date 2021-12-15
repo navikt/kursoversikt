@@ -1,12 +1,9 @@
 {
-  "ingresses": [
-    "https://kursoversikt.dev.nav.no/kursoversikt",
-    "https://kursoversikt-cors-canary.dev.nav.no/kursoversikt"
-  ],
+  "ingress": "https://kursoversikt.dev.nav.no/kursoversikt",
   "sfauthtarget": "https://test.salesforce.com",
   "sfurl":"https://navdialog--preprod.my.salesforce.com",
   "sfhost": "navdialog--preprod.my.salesforce.com",
   "sfauthurl": "https://test.salesforce.com/services/oauth2/token",
   "sfauthhost": "test.salesforce.com",
-  "kurs_api_cors_origin": "[\"https://arbeidsgiver-q.nav.no\", \"https://kursoversikt.dev.nav.no\", \"https://arbeidsgiver-gcp.dev.nav.no/\"]"
+  "kurs_api_cors_origin": "[\"https://arbeidsgiver-q.nav.no\", \"https://kursoversikt.dev.nav.no\", \"https://arbeidsgiver-gcp.dev.nav.no\"]"
 }

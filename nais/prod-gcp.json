@@ -1,5 +1,5 @@
 {
-  "ingresses": ["https://arbeidsgiver.nav.no/kursoversikt/"],
+  "ingress": "https://arbeidsgiver.nav.no/kursoversikt/",
   "sfauthtarget": "https://login.salesforce.com",
   "sfurl":  "https://navdialog.my.salesforce.com",
   "sfhost": "navdialog.my.salesforce.com",
