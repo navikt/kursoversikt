@@ -20,7 +20,7 @@
         "amplitude-js": "^8.12.0",
         "classnames": "^2.3.1",
         "core-js": "^3.2.1",
-        "craco-less": "^1.9.0",
+        "craco-less": "^1.20.0",
         "express": "^4.17.1",
         "fetch-mock": "^7.3.3",
         "http-proxy-middleware": "^0.21.0",
