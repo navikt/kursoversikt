@@ -7,6 +7,8 @@ import jsdom from "jsdom";
 import Prometheus from "prom-client";
 import require from "./esm-require.js";
 
+
+const cors = require('cors')
 const {createLogger, transports, format} = require('winston');
 const apiMetricsMiddleware = require('prometheus-api-metrics');
 const {JSDOM} = jsdom;
@@ -26,6 +28,7 @@ const {
     SF_CLIENTSECRET,
     SF_USER,
     SF_PASS,
+    KURS_API_CORS_ORIGIN = "[]",
 } = process.env;
 const log = createLogger({
     transports: [
@@ -75,6 +78,12 @@ app.use(
         metricsPath: '/kursoversikt/internal/metrics',
     })
 );
+
+
+const kursApiCorsOpts = {
+    origin: JSON.parse(KURS_API_CORS_ORIGIN)
+}
+
 /**
  * obs: dette apiet benyttes også av andre (e.g. team-ia)
  */
@@ -102,7 +111,7 @@ app.use('/kursoversikt/api/kurs', async (req, res, next) => {
         res.sendStatus(500);
     }
 });
-app.use('/kursoversikt/api/kurs', createProxyMiddleware({
+app.use('/kursoversikt/api/kurs', cors(kursApiCorsOpts), createProxyMiddleware({
     logLevel: PROXY_LOG_LEVEL,
     logProvider: _ => log,
     onError: (err, req, res) => {

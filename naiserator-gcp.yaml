@@ -27,6 +27,8 @@ spec:
       value: '{{{sfurl}}}'
     - name: SF_AUTH_URL
       value: '{{{sfauthurl}}}'
+    - name: KURS_API_CORS_ORIGIN
+      value: '{{{kurs_api_cors_origin}}}'
   envFrom:
     - secret: kursoversikt-secrets
   accessPolicy:
