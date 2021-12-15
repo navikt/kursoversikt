@@ -4,7 +4,7 @@ import {kursapiUrl} from "../utils/lenker";
 
 
 export async function hentAlleKurs(): Promise<Kurs[]> {
-    let response = await fetch(kursapiUrl);
+    let response = await fetch(kursapiUrl, {mode: 'cors'});
     if (response.ok) {
         const kurs = await response.json();
         return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato)

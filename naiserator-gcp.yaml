@@ -7,10 +7,11 @@ metadata:
     team: fager
 spec:
   image: {{image}}
-  team: fager
   port: 3000
   ingresses:
-    - '{{{ingress}}}'
+  {{#each ingresses as |url|}}
+    - {{url}}
+  {{/each}}
   liveness:
     path: /kursoversikt/internal/isAlive
     initialDelay: 20

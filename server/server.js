@@ -87,6 +87,10 @@ const kursApiCorsOpts = {
 /**
  * obs: dette apiet benyttes også av andre (e.g. team-ia)
  */
+app.use('/kursoversikt/api/kurs', cors(kursApiCorsOpts), async (req, res, next) => {
+    next()
+});
+
 app.use('/kursoversikt/api/kurs', async (req, res, next) => {
     try {
         const response = await fetch(SF_AUTH_URL, {

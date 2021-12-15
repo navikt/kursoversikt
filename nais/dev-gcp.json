@@ -1,5 +1,8 @@
 {
-  "ingress": "https://kursoversikt.dev.nav.no/kursoversikt",
+  "ingresses": [
+    "https://kursoversikt.dev.nav.no/kursoversikt",
+    "https://kursoversikt-cors-canary.dev.nav.no/kursoversikt"
+  ],
   "sfauthtarget": "https://test.salesforce.com",
   "sfurl":"https://navdialog--preprod.my.salesforce.com",
   "sfhost": "navdialog--preprod.my.salesforce.com",
