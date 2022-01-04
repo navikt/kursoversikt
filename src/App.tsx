@@ -7,6 +7,7 @@ import './App.less';
 import bemHelper from './utils/bemHelper';
 import {initAmplitude} from "./utils/amplitude";
 import {KursProvider} from "./utils/KursProvider";
+import ScrollToTop from "./utils/ScrollToTop";
 
 const cls = bemHelper('app');
 
@@ -18,6 +19,7 @@ function App() {
         <div className={cls.block}>
             <KursProvider>
             <BrowserRouter basename={basename}>
+                <ScrollToTop />
                 <Switch>
                     <Route path="/:id" exact={true} component={DetaljSide}/>
                     <Route path="/" exact={true} component={KursListe}/>
