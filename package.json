@@ -8,7 +8,7 @@
         "@navikt/fnrvalidator": "^1.1.4",
         "@navikt/nav-dekoratoren-moduler": "^1.6.9",
         "@sentry/browser": "^6.15.0",
-        "@types/amplitude-js": "^8.0.2",
+        "@types/amplitude-js": "^8.9.0",
         "@types/classnames": "^2.2.9",
         "@types/fetch-mock": "^7.3.5",
         "@types/jest": "^24.0.16",
