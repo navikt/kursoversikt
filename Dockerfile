@@ -7,7 +7,9 @@ COPY build/ build/
 WORKDIR /usr/src/app/server
 COPY server/ .
 
+USER root
 RUN npm ci
+USER apprunner
 
 EXPOSE 3000
 ENTRYPOINT ["/bin/sh", "start.sh"]
