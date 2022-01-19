@@ -1,4 +1,4 @@
-FROM navikt/node-express:12.2.0-alpine
+FROM navikt/node-express:16
 
 WORKDIR /usr/src/app
 
