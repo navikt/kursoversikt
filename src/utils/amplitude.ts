@@ -8,7 +8,7 @@ const getApiKey = () => {
 
 export const initAmplitude = () => {
     amplitude.getInstance().init(getApiKey(), '', {
-        apiEndpoint: 'amplitude.nav.no/collect',
+        apiEndpoint: 'amplitude.nav.no/collect-auto',
         saveEvents: false,
         includeUtm: true,
         includeReferrer: true,
