@@ -12,4 +12,4 @@ RUN npm ci
 USER apprunner
 
 EXPOSE 3000
-ENTRYPOINT ["/bin/sh", "start.sh"]
+ENTRYPOINT ["node", "server.js"]
