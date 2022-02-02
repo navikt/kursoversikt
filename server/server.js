@@ -3,11 +3,11 @@ import fetch from 'node-fetch';
 import express from 'express';
 import mustacheExpress from 'mustache-express';
 import httpProxyMiddleware from "http-proxy-middleware";
+import {createLogger, transports, format} from 'winston';
 import jsdom from "jsdom";
 import Prometheus from "prom-client";
-import require from "./esm-require.js";
 
-const {createLogger, transports, format} = require('winston');
+import require from "./esm-require.js";
 const apiMetricsMiddleware = require('prometheus-api-metrics');
 const {JSDOM} = jsdom;
 const {createProxyMiddleware} = httpProxyMiddleware;
@@ -115,7 +115,7 @@ app.use('/kursoversikt/api/kurs', createProxyMiddleware({
     },
     secure: true,
     xfwd: true,
-    onProxyReq: (proxyReq, req, res) => {
+    onProxyReq: (proxyReq, _req, _res) => {
         log.info("sf proxy proxyReq target: ", proxyReq.target);
     },
     onProxyRes: (proxyRes, req, res) => {
