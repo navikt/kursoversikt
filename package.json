@@ -7,7 +7,7 @@
         "@craco/craco": "^6.4.1",
         "@navikt/fnrvalidator": "^1.1.4",
         "@navikt/nav-dekoratoren-moduler": "^1.6.9",
-        "@sentry/browser": "^6.15.0",
+        "@sentry/browser": "^6.17.6",
         "@types/amplitude-js": "^8.9.0",
         "@types/classnames": "^2.2.9",
         "@types/fetch-mock": "^7.3.5",
