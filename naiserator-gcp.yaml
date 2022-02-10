@@ -27,6 +27,8 @@ spec:
       value: '{{{sfurl}}}'
     - name: SF_AUTH_URL
       value: '{{{sfauthurl}}}'
+    - name: GIT_COMMIT
+      value: {{commit}}
   envFrom:
     - secret: kursoversikt-secrets
   accessPolicy:
