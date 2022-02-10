@@ -16,6 +16,7 @@ const defaultDecoratorUrl = 'https://www.nav.no/dekoratoren/';
 const {
     PORT = 3000,
     NAIS_APP_IMAGE = '?',
+    GIT_COMMIT = '?',
     NAIS_CLUSTER_NAME = 'local',
     DECORATOR_EXTERNAL_URL = defaultDecoratorUrl,
     DECORATOR_UPDATE_MS = 30 * 60 * 1000,
@@ -48,8 +49,9 @@ const getDecoratorFragments = async () => {
         STYLES: document.getElementById('styles').innerHTML,
         SCRIPTS: document.getElementById('scripts').innerHTML,
         SETTINGS: `<script type="application/javascript">
-            window.appSettings = {
+            window.environment = {
                 MILJO: '${NAIS_CLUSTER_NAME}',
+                GIT_COMMIT: '${GIT_COMMIT}',
             }
         </script>`,
     };

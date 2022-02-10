@@ -1,0 +1,4 @@
+[defaults]
+project=kurskalender
+url=https://sentry.gc.nav.no/
+org=nav

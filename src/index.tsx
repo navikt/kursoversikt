@@ -5,11 +5,15 @@ import ReactDOM from 'react-dom';
 import './styles/index.less';
 import App from './App';
 import * as Sentry from "@sentry/browser";
+import environment, {gittMiljo} from './utils/environment';
 
 
 Sentry.init({
     dsn: "https://0d0215555d834fdab7dd2b90d8c5cb38@sentry.gc.nav.no/60",
     environment: window.location.hostname,
+    release: environment.GIT_COMMIT,
+    autoSessionTracking: false,
+    enabled: gittMiljo({prod: true, other: false}),
 });
 
 if (process.env.REACT_APP_MOCK) {

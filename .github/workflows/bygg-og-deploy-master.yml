@@ -85,6 +85,15 @@ jobs:
           docker build --tag $IMAGE .
           echo $GITHUB_TOKEN | docker login docker.pkg.github.com -u $GITHUB_REPOSITORY --password-stdin
           docker push $IMAGE
+          
+      - name: Lag sentry release
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        run: |
+          sentry-cli releases new "${{ env.GITHUB_SHA }}"
+          sentry-cli releases files "${{ env.GITHUB_SHA }}" upload-sourcemaps build/static/js \
+              --url-prefix '~/kursoversikt/static/js'
+          sentry-cli releases finalize "${{ env.GITHUB_SHA }}"
 
   deploy-dev-gcp:
     name: Deploy til dev-gcp
@@ -104,6 +113,7 @@ jobs:
           RESOURCE: naiserator-gcp.yaml
           PRINT_PAYLOAD: true
           VARS: nais/dev-gcp.json
+          VAR: commit=${{ env.GITHUB_SHA }}
 
   deploy-prod-gcp:
     name: Deploy til prod-gcp
@@ -120,3 +130,4 @@ jobs:
           RESOURCE: naiserator-gcp.yaml
           PRINT_PAYLOAD: true
           VARS: nais/prod-gcp.json
+          VAR: commit=${{ env.GITHUB_SHA }}
