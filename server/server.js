@@ -53,7 +53,7 @@ const sf_api_status_gauge = new Prometheus.Gauge({
 const kurskatalog_call_counter = new Prometheus.Counter({
     name: 'fetch_kurskatalog_counter',
     help: 'counter for henting av kurskalenderen fra salesforce til server-cache',
-    labelNames: ['success', 'failure'],
+    labelNames: ['outcome'],
 })
 const kurskatalog_call_counter_failure = kurskatalog_call_counter.labels('failure')
 const kurskatalog_call_counter_success = kurskatalog_call_counter.labels('success')
