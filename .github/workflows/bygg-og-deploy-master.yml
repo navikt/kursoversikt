@@ -89,6 +89,7 @@ jobs:
       - name: Lag sentry release
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        continue-on-error: true
         run: |
           export SENTRY_LOG_LEVEL=info
           echo '[sentry-cli releases new]'
