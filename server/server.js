@@ -4,22 +4,17 @@ import express from 'express';
 import mustacheExpress from 'mustache-express';
 import httpProxyMiddleware from "http-proxy-middleware";
 import {createLogger, transports, format} from 'winston';
-import jsdom from "jsdom";
 import Prometheus from "prom-client";
 
 import require from "./esm-require.js";
 const apiMetricsMiddleware = require('prometheus-api-metrics');
-const {JSDOM} = jsdom;
 const {createProxyMiddleware} = httpProxyMiddleware;
 
-const defaultDecoratorUrl = 'https://www.nav.no/dekoratoren/';
 const {
     PORT = 3000,
     NAIS_APP_IMAGE = '?',
     GIT_COMMIT = '?',
     NAIS_CLUSTER_NAME = 'local',
-    DECORATOR_EXTERNAL_URL = defaultDecoratorUrl,
-    DECORATOR_UPDATE_MS = 30 * 60 * 1000,
     PROXY_LOG_LEVEL = 'info',
     SF_TARGET = 'http://localhost:8080',
     SF_AUTH_URL = "https://login.salesforce.com/services/oauth2/token",
@@ -37,21 +32,8 @@ const log = createLogger({
     ]
 });
 
-const decoratorUrl = NAIS_CLUSTER_NAME === 'prod-sbs' ? defaultDecoratorUrl : DECORATOR_EXTERNAL_URL;
 const BUILD_PATH = path.join(process.cwd(), '../build');
-const getDecoratorFragments = async () => {
-    const response = await fetch(decoratorUrl);
-    const body = await response.text();
-    const {document} = new JSDOM(body).window;
-    return {
-        SETTINGS: `<script type="application/javascript">
-            window.environment = {
-                MILJO: '${NAIS_CLUSTER_NAME}',
-                GIT_COMMIT: '${GIT_COMMIT}',
-            }
-        </script>`,
-    };
-}
+
 
 const app = express();
 app.disable("x-powered-by");
@@ -125,10 +107,18 @@ app.use('/kursoversikt', express.static(BUILD_PATH, {index: false}));
 app.get('/kursoversikt/internal/isAlive', (req, res) => res.sendStatus(200));
 app.get('/kursoversikt/internal/isReady', (req, res) => res.sendStatus(200));
 
+const fragments = {
+    SETTINGS:
+`<script type="application/javascript">
+    window.environment = {
+        MILJO: '${NAIS_CLUSTER_NAME}',
+        GIT_COMMIT: '${GIT_COMMIT}',
+    }
+</script>`,
+}
+
 const serve = async () => {
-    let fragments;
     try {
-        fragments = await getDecoratorFragments();
         app.get('/kursoversikt/*', (req, res) => {
             res.render('index.html', fragments, (err, html) => {
                 if (err) {
@@ -146,17 +136,6 @@ const serve = async () => {
         log.error('Server failed to start ', error);
         process.exit(1);
     }
-
-    setInterval(() => {
-        getDecoratorFragments()
-            .then(oppdatert => {
-                fragments = oppdatert;
-                log.info(`dekoratør oppdatert: ${Object.keys(oppdatert)}`);
-            })
-            .catch(error => {
-                log.warn(`oppdatering av dekoratør feilet: ${error}`);
-            });
-    }, DECORATOR_UPDATE_MS);
 }
 
 serve().then(/*noop*/);
