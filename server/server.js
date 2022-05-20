@@ -62,7 +62,7 @@ const updateKurskatalogAsync = async () => {
     });
 
     if (!tokenResponse.ok) {
-        throw Error("fetch token response not ok")
+        throw Error(`fetch token response not ok. http status: ${tokenResponse.status}`)
     }
 
     const {access_token: token} = await tokenResponse.json();
@@ -77,7 +77,7 @@ const updateKurskatalogAsync = async () => {
     })
 
     if (!response.ok) {
-        throw Error("response not ok")
+        throw Error(`response not ok. http status ${response.status}`)
     }
 
     const body = await response.json()
@@ -90,26 +90,29 @@ const updateKurskatalogAsync = async () => {
     kurskatalog = body
 }
 
-const updateKurskatalog = (reportFailure = true) => {
+const updateKurskatalog = ({reportFailure = true} = { reportFailure: true}) => {
     updateKurskatalogAsync()
         .then()
         .catch(error => {
             if (reportFailure) {
                 kurskatalog_call_counter_failure.inc()
                 sf_api_status_gauge.set(0)
-                log.error("updateKurskatalog", error)
+                log.error(`updateKurskatalog ${error.message}`)
             }
         })
 }
 
-/* Might take some time before kubernetes network is ready.
-* Pull frequently in the beginning */
+/* Might take some time before container has network access (linkrd (or whatever) sidecar  must start up).
+ * So start a fast-pulling for initial loading.
+ **/
 const setupTimer = setInterval(() => {
-    updateKurskatalog('no-alert')
+    updateKurskatalog({reportFailure: true})
     if (kurskatalog !== null) {
         clearInterval(setupTimer)
     }
-}, 200)
+}, 500)
+
+/* This timer is slower and never cancled. */
 setInterval(updateKurskatalog, 10 * /* min */ 60 * /* s */ 1000 /* ms */)
 
 const BUILD_PATH = path.join(process.cwd(), '../build');
