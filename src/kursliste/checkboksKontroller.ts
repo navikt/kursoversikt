@@ -31,5 +31,10 @@ const fjernFilterKriterie = (
     nyttFilter[filterGruppe] = nyttFilter[filterGruppe].filter(
         filter => filter !== krietrieSomSkalFjernes
     );
+
+    /* Fjernes tema, så fjernes underkategoriene (som hører til tema) også. */
+    if (filterGruppe === 'tema') {
+        nyttFilter.underkategori = []
+    }
     return nyttFilter;
 };
