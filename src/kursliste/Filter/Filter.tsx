@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import {Checkbox} from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
@@ -28,9 +28,6 @@ const Filter: FunctionComponent<Props> = ({
                                               checked,
                                               underkategorier,
                                           }) => {
-    useEffect(() => {
-        console.log("alternativer", {alternativer})
-    }, [alternativer])
     return (
         <div className={cls.block}>
             <Ekspanderbartpanel tittel={tittel} apen>
