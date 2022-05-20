@@ -110,6 +110,23 @@ const sfkursliste = [{
     "Description": null,
     "configurable_custom": {"Underkategori": null, "Type": null, "Tema": null, "Fylke": null}
 }, {
+    "Title": "Nettverks samling Barnehage langt ord",
+    "ShowInActivityList": 1,
+    "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/s/pamelding?id=a160E000002WpHTQA0",
+    "RegistrationToDateTime": "2021-10-10T10:45:00.000Z",
+    "RegistrationPlaceName": "Artig Barnehage",
+    "RegistrationID": "a160E000002WpHTQA1",
+    "RegistrationFromDateTime": "2021-06-01T08:15:00.000Z",
+    "RegistrationDeadline": "2021-10-10T20:45:00.000Z",
+    "FrontPageDescription": null,
+    "Description": "Et veldig langt ord: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "configurable_custom": {
+        "Underkategori": "Bolig;Hørsel;Kognisjon",
+        "Type": "Nettverks- og erfaringssamling",
+        "Tema": "Hjelpemidler og tilrettelegging",
+        "Fylke": null
+    }
+}, {
     "Title": "Nettverks samling Barnehage",
     "ShowInActivityList": 1,
     "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/s/pamelding?id=a160E000002WpHTQA0",
@@ -177,6 +194,18 @@ const sfkursliste = [{
         "Tema": "Inkluderende arbeidsliv (IA)",
         "Fylke": null
     }
+}, {
+    "Title": "Veldig, veldig, veldig, veldig, veldig, veldig, veldig, veldig, veldig, veldig, veldig, veldig lang tittel",
+    "ShowInActivityList": 1,
+    "RegistrationUrl": "https://preprod-navdialog.cs89.force.com/s/pamelding?id=a160E000002Z2TFQA0",
+    "RegistrationToDateTime": "2021-11-01T14:00:00.000Z",
+    "RegistrationPlaceName": null,
+    "RegistrationID": "a160E000002Z2TFQA1",
+    "RegistrationFromDateTime": "2021-11-01T12:00:00.000Z",
+    "RegistrationDeadline": "2021-04-05T12:00:00.000Z",
+    "FrontPageDescription":"<p><strong>Påmelding er ikke nødvendig!</strong></p>\\r\\n<p><strong>Målgruppe:</strong><strong><br></strong>Alle interesserte og våre samarbeidspartnere. <br>NAV kan låne ut sykler til de under 26 år som har behov for spesialsykler, etter søknad. De som er over 26 år må betale en egenandel (10% av verdien på sykkelen, maks kr 4000,-)</p>\\r\\n<p><strong>Utprøving:</strong><br>Vi stiller med terapeuter og forhandlere som kan bistå med utprøving og tilpassing. <br>De som skal hjelpe til å søke om sykkel bør delta ved utprøvingen.<br>Er det noen som har spesielle behov vil vi vite om det i forkant, og <em>så snart som mulig</em>, slik at forhandler har mulighet for å ta med utstyr til tilpassing.</p>\\r\\n<p><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">Forhandlere som deltar er: </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://bardum.no/produktkategori/sykler-og-motor/\" target=\"_blank\">Bardum</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"http://www.caretec.no/produktkategori/aktivitetsutstyr/sykler-utstyr/\" target=\"_blank\">Caretec</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://hjelpemiddelspesialisten.no/produkter/sykler\" target=\"_blank\">Hjelpemiddelspesialisten</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://www.krabat.no/\" target=\"_blank\">Krabat</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://medema.no/produkter/sykler/\" target=\"_blank\">Medema</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">, </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"http://skeno.no/produkter/sykkel/\" target=\"_blank\">Skeno</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\"> og </span><a style=\"color: #0066cc; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: underline; white-space: normal;\" href=\"https://www.sunrisemedical.no/\" target=\"_blank\">Sunrise Medical</a><span style=\"float: none; background-color: #ffffff; color: #000000; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 14px; font-style: normal; font-weight: 400; text-align: left; text-decoration: none; white-space: normal;\">.</span></p>\\r\\n<p><strong>Husk kartleggingen i forkant</strong><strong>:</strong><br>- gi informasjon om regelverk og egenandel<br>- diskuter hvor sykkelen skal brukes<br>- kan personen ivareta sin egen og andres sikkerhet? <br>- trengs det spesiell sykkelstørrelse og tilleggsutstyr?<br>- kan sykkelen oppbevares forsvarlig, også innendørs om vinteren?</p>\\r\\n<p><strong>Reiseutgifter:</strong><br>NAV kan dekke utgifter for at bruker skal komme seg til utprøvingsstedene.<br><em><strong>Det forutsetter at vår kontaktperson i kommunen er kontaktet, har kartlagt behovet og har gjort avtale med NAV Hjelpemiddelsentral</strong></em><em>. Bare de som har gjort dette på forhånd vil kunne få drosjerekvisisjon</em><em>. </em>Vi regner med at dere samler flere personer i samme transport!</p>\\r\\n<p><strong>Smittevern:</strong><br>Alle regler for smittevern vil bli ivaretatt. Kommer det mange som vil prøve sykler samtidig, kan noen måtte vente.</p>\\r\\n<p>Ta kontakt med NAV Hjelpemiddelsentral for mer informasjon på <strong>telefon 40 70 28 20</strong></p>",
+    "Description": null,
+    "configurable_custom": {"Underkategori": null, "Type": "Webinar", "Tema": "Arbeidssøkeraktivitet", "Fylke": null}
 }, {
     "Title": "test tid",
     "ShowInActivityList": 1,
