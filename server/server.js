@@ -30,20 +30,6 @@ const log = createLogger({
     ]
 });
 
-const fetchSalesforceToken = async () => {
-    const response = await fetch(SF_AUTH_URL, {
-        method: 'post',
-        body: new URLSearchParams({
-            'grant_type': 'password',
-            'client_id': SF_CLIENTID,
-            'client_secret': SF_CLIENTSECRET,
-            'username': SF_USER,
-            'password': SF_PASS,
-        }),
-    });
-    const {access_token} = await response.json();
-    return access_token
-}
 
 const sf_api_status_gauge = new Prometheus.Gauge({
     name: 'sf_api_status',
@@ -58,13 +44,32 @@ const kurskatalog_call_counter = new Prometheus.Counter({
 const kurskatalog_call_counter_failure = kurskatalog_call_counter.labels('failure')
 const kurskatalog_call_counter_success = kurskatalog_call_counter.labels('success')
 
-
 /* Tidligere versjon, som hentet token og kursliste fra salesforce på hvert kall brukte
  * 2 sekunder. Så vi cacher, for å gi brukere kurskalenderen øyeblikkelig.
  */
 let kurskatalog = null
+
 const updateKurskatalogAsync = async () => {
-    const token = fetchSalesforceToken()
+    const tokenResponse = await fetch(SF_AUTH_URL, {
+        method: 'post',
+        body: new URLSearchParams({
+            'grant_type': 'password',
+            'client_id': SF_CLIENTID,
+            'client_secret': SF_CLIENTSECRET,
+            'username': SF_USER,
+            'password': SF_PASS,
+        }),
+    });
+
+    if (!tokenResponse.ok) {
+        throw Error("fetch token response not ok")
+    }
+
+    const {access_token: token} = await tokenResponse.json();
+    if (typeof token !== 'string') {
+        throw Error("token not a string")
+    }
+
     const response = await fetch(`${SF_TARGET}/services/apexrest/Course`, {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -72,39 +77,39 @@ const updateKurskatalogAsync = async () => {
     })
 
     if (!response.ok) {
-        log.error("updateKurskatalogAsync response not ok", response)
-        kurskatalog_call_counter_failure.inc()
-        sf_api_status_gauge.set(0)
-        return
+        throw Error("response not ok")
     }
 
     const body = await response.json()
     if (!Array.isArray('array')) {
-        log.error("updateKurskatalogAsync response.body not array", response)
-        kurskatalog_call_counter_failure.inc()
-        sf_api_status_gauge.set(0)
-        return
+        throw Error("response.body not array")
     }
     kurskatalog_call_counter_success.inc()
     sf_api_status_gauge.set(1)
-    log.info("updateKurskatalogAsync successfully fetched ")
-
-    /* We are sorting on ISO datetime strings, so 'en' should be sufficient. */
-    body.sort((a, b) => a.RegistrationFromDateTime.localeCompare(b.RegistrationFromDateTime, 'en'))
-
+    log.info("updateKurskatalogAsync successfully fetched")
     kurskatalog = body
 }
 
-const updateKurskatalog = () => {
+const updateKurskatalog = (reportFailure = true) => {
     updateKurskatalogAsync()
         .then()
         .catch(error => {
-            kurskatalog_call_counter_failure.inc()
-            log.error("error executing updateKurskatalog", error)
+            if (reportFailure) {
+                kurskatalog_call_counter_failure.inc()
+                sf_api_status_gauge.set(0)
+                log.error("updateKurskatalog", error)
+            }
         })
 }
 
-updateKurskatalog()
+/* Might take some time before kubernetes network is ready.
+* Pull frequently in the beginning */
+const setupTimer = setInterval(() => {
+    updateKurskatalog('no-alert')
+    if (kurskatalog !== null) {
+        clearInterval(setupTimer)
+    }
+}, 200)
 setInterval(updateKurskatalog, 10 * /* min */ 60 * /* s */ 1000 /* ms */)
 
 const BUILD_PATH = path.join(process.cwd(), '../build');

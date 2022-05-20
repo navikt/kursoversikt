@@ -25,6 +25,7 @@ const VarighetInfo: FunctionComponent<Props> = ({
         <div className={cls.block}>
             <Normaltekst className={className}>
                 {varighet} {kursForaLageKlokkeslett && lagTidspunkt(kursForaLageKlokkeslett)}
+                {' '} {startTid.getFullYear()}
             </Normaltekst>
         </div>
     );
