@@ -7,7 +7,6 @@ metadata:
     team: fager
 spec:
   image: {{image}}
-  team: fager
   port: 3000
   ingresses:
     - '{{{ingress}}}'

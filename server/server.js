@@ -44,10 +44,6 @@ const getDecoratorFragments = async () => {
     const body = await response.text();
     const {document} = new JSDOM(body).window;
     return {
-        HEADER: document.getElementById('header-withmenu').innerHTML,
-        FOOTER: document.getElementById('footer-withmenu').innerHTML,
-        STYLES: document.getElementById('styles').innerHTML,
-        SCRIPTS: document.getElementById('scripts').innerHTML,
         SETTINGS: `<script type="application/javascript">
             window.environment = {
                 MILJO: '${NAIS_CLUSTER_NAME}',
