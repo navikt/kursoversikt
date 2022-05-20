@@ -106,7 +106,7 @@ const updateKurskatalog = ({reportFailure = true} = { reportFailure: true}) => {
  * So start a fast-pulling for initial loading.
  **/
 const setupTimer = setInterval(() => {
-    updateKurskatalog({reportFailure: true})
+    updateKurskatalog({reportFailure: false})
     if (kurskatalog !== null) {
         clearInterval(setupTimer)
     }
