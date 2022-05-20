@@ -138,7 +138,8 @@ app.use(
  * obs: dette apiet benyttes også av andre (e.g. team-ia)
  */
 app.get('/kursoversikt/api/kurs', async (req, res ) => {
-    res.json(kurskatalog ?? [])
+    // 600 seconds = 10 min
+    res.header("Cache-control", "max-age=600").json(kurskatalog ?? [])
 });
 
 app.use('/kursoversikt', express.static(BUILD_PATH, {index: false}));
