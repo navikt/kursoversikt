@@ -23,10 +23,9 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
             tema = kurs.configurable_custom.Tema;
             underkategori = (kurs.configurable_custom['Underkategori'] ? kurs.configurable_custom['Underkategori'].split(';') :[] );
         }
-        let id:string = (typeof kurs.RegistrationID === 'number') ? kurs.RegistrationID.toString() : kurs.RegistrationID
 
-         return {
-            id: id,
+        return {
+            id: kurs.RegistrationID.toString(),
             tittel: kurs.Title,
             registreringsUrl: kurs.RegistrationUrl,
             starttidspunkt: tilDato(kurs.RegistrationFromDateTime),
@@ -35,11 +34,11 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
             sted: kurs.RegistrationPlaceName,
             beskrivelse: kurs.DescriptionInternal ? kurs.DescriptionInternal : kurs.Description,
             forsideBeskrivelse: kurs.FrontPageDescription,
-            fylke: fylke,
-            type: type,
-            tema: tema,
-            underkategori: underkategori,
-             aktivt:kurs.ShowInActivityList
+            fylke,
+            type,
+            tema,
+            underkategori,
+            aktivt: kurs.ShowInActivityList
         };
     });
 };

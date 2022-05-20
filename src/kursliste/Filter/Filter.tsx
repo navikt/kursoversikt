@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import {Checkbox} from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
@@ -35,10 +35,9 @@ const Filter: FunctionComponent<Props> = ({
                     alternativer.map(
                         alternativ =>
                             (alternativ !== 'Landsdekkende' && (
-                                    <>
+                                    <div key={alternativ}>
                                         <Checkbox
                                             label={alternativ}
-                                            key={alternativ}
                                             onChange={() => toggleFilter(filterGruppe, alternativ)}
                                             checked={checked(filterGruppe, alternativ)}
                                         />
@@ -47,7 +46,7 @@ const Filter: FunctionComponent<Props> = ({
                                                                   toggleFilter={toggleFilter}
                                                                   checked={checked}/>)
                                         )}
-                                    </>
+                                    </div>
                                 )
                             )
                     )) : (
