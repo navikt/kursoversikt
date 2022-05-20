@@ -44,7 +44,7 @@ const kurskatalog_call_counter = new Prometheus.Counter({
 const kurskatalog_call_counter_failure = kurskatalog_call_counter.labels('failure')
 const kurskatalog_call_counter_success = kurskatalog_call_counter.labels('success')
 
-/* Tidligere versjon, som hentet token og kursliste fra salesforce på hvert kall brukte
+/* Tidligere versjon, som hentet token og kursliste fra salesforce på hvert kall, brukte
  * 2 sekunder. Så vi cacher, for å gi brukere kurskalenderen øyeblikkelig.
  */
 let kurskatalog = null
@@ -81,7 +81,7 @@ const updateKurskatalogAsync = async () => {
     }
 
     const body = await response.json()
-    if (!Array.isArray('array')) {
+    if (!Array.isArray(body)) {
         throw Error("response.body not array")
     }
     kurskatalog_call_counter_success.inc()
