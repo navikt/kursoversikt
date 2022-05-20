@@ -7,6 +7,10 @@
     border-bottom: solid 1px #c6c2bf;
     flex-direction: column;
 
+    // Noen ganger inneholder beskrivelser URL-er, som kan være veldig
+    // lange og uten breakpoint.
+    overflow-wrap: anywhere;
+
     &__header {
         display: block;
         margin-bottom: 1rem;
