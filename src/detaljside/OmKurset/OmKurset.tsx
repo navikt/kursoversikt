@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Panel, BodyShort, Heading, Link as DesignLink } from '@navikt/ds-react';
+import { Panel, BodyShort, Heading } from '@navikt/ds-react';
 import { Back } from '@navikt/ds-icons';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';

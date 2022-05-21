@@ -40,5 +40,3 @@ const KursPanelSkeleton: FunctionComponent = () => {
         </Panel>
     );
 };
-
-export default KursPanelSkeleton;

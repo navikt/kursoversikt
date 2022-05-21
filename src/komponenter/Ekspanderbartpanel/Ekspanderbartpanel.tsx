@@ -8,15 +8,16 @@ import {Collapse} from 'react-collapse';
 interface Props {
     tittel: string;
     children: ReactNode;
+    className?: string;
 }
 
 const cls = bemHelper("ekspanderbartpanel")
 
-export const Ekspanderbartpanel: FC<Props> = ({tittel, children}) => {
+export const Ekspanderbartpanel: FC<Props> = ({tittel, children, className}) => {
     const [showing, setShowing] = useState(true)
 
     return (
-        <Panel border>
+        <Panel border className={className}>
             <Button
                 variant="tertiary"
                 className={cls.element("button")}

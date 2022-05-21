@@ -8,7 +8,7 @@ import environment, {gittMiljo} from './utils/environment';
 import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler';
 import { createRoot } from 'react-dom/client';
 import "@navikt/ds-css";
-
+import 'react-loading-skeleton/dist/skeleton.css'
 
 Sentry.init({
     dsn: "https://0d0215555d834fdab7dd2b90d8c5cb38@sentry.gc.nav.no/60",
