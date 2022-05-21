@@ -31,9 +31,9 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 <Skeleton count={3} aria-disabled={true} />
             )}
             {kurs && (
-                <DesignLink className={`navds-button navds-button--primary navds-button--medium ${cls.element("knapp")}`} href={kurs.registreringsUrl}>
+                <a className={`navds-button navds-button--primary navds-button--medium ${cls.element("knapp")}`} href={kurs.registreringsUrl}>
                     Meld deg på
-                </DesignLink>
+                </a>
             )}
             <div className={cls.element('tilbakelenke')}>
                 <RouteLink to={'/'} className={'lenke'}>
