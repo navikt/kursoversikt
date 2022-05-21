@@ -1,39 +1,39 @@
 import bemHelper from "../../utils/bemHelper";
 import React, {FunctionComponent} from "react";
-import {Checkbox} from "nav-frontend-skjema";
+import { CheckboxGroup, Checkbox } from '@navikt/ds-react';
 
 import './UnderKategoriFilter.less'
-import {FilterGruppe} from "../Kursliste";
-
-interface Props {
-    alternativer: string[];
-    toggleFilter: (gruppe: FilterGruppe, filterattr: string) => void;
-    checked: (filtergruppe: FilterGruppe, filterattr: string) => boolean;
-}
+import { FilterSpec } from './Filter';
 
 const cls = bemHelper('underKategoriFilter');
 
-const underkategoriFilterGruppe = 'underkategori'
-
-const UnderKategoriFilter: FunctionComponent<Props> = ({
-                                                           alternativer,
-                                                           toggleFilter,
-                                                           checked,
-
-                                                       }) => {
+const UnderKategoriFilter: FunctionComponent<FilterSpec<string>> = (
+    {
+        tittel,
+        alternativer,
+        selected,
+        updateSelected,
+    }
+) => {
     return (
         <div className={cls.block}>
-            {
-                alternativer.map(
-                    alternativ =>
+            <CheckboxGroup
+                hideLegend
+                legend={tittel}
+                value={selected}
+                onChange={updateSelected}
+            >
+                {
+                    alternativer.map(alternativ =>
                         <Checkbox
-                            label={alternativ}
                             key={alternativ}
-                            onChange={() => toggleFilter(underkategoriFilterGruppe, alternativ)}
-                            checked={checked(underkategoriFilterGruppe, alternativ)}
-                        />
-                )
-            }
+                            value={alternativ}
+                        >
+                            {alternativ}
+                        </Checkbox>
+                    )
+                }
+            </CheckboxGroup>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import bemHelper from '../../utils/bemHelper';
 import './Soketreff.less';
 
@@ -12,9 +12,9 @@ const cls = bemHelper('soketreff');
 
 const Soketreff: FunctionComponent<Props> = ({ antallTreff, totaltAntallKurs }) => {
     return (
-        <Normaltekst className={cls.block}>
+        <BodyShort spacing className={cls.block}>
             <b>{antallTreff}</b> treff i <b>{totaltAntallKurs}</b> kurs
-        </Normaltekst>
+        </BodyShort>
     );
 };
 

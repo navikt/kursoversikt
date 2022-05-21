@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import Panel from 'nav-frontend-paneler';
+import { BodyLong, BodyShort, Panel } from '@navikt/ds-react';
 import { Kurs } from '../../models/Kurs';
-import { Normaltekst } from 'nav-frontend-typografi';
 import './KursPanel.less';
 import bemHelper from '../../utils/bemHelper';
 import StedInfo from '../../komponenter/StedInfo/StedInfo';
@@ -26,16 +25,16 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                     sluttTid={kurs.sluttidspunkt}
                     className={cls.element('tidsTekst')}
                 />
-                <Normaltekst>{lagTidspunkt(kurs)}</Normaltekst>
+                <BodyShort size="small">{lagTidspunkt(kurs)}</BodyShort>
                 <div className={cls.element('rektangel')} />
             </div>
             <div className={cls.element('hovedInnhold')}>
                 <Link to={`/${kurs.id}`} className={classnames(cls.element('header'), 'lenke')}>
                     {kurs.tittel}
                 </Link>
-                <Normaltekst className={cls.element('beskrivelse')}>
+                <BodyLong spacing size="small" className={cls.element('beskrivelse')}>
                     {kurs.beskrivelse || ''}
-                </Normaltekst>
+                </BodyLong>
                 <StedInfo sted={kurs.sted} />
                 <PameldingsfristInfo pameldingsfrist={kurs.pameldingsfrist} />
             </div>

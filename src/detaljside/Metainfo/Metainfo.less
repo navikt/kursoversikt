@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .metainfo {
-    &__panel {
+    &__panel.metainfo__panel { // override design system
         display: flex;
         flex-direction: column;
 
@@ -12,7 +12,7 @@
             margin-bottom: 1rem;
         }
 
-        &__infoTekst {
+        &__infoTekst.metainfo__infoTekst.metainfo__infoTekst { // override designsystem
             display: flex;
             flex-direction: row;
             margin-left: 1rem;
@@ -46,14 +46,14 @@
     @media (min-width: @screen-md-min) {
       width: 20rem;
       margin: 0 1rem 1rem 1rem;
-        &__panel {
+        &__panel.metainfo__panel { // override design system
             padding: 2.5rem 1.5rem 0.75rem 1.5rem;
         }
         &__egenskapTop {
               margin-bottom: 0;
         }
 
-        &__infoTekst {
+        &__infoTekst.metainfo__infoTekst.metainfo__infoTekst { // override designsystem
             margin-bottom: 2rem;
         }
 

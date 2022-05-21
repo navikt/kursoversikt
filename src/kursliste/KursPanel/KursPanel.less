@@ -1,6 +1,7 @@
 @import '../../styles/variables.less';
 
-.kursPanel {
+/** increase css specifitiy: design-systemet overskriver paddingen vår */
+.kursPanel.kursPanel {
     display: flex;
     padding: 1.25rem 1rem 1.75rem;
     margin: 0 1rem 0.5rem;
@@ -11,6 +12,13 @@
     // lange og uten breakpoint.
     overflow-wrap: anywhere;
 
+    @media (min-width: @screen-md-min) {
+        padding: 2rem 2rem 2.5rem;
+        flex-direction: row;
+    }
+}
+
+.kursPanel {
     &__header {
         display: block;
         margin-bottom: 1rem;
@@ -54,8 +62,6 @@
     }
 
     @media (min-width: @screen-md-min) {
-        padding: 2rem 2rem 2.5rem;
-        flex-direction: row;
         .stedInfo {
             margin-bottom: 1rem;
         }

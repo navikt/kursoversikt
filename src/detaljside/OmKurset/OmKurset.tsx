@@ -1,12 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import Panel from 'nav-frontend-paneler';
-import { Systemtittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
-import { VenstreChevron } from 'nav-frontend-chevron';
+import { Panel, BodyShort, Heading, Link as DesignLink } from '@navikt/ds-react';
+import { Back } from '@navikt/ds-icons';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
 import bemHelper from '../../utils/bemHelper';
-import { Link } from 'react-router-dom';
+import { Link as RouteLink} from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 
 const cls = bemHelper('omKurset');
@@ -25,7 +23,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         <span className={cls.block} >
         <Panel className={cls.element('panel')}>
             <header className={cls.element('overskrift')}>
-                <Systemtittel>Om kurset</Systemtittel>
+                <Heading size="medium" level="2">Om kurset</Heading>
             </header>
             {kurs ? (
                 <div dangerouslySetInnerHTML={beskrivelse} />
@@ -33,15 +31,17 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 <Skeleton count={3} aria-disabled={true} />
             )}
             {kurs && (
-                <Lenke className="active knapp knapp--hoved" href={kurs.registreringsUrl}>
+                <DesignLink className={`navds-button navds-button--primary navds-button--medium ${cls.element("knapp")}`} href={kurs.registreringsUrl}>
                     Meld deg på
-                </Lenke>
+                </DesignLink>
             )}
             <div className={cls.element('tilbakelenke')}>
-                <Link to={'/'} className={'lenke'}>
-                    <VenstreChevron type={'venstre'} />
-                    Tilbake til kursoversikten
-                </Link>
+                <RouteLink to={'/'} className={'lenke'}>
+                    <BodyShort size="small">
+                        <Back style={{width: "1.1em", height: "1.1em"}} />{' '}
+                        Tilbake til kursoversikten
+                    </BodyShort>
+                </RouteLink>
             </div>
         </Panel>
         </span>

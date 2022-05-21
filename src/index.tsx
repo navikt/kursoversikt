@@ -7,6 +7,7 @@ import * as Sentry from "@sentry/browser";
 import environment, {gittMiljo} from './utils/environment';
 import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler';
 import { createRoot } from 'react-dom/client';
+import "@navikt/ds-css";
 
 
 Sentry.init({

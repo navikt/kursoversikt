@@ -1,57 +1,72 @@
-import React, { FunctionComponent } from 'react';
-import {Checkbox} from 'nav-frontend-skjema';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import React from 'react';
+import { CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import {Ekspanderbartpanel} from '../../komponenter/Ekspanderbartpanel/Ekspanderbartpanel';
 
-import {FilterGruppe} from '../Kursliste';
 import bemHelper from '../../utils/bemHelper';
 import FiltervalgSkeleton from './FiltervalgSkeleton';
 import './Filter.less';
 import UnderKategoriFilter from "./UnderKategoriFilter";
 
-interface Props {
+export interface FilterSpec<Keys extends string> {
     tittel: string;
-    alternativer: string[];
-    filterGruppe: FilterGruppe;
-    toggleFilter: (gruppe: FilterGruppe, filterattr: string) => void;
-    checked: (filtergruppe: FilterGruppe, filterattr: string) => boolean;
-    underkategorier: string[],
+    alternativer: Keys[];
+    selected: Keys[];
+    updateSelected: (newSelection: Keys[]) => void;
+}
+
+interface Props<Keys extends string> extends FilterSpec<Keys> {
+    underkategorier?: Record<Keys, FilterSpec<string>>,
 }
 
 const cls = bemHelper('filterboks');
-const hjelpemidlerOgTilrettelegg = 'Hjelpemidler og tilrettelegging'
 
-const Filter: FunctionComponent<Props> = ({
+const Filter = <Keys extends string> ({
                                               tittel,
                                               alternativer,
-                                              filterGruppe,
-                                              toggleFilter,
-                                              checked,
+                                              selected,
+                                              updateSelected,
                                               underkategorier,
-                                          }) => {
+                                          }: Props<Keys>) => {
+
     return (
         <div className={cls.block}>
-            <Ekspanderbartpanel tittel={tittel} apen>
-                {alternativer.length > 0 ? (
-                    alternativer.map(
-                        alternativ =>
-                            (alternativ !== 'Landsdekkende' && (
-                                    <div key={alternativ}>
-                                        <Checkbox
-                                            label={alternativ}
-                                            onChange={() => toggleFilter(filterGruppe, alternativ)}
-                                            checked={checked(filterGruppe, alternativ)}
+            <Ekspanderbartpanel tittel={tittel}>
+                <CheckboxGroup
+                    legend={tittel}
+                    hideLegend
+                    value={selected}
+                    onChange={updateSelected}
+                >
+                    {alternativer.length > 0 ? (
+                        alternativer
+                            .filter(alternativ => alternativ !== 'Landsdekkende')
+                            .map(alternativ =>
+                                <div key={alternativ}>
+                                    <Checkbox value={alternativ}> {alternativ} </Checkbox>
+                                    { underkategorier && underkategorier[alternativ] && selected.includes(alternativ) ?
+                                        <UnderKategoriFilter
+                                            tittel={underkategorier[alternativ].tittel}
+                                            alternativer={underkategorier[alternativ].alternativer}
+                                            selected={underkategorier[alternativ].selected}
+                                            updateSelected={underkategorier[alternativ].updateSelected}
                                         />
-                                        {(alternativ === hjelpemidlerOgTilrettelegg && checked(filterGruppe, hjelpemidlerOgTilrettelegg) &&
-                                            (<UnderKategoriFilter alternativer={underkategorier}
-                                                                  toggleFilter={toggleFilter}
-                                                                  checked={checked}/>)
-                                        )}
-                                    </div>
-                                )
+                                        : null
+                                    }
+                                    {/*{(alternativ === hjelpemidlerOgTilrettelegg && checked(filterGruppe, hjelpemidlerOgTilrettelegg) &&*/}
+                                    {/*    (<UnderKategoriFilter*/}
+                                    {/*        legend={hjelpemidlerOgTilrettelegg}*/}
+                                    {/*        alternativer={underkategorier}*/}
+                                    {/*        toggleFilter={toggleFilter}*/}
+                                    {/*        selected={checked}*/}
+                                    {/*    />)*/}
+                                    {/*)}*/}
+                                </div>
                             )
-                    )) : (
-                    <FiltervalgSkeleton/>
-                )}
+                    ) : (
+                        <FiltervalgSkeleton/>
+                    )
+                    }
+                </CheckboxGroup>
             </Ekspanderbartpanel>
         </div>
     );
