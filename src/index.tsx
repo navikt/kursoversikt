@@ -1,12 +1,12 @@
 import 'core-js';
 import 'unorm/lib/unorm';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './styles/index.less';
 import App from './App';
 import * as Sentry from "@sentry/browser";
 import environment, {gittMiljo} from './utils/environment';
 import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler';
+import { createRoot } from 'react-dom/client';
 
 
 Sentry.init({
@@ -36,4 +36,4 @@ if (process.env.REACT_APP_MOCK) {
     require('./mock/SfMock')
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+createRoot(document.getElementById('root')!).render(<App />)

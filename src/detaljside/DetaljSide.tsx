@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useContext, useEffect, useState} from 'react';
 import {Kurs} from '../models/Kurs';
-import {RouteComponentProps} from 'react-router';
 import {Sidetittel} from 'nav-frontend-typografi';
 import 'nav-frontend-knapper-style';
 import bemHelper from '../utils/bemHelper';
@@ -13,13 +12,15 @@ import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
 import {logAmplitudeEvent} from "../utils/amplitude";
 import {KursListeContext} from "../utils/KursProvider";
 import {AlertStripeAdvarsel} from "nav-frontend-alertstriper";
+import { useLocation } from 'react-router-dom';
 
 
 const cls = bemHelper('detaljside');
 
-const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
+const DetaljSide: FunctionComponent = () => {
     const [kurs, setKurs] = useState<Kurs | undefined>(undefined);
     const {alleKurs} = useContext(KursListeContext)
+    const location = useLocation()
 
     const loggDetaljvisning = (kursTittel: string) => {
         logAmplitudeEvent('sidevisning', {
@@ -28,13 +29,13 @@ const DetaljSide: FunctionComponent<RouteComponentProps> = props => {
     };
 
     useEffect(() => {
-        let kursIdFraUrl = props.location.pathname.split('/')[1];
+        let kursIdFraUrl = location.pathname.split('/')[1];
         setKurs(
             alleKurs.find(k =>
             k.id === kursIdFraUrl
         )
         );
-    }, [props.location.pathname, alleKurs]);
+    }, [location.pathname, alleKurs]);
 
     useEffect(()=>{
         if(kurs !== undefined){

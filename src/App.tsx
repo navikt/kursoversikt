@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import DetaljSide from './detaljside/DetaljSide';
 import KursListe from './kursliste/Kursliste';
@@ -20,10 +20,10 @@ function App() {
             <KursProvider>
             <BrowserRouter basename={basename}>
                 <ScrollToTop />
-                <Switch>
-                    <Route path="/:id" exact={true} component={DetaljSide}/>
-                    <Route path="/" exact={true} component={KursListe}/>
-                </Switch>
+                <Routes>
+                    <Route path="/:id" element={<DetaljSide />} />
+                    <Route path="/" element={<KursListe />} />
+                </Routes>
             </BrowserRouter>
             </KursProvider>
         </div>

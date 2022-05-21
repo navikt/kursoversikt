@@ -1,26 +1,26 @@
-import React, {FunctionComponent, useEffect, useState, ReactNode, useContext} from 'react';
-import {RouteComponentProps} from 'react-router';
-import {Sidetittel} from 'nav-frontend-typografi';
+import React, { FunctionComponent, ReactNode, useContext, useEffect, useState } from 'react';
+import { Sidetittel } from 'nav-frontend-typografi';
 import {
     filtrerKurs,
     lagFilterKriterier,
     lagFylkeFilterKriterier,
     lagUnderkategoriFilterKriterier
 } from './filtrertingsMotor';
-import {Kurs} from '../models/Kurs';
-import {lagPlaceholderlisteForKurs} from './KursPanel/KursPanelSkeleton';
+import { Kurs } from '../models/Kurs';
+import { lagPlaceholderlisteForKurs } from './KursPanel/KursPanelSkeleton';
 import bemHelper from '../utils/bemHelper';
 import Filter from './Filter/Filter';
 import IngenKurs from './IngenKurs/IngenKurs';
 import KursPanel from './KursPanel/KursPanel';
 import Soketreff from './Soketreff/Soketreff';
 import Sokeboks from './Sokeboks/Sokeboks';
-import {lagNyttFilter} from './checkboksKontroller';
-import {byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl} from '../komponenter/urlLogikk';
+import { lagNyttFilter } from './checkboksKontroller';
+import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
-import {logAmplitudeEvent} from "../utils/amplitude";
-import {KursListeContext} from "../utils/KursProvider";
+import { logAmplitudeEvent } from '../utils/amplitude';
+import { KursListeContext } from '../utils/KursProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export type FilterState = {
     fylke: string[];
@@ -33,24 +33,24 @@ export type FilterGruppe = 'fylke' | 'type' | 'tema' | 'underkategori';
 export type FilterGruppeUtenFylke = 'type' | 'tema';
 const cls = bemHelper('kursliste');
 
-const KursListe: FunctionComponent<RouteComponentProps> = props => {
+const KursListe: FunctionComponent = () => {
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const {aktiveKurs,kursLaster} = useContext(KursListeContext)
     const [filtrerteKursArray, setFiltrerteKursArray] = useState(Array<Kurs>());
-    const [sokeState, setsokeState] = useState<string>(hentSokFraUrl(props.location.search));
+    const [sokeState, setsokeState] = useState<string>(hentSokFraUrl(location.search));
     const [filterState, setFilterState] = useState<FilterState>(
-        hentFilterFraUrl(props.location.search)
+        hentFilterFraUrl(location.search)
     );
 
     useEffect(()=>{ logAmplitudeEvent('sidevisning', {})}
 ,[])
 
-    const brukFilterPaKurslisteOgOppdaterUrl = () => {
+    useEffect(() => {
+        navigate(byggFilterTilURL(filterState, sokeState), {replace: true});
         setFiltrerteKursArray(filtrerKurs(filterState, sokeState, aktiveKurs));
-        props.history.replace(byggFilterTilURL(filterState, sokeState));
-    };
-
-    useEffect(brukFilterPaKurslisteOgOppdaterUrl, [sokeState, filterState, aktiveKurs, props.history]);
+    }, [sokeState, filterState, aktiveKurs, navigate]);
 
     const handleFilterToggle = (filterGruppe: FilterGruppe, filterKriterie: string) => {
         setFilterState(lagNyttFilter(filterGruppe, filterKriterie, filterState));
