@@ -1,1 +1,0 @@
-web: REACT_APP_MOCK=true yarn serve
