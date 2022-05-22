@@ -16,21 +16,12 @@ jobs:
     steps:
       - name: Sjekk ut kode
         uses: actions/checkout@v2
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - uses: actions/setup-node@v3
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Installer avhengigheter (yarn install)
-        run:  yarn install --ignore-scripts --no-optional
+          node-version: 17
+          cache: 'npm'
+      - run: npm install
+      - run: npm run build
 
 
   bygg:
@@ -62,23 +53,13 @@ jobs:
       - name: Sjekk ut kode
         uses: actions/checkout@v2
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - uses: actions/setup-node@v3
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: 17
+          cache: 'npm'
 
-      - name: Installer avhengigheter (yarn install)
-        run:  yarn install --production --frozen-lockfile
-
-      - name: Bygg (yarn build)
-        run: yarn build
+      - run: npm ci
+      - run: npm run build
 
       - name: Bygg, tag og push Docker-image
         run: |
