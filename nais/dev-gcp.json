@@ -5,5 +5,5 @@
   "sfhost": "navdialog--preprod.my.salesforce.com",
   "sfauthurl": "https://test.salesforce.com/services/oauth2/token",
   "sfauthhost": "test.salesforce.com",
-  "node_env": "production"
+  "node_env": "development"
 }
