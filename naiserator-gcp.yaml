@@ -28,6 +28,8 @@ spec:
       value: '{{{sfauthurl}}}'
     - name: GIT_COMMIT
       value: {{commit}}
+    - name: NODE_ENV
+      value: '{{{node_env}}}'
   envFrom:
     - secret: kursoversikt-secrets
   accessPolicy:
