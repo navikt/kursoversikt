@@ -4,5 +4,6 @@
   "sfurl":"https://navdialog--preprod.my.salesforce.com",
   "sfhost": "navdialog--preprod.my.salesforce.com",
   "sfauthurl": "https://test.salesforce.com/services/oauth2/token",
-  "sfauthhost": "test.salesforce.com"
+  "sfauthhost": "test.salesforce.com",
+  "node_env": "development"
 }
