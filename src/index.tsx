@@ -1,13 +1,14 @@
 import 'core-js';
 import 'unorm/lib/unorm';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './styles/index.less';
 import App from './App';
 import * as Sentry from "@sentry/browser";
 import environment, {gittMiljo} from './utils/environment';
 import { injectDecoratorClientSide } from '@navikt/nav-dekoratoren-moduler';
-
+import { createRoot } from 'react-dom/client';
+import "@navikt/ds-css";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 Sentry.init({
     dsn: "https://0d0215555d834fdab7dd2b90d8c5cb38@sentry.gc.nav.no/60",
@@ -27,13 +28,4 @@ injectDecoratorClientSide({
     urlLookupTable: false,
 }).catch(Sentry.captureException);
 
-if (process.env.REACT_APP_MOCK) {
-    console.log('========================================');
-    console.log('=============== MED MOCK ===============');
-    console.log('===DETTE SKAL DU IKKE SE I PRODUKSJON===');
-    console.log('========================================');
-
-    require('./mock/SfMock')
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+createRoot(document.getElementById('root')!).render(<App />)

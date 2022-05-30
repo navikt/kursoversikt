@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import { dagOgManedPaLesbartFormat } from '../../utils/datoUtils';
 import flaggIkon from '../../ikoner/flag-3.svg';
 import bemHelper from '../../utils/bemHelper';
@@ -17,7 +17,7 @@ const PameldingsfristInfo: FunctionComponent<Props> = ({ pameldingsfrist, classN
     return (
         <div className={classnames(cls.block, className)}>
             <img className={cls.element('ikon')} src={flaggIkon} alt="flaggikon" />
-            <Normaltekst className={cls.element('label')}>
+            <BodyShort size="small" className={cls.element('label')}>
                 <b>Påmeldingsfrist:&nbsp;</b>
                 {dagOgManedPaLesbartFormat(pameldingsfrist)}
                 &nbsp; kl.
@@ -25,7 +25,7 @@ const PameldingsfristInfo: FunctionComponent<Props> = ({ pameldingsfrist, classN
                     hour: '2-digit',
                     minute: '2-digit',
                 })}
-            </Normaltekst>
+            </BodyShort>
         </div>
     );
 };

@@ -1,21 +1,19 @@
 # Kursoversikt
-Denne applikasjonen gir en filtrer-, og søkbar oversikt over kurs og webinarer som Nav tilbyr. Selve applikasjonen finner du her: https://arbeidsgiver.nav.no/kursoversikt/
+Denne applikasjonen gir en filtrer-, og søkbar oversikt over kurs og webinarer som Nav tilbyr. 
+Selve applikasjonen finner du her: 
+- prod: [https://arbeidsgiver.nav.no/kursoversikt/](https://arbeidsgiver.nav.no/kursoversikt/)
+- dev: [https://kursoversikt.dev.nav.no/kursoversikt/](https://kursoversikt.dev.nav.no/kursoversikt/) 
+ 
+## Kjøre lokalt
+Pass på at dependencies for både frontend og server er installert:
+- `npm install`
+- `cd server && npm install`
 
-## Komme i gang
-
-- Installere avhengigheter: `yarn`
-- Kjøre applikasjonen normalt: `yarn start` (NB! Krever at backend kjører på port 8080)
-- Kjøre applikasjon med mock: `yarn start:mock` eller `yarn start:mock:win` på windows
-- Bygge applikasjonen: `yarn build`
-- Kjøre applikasjonen med Node-backend:
-    1. `yarn && yarn build`
-    2. `cd server`
-    3. `npm i && npm start`
-- Kjøre applikasjonen med Docker:
-    1. `yarn && yarn build`
-    2. `yarn docker:build`
-    3. `yarn docker:start`
-    4. For å stoppe, kjør `docker stop <id>` med id-en fra forrige kommando
+Kjør serveren i watch-mode
+- `npm run watch`
+- Besøk [http://localhost:3000/kursoversikt/](http://localhost:3000/kursoversikt/) i en nettleser.
+- Koden rekompileres automatisk; du må refreshe nettleser manuelt.
+- Typescript-feil vises kun i konsollen, ikke i nettleseren.
 
 ---
 
@@ -25,12 +23,10 @@ Eller for genereller spørsmål sjekk commit log for personer som aktivt jobber 
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #arbeidsgiver-min-side-arbeidsgiver.
+Interne henvendelser kan sendes via Slack i kanalen #team-fager.
 
 ### Lenker til applikasjon
 
-dev: https://kursoversikt.dev.nav.no/kursoversikt
-prod: https://arbeidsgiver.nav.no/kursoversikt/
 sentry: https://sentry.gc.nav.no/nav/kurskalender/
 metrics: https://grafana.adeo.no/d/o_9KGF8Gk/team-forste-skanse
 logs: https://logs.adeo.no/app/dashboards#/view/754c72d0-76d8-11eb-90cb-7315dfb7dea6

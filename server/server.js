@@ -102,18 +102,31 @@ const updateKurskatalog = ({reportFailure = true} = { reportFailure: true}) => {
         })
 }
 
-/* Might take some time before container has network access (linkrd (or whatever) sidecar  must start up).
- * So start a fast-pulling for initial loading.
- **/
-const setupTimer = setInterval(() => {
-    updateKurskatalog({reportFailure: false})
-    if (kurskatalog !== null) {
-        clearInterval(setupTimer)
-    }
-}, 500)
+if (process.env.MOCK) {
+    log.warn(
+        `========================================
+=============== MED MOCK ===============
+===DETTE SKAL DU IKKE SE I PRODUKSJON===
+========================================`)
+    import('./mock_kursliste.js').then(k => {
+        kurskatalog = k.default
+        log.info(`kursliste: ${kursliste.length} elementer`)
+    });
+} else {
 
-/* This timer is slower and never cancled. */
-setInterval(updateKurskatalog, 10 * /* min */ 60 * /* s */ 1000 /* ms */)
+    /* Might take some time before container has network access (linkrd (or whatever) sidecar  must start up).
+     * So start a fast-pulling for initial loading.
+     **/
+    const setupTimer = setInterval(() => {
+        updateKurskatalog({reportFailure: false})
+        if (kurskatalog !== null) {
+            clearInterval(setupTimer)
+        }
+    }, 500)
+
+    /* This timer is slower and never cancled. */
+    setInterval(updateKurskatalog, 10 * /* min */ 60 * /* s */ 1000 /* ms */)
+}
 
 const BUILD_PATH = path.join(process.cwd(), '../build');
 
@@ -175,7 +188,7 @@ app.get('/kursoversikt/*', (req, res) => {
 const serve = async () => {
     try {
         app.listen(PORT, () => {
-            log.info('Server listening on port ', PORT);
+            log.info(`Server listening on port ${PORT}`);
         });
     } catch (error) {
         log.error('Server failed to start ', error);

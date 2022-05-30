@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import plasseringsIkon from '../../ikoner/location-pin-6.svg';
 import bemHelper from '../../utils/bemHelper';
 import './StedInfo.less';
@@ -14,9 +14,9 @@ const StedInfo: FunctionComponent<Props> = ({ sted }) => {
     return (
         <div className={cls.block}>
             <img className={cls.element('ikon')} src={plasseringsIkon} alt="plasseringsikon" />
-            <Normaltekst className={cls.element('label')}>
+            <BodyShort size="small" className={cls.element('label')}>
                 <b>Sted:&nbsp;</b> {sted}
-            </Normaltekst>
+            </BodyShort>
         </div>
     );
 };

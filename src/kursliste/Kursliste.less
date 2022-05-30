@@ -5,6 +5,10 @@
     display: ruby-base-container;
     display: -webkit-flex;
     flex-direction: column;
+    &__overskrift {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
 
     &__hovedside {
         display: flex;
@@ -25,7 +29,7 @@
     }
 
     @media (min-width: @screen-md-min) {
-        .overskrift {
+        &__overskrift {
             margin-bottom: 0.7rem;
         }
         &__hovedside {

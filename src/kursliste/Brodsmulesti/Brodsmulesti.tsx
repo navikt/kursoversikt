@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { onBreadcrumbClick, setBreadcrumbs } from '@navikt/nav-dekoratoren-moduler';
 
 interface Brodsmule {
@@ -13,10 +13,10 @@ interface BrodsmuleProps {
 }
 
 const Brodsmulesti = ({brodsmuler}: BrodsmuleProps) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     onBreadcrumbClick(breadcrumb => {
-        history.push(breadcrumb.url);
+        navigate(breadcrumb.url);
     });
 
     const forsideBrodsmule = [{url: '/', title: 'Kurskalender', handleInApp: true}];

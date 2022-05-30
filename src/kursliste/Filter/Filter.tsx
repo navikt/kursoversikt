@@ -1,60 +1,70 @@
-import React, { FunctionComponent } from 'react';
-import {Checkbox} from 'nav-frontend-skjema';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import React from 'react';
+import { CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import {Ekspanderbartpanel} from '../../komponenter/Ekspanderbartpanel/Ekspanderbartpanel';
 
-import {FilterGruppe} from '../Kursliste';
 import bemHelper from '../../utils/bemHelper';
 import FiltervalgSkeleton from './FiltervalgSkeleton';
 import './Filter.less';
-import UnderKategoriFilter from "./UnderKategoriFilter";
 
-interface Props {
+export interface FilterSpec<Keys extends string> {
     tittel: string;
-    alternativer: string[];
-    filterGruppe: FilterGruppe;
-    toggleFilter: (gruppe: FilterGruppe, filterattr: string) => void;
-    checked: (filtergruppe: FilterGruppe, filterattr: string) => boolean;
-    underkategorier: string[],
+    alternativer: Keys[];
+    selected: Keys[];
+    updateSelected: (newSelection: Keys[]) => void;
+}
+
+interface Props<Keys extends string> extends FilterSpec<Keys> {
+    className?: string;
+    underkategorier?: Record<Keys, FilterSpec<string>>,
 }
 
 const cls = bemHelper('filterboks');
-const hjelpemidlerOgTilrettelegg = 'Hjelpemidler og tilrettelegging'
 
-const Filter: FunctionComponent<Props> = ({
-                                              tittel,
-                                              alternativer,
-                                              filterGruppe,
-                                              toggleFilter,
-                                              checked,
-                                              underkategorier,
-                                          }) => {
-    return (
-        <div className={cls.block}>
-            <Ekspanderbartpanel tittel={tittel} apen>
-                {alternativer.length > 0 ? (
-                    alternativer.map(
-                        alternativ =>
-                            (alternativ !== 'Landsdekkende' && (
-                                    <div key={alternativ}>
-                                        <Checkbox
-                                            label={alternativ}
-                                            onChange={() => toggleFilter(filterGruppe, alternativ)}
-                                            checked={checked(filterGruppe, alternativ)}
-                                        />
-                                        {(alternativ === hjelpemidlerOgTilrettelegg && checked(filterGruppe, hjelpemidlerOgTilrettelegg) &&
-                                            (<UnderKategoriFilter alternativer={underkategorier}
-                                                                  toggleFilter={toggleFilter}
-                                                                  checked={checked}/>)
-                                        )}
-                                    </div>
-                                )
-                            )
-                    )) : (
-                    <FiltervalgSkeleton/>
-                )}
-            </Ekspanderbartpanel>
-        </div>
-    );
-};
+const Filter = <Keys extends string> (props: Props<Keys>) =>
+    <Ekspanderbartpanel tittel={props.tittel} className={cls.block}>
+        <Checkboxes {...props} />
+    </Ekspanderbartpanel>;
+
+const Checkboxes = <Keys extends string>(
+        {
+            tittel,
+            alternativer,
+            selected,
+            updateSelected,
+            underkategorier,
+            className
+        }: Props<Keys>
+    ) =>
+        <CheckboxGroup
+            legend={tittel}
+            hideLegend
+            value={selected}
+            onChange={updateSelected}
+            className={className}
+        >
+            {alternativer.length > 0 ? (
+                alternativer
+                    .filter(alternativ => alternativ !== 'Landsdekkende')
+                    .map(alternativ =>
+                        <div key={alternativ}>
+                            <Checkbox value={alternativ}> {alternativ} </Checkbox>
+                            { underkategorier && underkategorier[alternativ] && selected.includes(alternativ) ?
+                                <Checkboxes
+                                    tittel={underkategorier[alternativ].tittel}
+                                    alternativer={underkategorier[alternativ].alternativer}
+                                    selected={underkategorier[alternativ].selected}
+                                    updateSelected={underkategorier[alternativ].updateSelected}
+                                    className={cls.element("checkboxes", "indent")}
+                                />
+                                : null
+                            }
+                        </div>
+                    )
+            ) : (
+                <FiltervalgSkeleton/>
+            )
+            }
+        </CheckboxGroup>
+;
 
 export default Filter;

@@ -19,11 +19,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Installer avhengigheter (yarn install)
-        run:  yarn install --frozen-lockfile
+      - run:  npm ci
 
-      - name: Bygg (yarn build)
-        run: yarn build
+      - run: npm run build
 
       - name: Sjekk om branch er oppdatert mot master
         id: sjekk-mot-master

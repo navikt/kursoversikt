@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 
 import bemHelper from '../../utils/bemHelper';
 import fjell from './fjell.svg';
@@ -11,7 +11,7 @@ const IngenKurs: FunctionComponent = () => {
     return (
         <div className={cls.block}>
             <img src={fjell} alt="fjell" className={cls.element('illustrasjon')} />
-            <Systemtittel>Fant ingen kurs</Systemtittel>
+            <Heading size="medium" level="2">Fant ingen kurs</Heading>
             <p>Prøv igjen med andre kriterier</p>
         </div>
     );

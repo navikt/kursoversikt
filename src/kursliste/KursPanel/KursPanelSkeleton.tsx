@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import Panel from 'nav-frontend-paneler';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Panel, BodyLong } from '@navikt/ds-react';
 import bemHelper from '../../utils/bemHelper';
 import Skeleton from 'react-loading-skeleton';
 import './KursPanel.less';
@@ -21,10 +20,10 @@ const KursPanelSkeleton: FunctionComponent = () => {
                 <div className={cls.element('header')}>
                     <Skeleton width={140} />
                 </div>
-                <Normaltekst className={cls.element('beskrivelse')}>
+                <BodyLong className={cls.element('beskrivelse')}>
                     <Skeleton />
                     <Skeleton width={260} />
-                </Normaltekst>
+                </BodyLong>
                 <div className={cls.element('skeleton__ikonOgTekst')}>
                     <div className={cls.element('skeleton__ikon')}>
                         <Skeleton circle width={20} height={20} />
@@ -41,5 +40,3 @@ const KursPanelSkeleton: FunctionComponent = () => {
         </Panel>
     );
 };
-
-export default KursPanelSkeleton;
