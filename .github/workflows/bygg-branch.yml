@@ -7,8 +7,7 @@ on:
       - '!master'
 
 env:
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}
-
+  IMAGE_BASE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}
 jobs:
   bygg:
     name: Bygg branch og lag deployment-issue
@@ -34,11 +33,20 @@ jobs:
         run: |
           echo ::set-output name=branch::"$(echo ${GITHUB_REF#refs/heads/})"
 
-      - name: Bygg, tag og push Docker-image
-        run: |
-          docker build --tag $IMAGE_BASE:$GITHUB_SHA .
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u $GITHUB_REPOSITORY --password-stdin
-          docker push $IMAGE_BASE:$GITHUB_SHA
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}
+            ${{ env.IMAGE_BASE }}:latest
+          cache-from: type=registry,ref=${{ env.IMAGE_BASE }}:latest
+          cache-to: type=inline
 
       - name: Lukk gamle deployment-issues
         uses: actions/github-script@0.5.0
