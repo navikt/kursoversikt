@@ -8,6 +8,8 @@ on:
 
 env:
   IMAGE_BASE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}
+  IMAGE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
+
 jobs:
   bygg:
     name: Bygg branch og lag deployment-issue

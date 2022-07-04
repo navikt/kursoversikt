@@ -3,7 +3,9 @@ on:
   repository_dispatch:
     types: [deploy-command]
 env:
+  IMAGE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
   IMAGE_BASE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}
+
 jobs:
   deploy-branch:
     name: Deploy til dev
