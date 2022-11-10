@@ -39,7 +39,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
-            ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest
-          cache-from: type=registry,ref=${{ github.repository }}/${{ github.event.repository.name }}:latest
+            ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/kursoversikt:latest
+          cache-from: type=registry,ref=${{ github.repository }}/kursoversikt:latest
           cache-to: type=inline
