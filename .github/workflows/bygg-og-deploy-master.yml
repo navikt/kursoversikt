@@ -79,11 +79,12 @@ jobs:
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
+          IMAGE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: nais/dev-gcp.json
-          PRINT_PAYLOAD: true
           VAR: commit=${{ env.GITHUB_SHA }}
+          RESOURCE: nais/dev-gcp.yaml
+          PRINT_PAYLOAD: true
 
   deploy-prod-gcp:
     name: Deploy til prod-gcp
@@ -95,8 +96,9 @@ jobs:
       - name: Deploy til prod-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
+          IMAGE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
+          VAR: commit=${{ env.GITHUB_SHA }}
           RESOURCE: nais/prod-gcp.yaml
           PRINT_PAYLOAD: true
-          VAR: commit=${{ env.GITHUB_SHA }}
