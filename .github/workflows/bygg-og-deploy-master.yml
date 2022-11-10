@@ -30,26 +30,6 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     steps:
-      - name: Lukk deployment-issues
-        uses: actions/github-script@0.5.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: ['deploy']
-            }).then(response => {
-              response.data.forEach(issue => {
-                github.issues.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  state: 'closed'
-                });
-              });
-            });
       - name: Sjekk ut kode
         uses: actions/checkout@v2
 
@@ -105,9 +85,8 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: naiserator-gcp.yaml
+          RESOURCE: nais/dev-gcp.json
           PRINT_PAYLOAD: true
-          VARS: nais/dev-gcp.json
           VAR: commit=${{ env.GITHUB_SHA }}
 
   deploy-prod-gcp:
@@ -122,7 +101,6 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: naiserator-gcp.yaml
+          RESOURCE: nais/prod-gcp.yaml
           PRINT_PAYLOAD: true
-          VARS: nais/prod-gcp.json
           VAR: commit=${{ env.GITHUB_SHA }}
