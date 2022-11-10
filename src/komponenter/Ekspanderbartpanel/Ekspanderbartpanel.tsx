@@ -3,7 +3,6 @@ import { Button, Heading, Panel } from '@navikt/ds-react';
 import { Collapse as CollapseIcon, Expand as ExpandIcon } from '@navikt/ds-icons';
 import bemHelper from '../../utils/bemHelper';
 import './Ekspanderbartpanel.less';
-import {Collapse} from 'react-collapse';
 
 interface Props {
     tittel: string;
@@ -25,12 +24,14 @@ export const Ekspanderbartpanel: FC<Props> = ({tittel, children, className}) => 
                 aria-expanded={showing}
             >
                 <Heading size="small" as="span"> {tittel} </Heading>
-                { showing ? <CollapseIcon /> : <ExpandIcon /> }
+                { showing ? <CollapseIcon title="Lukk"/> : <ExpandIcon title="Åpne" /> }
             </Button>
 
-            <Collapse isOpened={showing}>
-                { children }
-            </Collapse>
+            {showing &&
+                <div className={cls.modifier("content")}>
+                    {children}
+                </div>
+            }
         </Panel>
     )
 }

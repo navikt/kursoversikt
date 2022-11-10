@@ -15,10 +15,10 @@ const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon, verdi }) => {
         <div className={'filterboks'}>
             <Panel border className={cls.block}>
                 <Search
-                    label={ <Heading size="small" level="2">Søk etter kurs</Heading> }
+                    id="sokeboks_sok"
+                    label="Søk etter kurs"
                     hideLabel={false}
                     onChange={sokeFunksjon}
-                    placeholder={'Søk etter kurs'}
                     value={verdi}
                     variant="simple"
                 />
