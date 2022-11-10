@@ -1,0 +1,43 @@
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
+metadata:
+  name: kursoversikt
+  namespace: fager
+  labels:
+    team: fager
+spec:
+  image: {{image}}
+  port: 3000
+  ingresses:
+    - https://kursoversikt.dev.nav.no/kursoversikt
+  liveness:
+    path: /kursoversikt/internal/isAlive
+    initialDelay: 20
+  readiness:
+    path: /kursoversikt/internal/isReady
+    initialDelay: 20
+  prometheus:
+    enabled: true
+    path: /kursoversikt/internal/metrics
+  env:
+    - name: NODE_EXTRA_CA_CERTS
+      value: /etc/ssl/ca-bundle.pem
+    - name: SF_TARGET
+      value: https://navdialog--preprod.my.salesforce.com
+    - name: SF_AUTH_URL
+      value: https://test.salesforce.com/services/oauth2/token
+    - name: GIT_COMMIT
+      value: {{commit}}
+    - name: NODE_ENV
+      value: development
+  envFrom:
+    - secret: kursoversikt-secrets
+  accessPolicy:
+    outbound:
+      rules:
+        - application: kursoversikt
+      external:
+        - host: nav.pameldingssystem.no
+        - host: www.nav.no
+        - host: test.salesforce.com
+        - host: navdialog--preprod.my.salesforce.com
