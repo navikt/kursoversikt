@@ -110,7 +110,7 @@ if (process.env.MOCK) {
 ========================================`)
     import('./mock_kursliste.js').then(k => {
         kurskatalog = k.default
-        log.info(`kursliste: ${kursliste.length} elementer`)
+        log.info(`kurskatalog: ${kurskatalog.length} elementer`)
     });
 } else {
 
