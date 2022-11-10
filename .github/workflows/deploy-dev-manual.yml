@@ -2,9 +2,6 @@ on: workflow_dispatch
 
 name: Deploy dev
 
-env:
-  IMAGE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
-
 jobs:
   deploy-dev-manual:
     name: deploy dev manual
@@ -17,10 +14,10 @@ jobs:
       - name: "Deploy dev-gcp"
         uses: nais/deploy/actions/deploy@v1
         env:
+          IMAGE: ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais/dev-gcp.yaml
           PRINT_PAYLOAD: true
           VAR: commit=${{ github.sha }}
           REF: ${{ github.sha }}
-          IMAGE: ${{ env.IMAGE }}
