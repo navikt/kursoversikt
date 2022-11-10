@@ -6,9 +6,6 @@ on:
       - '*'
       - '!master'
 
-env:
-  IMAGE_BASE: ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}
-
 jobs:
   bygg:
     name: Bygg branch og lag deployment-issue
@@ -42,7 +39,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.IMAGE }}
-            ${{ env.IMAGE_BASE }}:latest
-          cache-from: type=registry,ref=${{ env.IMAGE_BASE }}:latest
+            ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/${{ github.event.repository.name }}:latest
+          cache-from: type=registry,ref=${{ github.repository }}/${{ github.event.repository.name }}:latest
           cache-to: type=inline
