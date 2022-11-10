@@ -81,7 +81,7 @@ jobs:
           IMAGE: ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          VAR: commit=${{ env.GITHUB_SHA }}
+          VAR: commit=${{ github.sha }}
           RESOURCE: nais/dev-gcp.yaml
           PRINT_PAYLOAD: true
 
@@ -98,6 +98,6 @@ jobs:
           IMAGE: ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          VAR: commit=${{ env.GITHUB_SHA }}
+          VAR: commit=${{ github.sha }}
           RESOURCE: nais/prod-gcp.yaml
           PRINT_PAYLOAD: true
