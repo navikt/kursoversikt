@@ -1,9 +1,0 @@
-{
-  "ingress": "https://kursoversikt.dev.nav.no/kursoversikt",
-  "sfauthtarget": "https://test.salesforce.com",
-  "sfurl":"https://navdialog--preprod.my.salesforce.com",
-  "sfhost": "navdialog--preprod.my.salesforce.com",
-  "sfauthurl": "https://test.salesforce.com/services/oauth2/token",
-  "sfauthhost": "test.salesforce.com",
-  "node_env": "development"
-}
