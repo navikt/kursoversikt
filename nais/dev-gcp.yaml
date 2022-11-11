@@ -23,7 +23,7 @@ spec:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
     - name: SF_TARGET
-      value: https://navdialog--preprod.my.salesforce.com
+      value: https://navdialog--preprod.sandbox.my.salesforce.com
     - name: SF_AUTH_URL
       value: https://test.salesforce.com/services/oauth2/token
     - name: GIT_COMMIT
