@@ -28,5 +28,5 @@ Interne henvendelser kan sendes via Slack i kanalen #team-fager.
 ### Lenker til applikasjon
 
 sentry: https://sentry.gc.nav.no/nav/kurskalender/
-metrics: https://grafana.adeo.no/d/o_9KGF8Gk/team-forste-skanse
+metrics: https://grafana.nais.io/d/o_9KGF8Gk/fager?orgId=1
 logs: https://logs.adeo.no/app/dashboards#/view/754c72d0-76d8-11eb-90cb-7315dfb7dea6
