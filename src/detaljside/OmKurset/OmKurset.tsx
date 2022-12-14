@@ -38,7 +38,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
             <div className={cls.element('tilbakelenke')}>
                 <RouteLink to={'/'} className={'lenke'}>
                     <BodyShort size="small">
-                        <Back style={{width: "1.1em", height: "1.1em"}} />{' '}
+                        <Back title="pil tilbake" aria-hidden style={{width: "1.1em", height: "1.1em"}} />{' '}
                         Tilbake til kursoversikten
                     </BodyShort>
                 </RouteLink>
