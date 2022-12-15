@@ -54,8 +54,8 @@ const isNewish = (kurs) => {
     const earliest = new Date()
     earliest.setMonth(earliest.getMonth() - 3)
 
-    const {RegistrationToDateTime} = kurs
-    return earliest < Date.parse(RegistrationToDateTime)
+    const {RegistrationToDateTime, ShowInActivityList} = kurs
+    return ShowInActivityList === 1 && earliest < Date.parse(RegistrationToDateTime)
 }
 const updateKurskatalogAsync = async () => {
     const tokenResponse = await fetch(SF_AUTH_URL, {
