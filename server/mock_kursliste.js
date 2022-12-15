@@ -1,3 +1,21 @@
+const randomDates = () => {
+    const start = new Date()
+    start.setMonth(start.getMonth() - 3)
+    const end = new Date()
+    end.setMonth(start.getMonth() + 3)
+    const from = new Date(+start + Math.random() * (end - start));
+    const to = new Date(from)
+    to.setMonth(from.getMonth() + 1)
+    const deadline = new Date(from)
+    deadline.setMonth(from.getMonth() + 1)
+    deadline.setHours(to.getHours() - (24 * 7))
+    return {
+        from: from.toISOString(),
+        to: to.toISOString(),
+        deadline: deadline.toISOString(),
+    };
+}
+
 const sfkursliste = [{
     "Title": "Hørselsteknisk utstyr: Roger skoleanlegg i skolen – Koding av utstyr",
     "ShowInActivityList": 0,
@@ -639,6 +657,12 @@ const sfkursliste = [{
     "FrontPageDescription": "<p><b>Velkommen til kurs!</b></p><p><br></p><p>Her kan legge inn:</p><p><br></p><ul><li>Lenker</li><li>Bilder</li><li>Lister m.m. </li></ul>",
     "Description": null,
     "configurable_custom": {"Underkategori": null, "Type": "Kurs", "Tema": "Annet", "Fylke": null}
-}]
+}].map(kurs => {
+    const {from, to, deadline} = randomDates()
+    kurs.RegistrationFromDateTime = from
+    kurs.RegistrationToDateTime = to
+    kurs.RegistrationDeadline = deadline
+    return kurs
+})
 
 export default sfkursliste;
