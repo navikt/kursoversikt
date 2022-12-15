@@ -2,10 +2,11 @@ import path from 'path';
 import fetch from 'node-fetch';
 import express from 'express';
 import mustacheExpress from 'mustache-express';
-import {createLogger, transports, format} from 'winston';
+import {createLogger, format, transports} from 'winston';
 import Prometheus from "prom-client";
 
 import require from "./esm-require.js";
+
 const apiMetricsMiddleware = require('prometheus-api-metrics');
 
 const {
@@ -49,6 +50,13 @@ const kurskatalog_call_counter_success = kurskatalog_call_counter.labels('succes
  */
 let kurskatalog = null
 
+const isNewish = (kurs) => {
+    const earliest = new Date()
+    earliest.setMonth(earliest.getMonth() - 3)
+
+    const {RegistrationToDateTime} = kurs
+    return earliest < Date.parse(RegistrationToDateTime)
+}
 const updateKurskatalogAsync = async () => {
     const tokenResponse = await fetch(SF_AUTH_URL, {
         method: 'post',
@@ -87,7 +95,7 @@ const updateKurskatalogAsync = async () => {
     kurskatalog_call_counter_success.inc()
     sf_api_status_gauge.set(1)
     log.info("updateKurskatalogAsync successfully fetched")
-    kurskatalog = body
+    kurskatalog = body.filter(isNewish)
 }
 
 const updateKurskatalog = ({reportFailure = true} = { reportFailure: true}) => {
@@ -109,7 +117,7 @@ if (process.env.MOCK) {
 ===DETTE SKAL DU IKKE SE I PRODUKSJON===
 ========================================`)
     import('./mock_kursliste.js').then(k => {
-        kurskatalog = k.default
+        kurskatalog = k.default.filter(isNewish)
         log.info(`kurskatalog: ${kurskatalog.length} elementer`)
     });
 } else {
@@ -149,6 +157,8 @@ app.use(
 
 /**
  * obs: dette apiet benyttes også av andre (e.g. team-ia)
+ * * forebygge-sykefravaer bryr seg kun om kommende kurs
+ * * det samme gjelder min-is
  */
 app.get('/kursoversikt/api/kurs', async (req, res ) => {
     // 600 seconds = 10 min
