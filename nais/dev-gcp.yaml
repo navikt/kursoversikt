@@ -9,7 +9,7 @@ spec:
   image: {{image}}
   port: 3000
   ingresses:
-    - https://kursoversikt.dev.nav.no/kursoversikt
+    - https://arbeidsgiver.intern.dev.nav.no/kursoversikt
   liveness:
     path: /kursoversikt/internal/isAlive
     initialDelay: 20
@@ -34,8 +34,6 @@ spec:
     - secret: kursoversikt-secrets
   accessPolicy:
     outbound:
-      rules:
-        - application: kursoversikt
       external:
         - host: nav.pameldingssystem.no
         - host: www.nav.no
