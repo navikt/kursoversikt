@@ -38,4 +38,4 @@ spec:
         - host: nav.pameldingssystem.no
         - host: www.nav.no
         - host: test.salesforce.com
-        - host: navdialog--preprod.my.salesforce.com
+        - host: navdialog--preprod.sandbox.my.salesforce.com
