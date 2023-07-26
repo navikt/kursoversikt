@@ -106,6 +106,8 @@ const updateKurskatalog = ({reportFailure = true} = { reportFailure: true}) => {
                 kurskatalog_call_counter_failure.inc()
                 sf_api_status_gauge.set(0)
                 log.error(`updateKurskatalog ${error.message}`)
+            } else {
+                log.info(`updateKurskatalog ${error.message}`)
             }
         })
 }
