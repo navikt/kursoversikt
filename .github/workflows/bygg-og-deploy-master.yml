@@ -35,7 +35,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm ci
-        working-director: ./server
+        working-directory: ./server
       
       - uses: docker/login-action@v1
         with:
