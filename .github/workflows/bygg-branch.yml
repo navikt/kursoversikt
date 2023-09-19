@@ -25,10 +25,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
-    - run:  npm ci
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-      working-directory: ./server
+      - run:  npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+        working-directory: ./server
 
       - run: npm run build
 
