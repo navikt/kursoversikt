@@ -10,11 +10,10 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - name: Sjekk ut kode
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 17
+          node-version: 20
           cache: 'npm'
       - run: npm install
       - run: npm run build
@@ -26,16 +25,17 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     steps:
-      - name: Sjekk ut kode
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 17
+          node-version: 20
           cache: 'npm'
 
       - run: npm ci
       - run: npm run build
+      - run: npm ci
+        working-director: ./server
       
       - uses: docker/login-action@v1
         with:
@@ -72,8 +72,7 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     needs: bygg
     steps:
-      - name: Sjekk ut kode
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v1
@@ -90,8 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: bygg
     steps:
-      - name: Sjekk ut kode
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Deploy til prod-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
