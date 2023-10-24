@@ -34,8 +34,6 @@ spec:
     - secret: kursoversikt-secrets
   accessPolicy:
     outbound:
-      rules:
-        - application: kursoversikt
       external:
         - host: nav.pameldingssystem.no
         - host: www.nav.no
