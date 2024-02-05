@@ -7,54 +7,31 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: CICD
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'npm'
-      - run: npm install
-      - run: npm run build
-
-
-  bygg:
-    name: Bygg
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     permissions:
       contents: 'read'
       id-token: 'write'
       packages: 'write'
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'npm'
-
       - run: npm ci
       - run: npm run build
       - run: npm ci
         working-directory: ./server
-      
-      - uses: docker/login-action@v1
+
+      - uses: nais/docker-build-push@v0
+        id: dockerpush
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      -  uses: docker/build-push-action@v2
-         with:
-            context: .
-            push: true
-            tags: |
-              ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
-              ghcr.io/${{ github.repository }}/kursoversikt:latest
-            cache-from: type=registry,ref=${{ github.repository }}/kursoversikt:latest
-          
+          team: fager
+          tag: ${{ github.sha }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
       - name: Lag sentry release
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
@@ -69,37 +46,12 @@ jobs:
           echo '[sentry-cli releases finalize]'
           npx -p @sentry/cli sentry-cli releases finalize "${{ github.sha }}"
 
-  deploy-dev-gcp:
-    name: Deploy til dev-gcp
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-    needs: bygg
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Deploy til dev-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          IMAGE: ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          VAR: commit=${{ github.sha }}
-          RESOURCE: nais/dev-gcp.yaml
-          PRINT_PAYLOAD: true
-
-  deploy-prod-gcp:
-    name: Deploy til prod-gcp
-    runs-on: ubuntu-latest
-    needs: bygg
-    steps:
-      - uses: actions/checkout@v3
       - name: Deploy til prod-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
-          IMAGE: ghcr.io/${{ github.repository }}/kursoversikt:${{ github.sha }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          IMAGE: ${{ steps.dockerpush.outputs.image }}
           CLUSTER: prod-gcp
-          VAR: commit=${{ github.sha }}
           RESOURCE: nais/prod-gcp.yaml
           PRINT_PAYLOAD: true
+          VAR: commit=${{ github.sha }}
