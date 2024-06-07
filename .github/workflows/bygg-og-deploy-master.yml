@@ -49,8 +49,7 @@ jobs:
             - name: Deploy til prod-gcp
               uses: nais/deploy/actions/deploy@v2
               env:
-                  IMAGE: ${{ steps.dockerpush.outputs.image }}
                   CLUSTER: prod-gcp
                   RESOURCE: nais/prod-gcp.yaml
                   PRINT_PAYLOAD: true
-                  VAR: commit=${{ github.sha }}
+                  VAR: commit=${{ github.sha }},image=${{ steps.dockerpush.outputs.image }}
