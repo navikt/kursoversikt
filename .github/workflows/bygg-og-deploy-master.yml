@@ -48,6 +48,9 @@ jobs:
 
             - name: Deploy til prod-gcp
               uses: nais/deploy/actions/deploy@v2
+              permissions:
+                  contents: 'read'
+                  id-token: 'write'
               env:
                   CLUSTER: prod-gcp
                   RESOURCE: nais/prod-gcp.yaml
