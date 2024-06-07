@@ -1,57 +1,56 @@
 name: Bygg og deploy master
 
 on:
-  push:
-    branches:
-      - 'master'
+    push:
+        branches:
+            - 'master'
 
 jobs:
-  test:
-    name: CICD
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-      packages: 'write'
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      - run: npm ci
-        working-directory: ./server
+    test:
+        name: CICD
+        runs-on: ubuntu-latest
+        permissions:
+            contents: 'read'
+            id-token: 'write'
+            packages: 'write'
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  cache: 'npm'
+            - run: npm ci
+            - run: npm run build
+            - run: npm ci
+              working-directory: ./server
 
-      - uses: nais/docker-build-push@v0
-        id: dockerpush
-        with:
-          team: fager
-          tag: ${{ github.sha }}
-          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
-          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+            - uses: nais/docker-build-push@v0
+              id: dockerpush
+              with:
+                  team: fager
+                  tag: ${{ github.sha }}
+                  project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+                  identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
-      - name: Lag sentry release
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        continue-on-error: true
-        run: |
-          export SENTRY_LOG_LEVEL=info
-          echo '[sentry-cli releases new]'
-          npx -p @sentry/cli sentry-cli releases new "${{ github.sha }}"
-          echo '[sentry-cli releases files]'
-          npx -p @sentry/cli sentry-cli releases files "${{ github.sha }}" upload-sourcemaps build/static/js \
-              --url-prefix '~/kursoversikt/static/js'
-          echo '[sentry-cli releases finalize]'
-          npx -p @sentry/cli sentry-cli releases finalize "${{ github.sha }}"
+            - name: Lag sentry release
+              env:
+                  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+              continue-on-error: true
+              run: |
+                  export SENTRY_LOG_LEVEL=info
+                  echo '[sentry-cli releases new]'
+                  npx -p @sentry/cli sentry-cli releases new "${{ github.sha }}"
+                  echo '[sentry-cli releases files]'
+                  npx -p @sentry/cli sentry-cli releases files "${{ github.sha }}" upload-sourcemaps build/static/js \
+                      --url-prefix '~/kursoversikt/static/js'
+                  echo '[sentry-cli releases finalize]'
+                  npx -p @sentry/cli sentry-cli releases finalize "${{ github.sha }}"
 
-      - name: Deploy til prod-gcp
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          IMAGE: ${{ steps.dockerpush.outputs.image }}
-          CLUSTER: prod-gcp
-          RESOURCE: nais/prod-gcp.yaml
-          PRINT_PAYLOAD: true
-          VAR: commit=${{ github.sha }}
+            - name: Deploy til prod-gcp
+              uses: nais/deploy/actions/deploy@v2
+              env:
+                  IMAGE: ${{ steps.dockerpush.outputs.image }}
+                  CLUSTER: prod-gcp
+                  RESOURCE: nais/prod-gcp.yaml
+                  PRINT_PAYLOAD: true
+                  VAR: commit=${{ github.sha }}
