@@ -9,7 +9,7 @@ spec:
     image: '{{ image }}'
     port: 3000
     ingresses:
-        - https://kursoversiktarbeidsgiver.nav.no/kursoversikt/
+        - https://arbeidsgiver.nav.no/kursoversikt/
     liveness:
         path: /kursoversikt/internal/isAlive
         initialDelay: 20
