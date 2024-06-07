@@ -6,7 +6,7 @@ metadata:
     labels:
         team: hot-crm
 spec:
-    image: { { image } }
+    image: '{{ image }}'
     port: 3000
     ingresses:
         - https://arbeidsgiver.nav.no/kursoversikt-hot/
@@ -27,7 +27,7 @@ spec:
         - name: SF_AUTH_URL
           value: https://login.salesforce.com/services/oauth2/token
         - name: GIT_COMMIT
-          value: { { commit } }
+          value: '{{ commit }}'
         - name: NODE_ENV
           value: production
     envFrom:
