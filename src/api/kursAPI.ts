@@ -1,27 +1,32 @@
 import { Kurs, KursFraKildeSystem } from '../models/Kurs';
 import { sammenlignKursPaDato, tilDato } from '../utils/datoUtils';
-import {kursapiUrl} from "../utils/lenker";
-
+import { kursapiUrl } from '../utils/lenker';
 
 export async function hentAlleKurs(): Promise<Kurs[]> {
     let response = await fetch(kursapiUrl);
     if (response.ok) {
         const kurs = await response.json();
-        return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato)
+        return oversettTilKursObjekt(kurs).sort(sammenlignKursPaDato);
     } else {
         return [];
     }
 }
 
-
 const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
     return alleKurs.map((kurs: KursFraKildeSystem) => {
         let fylke, type, tema, underkategori;
         if (kurs.configurable_custom) {
-            fylke = (kurs.configurable_custom['Fylke'] ? kurs.configurable_custom['Fylke'].split(';') :[] );
-            type = (kurs.configurable_custom['Type kurs'] !== undefined) ? kurs.configurable_custom['Type kurs'] : kurs.configurable_custom.Type;
+            fylke = kurs.configurable_custom['Fylke']
+                ? kurs.configurable_custom['Fylke'].split(';')
+                : [];
+            type =
+                kurs.configurable_custom['Type kurs'] !== undefined
+                    ? kurs.configurable_custom['Type kurs']
+                    : kurs.configurable_custom.Type;
             tema = kurs.configurable_custom.Tema;
-            underkategori = (kurs.configurable_custom['Underkategori'] ? kurs.configurable_custom['Underkategori'].split(';') :[] );
+            underkategori = kurs.configurable_custom['Underkategori']
+                ? kurs.configurable_custom['Underkategori'].split(';')
+                : [];
         }
 
         return {
@@ -38,7 +43,8 @@ const oversettTilKursObjekt = (alleKurs: KursFraKildeSystem[]): Kurs[] => {
             type,
             tema,
             underkategori,
-            aktivt: kurs.ShowInActivityList
+            aktivt: kurs.ShowInActivityList,
+            publiserUtenPameldingsskjema: kurs.PublishWithoutRegistrationForm,
         };
     });
 };

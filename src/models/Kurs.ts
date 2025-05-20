@@ -12,7 +12,8 @@ export interface Kurs {
     type?: string;
     tema?: string;
     underkategori?: string[];
-    aktivt:number
+    aktivt: number;
+    publiserUtenPameldingsskjema: boolean;
 }
 
 export const tomtKurs: Kurs = {
@@ -29,11 +30,12 @@ export const tomtKurs: Kurs = {
     type: '',
     tema: '',
     underkategori: [],
-    aktivt:0
+    aktivt: 0,
+    publiserUtenPameldingsskjema: false,
 };
 
 export interface KursFraKildeSystem {
-    RegistrationID: string|number;
+    RegistrationID: string | number;
     Title: string;
     RegistrationUrl: string;
     RegistrationFromDateTime: string;
@@ -42,7 +44,7 @@ export interface KursFraKildeSystem {
     RegistrationPlaceName?: any;
     CatalogText?: any;
     Description?: any;
-    DescriptionInternal?:string;
+    DescriptionInternal?: string;
     FrontPageDescription?: any;
     ShowInActivityList: number;
     configurable_custom: {
@@ -50,7 +52,6 @@ export interface KursFraKildeSystem {
         Type?: string;
         Tema: string;
         'Type kurs'?: string;
-        Underkategori: string|null;
-    }
-
+        Underkategori: string | null;
+    };
 }
