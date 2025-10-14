@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import FacebookIcon from "../ikoner/FacebookIcon";
 import LinkedinIcon from "../ikoner/LinkedinIcon";
 import TwitterIcon from "../ikoner/TwitterIcon";
+import NavFilesIcon from "../ikoner/NavFilesIcon";
+import NavFilesFillIcon from "../ikoner/NavFilesFillIcon";
 
 interface ShareButtonsProps {
   url: string;
@@ -12,6 +14,8 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title || "");
 
+  const [copied, setCopied] = useState(false);
+
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
@@ -19,6 +23,31 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
   };
 
   const iconSize = 28;
+
+  const copyLink = () => {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 3000);
+      })
+      .catch((err) => {
+        console.error("Kunne ikke kopiere lenken:", err);
+      });
+  };
+
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+      copyLink();
+    }
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    copyLink();
+  };
 
   return (
     <div
@@ -29,7 +58,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
         marginTop: "5px"
       }}
     >
-        <h3>Del kurset:</h3>
+      <h3>Del kurset:</h3>
       <a
         href={shareLinks.facebook}
         target="_blank"
@@ -55,6 +84,19 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
         aria-label="Share on Twitter"
       >
         <TwitterIcon size={28} color="#000000" />
+      </a>
+
+      <a
+        href="#"
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        aria-label="Kopier lenke til kurs"
+      >
+        {copied ? (
+          <NavFilesFillIcon size={iconSize} color="#000000" />
+        ) : (
+          <NavFilesIcon size={iconSize} color="#000000" />
+        )}
       </a>
     </div>
   );
