@@ -27,7 +27,9 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                     </Heading>
                 </header>
                 {kurs ? (
-                    <div dangerouslySetInnerHTML={beskrivelse} />
+                    <div className={cls.element('beskrivelse')}>
+                        <div dangerouslySetInnerHTML={beskrivelse} />
+                    </div>
                 ) : (
                     <Skeleton count={3} aria-disabled={true} />
                 )}

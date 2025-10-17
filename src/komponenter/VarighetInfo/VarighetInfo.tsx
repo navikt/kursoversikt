@@ -23,7 +23,7 @@ const VarighetInfo: FunctionComponent<Props> = ({
     const varighet = formaterVarighet(startTid, sluttTid);
     return (
         <div className={cls.block}>
-            <BodyShort spacing size="small" className={className}>
+            <BodyShort spacing size="medium" className={className}>
                 {varighet} {kursForaLageKlokkeslett && lagTidspunkt(kursForaLageKlokkeslett)}
             </BodyShort>
         </div>

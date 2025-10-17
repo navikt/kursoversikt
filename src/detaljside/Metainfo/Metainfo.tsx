@@ -6,8 +6,8 @@ import StedInfo from '../../komponenter/StedInfo/StedInfo';
 import { Kurs } from '../../models/Kurs';
 import ShareKurs from '../ShareKurs';
 import bemHelper from '../../utils/bemHelper';
-import kalenderIkon from '../../ikoner/calendar-3.svg';
-import kursTypeIkon from '../../ikoner/person-2.svg';
+import kalenderIkon from '../../ikoner/CalendarFill.svg';
+import kursTypeIkon from '../../ikoner/StarFill.svg';
 import './Metainfo.less';
 
 const cls = bemHelper('metainfo');
@@ -18,13 +18,13 @@ interface Props {
 
 const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
     const kursUrl = window.location.href;
-    console.log(kurs.tittel)
+    console.log(kurs.tittel);
     return (
         <span className={cls.block}>
             <Panel className={cls.element('panel')}>
                 <div className={cls.element('egenskapTop')}>
                     <img className={cls.element('ikon')} src={kalenderIkon} alt="kalenderIkon" />
-                    <Label spacing size="small" className={cls.element('infoTekst')}>
+                    <Label spacing size="medium" className={cls.element('infoTekst')}>
                         <b>Når:&nbsp;</b>
                     </Label>
                     <VarighetInfo
@@ -41,7 +41,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                 <StedInfo sted={kurs.sted} />
                 <div className={cls.element('egenskapTop')}>
                     <img className={cls.element('ikon')} src={kursTypeIkon} alt="kurstypeikon" />
-                    <BodyShort size="small" className={cls.element('infoTekst')}>
+                    <BodyShort size="medium" className={cls.element('infoTekst')}>
                         <b>Type kurs:&nbsp;</b>
                         {kurs.type}
                     </BodyShort>
