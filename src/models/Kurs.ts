@@ -47,6 +47,7 @@ export interface KursFraKildeSystem {
     DescriptionInternal?: string;
     FrontPageDescription?: any;
     ShowInActivityList: number;
+    PublishWithoutRegistrationForm: boolean;
     configurable_custom: {
         Fylke: string;
         Type?: string;

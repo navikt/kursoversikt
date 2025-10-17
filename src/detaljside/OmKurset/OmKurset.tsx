@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Panel, BodyShort, Heading } from '@navikt/ds-react';
+import { Panel, BodyShort, Heading, Alert } from '@navikt/ds-react';
 import { Back } from '@navikt/ds-icons';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
@@ -33,9 +33,9 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 )}
                 {kurs &&
                     (kurs.publiserUtenPameldingsskjema ? (
-                        <BodyShort className={cls.element('melding')}>
-                            Påmelding er ikke nødvendig
-                        </BodyShort>
+                        <Alert variant="info" className={cls.element('info')}>
+                            Påmelding er ikke nødvendig for dette kurset.
+                        </Alert>
                     ) : (
                         <a
                             className={`navds-button navds-button--primary navds-button--medium ${cls.element(
@@ -46,6 +46,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                             Meld deg på
                         </a>
                     ))}
+
                 <div className={cls.element('tilbakelenke')}>
                     <RouteLink to={'/'} className={'lenke'}>
                         <BodyShort size="small">

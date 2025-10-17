@@ -36,7 +36,10 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                     {kurs.beskrivelse || ''}
                 </BodyLong>
                 <StedInfo sted={kurs.sted} />
-                <PameldingsfristInfo pameldingsfrist={kurs.pameldingsfrist} />
+                <PameldingsfristInfo
+                    pameldingsfrist={kurs.pameldingsfrist}
+                    publiserUtenPameldingsskjema={kurs.publiserUtenPameldingsskjema}
+                />
             </div>
         </Panel>
     );

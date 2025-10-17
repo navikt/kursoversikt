@@ -36,6 +36,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                 <PameldingsfristInfo
                     pameldingsfrist={kurs.pameldingsfrist}
                     className={cls.element('pamelding')}
+                    publiserUtenPameldingsskjema={kurs.publiserUtenPameldingsskjema}
                 />
                 <StedInfo sted={kurs.sted} />
                 <div className={cls.element('egenskapTop')}>
@@ -45,7 +46,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                         {kurs.type}
                     </BodyShort>
                 </div>
-               <ShareKurs url={kursUrl} title={kurs.tittel}/>
+                <ShareKurs url={kursUrl} title={kurs.tittel} />
             </Panel>
         </span>
     );
