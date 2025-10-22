@@ -11,9 +11,18 @@ const cls = bemHelper('pameldingsfristInfo');
 interface Props {
     pameldingsfrist: Date;
     className?: string;
+    publiserUtenPameldingsskjema: boolean;
 }
 
-const PameldingsfristInfo: FunctionComponent<Props> = ({ pameldingsfrist, className }) => {
+const PameldingsfristInfo: FunctionComponent<Props> = ({
+    pameldingsfrist,
+    className,
+    publiserUtenPameldingsskjema,
+}) => {
+    if (publiserUtenPameldingsskjema) {
+        return null;
+    }
+
     return (
         <div className={classnames(cls.block, className)}>
             <img className={cls.element('ikon')} src={flaggIkon} alt="flaggikon" />

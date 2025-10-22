@@ -1,15 +1,14 @@
 @import '../../styles/variables.less';
 
 .omKurset {
-
     &__panel {
         margin-top: 1rem;
         padding-bottom: 2.5rem;
     }
 
-        &__knapp.omKurset__knapp {
-            margin-top: 2rem;
-        }
+    &__knapp.omKurset__knapp {
+        margin-top: 2rem;
+    }
 
     &__tilbakelenke {
         margin-top: 1rem;
@@ -25,20 +24,25 @@
             transform: translateY(1px) rotate(270deg);
         }
     }
+    &__melding {
+        margin-top: 2rem;
+    }
+    &__info {
+        margin-top: 1.5rem; /* Juster verdien etter behov */
+    }
 
-        @media (min-width: @screen-md-min) {
-            width: 48.5rem;
+    @media (min-width: @screen-md-min) {
+        width: 48.5rem;
 
-            &__panel {
-                margin: 0 1rem 0.5rem;
-                padding: 2.75rem 2rem 2.75rem 2rem;
-            }
-            &__overskrift{
-                margin-bottom: 2rem;
-            }
-            &__tilbakelenke {
-                margin-top: 2.5rem;
-            }
+        &__panel {
+            margin: 0 1rem 0.5rem;
+            padding: 2.75rem 2rem 2.75rem 2rem;
         }
-
+        &__overskrift {
+            margin-bottom: 2rem;
+        }
+        &__tilbakelenke {
+            margin-top: 2.5rem;
+        }
+    }
 }
