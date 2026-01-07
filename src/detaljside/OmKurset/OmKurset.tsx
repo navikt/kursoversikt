@@ -15,8 +15,9 @@ interface Props {
 
 const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
     const beskrivelse = kurs && {
-        __html: kurs.forsideBeskrivelse,
+        __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
+
 
     return (
         <span className={cls.block}>
@@ -27,7 +28,9 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                     </Heading>
                 </header>
                 {kurs ? (
-                    <div dangerouslySetInnerHTML={beskrivelse} />
+                    <div className={cls.element('beskrivelse')}>
+                        <div dangerouslySetInnerHTML={beskrivelse} />
+                    </div>
                 ) : (
                     <Skeleton count={3} aria-disabled={true} />
                 )}
