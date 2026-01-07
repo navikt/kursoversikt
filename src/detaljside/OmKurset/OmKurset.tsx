@@ -15,8 +15,9 @@ interface Props {
 
 const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
     const beskrivelse = kurs && {
-        __html: kurs.forsideBeskrivelse,
+        __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
+
 
     return (
         <span className={cls.block}>
