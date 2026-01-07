@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import { dagOgManedPaLesbartFormat } from '../../utils/datoUtils';
-import flaggIkon from '../../ikoner/HourglassBottomFilled-3.svg';
+import flaggIkon from '../../ikoner/HourglassBottomFilled.svg';
 import bemHelper from '../../utils/bemHelper';
 import classnames from 'classnames';
 import './PameldingsfristInfo.less';
