@@ -17,7 +17,7 @@ import Sokeboks from './Sokeboks/Sokeboks';
 import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
-import { logAmplitudeEvent } from '../utils/amplitude';
+// import { logAmplitudeEvent } from '../utils/amplitude';
 import { KursListeContext } from '../utils/KursProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -45,9 +45,6 @@ const KursListe: FunctionComponent = () => {
     const [filterState, setFilterState] = useState<FilterState>(
         hentFilterFraUrl(location.search)
     );
-
-    useEffect(()=>{ logAmplitudeEvent('sidevisning', {})}
-,[])
 
     useEffect(() => {
         navigate(byggFilterTilURL(filterState, sokeState), {replace: true});

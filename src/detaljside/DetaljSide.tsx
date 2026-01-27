@@ -8,7 +8,6 @@ import OmKurset from './OmKurset/OmKurset';
 import Skeleton from 'react-loading-skeleton';
 import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
-import {logAmplitudeEvent} from "../utils/amplitude";
 import {KursListeContext} from "../utils/KursProvider";
 import { useLocation } from 'react-router-dom';
 
@@ -20,11 +19,11 @@ const DetaljSide: FunctionComponent = () => {
     const {alleKurs} = useContext(KursListeContext)
     const location = useLocation()
 
-    const loggDetaljvisning = (kursTittel: string) => {
-        logAmplitudeEvent('sidevisning', {
-            kurstittel: kursTittel
-        });
-    };
+    // const loggDetaljvisning = (kursTittel: string) => {
+    //     logAmplitudeEvent('sidevisning', {
+    //         kurstittel: kursTittel
+    //     });
+    // };
 
     useEffect(() => {
         let kursIdFraUrl = location.pathname.split('/')[1];
@@ -34,12 +33,6 @@ const DetaljSide: FunctionComponent = () => {
         )
         );
     }, [location.pathname, alleKurs]);
-
-    useEffect(()=>{
-        if(kurs !== undefined){
-            loggDetaljvisning(kurs.tittel)
-        }
-    },[kurs])
 
     return (
         <>
