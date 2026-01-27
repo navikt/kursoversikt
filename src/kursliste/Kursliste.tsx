@@ -17,7 +17,6 @@ import Sokeboks from './Sokeboks/Sokeboks';
 import { byggFilterTilURL, hentFilterFraUrl, hentSokFraUrl } from '../komponenter/urlLogikk';
 import Brodsmulesti from './Brodsmulesti/Brodsmulesti';
 import './Kursliste.less';
-// import { logAmplitudeEvent } from '../utils/amplitude';
 import { KursListeContext } from '../utils/KursProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 
