@@ -19,12 +19,6 @@ const DetaljSide: FunctionComponent = () => {
     const {alleKurs} = useContext(KursListeContext)
     const location = useLocation()
 
-    // const loggDetaljvisning = (kursTittel: string) => {
-    //     logAmplitudeEvent('sidevisning', {
-    //         kurstittel: kursTittel
-    //     });
-    // };
-
     useEffect(() => {
         let kursIdFraUrl = location.pathname.split('/')[1];
         setKurs(
