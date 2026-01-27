@@ -5,7 +5,6 @@ import DetaljSide from './detaljside/DetaljSide';
 import KursListe from './kursliste/Kursliste';
 import './App.less';
 import bemHelper from './utils/bemHelper';
-import {initAmplitude} from "./utils/amplitude";
 import {KursProvider} from "./utils/KursProvider";
 import ScrollToTop from "./utils/ScrollToTop";
 
@@ -14,7 +13,6 @@ const cls = bemHelper('app');
 const basename = '/kursoversikt';
 
 function App() {
-    initAmplitude()
     return (
         <div className={cls.block}>
             <KursProvider>
