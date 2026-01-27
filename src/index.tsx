@@ -23,9 +23,10 @@ injectDecoratorClientSide({
         prod: "prod",
         other: "dev",
     }),
-    redirectToApp: true,
-    chatbot: false,
-    urlLookupTable: false,
+    params: {
+        redirectToApp: true,
+        chatbot: false
+    }
 }).catch(Sentry.captureException);
 
 createRoot(document.getElementById('root')!).render(<App />)
