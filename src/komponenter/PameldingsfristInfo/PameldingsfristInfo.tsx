@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import { dagOgManedPaLesbartFormat } from '../../utils/datoUtils';
-import flaggIkon from '../../ikoner/HourglassBottomFilled.svg';
+import { HourglassBottomFilledIcon } from '@navikt/aksel-icons';
 import bemHelper from '../../utils/bemHelper';
 import classnames from 'classnames';
 import './PameldingsfristInfo.less';
@@ -25,7 +25,7 @@ const PameldingsfristInfo: FunctionComponent<Props> = ({
 
     return (
         <div className={classnames(cls.block, className)}>
-            <img className={cls.element('ikon')} src={flaggIkon} alt="flaggikon" />
+            <HourglassBottomFilledIcon className={cls.element('ikon')} title="a11y-title" fontSize="6rem"  />
             <BodyShort size="medium" className={cls.element('label')}>
                 <b>Påmeldingsfrist:&nbsp;</b>
                 {dagOgManedPaLesbartFormat(pameldingsfrist)}
