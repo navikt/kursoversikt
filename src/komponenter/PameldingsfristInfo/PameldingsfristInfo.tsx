@@ -25,7 +25,7 @@ const PameldingsfristInfo: FunctionComponent<Props> = ({
 
     return (
         <div className={classnames(cls.block, className)}>
-            <HourglassBottomFilledIcon className={cls.element('ikon')} title="a11y-title" fontSize="6rem"  />
+            <HourglassBottomFilledIcon className={cls.element('ikon')} title="flagg" fontSize="6rem"  />
             <BodyShort size="medium" className={cls.element('label')}>
                 <b>Påmeldingsfrist:&nbsp;</b>
                 {dagOgManedPaLesbartFormat(pameldingsfrist)}

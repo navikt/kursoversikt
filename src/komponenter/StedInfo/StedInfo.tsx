@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { BodyShort } from '@navikt/ds-react';
-import plasseringsIkon from '../../ikoner/LocationPinFill.svg';
+import { LocationPinFillIcon } from '@navikt/aksel-icons';
 import bemHelper from '../../utils/bemHelper';
 import './StedInfo.less';
 
@@ -13,7 +13,7 @@ interface Props {
 const StedInfo: FunctionComponent<Props> = ({ sted }) => {
     return (
         <div className={cls.block}>
-            <img className={cls.element('ikon')} src={plasseringsIkon} alt="plasseringsikon" />
+            <LocationPinFillIcon className={cls.element('ikon')} title="plasseringsikon" fontSize="6rem" />
             <BodyShort size="medium" className={cls.element('label')}>
                 <b>Sted:&nbsp;</b> {sted}
             </BodyShort>
