@@ -18,13 +18,34 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
 
+    const hentOverskrift = (type?: string) => {
+    switch (type) {
+        case 'Kurs':
+            return 'Om Kurset';
+        case 'Webinar':
+            return 'Om Webinar';
+        case 'E-læring':
+            return 'Om E-læring';
+        case 'Informasjonsmøte':
+            return 'Om Informasjonsmøte';
+        case 'Konferanse':
+            return 'Om Konferanse';
+        case 'Nettverks- og erfaringssamling':
+            return 'Om Nettverks- og erfaringssamling';
+        case 'Seminar':
+            return 'Om Seminar';
+        default:
+            return 'Om kurset';
+    }
+};
+
 
     return (
         <span className={cls.block}>
             <Panel className={cls.element('panel')}>
-                <header className={cls.element('overskrift')}>
+             <header className={cls.element('overskrift')}>
                     <Heading size="medium" level="2">
-                        Om kurset
+                        {hentOverskrift(kurs?.type)}
                     </Heading>
                 </header>
                 {kurs ? (
