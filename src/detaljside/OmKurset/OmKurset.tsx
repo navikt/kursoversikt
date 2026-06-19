@@ -18,20 +18,12 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
 
-   const hentOverskrift = (type?: string) => {
+const getHeaderBasedOnType = (type?: string) => {
     switch (type) {
-        case 'Kurs':
-            return 'Om Kurset';
         case 'Webinar':
             return 'Om Webinaret';
-        case 'E-læring':
-            return 'Om E-læringen';
-        case 'Informasjonsmøte':
-            return 'Om Informasjonsmøtet';
         case 'Konferanse':
             return 'Om Konferansen';
-        case 'Nettverks- og erfaringssamling':
-            return 'Om Nettverks- og erfaringssamlingen';
         case 'Seminar':
             return 'Om Seminaret';
         default:
@@ -45,7 +37,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
             <Panel className={cls.element('panel')}>
              <header className={cls.element('overskrift')}>
                     <Heading size="medium" level="2">
-                        {hentOverskrift(kurs?.type)}
+                        {getHeaderBasedOnType(kurs?.type)}
                     </Heading>
                 </header>
                 {kurs ? (
