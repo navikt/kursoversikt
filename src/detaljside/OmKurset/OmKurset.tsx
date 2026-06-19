@@ -18,24 +18,24 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
 
-    const hentOverskrift = (type?: string) => {
+   const hentOverskrift = (type?: string) => {
     switch (type) {
         case 'Kurs':
             return 'Om Kurset';
         case 'Webinar':
-            return 'Om Webinar';
+            return 'Om Webinaret';
         case 'E-læring':
-            return 'Om E-læring';
+            return 'Om E-læringen';
         case 'Informasjonsmøte':
-            return 'Om Informasjonsmøte';
+            return 'Om Informasjonsmøtet';
         case 'Konferanse':
-            return 'Om Konferanse';
+            return 'Om Konferansen';
         case 'Nettverks- og erfaringssamling':
-            return 'Om Nettverks- og erfaringssamling';
+            return 'Om Nettverks- og erfaringssamlingen';
         case 'Seminar':
-            return 'Om Seminar';
+            return 'Om Seminaret';
         default:
-            return 'Om kurset';
+            return 'Om Kurset';
     }
 };
 
