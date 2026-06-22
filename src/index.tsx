@@ -14,7 +14,10 @@ Sentry.init({
     dsn: "https://0d0215555d834fdab7dd2b90d8c5cb38@sentry.gc.nav.no/60",
     environment: window.location.hostname,
     release: environment.GIT_COMMIT,
-    autoSessionTracking: false,
+    integrations: (defaultIntegrations) => {
+    return defaultIntegrations.filter(
+      (integration) => integration.name !== "BrowserSession",
+    );},
     enabled: gittMiljo({prod: true, other: false}),
 });
 
