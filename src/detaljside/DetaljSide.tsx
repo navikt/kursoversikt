@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useContext, useEffect, useState} from 'react';
 import {Kurs} from '../models/Kurs';
-import { Alert, Heading } from '@navikt/ds-react';
+import { LocalAlert, Heading } from '@navikt/ds-react';
 import bemHelper from '../utils/bemHelper';
 import './DetaljSide.less';
 import Metainfo from './Metainfo/Metainfo';
@@ -41,9 +41,11 @@ const DetaljSide: FunctionComponent = () => {
                 {
                     kurs?.aktivt===0 &&
                     <div className={cls.element('varselbanner')}>
-                    <Alert variant="warning">
-                        Dette kurset er ikke aktivt. Det vil sannsynligvis ikke være mulig å melde seg som deltaker
-                    </Alert>
+                    <LocalAlert status="warning">
+                        <LocalAlert.Title>
+                            Dette kurset er ikke aktivt. Det vil sannsynligvis ikke være mulig å melde seg som deltaker
+                        </LocalAlert.Title>
+                    </LocalAlert>
                     </div>
                 }
                 <main className={cls.element('innhold')}>

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BodyShort, Label, Panel } from '@navikt/ds-react';
+import { BodyShort, Label, Box } from '@navikt/ds-react';
 import VarighetInfo from '../../komponenter/VarighetInfo/VarighetInfo';
 import PameldingsfristInfo from '../../komponenter/PameldingsfristInfo/PameldingsfristInfo';
 import StedInfo from '../../komponenter/StedInfo/StedInfo';
@@ -21,7 +21,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
     console.log(kurs.tittel);
     return (
         <span className={cls.block}>
-            <Panel className={cls.element('panel')}>
+            <Box background="default" borderWidth="1" borderColor="info" borderRadius="8" padding="space-4" className={cls.element('panel')}>
                 <div className={cls.element('egenskapTop')}>
                     <img className={cls.element('ikon')} src={kalenderIkon} alt="kalenderIkon" />
                     <Label spacing size="medium" className={cls.element('infoTekst')}>
@@ -47,7 +47,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                     </BodyShort>
                 </div>
                 <ShareKurs url={kursUrl} title={kurs.tittel} />
-            </Panel>
+            </Box>
         </span>
     );
 };

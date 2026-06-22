@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Panel, BodyShort, Heading, Alert } from '@navikt/ds-react';
-import { Back } from '@navikt/ds-icons';
+import { Box, BodyShort, Heading, LocalAlert } from '@navikt/ds-react';
+import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
 import bemHelper from '../../utils/bemHelper';
@@ -21,7 +21,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
 
     return (
         <span className={cls.block}>
-            <Panel className={cls.element('panel')}>
+            <Box background="default" borderWidth="1" borderColor="info" borderRadius="8" padding="space-4" className={cls.element('panel')}>
                 <header className={cls.element('overskrift')}>
                     <Heading size="medium" level="2">
                         Om kurset
@@ -36,9 +36,11 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 )}
                 {kurs &&
                     (kurs.publiserUtenPameldingsskjema ? (
-                        <Alert variant="info" className={cls.element('info')}>
-                            Påmelding er ikke nødvendig for dette kurset.
-                        </Alert>
+                        <LocalAlert status="announcement">
+                            <LocalAlert.Title>
+                                Påmelding er ikke nødvendig for dette kurset.
+                            </LocalAlert.Title>
+                        </LocalAlert>
                     ) : (
                         <a
                             className={`navds-button navds-button--primary navds-button--medium ${cls.element(
@@ -53,7 +55,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                 <div className={cls.element('tilbakelenke')}>
                     <RouteLink to={'/'} className={'lenke'}>
                         <BodyShort size="small">
-                            <Back
+                            <ArrowLeftIcon
                                 title="pil tilbake"
                                 aria-hidden
                                 style={{ width: '1.1em', height: '1.1em' }}
@@ -62,7 +64,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                         </BodyShort>
                     </RouteLink>
                 </div>
-            </Panel>
+            </Box>
         </span>
     );
 };

@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react';
-import { Button, Heading, Panel } from '@navikt/ds-react';
-import { Collapse as CollapseIcon, Expand as ExpandIcon } from '@navikt/ds-icons';
+import { Button, Heading, Box } from '@navikt/ds-react';
+import { ChevronUpIcon, ChevronDownIcon } from '@navikt/aksel-icons';
 import bemHelper from '../../utils/bemHelper';
 import './Ekspanderbartpanel.less';
 
@@ -16,7 +16,7 @@ export const Ekspanderbartpanel: FC<Props> = ({tittel, children, className}) => 
     const [showing, setShowing] = useState(true)
 
     return (
-        <Panel border className={className}>
+        <Box padding="space-4" className={className}>
             <Button
                 variant="tertiary"
                 className={cls.element("button")}
@@ -24,7 +24,7 @@ export const Ekspanderbartpanel: FC<Props> = ({tittel, children, className}) => 
                 aria-expanded={showing}
             >
                 <Heading size="small" as="span"> {tittel} </Heading>
-                { showing ? <CollapseIcon title="Lukk"/> : <ExpandIcon title="Åpne" /> }
+                { showing ? <ChevronUpIcon title="Lukk" aria-hidden /> : <ChevronDownIcon title="Åpne" aria-hidden /> }
             </Button>
 
             {showing &&
@@ -32,6 +32,6 @@ export const Ekspanderbartpanel: FC<Props> = ({tittel, children, className}) => 
                     {children}
                 </div>
             }
-        </Panel>
+        </Box>
     )
 }

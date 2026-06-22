@@ -22,7 +22,9 @@ const cls = bemHelper('filterboks');
 
 const Filter = <Keys extends string> (props: Props<Keys>) =>
     <Ekspanderbartpanel tittel={props.tittel} className={cls.block}>
-        <Checkboxes {...props} />
+        <div style={{ padding: '1rem' }}>
+            <Checkboxes {...props} />
+        </div>
     </Ekspanderbartpanel>;
 
 const Checkboxes = <Keys extends string>(

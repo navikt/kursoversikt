@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Heading, Panel, Search } from '@navikt/ds-react';
+import { Heading, Box, Search } from '@navikt/ds-react';
 import bemHelper from '../../utils/bemHelper';
 
 const cls = bemHelper('Sokeboks');
@@ -13,7 +13,7 @@ interface Props {
 const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon, verdi }) => {
     return (
         <div className={'filterboks'}>
-            <Panel border className={cls.block}>
+            <Box padding="space-8" className={cls.block}>
                 <Search
                     id="sokeboks_sok"
                     label="Søk etter kurs"
@@ -22,7 +22,7 @@ const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon, verdi }) => {
                     value={verdi}
                     variant="simple"
                 />
-            </Panel>
+            </Box>
         </div>
     );
 };
