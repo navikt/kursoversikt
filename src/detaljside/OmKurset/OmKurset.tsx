@@ -18,26 +18,13 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
 
-const getHeaderBasedOnType = (type?: string) => {
-    switch (type) {
-        case 'Webinar':
-            return 'Om Webinaret';
-        case 'Konferanse':
-            return 'Om Konferansen';
-        case 'Seminar':
-            return 'Om Seminaret';
-        default:
-            return 'Om Kurset';
-    }
-};
-
 
     return (
         <span className={cls.block}>
             <Panel className={cls.element('panel')}>
-             <header className={cls.element('overskrift')}>
+                <header className={cls.element('overskrift')}>
                     <Heading size="medium" level="2">
-                        {getHeaderBasedOnType(kurs?.type)}
+                        Om kurset
                     </Heading>
                 </header>
                 {kurs ? (
