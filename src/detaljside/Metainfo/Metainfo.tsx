@@ -42,7 +42,7 @@ const Metainfo: FunctionComponent<Props> = ({ kurs }) => {
                 <div className={cls.element('egenskapTop')}>
                     <img className={cls.element('ikon')} src={kursTypeIkon} alt="kurstypeikon" />
                     <BodyShort size="medium" className={cls.element('infoTekst')}>
-                        <b>Type kurs:&nbsp;</b>
+                        <b>Type:&nbsp;</b>
                         {kurs.type}
                     </BodyShort>
                 </div>

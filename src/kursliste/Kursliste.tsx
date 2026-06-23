@@ -98,7 +98,7 @@ const KursListe: FunctionComponent = () => {
                             updateSelected={fylke => setFilterState({...filterState, fylke})}
                         />
                         <Filter
-                            tittel="Type kurs"
+                            tittel="Type"
                             alternativer={lagFilterKriterier(aktiveKurs, 'type')}
                             selected={filterState.type}
                             updateSelected={type => setFilterState({...filterState, type})}
