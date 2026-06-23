@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Panel, BodyShort, Heading, Alert } from '@navikt/ds-react';
-import { Back } from '@navikt/ds-icons';
+import { Box, BodyShort, Heading, LocalAlert } from '@navikt/ds-react';
+import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
 import bemHelper from '../../utils/bemHelper';
@@ -18,7 +18,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
 
-const getHeaderBasedOnType = (type?: string) => {
+    const getHeaderBasedOnType = (type?: string) => {
     switch (type) {
         case 'Webinar':
             return 'Om Webinaret';
@@ -28,14 +28,14 @@ const getHeaderBasedOnType = (type?: string) => {
             return 'Om Seminaret';
         default:
             return 'Om Kurset';
-    }
-};
+        }
+    };
 
 
     return (
         <span className={cls.block}>
-            <Panel className={cls.element('panel')}>
-             <header className={cls.element('overskrift')}>
+            <Box background="default" borderWidth="1" borderColor="info" borderRadius="8" padding="space-4" className={cls.element('panel')}>
+                <header className={cls.element('overskrift')}>
                     <Heading size="medium" level="2">
                         {getHeaderBasedOnType(kurs?.type)}
                     </Heading>
@@ -49,9 +49,11 @@ const getHeaderBasedOnType = (type?: string) => {
                 )}
                 {kurs &&
                     (kurs.publiserUtenPameldingsskjema ? (
-                        <Alert variant="info" className={cls.element('info')}>
-                            Påmelding er ikke nødvendig for dette kurset.
-                        </Alert>
+                        <LocalAlert status="announcement">
+                            <LocalAlert.Title>
+                                Påmelding er ikke nødvendig for dette kurset.
+                            </LocalAlert.Title>
+                        </LocalAlert>
                     ) : (
                         <a
                             className={`navds-button navds-button--primary navds-button--medium ${cls.element(
@@ -66,7 +68,7 @@ const getHeaderBasedOnType = (type?: string) => {
                 <div className={cls.element('tilbakelenke')}>
                     <RouteLink to={'/'} className={'lenke'}>
                         <BodyShort size="small">
-                            <Back
+                            <ArrowLeftIcon
                                 title="pil tilbake"
                                 aria-hidden
                                 style={{ width: '1.1em', height: '1.1em' }}
@@ -75,7 +77,7 @@ const getHeaderBasedOnType = (type?: string) => {
                         </BodyShort>
                     </RouteLink>
                 </div>
-            </Panel>
+            </Box>
         </span>
     );
 };

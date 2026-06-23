@@ -13,7 +13,7 @@ interface Props {
 const StedInfo: FunctionComponent<Props> = ({ sted }) => {
     return (
         <div className={cls.block}>
-            <LocationPinFillIcon className={cls.element('ikon')} title="plasseringsikon" fontSize="6rem" />
+            <LocationPinFillIcon className={cls.element('ikon')} title="plasseringsikon" aria-hidden />
             <BodyShort size="medium" className={cls.element('label')}>
                 <b>Sted:&nbsp;</b> {sted}
             </BodyShort>

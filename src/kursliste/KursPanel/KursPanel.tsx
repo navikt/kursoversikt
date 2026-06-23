@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BodyLong, BodyShort, Panel } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Box } from '@navikt/ds-react';
 import { Kurs } from '../../models/Kurs';
 import './KursPanel.less';
 import bemHelper from '../../utils/bemHelper';
@@ -18,7 +18,7 @@ const cls = bemHelper('kursPanel');
 
 const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
     return (
-        <Panel className={cls.block}>
+        <Box background="default" borderWidth="1" borderColor="info" borderRadius="8" padding="space-4" className={cls.block}>
             <div className={cls.element('tidspunkt')}>
                 <VarighetInfo
                     startTid={kurs.starttidspunkt}
@@ -41,7 +41,7 @@ const KursPanel: FunctionComponent<Props> = ({ kurs }) => {
                     publiserUtenPameldingsskjema={kurs.publiserUtenPameldingsskjema}
                 />
             </div>
-        </Panel>
+        </Box>
     );
 };
 

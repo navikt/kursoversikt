@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Panel, BodyLong } from '@navikt/ds-react';
+import { Box, BodyLong } from '@navikt/ds-react';
 import bemHelper from '../../utils/bemHelper';
 import Skeleton from 'react-loading-skeleton';
 import './KursPanel.less';
@@ -10,7 +10,7 @@ export const lagPlaceholderlisteForKurs = () => [1, 2, 3].map(n => <KursPanelSke
 
 const KursPanelSkeleton: FunctionComponent = () => {
     return (
-        <Panel className={cls.block} aria-disabled={true}>
+        <Box background="default" borderWidth="1" borderColor="info" borderRadius="8" padding="space-4" className={cls.block} aria-disabled={true}>
             <div className={cls.element('tidspunkt')}>
                 <Skeleton width={70} />
                 <Skeleton width={55} />
@@ -37,6 +37,6 @@ const KursPanelSkeleton: FunctionComponent = () => {
                     <Skeleton width={250} />
                 </div>
             </div>
-        </Panel>
+        </Box>
     );
 };
