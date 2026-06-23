@@ -16,7 +16,7 @@ const Sokeboks: FunctionComponent<Props> = ({ sokeFunksjon, verdi }) => {
             <Box padding="space-8" className={cls.block}>
                 <Search
                     id="sokeboks_sok"
-                    label="Søk etter kurs"
+                    label="Søk i Kurskalender"
                     hideLabel={false}
                     onChange={sokeFunksjon}
                     value={verdi}
