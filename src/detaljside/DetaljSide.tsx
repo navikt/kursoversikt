@@ -10,6 +10,7 @@ import MetainfoSkeleton from './Metainfo/MetainfoSkeleton';
 import Brodsmulesti from '../kursliste/Brodsmulesti/Brodsmulesti';
 import {KursListeContext} from "../utils/KursProvider";
 import { useLocation } from 'react-router-dom';
+import { getOmKursetTittel } from '../utils/kurstype';
 
 
 const cls = bemHelper('detaljside');
@@ -30,7 +31,9 @@ const DetaljSide: FunctionComponent = () => {
 
     return (
         <>
-            <Brodsmulesti brodsmuler={[{url: '/', title: 'Om kurset', handleInApp: true}]}/>
+            <Brodsmulesti
+                brodsmuler={[{url: '/', title: getOmKursetTittel(kurs?.type), handleInApp: true}]}
+            />
             <div className={cls.block}>
                 <header className={cls.element('overskrift')}>
                     <Heading size="xlarge" className={cls.element('kurstittel')}>

@@ -6,6 +6,7 @@ import './OmKurset.less';
 import bemHelper from '../../utils/bemHelper';
 import { Link as RouteLink } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
+import { getOmKursetTittel } from '../../utils/kurstype';
 
 const cls = bemHelper('omKurset');
 
@@ -18,26 +19,12 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
         __html: kurs.forsideBeskrivelse.replace(/\\r\\n/g, '<br />'),
     };
 
-    const getHeaderBasedOnType = (type?: string) => {
-    switch (type) {
-        case 'Webinar':
-            return 'Om Webinaret';
-        case 'Konferanse':
-            return 'Om Konferansen';
-        case 'Seminar':
-            return 'Om Seminaret';
-        default:
-            return 'Om Kurset';
-        }
-    };
-
-
     return (
         <span className={cls.block}>
             <Box background="default" borderWidth="1" borderColor="info" borderRadius="8" padding="space-4" className={cls.element('panel')}>
                 <header className={cls.element('overskrift')}>
                     <Heading size="medium" level="2">
-                        {getHeaderBasedOnType(kurs?.type)}
+                        {getOmKursetTittel(kurs?.type)}
                     </Heading>
                 </header>
                 {kurs ? (
