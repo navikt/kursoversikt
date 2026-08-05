@@ -1,12 +1,12 @@
 export const getOmKursetTittel = (type?: string) => {
     switch (type) {
         case 'Webinar':
-            return 'Om Webinaret';
+            return 'Om webinaret';
         case 'Konferanse':
-            return 'Om Konferansen';
+            return 'Om konferansen';
         case 'Seminar':
-            return 'Om Seminaret';
+            return 'Om seminaret';
         default:
-            return 'Om Kurset';
+            return 'Om kurset';
     }
 };
