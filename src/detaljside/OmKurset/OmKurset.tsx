@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Box, BodyShort, Heading, LocalAlert } from '@navikt/ds-react';
+import { Box, BodyShort, Heading, LocalAlert, Button } from '@navikt/ds-react';
 import { ArrowLeftIcon } from '@navikt/aksel-icons';
 import { Kurs } from '../../models/Kurs';
 import './OmKurset.less';
@@ -42,14 +42,14 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                             </LocalAlert.Title>
                         </LocalAlert>
                     ) : (
-                        <a
+                        <Button as="a"
                             className={`navds-button navds-button--primary navds-button--medium ${cls.element(
                                 'knapp'
                             )}`}
                             href={kurs.registreringsUrl}
                         >
                             Meld deg på
-                        </a>
+                        </Button>
                     ))}
 
                 <div className={cls.element('tilbakelenke')}>
