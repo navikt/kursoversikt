@@ -60,7 +60,7 @@ const OmKurset: FunctionComponent<Props> = ({ kurs }) => {
                                 aria-hidden
                                 style={{ width: '1.1em', height: '1.1em' }}
                             />{' '}
-                            Tilbake til kursoversikten
+                            Tilbake til kurskalender
                         </BodyShort>
                     </RouteLink>
                 </div>
