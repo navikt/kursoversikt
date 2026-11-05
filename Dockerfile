@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs20-debian11
+FROM gcr.io/distroless/nodejs24-debian13
 
 WORKDIR /usr/src/app
 
